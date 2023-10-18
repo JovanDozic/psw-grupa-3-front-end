@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { TourComponent } from './tour/tour.component';
 import { TourFormComponent } from './tour-form/tour-form.component';
+import { ClubComponent } from './club/club.component';
 
 
 
@@ -13,7 +14,8 @@ import { TourFormComponent } from './tour-form/tour-form.component';
   declarations: [
     TourReviewFormComponent,
     TourComponent,
-    TourFormComponent
+    TourFormComponent,
+    ClubComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { TourFormComponent } from './tour-form/tour-form.component';
   exports: [
     TourComponent,
     TourFormComponent,
-    TourReviewFormComponent
+    TourReviewFormComponent, 
+    ClubComponent
   ]
 })
 export class TourAuthoringModule { }
