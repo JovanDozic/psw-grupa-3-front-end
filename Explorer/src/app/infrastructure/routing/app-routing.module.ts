@@ -8,6 +8,7 @@ import { RegistrationComponent } from '../auth/registration/registration.compone
 import { TourComponent } from 'src/app/feature-modules/tour-authoring/tour/tour.component';
 import { AppRatingsComponent } from 'src/app/feature-modules/administration/app-ratings/app-ratings.component';
 import { AppRatingFormComponent } from 'src/app/feature-modules/administration/app-rating-form/app-rating-form.component';
+import { BlogCommentsComponent } from 'src/app/feature-modules/blog/blog-comments/blog-comments.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -16,8 +17,8 @@ const routes: Routes = [
   {path: 'equipment', component: EquipmentComponent, canActivate: [AuthGuard],},
   {path: 'tours', component: TourComponent, canActivate: [AuthGuard]},
   {path: 'app-ratings', component: AppRatingsComponent},
-  {path: 'app-rating-form', component: AppRatingFormComponent}
-
+  {path: 'app-rating-form', component: AppRatingFormComponent},
+  {path: 'blog-comments', component: BlogCommentsComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
