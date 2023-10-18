@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { PagedResults } from 'src/app/shared/model/paged-results.model';
+import { HttpClient } from '@angular/common/http';
+import { TourReview } from './model/tourReview.model';
 import { environment } from 'src/env/environment';
+import { Observable } from 'rxjs/internal/Observable';
+import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { Tour } from './model/tour.model';
 
 @Injectable({
@@ -11,7 +12,6 @@ import { Tour } from './model/tour.model';
 export class TourAuthoringService {
 
   constructor(private http: HttpClient) { }
-
   
   getTours(): Observable<PagedResults<Tour>> {
     return this.http.get<PagedResults<Tour>>(environment.apiHost + 'author/tour/getAll')
@@ -27,5 +27,9 @@ export class TourAuthoringService {
 
   updateTour(tour: Tour): Observable<Tour> {
     return this.http.put<Tour>(environment.apiHost + 'author/tour/' + tour.id, tour);
+  }
+  
+  addTourReview(tourReview: TourReview): Observable<TourReview>{
+    return this.http.post<TourReview>(environment.apiHost + 'tourist/tourReview', tourReview);
   }
 }
