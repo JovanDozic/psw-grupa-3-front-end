@@ -4,12 +4,17 @@ import { TourReviewFormComponent } from './tour-review-form/tour-review-form.com
 import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
+import { TourComponent } from './tour/tour.component';
+import { TourFormComponent } from './tour-form/tour-form.component';
+import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 
 
 
 @NgModule({
   declarations: [
-    TourReviewFormComponent
+    TourReviewFormComponent,
+    TourComponent,
+    TourFormComponent
   ],
   imports: [
     CommonModule,
@@ -18,6 +23,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatRadioModule
   ],
   exports: [
+    TourComponent,
+    TourFormComponent,
     TourReviewFormComponent
   ]
 })
