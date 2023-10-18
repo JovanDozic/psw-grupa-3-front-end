@@ -1,25 +1,43 @@
-<form>
+<div id="equipment">
+    <p>Korisnik</p>
+    <hr>
+    <div id="equipment-details">
     <div>
-        <mat-form-field>
-            <mat-label>Name</mat-label>
-            <input matInput formControlName="name" type="text"/>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Surname</mat-label>
-            <input matInput formControlName="surname" type="text"/>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Picture</mat-label>
-            <input formControlName="picture" type="file" (change)="onFileSelected()"/>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Bio</mat-label>
-            <input matInput formControlName="bio" type="text"/>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Quote</mat-label>
-            <input matInput formControlName="quote" type="text"/>
-        </mat-form-field>
-    <button color="primary" type="submit" mat-raised-button>Register</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Fotografija</th>
+                    <th>Biografija</th>
+                    <th>Citat</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{person.name}}</td>
+                    <td>{{person.surname}}</td>
+                    <td>{{person.picture}}</td>
+                    <td>{{person.bio}}</td>
+                    <td>{{person.quote}}</td>
+                    <td>
+                        <button color="accent" mat-icon-button>
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button color="primary" mat-icon-button>
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+                <tr><button color="primary" mat-icon-button>
+                    <mat-icon>add</mat-icon>
+                </button></tr>
+            </tbody>
+        </table>
     </div>
-</form>
+    <div>
+    </div>
+    </div>
+</div>
+
+
