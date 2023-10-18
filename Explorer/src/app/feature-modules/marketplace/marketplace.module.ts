@@ -20,6 +20,7 @@ import { PreferenceComponent } from './preference/preference.component';
   ],
   exports:[
     PreferenceFormComponent,
+    PreferenceComponent
   ]
 })
 export class MarketplaceModule { }

@@ -17,6 +17,7 @@
           <mat-label>Tags</mat-label>
           <input matInput formControlName="tags" type="text">
         </mat-form-field>
-    <button color="primary" type="submit" (click)="addPreference()" mat-raised-button>Done</button>
+    <button *ngIf="!shouldEdit" color="primary" type="submit" (click)="addPreference()" mat-raised-button>Done</button>
+    <button *ngIf="shouldEdit" color="primary" type="submit" (click)="editPreference()" mat-raised-button>Done</button>
     </div>
 </form>

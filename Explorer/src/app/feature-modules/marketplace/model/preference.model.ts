@@ -1,5 +1,6 @@
 export interface Preference{
-    userId?: number,
+    id?: number,
+    userId: number,
     difficulty: number,
     transport: string,
     tags: string
