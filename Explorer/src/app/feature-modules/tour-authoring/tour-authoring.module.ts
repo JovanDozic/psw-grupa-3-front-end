@@ -6,7 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { TourComponent } from './tour/tour.component';
 import { TourFormComponent } from './tour-form/tour-form.component';
-import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 
 
 
