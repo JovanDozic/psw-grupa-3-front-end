@@ -3,9 +3,14 @@ import { CommonModule } from '@angular/common';
 import { PointsComponent } from './points/points.component';
 import { PointsFormComponent } from './points-form/points-form.component';
 import {MatButtonModule} from "@angular/material/button";
-import {MaterialModule} from "../../infrastructure/material/material.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TextFieldModule} from "@angular/cdk/text-field";
+import { TourReviewFormComponent } from './tour-review-form/tour-review-form.component';
+import { MaterialModule } from 'src/app/infrastructure/material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
+import { TourComponent } from './tour/tour.component';
+import { TourFormComponent } from './tour-form/tour-form.component';
 
 
 
@@ -13,6 +18,9 @@ import {TextFieldModule} from "@angular/cdk/text-field";
   declarations: [
     PointsComponent,
     PointsFormComponent
+    TourReviewFormComponent,
+    TourComponent,
+    TourFormComponent
   ],
   imports: [
     CommonModule,
@@ -20,11 +28,15 @@ import {TextFieldModule} from "@angular/cdk/text-field";
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    TextFieldModule
+    TextFieldModule,
+    MatRadioModule
   ],
   exports: [
     PointsComponent,
-    PointsFormComponent
+    PointsFormComponent,
+    TourComponent,
+    TourFormComponent,
+    TourReviewFormComponent
   ]
 })
 export class TourAuthoringModule { }
