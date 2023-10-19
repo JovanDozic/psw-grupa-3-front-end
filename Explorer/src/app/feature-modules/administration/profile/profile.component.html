@@ -9,6 +9,7 @@
                     <th>Ime</th>
                     <th>Prezime</th>
                     <th>Fotografija</th>
+                    <th>Opcije</th>
                     <th>Biografija</th>
                     <th>Citat</th>
                 </tr>
@@ -17,7 +18,10 @@
                 <tr>
                     <td>{{person.name}}</td>
                     <td>{{person.surname}}</td>
-                    <td>{{person.picture}}</td>
+                    <td><img  src="{{person.picture}}"
+                        class="img-responsive img-thumbnail" style="width:70px;height:70px"></td>
+                        <td><a  class="btn btn-success">Upload</a> | 
+                            <a class="btn btn-danger">Remove</a></td>
                     <td>{{person.bio}}</td>
                     <td>{{person.quote}}</td>
                     <td>
