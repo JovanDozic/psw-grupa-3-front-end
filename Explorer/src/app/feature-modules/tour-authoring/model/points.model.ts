@@ -1,5 +1,5 @@
 export interface Points {
-  id: number,
+  id?: number,
   longitude: number,
   latitude: number,
   name: string,

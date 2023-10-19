@@ -16,15 +16,15 @@ export class TourAuthoringService {
     return this.http.get<PagedResults<Points>>(environment.apiHost + 'author/points');
   }
 
-  deletePoints(id: number): Observable<Points> {
+  deletePoints(id: number | undefined): Observable<Points> {
     return this.http.delete<Points>(environment.apiHost + 'author/points/' + id);
   }
 
-  addPoints(point: Points): Observable<Points> {
+  addPoint(point: Points): Observable<Points> {
     return this.http.post<Points>(environment.apiHost + 'author/points',point);
   }
 
-  updatePoints(point: Points): Observable<Points> {
+  updatePoint(point: Points): Observable<Points> {
     return this.http.put<Points>(environment.apiHost + 'author/points/' + point.id, point);
   }
 }
