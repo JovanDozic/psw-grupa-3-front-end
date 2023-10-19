@@ -34,7 +34,7 @@ export class PointsFormComponent implements OnChanges{
       latitude: Number(this.pointsFrom.value.latitude),
       name: this.pointsFrom.value.name || '',
       description: this.pointsFrom.value.description || '',
-      picture: this.pointsFrom.value.name || '',
+      picture: this.pointsFrom.value.picture || '',
     }
 
     this.service.addPoint(point).subscribe({
@@ -51,7 +51,7 @@ export class PointsFormComponent implements OnChanges{
       latitude: Number(this.pointsFrom.value.latitude),
       name: this.pointsFrom.value.name || '',
       description: this.pointsFrom.value.description || '',
-      picture: this.pointsFrom.value.name || '',
+      picture: this.pointsFrom.value.picture || '',
     }
 
     this.service.updatePoint(point).subscribe({
