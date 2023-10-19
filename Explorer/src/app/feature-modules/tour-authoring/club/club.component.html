@@ -1,12 +1,13 @@
-<form>
+<form [formGroup] = "clubForm">
     <div>
 
         <h2>Create a club</h2>
         <label>Name: </label>
-        <input type="text"> <br>
+        <input type="text" formControlName = "name"> <br>
         <label>Description: </label>
-        <input type="text"> <br>
+        <input type="text" formControlName = "description"> <br>
         <label>Enter URL of image: </label>
-        <input type="text">
+        <input type="text" formControlName = "URL"> <br>
+        <button type="submit" value="Create" (click) = "addClub()"></button>
     </div>
 </form>

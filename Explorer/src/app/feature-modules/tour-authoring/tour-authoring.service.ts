@@ -5,6 +5,7 @@ import { environment } from 'src/env/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { Tour } from './model/tour.model';
+import { Club } from './model/club.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,9 @@ export class TourAuthoringService {
   
   addTourReview(tourReview: TourReview): Observable<TourReview>{
     return this.http.post<TourReview>(environment.apiHost + 'tourist/tourReview', tourReview);
+  }
+
+  addClub(club: Club) : Observable<Club>{
+    return this.http.post<Club>(environment.apiHost + 'club', club)
   }
 }
