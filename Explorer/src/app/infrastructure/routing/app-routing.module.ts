@@ -11,6 +11,7 @@ import { TourReviewFormComponent } from 'src/app/feature-modules/tour-authoring/
 import { TourComponent } from 'src/app/feature-modules/tour-authoring/tour/tour.component';
 import { AppRatingsComponent } from 'src/app/feature-modules/administration/app-ratings/app-ratings.component';
 import { AppRatingFormComponent } from 'src/app/feature-modules/administration/app-rating-form/app-rating-form.component';
+import { EquipmentRecordComponent } from 'src/app/feature-modules/administration/equipment-record/equipment-record.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -22,8 +23,9 @@ const routes: Routes = [
   {path: 'tour-review', component: TourReviewFormComponent},
   {path: 'tours', component: TourComponent, canActivate: [AuthGuard]},
   {path: 'app-ratings', component: AppRatingsComponent},
+  {path: 'app-rating-form', component: AppRatingFormComponent},
+  {path: 'equipment-record', component: EquipmentRecordComponent}
   {path: 'app-rating-form', component: AppRatingFormComponent}
-
 ];
 
 @NgModule({
