@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { TourReview } from './model/tourReview.model';
 import { environment } from 'src/env/environment';
 import { Observable } from 'rxjs/internal/Observable';
-import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { Tour } from './model/tour.model';
 
 @Injectable({
@@ -29,7 +28,7 @@ export class TourAuthoringService {
 
   updatePoint(point: Points): Observable<Points> {
     return this.http.put<Points>(environment.apiHost + 'author/points/' + point.id, point);
-
+  }
   getTours(): Observable<PagedResults<Tour>> {
     return this.http.get<PagedResults<Tour>>(environment.apiHost + 'author/tour/getAll')
   }

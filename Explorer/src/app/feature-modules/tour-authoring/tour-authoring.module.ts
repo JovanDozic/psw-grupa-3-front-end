@@ -7,7 +7,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TextFieldModule} from "@angular/cdk/text-field";
 import { TourReviewFormComponent } from './tour-review-form/tour-review-form.component';
 import { MaterialModule } from 'src/app/infrastructure/material/material.module';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { TourComponent } from './tour/tour.component';
 import { TourFormComponent } from './tour-form/tour-form.component';
@@ -17,7 +16,7 @@ import { TourFormComponent } from './tour-form/tour-form.component';
 @NgModule({
   declarations: [
     PointsComponent,
-    PointsFormComponent
+    PointsFormComponent,
     TourReviewFormComponent,
     TourComponent,
     TourFormComponent
