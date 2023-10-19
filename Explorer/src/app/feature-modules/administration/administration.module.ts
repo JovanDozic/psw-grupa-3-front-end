@@ -6,6 +6,7 @@ import { MaterialModule } from 'src/app/infrastructure/material/material.module'
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRatingFormComponent } from './app-rating-form/app-rating-form.component';
 import { AppRatingsComponent } from './app-ratings/app-ratings.component';
+import { EquipmentRecordComponent } from './equipment-record/equipment-record.component';
 
 
 
@@ -14,7 +15,8 @@ import { AppRatingsComponent } from './app-ratings/app-ratings.component';
     EquipmentFormComponent,
     EquipmentComponent,
     AppRatingFormComponent,
-    AppRatingsComponent
+    AppRatingsComponent,
+    EquipmentRecordComponent
   ],
   imports: [
     CommonModule,
@@ -24,8 +26,9 @@ import { AppRatingsComponent } from './app-ratings/app-ratings.component';
   exports: [
     EquipmentComponent,
     EquipmentFormComponent,
+    EquipmentRecordComponent,
     AppRatingsComponent,
-    AppRatingFormComponent
+    AppRatingFormComponent,
   ]
 })
 export class AdministrationModule { }
