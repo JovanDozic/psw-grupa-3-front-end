@@ -25,7 +25,7 @@ const routes: Routes = [
   {path: 'tours', component: TourComponent, canActivate: [AuthGuard]},
   {path: 'app-ratings', component: AppRatingsComponent},
   {path: 'app-rating-form', component: AppRatingFormComponent},
-  {path: 'blog-comments', component: BlogCommentsComponent, canActivate: [AuthGuard]}
+  {path: 'blog-comments', component: BlogCommentsComponent, canActivate: [AuthGuard]},
   {path: 'equipment-record', component: EquipmentRecordComponent}
 ];
 
