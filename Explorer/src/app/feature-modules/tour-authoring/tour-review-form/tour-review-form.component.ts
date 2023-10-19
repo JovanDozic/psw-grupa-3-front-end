@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TourAuthoringService } from '../tour-authoring.service';
 import { TourReview } from '../model/tourReview.model';
 import { DatePipe } from '@angular/common';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { Tour } from '../model/tour.model';
 
 @Component({
   selector: 'xp-tour-review-form',
@@ -13,6 +14,9 @@ import { User } from 'src/app/infrastructure/auth/model/user.model';
 })
 
 export class TourReviewFormComponent implements OnInit{
+
+  @Input() tour: Tour;
+  @Output() visibilityFlag = new EventEmitter<null>();
 
   user: User | undefined;
 
@@ -39,11 +43,11 @@ export class TourReviewFormComponent implements OnInit{
       tourDate: this.formatDate(this.reviewForm.value.tourDate), 
       images: this.images || [],
       creationDate: new Date(),
-      tourId: 2,
+      tourId: this.tour.id || -1,
       touristId: this.user?.id || -1
     }
     this.service.addTourReview(review).subscribe({
-      next: () => { }
+      next: () => { this.visibilityFlag.emit() }
     });
     console.log(review);
   }

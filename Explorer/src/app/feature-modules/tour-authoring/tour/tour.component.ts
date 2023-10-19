@@ -10,9 +10,10 @@ import { TourAuthoringService } from '../tour-authoring.service';
 })
 export class TourComponent implements OnInit {
 
-  tours: Tour[] = [];
+  tours: Tour[] =  [];
   selectedTour: Tour;
   shouldRenderTourForm: boolean = false;
+  shouldRenderTourReviewForm: boolean = false;
   shouldEdit: boolean = false;
 
   constructor(private service: TourAuthoringService) { }
@@ -43,6 +44,15 @@ export class TourComponent implements OnInit {
     this.selectedTour = tour;
     this.shouldRenderTourForm = true;
     this.shouldEdit = true;
+  }
+
+  onRatingClicked(tour: Tour): void {
+    this.selectedTour = tour;
+    this.shouldRenderTourReviewForm = true;
+  }
+
+  changeReviewVisibility(): void {
+    this.shouldRenderTourReviewForm = false;
   }
 
   onAddClicked(): void {
