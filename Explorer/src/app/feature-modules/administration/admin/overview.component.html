@@ -1,0 +1,26 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.role}}</td>
+        <td>
+          <button (click)="selectUser(user)">Selektuj</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="selectedUser">
+    <p>Selektovani korisnik: {{selectedUser.username}}</p>
+    <button (click)="blockSelectedUser()">Blokiraj odabrane</button>
+  </div>
+</div>
