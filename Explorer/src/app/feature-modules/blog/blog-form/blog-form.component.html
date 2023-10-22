@@ -1,0 +1,26 @@
+<form>
+    <div>
+        <form [formGroup]="blogForm">
+            <mat-form-field>
+                <mat-label>Naslov: </mat-label>
+                <input matInput formControlName="title" type="text">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Opis: </mat-label>
+                <textarea matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="1"
+                formControlName="description"
+                cdkAutosizeMaxRows="5"></textarea>
+            </mat-form-field>
+        </form>
+        <div>
+            <mat-label>Url slike: </mat-label>
+            <span class="blog-image-url">
+                <input name="imageUrl" matInput [(ngModel)]="imageUrl" type="text">
+                <button type="button" color="primary" (click)="addImage()" mat-raised-button>Dodaj sliku</button>
+            </span>
+        </div>
+        <button color="primary" (click)="addBlog()" mat-raised-button>Kreiraj blog</button>
+    </div>
+</form>

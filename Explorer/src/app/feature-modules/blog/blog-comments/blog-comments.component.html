@@ -1,0 +1,43 @@
+<div id="comments">
+    <div id="comment-details">
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>User Id</th>
+                        <th>Blog Id</th>
+                        <th>Comment</th>
+                        <th>Time created</th>
+                        <th>Time updated</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let comm of comment">
+                        <td>{{comm.id}}</td>
+                        <td>{{comm.userId}}</td>
+                        <td>{{comm.blogId}}</td>
+                        <td>{{comm.comment}}</td>
+                        <td>{{comm.timeCreated}}</td>
+                        <td>{{comm.timeUpdated}}</td>
+                        <td>
+                            <button color="accent" (click)="deleteComment(comm.id || 0)" mat-icon-button>
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                            <button color="primary" (click)="onEditClicked(comm)" mat-icon-button>
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                    <tr><button color="primary" (click)="onAddClicked()" mat-icon-button>
+                        <mat-icon>add</mat-icon>
+                    </button></tr>
+                </tbody>
+            </table>
+        </div>
+        <xp-blog-comment-form *ngIf="shouldRenderCommentForm" [shouldEdit]="shouldEdit" [comment]="selectedComment"  (commentsUpdated)="getComments()"></xp-blog-comment-form>
+    </div>
+</div>

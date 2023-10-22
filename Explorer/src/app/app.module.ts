@@ -32,7 +32,9 @@ import { JwtInterceptor } from './infrastructure/auth/jwt/jwt.interceptor';
     TourExecutionModule,
     AuthModule,
     HttpClientModule,
+
     
+
   ],
   providers: [
     {
