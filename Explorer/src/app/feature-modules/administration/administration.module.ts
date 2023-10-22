@@ -5,6 +5,7 @@ import { EquipmentComponent } from './equipment/equipment.component';
 import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
+import { ProfileFormComponent } from './profile-form/profile-form.component';
 
 
 
@@ -12,7 +13,8 @@ import { ProfileComponent } from './profile/profile.component';
   declarations: [
     EquipmentFormComponent,
     EquipmentComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProfileFormComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { ProfileComponent } from './profile/profile.component';
   ],
   exports: [
     EquipmentComponent,
-    EquipmentFormComponent
+    EquipmentFormComponent,
+    ProfileFormComponent
   ]
 })
 export class AdministrationModule { }

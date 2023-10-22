@@ -1,0 +1,27 @@
+    <div>
+        <h2>Izmeni profil</h2>
+        <form [formGroup]="profileForm">
+            
+            <div>
+                <label>Fotografija</label>
+                <input type="text" class="form-control" formControlName="picture">
+            </div>
+            <div class="form-group">
+                <label>Ime</label>
+                <input type="text" class="form-control" formControlName="name">
+            </div>
+            <div class="form-group">
+                <label for="prezime">Prezime</label>
+                <input type="text" class="form-control" formControlName="surname">
+            </div>
+            <div class="form-group">
+                <label for="biografija">Biografija</label>
+                <textarea class="form-control" formControlName="bio" rows="5" placeholder="Unesite biografiju"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="citat">Citat</label>
+                <input type="text" class="form-control" formControlName="quote" placeholder="Unesite citat">
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="saveProfile()">Sačuvaj</button>
+        </form>
+    </div>

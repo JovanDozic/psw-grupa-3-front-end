@@ -1,47 +1,39 @@
 <div id="equipment">
     <p>Korisnik</p>
-    <hr>
     <div id="equipment-details">
     <div>
         <table>
             <thead>
                 <tr>
+                    <th>Fotografija</th>
                     <th>Ime</th>
                     <th>Prezime</th>
-                    <th>Fotografija</th>
-                    <th>Opcije</th>
                     <th>Biografija</th>
                     <th>Citat</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>{{person.name}}</td>
-                    <td>{{person.surname}}</td>
-                    <td><img  src="{{person.picture}}"
-                        class="img-responsive img-thumbnail" style="width:70px;height:70px"></td>
-                        <td><a  class="btn btn-success">Upload</a> | 
-                            <a class="btn btn-danger">Remove</a></td>
-                    <td>{{person.bio}}</td>
-                    <td>{{person.quote}}</td>
+                    
+                    
+                    <td *ngIf="person">{{person.name}}</td>
+                    <td *ngIf="person">{{person.surname}}</td>   
+                    <td *ngIf="person">{{person.bio}}</td>
+                    <td *ngIf="person">{{person.quote}}</td>
                     <td>
-                        <button color="accent" mat-icon-button>
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                        <button color="primary" mat-icon-button>
+                        <button (click)="onEditClicked(person)" color="primary" mat-icon-button>
                             <mat-icon>edit</mat-icon>
                         </button>
                     </td>
                 </tr>
-                <tr><button color="primary" mat-icon-button>
-                    <mat-icon>add</mat-icon>
-                </button></tr>
+                
             </tbody>
         </table>
     </div>
-    <div>
+    <xp-profile-form *ngIf="shouldRenderProfileForm"  [profile]="selectedProfile" (profileUpdated)="getUser()" ></xp-profile-form>
     </div>
-    </div>
+
+    
 </div>
 
 

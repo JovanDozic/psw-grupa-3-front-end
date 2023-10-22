@@ -32,11 +32,11 @@ export class AdministrationService {
   //User Profile
 
   getUser(id: number): Observable<Person>{
-    return this.http.get<Person>(environment.apiHost + 'profile' + id);
+    return this.http.get<Person>(environment.apiHost + 'userprofile/' + id);
   }
 
   updateUser(user: Person): Observable<Person> {
-    return this.http.put<Person>(environment.apiHost + 'profile' + user.id, user);
+    return this.http.put<Person>(environment.apiHost + 'userprofile/' + user.id, user);
   }
 
 }
