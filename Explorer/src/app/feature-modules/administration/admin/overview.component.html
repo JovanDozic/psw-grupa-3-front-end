@@ -1,28 +1,26 @@
 <div>
-    <table>
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Role</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users">
-          <td>{{user.Id}}</td>
-          <td>{{user.username}}</td>
-          <td>{{user.email}}</td>
-          <td>{{user.role}}</td>
-          <td>
-            <input type="number" placeholder="Unesite ID korisnika" #userIdInput>
-            <button (click)="blockUser(userIdInput.value)">Blokiraj</button>
-             
-            
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.role}}</td>
+        <td>
+          <button (click)="selectUser(user)">Selektuj</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="selectedUser">
+    <p>Selektovani korisnik: {{selectedUser.username}}</p>
+    <button (click)="blockSelectedUser()">Blokiraj odabrane</button>
   </div>
-  
+</div>

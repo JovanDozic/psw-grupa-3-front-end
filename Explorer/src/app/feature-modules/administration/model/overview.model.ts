@@ -1,8 +1,9 @@
 export interface Overview {
   Id: number;
-  username: string;  // Match the case
-  email: string;     // Match the case
-  role: UserRole;    // Match the case
+  username: string; 
+  email: string;     
+  role: UserRole;    
+  isSelected: boolean;
 }
 export enum UserRole {
   Guide = 'vodič',

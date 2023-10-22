@@ -32,10 +32,11 @@ export class AdministrationService {
     return this.http.get<PagedResults<Overview>>(environment.apiHost + 'administration/users');
   }
   
-  blockUser(Id: number): Observable<Overview> {
-    console.log('User ID to block:', Id);
-    const url = `${environment.apiHost}administration/users/${Id}/block`;
-    return this.http.post<Overview>(url, null);
+  blockUser(username: string): Observable<any> {
+    const url = `${environment.apiHost}administration/users/block-users`;
+    return this.http.post(url, [username]);
   }
+  
+  
   
 }
