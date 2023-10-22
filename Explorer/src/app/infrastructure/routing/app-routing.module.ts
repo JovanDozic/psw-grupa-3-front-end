@@ -22,9 +22,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegistrationComponent},
-  {path: 'equipment', component: EquipmentComponent, canActivate: [AuthGuard],},
+  {path: 'equipment', component: EquipmentComponent, canActivate: [AuthGuard]},
   {path: 'overview', component: OverviewComponent},
-
   {path: 'blogCreation', component: BlogFormComponent, canActivate: [AuthGuard]},
   {path: 'points', component: PointsComponent, canActivate: [AuthGuard]},
   {path: 'preference', component: PreferenceComponent},
