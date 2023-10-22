@@ -10,6 +10,8 @@ import { MaterialModule } from 'src/app/infrastructure/material/material.module'
 import { MatRadioModule } from '@angular/material/radio';
 import { TourComponent } from './tour/tour.component';
 import { TourFormComponent } from './tour-form/tour-form.component';
+import { ClubComponent } from './club/club.component';
+import { ClubFormComponent } from './club-form/club-form.component';
 
 
 
@@ -19,7 +21,9 @@ import { TourFormComponent } from './tour-form/tour-form.component';
     PointsFormComponent,
     TourReviewFormComponent,
     TourComponent,
-    TourFormComponent
+    TourFormComponent,
+    ClubComponent,
+    ClubFormComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +39,9 @@ import { TourFormComponent } from './tour-form/tour-form.component';
     PointsFormComponent,
     TourComponent,
     TourFormComponent,
-    TourReviewFormComponent
+    TourReviewFormComponent, 
+    ClubComponent,
+    ClubFormComponent
   ]
 })
 export class TourAuthoringModule { }
