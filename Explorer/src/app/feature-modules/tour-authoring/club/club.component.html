@@ -1,13 +1,35 @@
-<form [formGroup] = "clubForm">
+<div class="horizontal">
+<div id="equipment-details">
     <div>
-
-        <h2>Create a club</h2>
-        <label>Name: </label>
-        <input type="text" formControlName = "name"> <br>
-        <label>Description: </label>
-        <input type="text" formControlName = "description"> <br>
-        <label>Enter URL of image: </label>
-        <input type="text" formControlName = "URL"> <br>
-        <button type="submit" value="Create" (click) = "addClub()"></button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let c of clubs">
+                    <td>{{c.name}}</td>
+                    <td>{{c.description}}</td>
+                    <td>{{c.url}}</td>
+                    <td>
+                        <button color="primary" (click)="onEditClicked(c)" mat-icon-button>
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+                <tr><button color="primary" (click)="onAddClicked()" mat-icon-button>
+                    <mat-icon>add</mat-icon>
+                </button></tr>
+            </tbody>
+        </table>
     </div>
-</form>
+    </div>
+    <div>
+        <xp-club-form *ngIf="shouldRenderClubForm" [shouldEdit]="shouldEdit" [club]="selectedClub"  (clubsUpdated)="getClubs()"></xp-club-form>
+    </div>
+</div>
+

@@ -37,4 +37,11 @@ export class TourAuthoringService {
   addClub(club: Club) : Observable<Club>{
     return this.http.post<Club>(environment.apiHost + 'club', club)
   }
+
+  getClubs() : Observable<PagedResults<Club>> {
+    return this.http.get<PagedResults<Club>>(environment.apiHost + 'club/getAll')
+  }
+  updateClub(club: Club): Observable<Club> {
+    return this.http.put<Club>(environment.apiHost + 'club/' + club.id, club);
+  }
 }
