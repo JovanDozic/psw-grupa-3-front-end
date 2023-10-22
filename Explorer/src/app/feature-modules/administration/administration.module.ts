@@ -4,9 +4,13 @@ import { EquipmentFormComponent } from './equipment-form/equipment-form.componen
 import { EquipmentComponent } from './equipment/equipment.component';
 import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { OverviewComponent } from './admin/overview.component';
+
 import { AppRatingFormComponent } from './app-rating-form/app-rating-form.component';
 import { AppRatingsComponent } from './app-ratings/app-ratings.component';
 import { EquipmentRecordComponent } from './equipment-record/equipment-record.component';
+
 
 
 
@@ -14,6 +18,7 @@ import { EquipmentRecordComponent } from './equipment-record/equipment-record.co
   declarations: [
     EquipmentFormComponent,
     EquipmentComponent,
+    OverviewComponent,
     AppRatingFormComponent,
     AppRatingsComponent,
     EquipmentRecordComponent
@@ -26,9 +31,11 @@ import { EquipmentRecordComponent } from './equipment-record/equipment-record.co
   exports: [
     EquipmentComponent,
     EquipmentFormComponent,
+    OverviewComponent,
     EquipmentRecordComponent,
     AppRatingsComponent,
     AppRatingFormComponent,
+
   ]
 })
 export class AdministrationModule { }

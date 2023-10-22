@@ -4,8 +4,12 @@ import { Equipment } from './model/equipment.model';
 import { environment } from 'src/env/environment';
 import { Observable } from 'rxjs';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
+
+import { Overview } from './model/overview.model';
+
 import { AppRating } from './model/app-rating.model';
 import { TouristEquipment } from './model/tourist-equipment.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +35,18 @@ export class AdministrationService {
     return this.http.put<Equipment>(environment.apiHost + 'administration/equipment/' + equipment.id, equipment);
   }
 
+  getAllUsers(): Observable<PagedResults<Overview>> {
+    return this.http.get<PagedResults<Overview>>(environment.apiHost + 'administration/users');
+  }
+  
+  blockUser(username: string): Observable<any> {
+    const url = `${environment.apiHost}administration/users/block-users`;
+    return this.http.post(url, [username]);
+  }
+  
+  
+
+
   // App ratings
   getAppRatings(): Observable<PagedResults<AppRating>> {
     return this.http.get<PagedResults<AppRating>>(environment.apiHost + 'administration/app-ratings')
@@ -55,5 +71,6 @@ export class AdministrationService {
   removeTouristEquipment(id: number): Observable<TouristEquipment> {
     return this.http.delete<TouristEquipment>(environment.apiHost + 'tourist/equipment/' + id);
   }
+
 
 }

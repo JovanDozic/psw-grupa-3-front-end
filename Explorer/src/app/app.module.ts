@@ -33,7 +33,7 @@ import { MapComponent } from './shared/map/map.component';
     TourAuthoringModule,
     TourExecutionModule,
     AuthModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     {
