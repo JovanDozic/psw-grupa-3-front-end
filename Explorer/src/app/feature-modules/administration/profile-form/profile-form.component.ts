@@ -70,4 +70,8 @@ export class ProfileFormComponent implements OnChanges {
       this.encodeImages(selectedFiles);
     }
   }
+
+  removeImage():void{
+    this.picture = " ";
+  }
 }
