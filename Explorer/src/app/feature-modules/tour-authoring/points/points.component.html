@@ -1,0 +1,44 @@
+<div id="points">
+  <p>Points</p>
+  <hr>
+  <div id="points-details">
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Longitude</th>
+            <th>Latitude</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Picture</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let point of points">
+            <td>{{point.longitude}}</td>
+            <td>{{point.latitude}}</td>
+            <td>{{point.name}}</td>
+            <td>{{point.description}}</td>
+            <td>{{point.picture}}</td>
+            <td>
+              <button color="accent" (click)="deletePoint(point.id)" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button color="accent" (click)="onEditClicked(point)" mat-icon-button>
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <button color="primary" (click)="onAddClicked()" mat-icon-button>
+              <mat-icon>add</mat-icon>
+            </button>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <xp-points-form *ngIf="shouldRenderPointForm" (pointUpdated)="getPoints()" [point]="selectedPoint" [shouldEdit]="shouldEdit"></xp-points-form>
+    </div>
+  </div>
+</div>

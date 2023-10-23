@@ -7,6 +7,16 @@ import { AuthGuard } from '../auth/auth.guard';
 import { RegistrationComponent } from '../auth/registration/registration.component';
 import { ProblemFormComponent } from 'src/app/feature-modules/tour-authoring/problem-form/problem-form.component';
 import { ProblemsComponent } from 'src/app/feature-modules/administration/problems/problems.component';
+import { OverviewComponent } from 'src/app/feature-modules/administration/admin/overview.component';
+import { BlogFormComponent } from 'src/app/feature-modules/blog/blog-form/blog-form.component';
+import {PointsComponent} from "../../feature-modules/tour-authoring/points/points.component";
+import { PreferenceComponent } from 'src/app/feature-modules/marketplace/preference/preference.component';
+import { TourReviewFormComponent } from 'src/app/feature-modules/tour-authoring/tour-review-form/tour-review-form.component';
+import { TourComponent } from 'src/app/feature-modules/tour-authoring/tour/tour.component';
+import { AppRatingsComponent } from 'src/app/feature-modules/administration/app-ratings/app-ratings.component';
+import { AppRatingFormComponent } from 'src/app/feature-modules/administration/app-rating-form/app-rating-form.component';
+import { BlogCommentsComponent } from 'src/app/feature-modules/blog/blog-comments/blog-comments.component';
+import { EquipmentRecordComponent } from 'src/app/feature-modules/administration/equipment-record/equipment-record.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -15,6 +25,16 @@ const routes: Routes = [
   {path: 'equipment', component: EquipmentComponent, canActivate: [AuthGuard],},
   {path: 'problem-form', component: ProblemFormComponent},
   {path: 'problems', component: ProblemsComponent},
+  {path: 'overview', component: OverviewComponent},
+  {path: 'blogCreation', component: BlogFormComponent, canActivate: [AuthGuard]},
+  {path: 'points', component: PointsComponent, canActivate: [AuthGuard]},
+  {path: 'preference', component: PreferenceComponent},
+  {path: 'tour-review', component: TourReviewFormComponent},
+  {path: 'tours', component: TourComponent, canActivate: [AuthGuard]},
+  {path: 'app-ratings', component: AppRatingsComponent},
+  {path: 'app-rating-form', component: AppRatingFormComponent},
+  {path: 'blog-comments', component: BlogCommentsComponent, canActivate: [AuthGuard]},
+  {path: 'equipment-record', component: EquipmentRecordComponent}
 ];
 
 @NgModule({
