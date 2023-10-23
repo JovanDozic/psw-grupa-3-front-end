@@ -4,6 +4,7 @@ import { EquipmentFormComponent } from './equipment-form/equipment-form.componen
 import { EquipmentComponent } from './equipment/equipment.component';
 import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProblemsComponent } from './problems/problems.component';
 
 import { OverviewComponent } from './admin/overview.component';
 
@@ -18,6 +19,7 @@ import { EquipmentRecordComponent } from './equipment-record/equipment-record.co
   declarations: [
     EquipmentFormComponent,
     EquipmentComponent,
+    ProblemsComponent,
     OverviewComponent,
     AppRatingFormComponent,
     AppRatingsComponent,
@@ -31,11 +33,11 @@ import { EquipmentRecordComponent } from './equipment-record/equipment-record.co
   exports: [
     EquipmentComponent,
     EquipmentFormComponent,
+    ProblemsComponent,
     OverviewComponent,
     EquipmentRecordComponent,
     AppRatingsComponent,
     AppRatingFormComponent,
-
   ]
 })
 export class AdministrationModule { }
