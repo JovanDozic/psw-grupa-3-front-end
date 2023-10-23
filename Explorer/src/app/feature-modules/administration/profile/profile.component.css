@@ -1,9 +1,9 @@
-#equipment {
+#profile {
     margin-top: 20px;
     margin-left: 20px;
 }
 
-#equipment-details {
+#profile-details {
     display: flex;
     flex-direction: row;
     gap: 50px;

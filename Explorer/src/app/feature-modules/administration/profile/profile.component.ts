@@ -39,4 +39,5 @@ export class ProfileComponent implements OnInit {
       this.selectedProfile = profile;
       this.shouldRenderProfileForm = true;
   }
+
 }

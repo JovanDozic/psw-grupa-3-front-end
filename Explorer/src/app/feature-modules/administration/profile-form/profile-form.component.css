@@ -16,6 +16,7 @@
 
 .form-group {
     margin-bottom: 15px;
+    
 }
 
 .form-group label {
@@ -27,13 +28,15 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 15px;
 }
 
 textarea.form-control {
-    resize: vertical; /* Omogućava vertikalno proširivanje textarea */
+    resize: vertical; 
 }
 
 .btn-primary {
+    width: 98%;
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -46,10 +49,26 @@ textarea.form-control {
     background-color: #0056b3;
 }
 
-/* Dodatni stil za širinu forme na manjim ekranima (npr. mobilni uređaji) */
 @media (max-width: 576px) {
     .form-container {
         width: 100%;
         padding: 10px;
     }
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    width: 150px; /* Prilagodite širinu prema potrebama */
+}
+
+.custom-file-upload:hover {
+    background-color: #e7e7e7;
 }

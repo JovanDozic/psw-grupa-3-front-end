@@ -24,7 +24,8 @@ import { ProfileFormComponent } from './profile-form/profile-form.component';
   exports: [
     EquipmentComponent,
     EquipmentFormComponent,
-    ProfileFormComponent
+    ProfileFormComponent,
+    ProfileComponent
   ]
 })
 export class AdministrationModule { }

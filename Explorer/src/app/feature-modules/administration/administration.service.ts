@@ -35,8 +35,9 @@ export class AdministrationService {
     return this.http.get<Person>(environment.apiHost + 'userprofile/' + id);
   }
 
-  updateUser(user: Person): Observable<Person> {
-    return this.http.put<Person>(environment.apiHost + 'userprofile/' + user.id, user);
+  updateUser(profile: Person): Observable<Person> {
+    console.log(profile);
+    return this.http.put<Person>(environment.apiHost + 'userprofile/' + profile.id, profile);
   }
 
 }

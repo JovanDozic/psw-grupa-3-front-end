@@ -1,6 +1,6 @@
-<div id="equipment">
-    <p>Korisnik</p>
-    <div id="equipment-details">
+<div id="profile">
+    <p><b>Korisnik</b></p>
+    <div id="profile-details">
     <div>
         <table>
             <thead>
@@ -15,11 +15,14 @@
             <tbody>
                 <tr>
                     
-                    
-                    <td *ngIf="person">{{person.name}}</td>
-                    <td *ngIf="person">{{person.surname}}</td>   
-                    <td *ngIf="person">{{person.bio}}</td>
-                    <td *ngIf="person">{{person.quote}}</td>
+                    <td *ngIf="person">
+                  <img  src="{{person.picture}}"
+                            class="img-responsive img-thumbnail" style="width:160px;height:140px">
+                    </td>
+                    <td *ngIf="person"><b>{{person.name}}</b></td>
+                    <td *ngIf="person"><b>{{person.surname}}</b></td>   
+                    <td *ngIf="person"><b>{{person.bio}}</b></td>
+                    <td *ngIf="person"><b>{{person.quote}}</b></td>
                     <td>
                         <button (click)="onEditClicked(person)" color="primary" mat-icon-button>
                             <mat-icon>edit</mat-icon>
@@ -35,5 +38,4 @@
 
     
 </div>
-
 

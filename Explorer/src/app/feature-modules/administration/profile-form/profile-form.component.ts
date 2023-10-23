@@ -13,11 +13,13 @@ export class ProfileFormComponent implements OnChanges {
 
   @Input() profile: Person;
   @Output() profileUpdated = new EventEmitter<null>();
+  
+  picture: string = " ";
 
   constructor(private service: AdministrationService) {
   }
   ngOnChanges(): void {
-    this.profileForm.reset();
+    //this.profileForm.reset();
     this.profileForm.patchValue(this.profile);
   }
 
@@ -31,18 +33,41 @@ export class ProfileFormComponent implements OnChanges {
 
   saveProfile(): void{
     const person: Person = {
+      id: this.profile.id || -1,
       userId: this.profile.userId || -1,
-      picture: this.profileForm.value.picture || "",
+      picture: this.picture,
       name: this.profileForm.value.name || "",
       surname: this.profileForm.value.surname || "",
       bio: this.profileForm.value.bio || "",
       quote: this.profileForm.value.quote || "",
+      email: this.profile.email
     };
     person.id = this.profile.id;
+    console.log(person);
     this.service.updateUser(person).subscribe({
-      next: () => { this.profileUpdated.emit();
-        }
+      next: (_) => { this.profileUpdated.emit();}
     });
   }
+  
+  encodeImages(selectedFiles: FileList) {
+    for(let i = 0; i < selectedFiles.length; i++){
+      const file = selectedFiles[i];
+      const reader = new FileReader();
 
+      reader.onload = (event: any) => {
+        this.picture = event.target.result;
+      }
+
+      reader.readAsDataURL(file);
+    }
+  }
+
+
+  onSelectedFile(event: any) {
+    const selectedFiles: FileList = event.target.files;
+
+    if (selectedFiles.length > 0) {
+      this.encodeImages(selectedFiles);
+    }
+  }
 }
