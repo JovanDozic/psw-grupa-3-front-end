@@ -15,6 +15,8 @@ import { AuthModule } from './infrastructure/auth/auth.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './infrastructure/auth/jwt/jwt.interceptor';
 import { MapComponent } from './shared/map/map.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { MapComponent } from './shared/map/map.component';
     AuthModule,
     HttpClientModule,
     FormsModule,
+    NgbModule
   ],
   providers: [
     {

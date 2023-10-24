@@ -4,20 +4,25 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 import { RouterModule } from '@angular/router';
+import { RatingsComponent } from './ratings/ratings.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    RatingsComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    NgbModule
   ],
   exports: [
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    RatingsComponent
   ]
 })
 export class LayoutModule { }

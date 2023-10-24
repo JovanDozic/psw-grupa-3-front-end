@@ -1,0 +1,49 @@
+.main-rating-div{
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 200px;
+    width: auto;
+}
+.first{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 220px;
+    height: 140px;
+    font-size: 22px; 
+    font-weight: bold;
+    margin: 15px;
+}
+.other{
+    margin: 15px;
+    width: 220px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+}
+.divide{
+    display: flex;
+}
+.left{
+    flex: 1;
+}
+.right{
+    flex: 1;
+}
+.vertical{
+    display: flex;
+    align-items: center;
+}
+.comment{
+    width: 220px;
+    height: 80px;
+}
+ngb-rating{
+    color: #23967F;
+    font-size: 20px;
+}
+.average{
+    color: #23967F;
+    font-size: 36px;
+}
