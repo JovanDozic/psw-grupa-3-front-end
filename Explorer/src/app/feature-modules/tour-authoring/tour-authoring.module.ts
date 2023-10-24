@@ -17,6 +17,8 @@ import { ClubInvitationsComponent } from './club-invitations/club-invitations.co
 
 
 
+import { ProblemFormComponent } from './problem-form/problem-form.component';
+
 @NgModule({
   declarations: [
     PointsComponent,
@@ -27,7 +29,8 @@ import { ClubInvitationsComponent } from './club-invitations/club-invitations.co
     ClubComponent,
     ClubFormComponent,
     ClubInvitationFormComponent,
-    ClubInvitationsComponent
+    ClubInvitationsComponent,
+    ProblemFormComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +50,8 @@ import { ClubInvitationsComponent } from './club-invitations/club-invitations.co
     ClubComponent,
     ClubFormComponent,
     ClubInvitationFormComponent,
-    ClubInvitationsComponent
+    ClubInvitationsComponent,
+    ProblemFormComponent
   ]
 })
 export class TourAuthoringModule { }
