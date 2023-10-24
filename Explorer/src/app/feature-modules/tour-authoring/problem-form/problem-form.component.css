@@ -67,3 +67,8 @@ tbody tr.active-row {
 .problem-header {
     text-align: center;
   }
+
+.button-td {
+    display: flex;
+    flex-direction: row;
+}
