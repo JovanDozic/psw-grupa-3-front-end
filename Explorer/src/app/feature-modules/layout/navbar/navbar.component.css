@@ -4,7 +4,85 @@ div {
     gap: 10px;
 }
 
+.toolbar {
+    background-color: #f7fff7;
+}
+
 #buttons {
+    padding: 20px;
     width: auto;
     margin-left: auto;
+    margin-right: 3%;
+}
+
+.middle-section{
+  display: flex; 
+  justify-content: center;
+}
+
+.custom-menu {
+  display: flex;
+  position: relative;
+  text-align: center;
+  width: 10%; 
+}
+
+.custom-menu-trigger { 
+ 
+  background-color: transparent;
+  color: #1F7A8C;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 550;
+  font-size: 17px;
+  transition: background-color 0.3s;
+  position: relative;
+
+  &:hover {
+    background-color: lightgray;
+  }
+}
+
+.custom-menu-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  background-color: #fff; 
+  border-radius: 15px;
+  min-width: 100%;
+}
+
+.custom-menu:hover .custom-menu-content {
+  display: block;
+}
+
+.custom-menu-item {
+  padding: 10px 0;
+  width: 100%; 
+}
+
+.custom-menu-item:hover {
+  text-decoration: underline;
+  color: #32292f;
+  border-radius: 30px; 
+  cursor: pointer;
+}
+
+.custom-menu-item-text {
+  margin-left: 20px; 
+  font-size: 15px;
+}
+
+.logo-section{
+  width: 70px; 
+  height: 70px;
+  margin-left: 20px;
+}
+
+.custom-button {
+  border-radius: 15px;
+  color: #ffffff; 
 }
