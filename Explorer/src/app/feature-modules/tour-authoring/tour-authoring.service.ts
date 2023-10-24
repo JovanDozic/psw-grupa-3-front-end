@@ -78,8 +78,9 @@ export class TourAuthoringService {
     return this.http.delete<ClubInvitation>(environment.apiHost + 'tourist/clubInvitation/' + id);
   }
 
-}
-  addProblem(problem: Problem): Observable<Problem> {
+   addProblem(problem: Problem): Observable<Problem> {
     return this.http.post<Problem>(environment.apiHost + 'tourist/problem', problem);
   }
+
 }
+ 
