@@ -7,6 +7,7 @@ import { environment } from 'src/env/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { Tour } from './model/tour.model';
 import { Club } from './model/club.model';
+import { ClubInvitation } from './model/clubInvitation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -60,4 +61,18 @@ export class TourAuthoringService {
   updateClub(club: Club): Observable<Club> {
     return this.http.put<Club>(environment.apiHost + 'club/' + club.id, club);
   }
+
+  addClubInvitation(clubInvitation: ClubInvitation): Observable<ClubInvitation>{
+    return this.http.post<ClubInvitation>(environment.apiHost + 'tourist/clubInvitation', clubInvitation);
+  }
+
+  getClubInvitations(): Observable<PagedResults<ClubInvitation>> {
+    return this.http.get<PagedResults<ClubInvitation>>(environment.apiHost + 'tourist/clubInvitation/getAll')
+  }
+
+
+  deleteClubInvitation(id: number): Observable<ClubInvitation> {
+    return this.http.delete<ClubInvitation>(environment.apiHost + 'tourist/clubInvitation/' + id);
+  }
+
 }
