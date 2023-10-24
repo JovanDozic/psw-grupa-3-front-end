@@ -1,51 +1,36 @@
-#equipment {
-    margin-top: 20px;
-    margin-left: 20px;
-}
-
-#equipment-details {
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-    align-items: flex-start;
-}
-
 p {
-    margin-top: 50px;
     font-size: 20px;
-    text-align: center; 
-    font-weight: bold;
+    text-align: center;
 }
 
-div {
-    width: 400px;
-    display:flex;
-    gap: 20px;
-    flex-direction: column;
-    place-items: center;
-}
 
-#tours {
-    margin: 0 auto; 
-}
 
 table {
+
     border-collapse: collapse;
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 300px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
 }
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+  }
 
 thead tr {
     background-color: #3f51b5;
     color: #ffffff;
-    text-align: left;
+    text-align: center;
 }
 
 th, td {
     padding: 12px 15px;
 }
+
+
 
 tbody tr {
     border-bottom: 1px solid #dddddd;
@@ -62,13 +47,4 @@ tbody tr:last-of-type {
 tbody tr.active-row {
     font-weight: bold;
     color: #3f51b5;
-}
-
-.problem-header {
-    text-align: center;
-  }
-
-.button-td {
-    display: flex;
-    flex-direction: row;
 }

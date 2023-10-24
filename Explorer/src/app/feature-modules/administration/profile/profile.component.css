@@ -1,9 +1,9 @@
-#equipment {
+#profile {
     margin-top: 20px;
     margin-left: 20px;
 }
 
-#equipment-details {
+#profile-details {
     display: flex;
     flex-direction: row;
     gap: 50px;
@@ -11,22 +11,7 @@
 }
 
 p {
-    margin-top: 50px;
     font-size: 20px;
-    text-align: center; 
-    font-weight: bold;
-}
-
-div {
-    width: 400px;
-    display:flex;
-    gap: 20px;
-    flex-direction: column;
-    place-items: center;
-}
-
-#tours {
-    margin: 0 auto; 
 }
 
 table {
@@ -62,13 +47,4 @@ tbody tr:last-of-type {
 tbody tr.active-row {
     font-weight: bold;
     color: #3f51b5;
-}
-
-.problem-header {
-    text-align: center;
-  }
-
-.button-td {
-    display: flex;
-    flex-direction: row;
 }

@@ -18,6 +18,7 @@ export class ProblemFormComponent implements OnChanges {
   tours: Tour[] =  [];
   selectedTour: Tour;
   shouldRenderProblemForm: boolean = false;
+  shouldRenderTourReviewForm: boolean = false;
 
   user: User | undefined;
   
@@ -81,9 +82,20 @@ export class ProblemFormComponent implements OnChanges {
   onProblemClicked(tour: Tour): void {
     this.selectedTour = tour;
     this.shouldRenderProblemForm = true;
+    this.shouldRenderTourReviewForm = false;
   }
 
   changeProblemVisibility(): void {
     this.shouldRenderProblemForm = false;
+  }
+
+  onRatingClicked(tour: Tour): void {
+    this.selectedTour = tour;
+    this.shouldRenderTourReviewForm = true;
+    this.shouldRenderProblemForm = false;
+  }
+
+  changeReviewVisibility(): void {
+    this.shouldRenderTourReviewForm = false;
   }
 }
