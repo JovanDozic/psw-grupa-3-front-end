@@ -1,0 +1,23 @@
+
+<form [formGroup]="reviewForm" class="review-form">
+    <h2 class="form-title">Tour Review Form</h2>
+    <div>
+        <mat-radio-group formControlName="rating">
+            <mat-radio-button *ngFor="let i of[1, 2, 3, 4, 5]" [value]="i">{{i}}</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field>
+            <input matInput formControlName="comment" placeholder="Comment" type="text">
+        </mat-form-field>
+    <div class="form-item">
+        <label>The date you visited the tour:</label>
+        <mat-form-field>
+            <input matInput formControlName="tourDate" type="date"  placeholder="Date of Tour">
+        </mat-form-field>
+    </div>
+    <div class="form-item">
+        <label>Upload images:</label>
+        <input type="file" multiple (change)="onFileSelected($event)">
+    </div>
+        <button  color="primary" type="submit" (click)="addReview()" mat-raised-button>Done</button>
+    </div>
+</form>

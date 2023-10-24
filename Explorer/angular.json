@@ -29,10 +29,14 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/leaflet/dist/leaflet.css",
               "@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/leaflet/dist/leaflet.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -102,6 +106,6 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": "16a2f6b8-cb6a-4698-9f13-d1f91469cb40"
   }
 }
