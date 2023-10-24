@@ -8,6 +8,7 @@ import {PagedResults} from "../../shared/model/paged-results.model";
 import {Points} from "./model/points.model";
 import { TourReview } from './model/tourReview.model';
 import { Club } from './model/club.model';
+import { ClubInvitation } from './model/clubInvitation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -64,7 +65,22 @@ export class TourAuthoringService {
     return this.http.put<Club>(environment.apiHost + 'club/' + club.id, club);
   }
 
-  addProblem(problem: Problem): Observable<Problem> {
+  addClubInvitation(clubInvitation: ClubInvitation): Observable<ClubInvitation>{
+    return this.http.post<ClubInvitation>(environment.apiHost + 'tourist/clubInvitation', clubInvitation);
+  }
+
+  getClubInvitations(): Observable<PagedResults<ClubInvitation>> {
+    return this.http.get<PagedResults<ClubInvitation>>(environment.apiHost + 'tourist/clubInvitation/getAll')
+  }
+
+
+  deleteClubInvitation(id: number): Observable<ClubInvitation> {
+    return this.http.delete<ClubInvitation>(environment.apiHost + 'tourist/clubInvitation/' + id);
+  }
+
+   addProblem(problem: Problem): Observable<Problem> {
     return this.http.post<Problem>(environment.apiHost + 'tourist/problem', problem);
   }
+
 }
+ 
