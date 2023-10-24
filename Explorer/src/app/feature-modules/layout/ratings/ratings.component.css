@@ -36,14 +36,15 @@
     align-items: center;
 }
 .comment{
+    margin-top: 7px;
     width: 220px;
     height: 80px;
 }
 ngb-rating{
-    color: #23967F;
+    color: #FFD700;
     font-size: 20px;
 }
 .average{
-    color: #23967F;
+    color: #FFD700;
     font-size: 36px;
 }
