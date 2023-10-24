@@ -6,23 +6,28 @@ import { MaterialModule } from 'src/app/infrastructure/material/material.module'
 import { RouterModule } from '@angular/router';
 import { SearchComponent } from './home/search/search.component';
 import { FormsModule } from '@angular/forms';
+import { RecommendedToursComponent } from './recommended-tours/recommended-tours.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     HomeComponent,
     NavbarComponent,
-    SearchComponent
+    SearchComponent,
+    RecommendedToursComponent,
   ],
   imports: [
     CommonModule,
     MaterialModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    NgbModule,
   ],
   exports: [
     NavbarComponent,
     HomeComponent,
-    SearchComponent
+    SearchComponent,
+    RecommendedToursComponent,
   ]
 })
 export class LayoutModule { }
