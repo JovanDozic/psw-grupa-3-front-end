@@ -1,0 +1,41 @@
+<div id="profile">
+    <p><b>Korisnik</b></p>
+    <div id="profile-details">
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fotografija</th>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Biografija</th>
+                    <th>Citat</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    
+                    <td *ngIf="person">
+                  <img  src="{{person.picture}}"
+                            class="img-responsive img-thumbnail" style="width:160px;height:140px">
+                    </td>
+                    <td *ngIf="person"><b>{{person.name}}</b></td>
+                    <td *ngIf="person"><b>{{person.surname}}</b></td>   
+                    <td *ngIf="person"><b>{{person.bio}}</b></td>
+                    <td *ngIf="person"><b>{{person.quote}}</b></td>
+                    <td>
+                        <button (click)="onEditClicked(person)" color="primary" mat-icon-button>
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+    <xp-profile-form *ngIf="shouldRenderProfileForm"  [profile]="selectedProfile" (profileUpdated)="getUser()" ></xp-profile-form>
+    </div>
+
+    
+</div>
+

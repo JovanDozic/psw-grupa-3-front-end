@@ -5,6 +5,7 @@ import { LoginComponent } from '../auth/login/login.component';
 import { EquipmentComponent } from 'src/app/feature-modules/administration/equipment/equipment.component';
 import { AuthGuard } from '../auth/auth.guard';
 import { RegistrationComponent } from '../auth/registration/registration.component';
+import { ProfileComponent } from 'src/app/feature-modules/administration/profile/profile.component';
 import { ProblemFormComponent } from 'src/app/feature-modules/tour-authoring/problem-form/problem-form.component';
 import { ProblemsComponent } from 'src/app/feature-modules/administration/problems/problems.component';
 import { OverviewComponent } from 'src/app/feature-modules/administration/admin/overview.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegistrationComponent},
   {path: 'equipment', component: EquipmentComponent, canActivate: [AuthGuard],},
+  {path: 'profile', component: ProfileComponent, canActivate:[AuthGuard]},
   {path: 'problem-form', component: ProblemFormComponent},
   {path: 'problems', component: ProblemsComponent},
   {path: 'overview', component: OverviewComponent},
