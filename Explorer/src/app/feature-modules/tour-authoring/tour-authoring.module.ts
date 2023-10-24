@@ -14,6 +14,8 @@ import { ClubComponent } from './club/club.component';
 import { ClubFormComponent } from './club-form/club-form.component';
 import { ClubInvitationFormComponent } from './club-invitation-form/club-invitation-form.component';
 import { ClubInvitationsComponent } from './club-invitations/club-invitations.component';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -39,7 +41,9 @@ import { ProblemFormComponent } from './problem-form/problem-form.component';
     FormsModule,
     ReactiveFormsModule,
     TextFieldModule,
-    MatRadioModule
+    MatRadioModule,
+    RouterModule,
+    SharedModule
   ],
   exports: [
     PointsComponent,
