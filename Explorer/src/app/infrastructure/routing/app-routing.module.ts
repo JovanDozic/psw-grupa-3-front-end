@@ -17,6 +17,7 @@ import { AppRatingsComponent } from 'src/app/feature-modules/administration/app-
 import { AppRatingFormComponent } from 'src/app/feature-modules/administration/app-rating-form/app-rating-form.component';
 import { BlogCommentsComponent } from 'src/app/feature-modules/blog/blog-comments/blog-comments.component';
 import { EquipmentRecordComponent } from 'src/app/feature-modules/administration/equipment-record/equipment-record.component';
+import { ClubComponent } from 'src/app/feature-modules/tour-authoring/club/club.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -34,7 +35,8 @@ const routes: Routes = [
   {path: 'app-ratings', component: AppRatingsComponent},
   {path: 'app-rating-form', component: AppRatingFormComponent},
   {path: 'blog-comments', component: BlogCommentsComponent, canActivate: [AuthGuard]},
-  {path: 'equipment-record', component: EquipmentRecordComponent}
+  {path: 'equipment-record', component: EquipmentRecordComponent},
+  {path: 'club', component: ClubComponent}
 ];
 
 @NgModule({
