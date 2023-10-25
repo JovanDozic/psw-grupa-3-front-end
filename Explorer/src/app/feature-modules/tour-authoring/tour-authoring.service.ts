@@ -17,7 +17,7 @@ import { ClubMember } from './model/clubMember.model';
 export class TourAuthoringService {
 
   constructor(private http: HttpClient) { }
-  
+
   getPoints(): Observable<PagedResults<Points>>{
     return this.http.get<PagedResults<Points>>(environment.apiHost + 'author/points');
   }
@@ -31,11 +31,11 @@ export class TourAuthoringService {
   }
 
   updatePoint(point: Points): Observable<Points> {
-    return this.http.put<Points>(environment.apiHost + 'author/points/' + point.id, point);
+      return this.http.put<Points>(environment.apiHost + 'author/points/' + point.id, point);
   }
   
   getTours(): Observable<PagedResults<Tour>> {
-    return this.http.get<PagedResults<Tour>>(environment.apiHost + 'author/tour/getAll')
+    return this.http.get<PagedResults<Tour>>(environment.apiHost + 'author/tour/getAll');
   }
 
   deleteTour(id: number): Observable<Tour> {
