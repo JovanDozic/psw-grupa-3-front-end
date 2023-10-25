@@ -24,6 +24,7 @@ import { ClubInvitationsComponent } from 'src/app/feature-modules/tour-authoring
 import { ClubMembersComponent } from 'src/app/feature-modules/tour-authoring/club-members/club-members.component';
 
 const routes: Routes = [
+  {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegistrationComponent},
