@@ -21,6 +21,7 @@ import { EquipmentRecordComponent } from 'src/app/feature-modules/administration
 import { ClubComponent } from 'src/app/feature-modules/tour-authoring/club/club.component';
 import { ClubInvitationFormComponent } from 'src/app/feature-modules/tour-authoring/club-invitation-form/club-invitation-form.component';
 import { ClubInvitationsComponent } from 'src/app/feature-modules/tour-authoring/club-invitations/club-invitations.component';
+import { ClubMembersComponent } from 'src/app/feature-modules/tour-authoring/club-members/club-members.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -42,7 +43,8 @@ const routes: Routes = [
   {path: 'equipment-record', component: EquipmentRecordComponent},
   {path: 'club', component: ClubComponent},
   {path: 'invitations', component: ClubInvitationFormComponent},
-  {path: 'club-invitations', component: ClubInvitationsComponent}
+  {path: 'club-invitations', component: ClubInvitationsComponent},
+  {path: 'club-members', component: ClubMembersComponent}
 ];
 
 @NgModule({
