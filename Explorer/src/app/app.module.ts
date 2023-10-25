@@ -18,6 +18,7 @@ import { MapComponent } from './shared/map/map.component';
 import { RouterModule } from '@angular/router';
 import { TourComponent } from './feature-modules/tour-authoring/tour/tour.component';
 import { SharedModule } from './shared/shared.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     FormsModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    NgbModule,
   ],
   providers: [
     {
