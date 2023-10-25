@@ -4,5 +4,6 @@ export interface Points {
   latitude: number,
   name: string,
   description: string,
-  picture: string
+  picture: string,
+  tourId: number
 }

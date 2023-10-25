@@ -35,6 +35,7 @@ export class PointsFormComponent implements OnChanges {
       name: this.pointsFrom.value.name || '',
       description: this.pointsFrom.value.description || '',
       picture: this.pointsFrom.value.picture || '',
+      tourId: 0
     }
 
     this.service.addPoint(point).subscribe({
@@ -52,6 +53,7 @@ export class PointsFormComponent implements OnChanges {
       name: this.pointsFrom.value.name || '',
       description: this.pointsFrom.value.description || '',
       picture: this.pointsFrom.value.picture || '',
+      tourId: 0
     }
 
     this.service.updatePoint(point).subscribe({
