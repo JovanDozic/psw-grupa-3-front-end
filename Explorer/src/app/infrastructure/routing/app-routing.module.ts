@@ -18,6 +18,7 @@ import { AppRatingsComponent } from 'src/app/feature-modules/administration/app-
 import { AppRatingFormComponent } from 'src/app/feature-modules/administration/app-rating-form/app-rating-form.component';
 import { BlogCommentsComponent } from 'src/app/feature-modules/blog/blog-comments/blog-comments.component';
 import { EquipmentRecordComponent } from 'src/app/feature-modules/administration/equipment-record/equipment-record.component';
+import { ClubComponent } from 'src/app/feature-modules/tour-authoring/club/club.component';
 import { ClubInvitationFormComponent } from 'src/app/feature-modules/tour-authoring/club-invitation-form/club-invitation-form.component';
 import { ClubInvitationsComponent } from 'src/app/feature-modules/tour-authoring/club-invitations/club-invitations.component';
 import { ClubMembersComponent } from 'src/app/feature-modules/tour-authoring/club-members/club-members.component';
@@ -40,10 +41,10 @@ const routes: Routes = [
   {path: 'app-rating-form', component: AppRatingFormComponent},
   {path: 'blog-comments', component: BlogCommentsComponent, canActivate: [AuthGuard]},
   {path: 'equipment-record', component: EquipmentRecordComponent},
+  {path: 'club', component: ClubComponent},
   {path: 'invitations', component: ClubInvitationFormComponent},
   {path: 'club-invitations', component: ClubInvitationsComponent},
   {path: 'club-members', component: ClubMembersComponent}
-  
 ];
 
 @NgModule({
