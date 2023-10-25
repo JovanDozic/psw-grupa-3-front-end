@@ -32,7 +32,7 @@ import { ClubMembersComponent } from './club-members/club-members.component';
     ClubInvitationFormComponent,
     ClubInvitationsComponent,
     ProblemFormComponent,
-    MembershipRequestComponent
+    MembershipRequestComponent,
     ClubMembersComponent
   ],
   imports: [

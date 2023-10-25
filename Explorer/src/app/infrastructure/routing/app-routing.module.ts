@@ -46,7 +46,7 @@ const routes: Routes = [
   {path: 'club', component: ClubComponent},
   {path: 'invitations', component: ClubInvitationFormComponent},
   {path: 'club-invitations', component: ClubInvitationsComponent},
-  {path: 'membership-requests', component: MembershipRequestComponent}
+  {path: 'membership-requests', component: MembershipRequestComponent},
   {path: 'club-members', component: ClubMembersComponent}
 ];
 
