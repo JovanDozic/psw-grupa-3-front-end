@@ -12,8 +12,15 @@ import { TourComponent } from './tour/tour.component';
 import { TourFormComponent } from './tour-form/tour-form.component';
 import { ClubComponent } from './club/club.component';
 import { ClubFormComponent } from './club-form/club-form.component';
+import { ClubInvitationFormComponent } from './club-invitation-form/club-invitation-form.component';
+import { ClubInvitationsComponent } from './club-invitations/club-invitations.component';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
+
+import { ProblemFormComponent } from './problem-form/problem-form.component';
+import { ClubMembersComponent } from './club-members/club-members.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +30,11 @@ import { ClubFormComponent } from './club-form/club-form.component';
     TourComponent,
     TourFormComponent,
     ClubComponent,
-    ClubFormComponent
+    ClubFormComponent,
+    ClubInvitationFormComponent,
+    ClubInvitationsComponent,
+    ProblemFormComponent,
+    ClubMembersComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +43,9 @@ import { ClubFormComponent } from './club-form/club-form.component';
     FormsModule,
     ReactiveFormsModule,
     TextFieldModule,
-    MatRadioModule
+    MatRadioModule,
+    RouterModule,
+    SharedModule
   ],
   exports: [
     PointsComponent,
@@ -41,7 +54,11 @@ import { ClubFormComponent } from './club-form/club-form.component';
     TourFormComponent,
     TourReviewFormComponent, 
     ClubComponent,
-    ClubFormComponent
+    ClubFormComponent,
+    ClubInvitationFormComponent,
+    ClubInvitationsComponent,
+    ProblemFormComponent,
+    ClubMembersComponent
   ]
 })
 export class TourAuthoringModule { }

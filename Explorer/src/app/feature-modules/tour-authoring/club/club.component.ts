@@ -5,6 +5,7 @@ import { Club } from '../model/club.model'
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { ClubMember } from '../model/clubMember.model';
 
 @Component({
   selector: 'xp-club',
@@ -18,6 +19,7 @@ export class ClubComponent {
   clubs: Club[] = [];
   selectedClub: Club;
   shouldRenderClubForm: boolean = false;
+  shouldRenderClubMemberForm: boolean = false;
   shouldEdit: boolean = false;
 
   user: User | undefined;
@@ -74,10 +76,23 @@ export class ClubComponent {
     this.selectedClub = club;
     this.shouldRenderClubForm = true;
     this.shouldEdit = true;
+    this.shouldRenderClubMemberForm=false;
   }
-  
+  onMemberClicked(club: Club): void {
+    this.selectedClub = club;
+    this.shouldRenderClubMemberForm = true;
+    this.shouldEdit=false;
+    this.shouldRenderClubForm=false;
+    
+  }
+
+  changeReviewVisibility(): void {
+    this.shouldRenderClubMemberForm = false;
+  }
+
   onAddClicked() : void {
     this.shouldEdit = false;
     this.shouldRenderClubForm = true;
+    this.shouldRenderClubMemberForm=false;
   }
 }

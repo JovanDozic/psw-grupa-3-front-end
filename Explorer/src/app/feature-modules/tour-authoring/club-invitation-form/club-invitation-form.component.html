@@ -1,0 +1,32 @@
+
+<form [formGroup]="clubInvitationForm" class="club-invitation-form">
+    <h2 class="form-title">Send club invitation</h2>
+    <div>
+        
+       
+    <div class="form-item">
+        <label>For tourist:</label>
+        <mat-form-field>
+            <input matInput formControlName="touristId" type="number" min="1"  placeholder="id">
+        </mat-form-field>
+    </div>
+    <div class="form-item">
+        <label>From club:</label>
+        <mat-form-field>
+            <input matInput formControlName="clubId" type="number" min="1"  placeholder="id">
+        </mat-form-field>
+    </div>
+    
+        <button  color="primary" type="submit" (click)="addClubInvitation()" mat-raised-button>Send</button>
+          <div>
+             <xp-club-invitations></xp-club-invitations>
+    
+          </div>
+       
+    </div>
+   
+</form>
+ 
+
+
+

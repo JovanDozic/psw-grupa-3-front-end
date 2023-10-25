@@ -1,6 +1,6 @@
-
 <form [formGroup]="reviewForm" class="review-form">
     <h2 class="form-title">Tour Review Form</h2>
+    <p class="tour-name">{{tour.name}}</p>
     <div>
         <mat-radio-group formControlName="rating">
             <mat-radio-button *ngFor="let i of[1, 2, 3, 4, 5]" [value]="i">{{i}}</mat-radio-button>
