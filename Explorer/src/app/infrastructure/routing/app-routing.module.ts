@@ -40,10 +40,9 @@ const routes: Routes = [
   {path: 'app-rating-form', component: AppRatingFormComponent},
   {path: 'blog-comments', component: BlogCommentsComponent, canActivate: [AuthGuard]},
   {path: 'equipment-record', component: EquipmentRecordComponent},
-  {path: 'club', component: ClubComponent}
+  {path: 'club', component: ClubComponent},
   {path: 'invitations', component: ClubInvitationFormComponent},
   {path: 'club-invitations', component: ClubInvitationsComponent}
-  
 ];
 
 @NgModule({
