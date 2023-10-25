@@ -7,6 +7,7 @@ import {MatInput, MatInputModule} from '@angular/material/input';
 import {MatTable, MatTableModule} from '@angular/material/table';
 import {MatIcon, MatIconModule} from '@angular/material/icon';
 import {MatCheckbox,MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDatepicker,MatDatepickerModule } from '@angular/material/datepicker';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {MatCheckbox,MatCheckboxModule} from '@angular/material/checkbox';
     MatInputModule,
     MatTableModule,
     MatIconModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDatepickerModule,
   ],
   exports: [
     MatToolbar,
@@ -30,7 +32,8 @@ import {MatCheckbox,MatCheckboxModule} from '@angular/material/checkbox';
     MatTable,
     MatIconButton,
     MatIcon,
-    MatCheckbox
+    MatCheckbox,
+    MatDatepicker
   ]
 })
 export class MaterialModule { }

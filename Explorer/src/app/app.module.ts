@@ -15,13 +15,16 @@ import { AuthModule } from './infrastructure/auth/auth.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './infrastructure/auth/jwt/jwt.interceptor';
 import { MapComponent } from './shared/map/map.component';
+import { RouterModule } from '@angular/router';
+import { TourComponent } from './feature-modules/tour-authoring/tour/tour.component';
+import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent
+    // MapComponent,
+    // TourComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AuthModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    RouterModule,
+    SharedModule,
+    NgbModule,
   ],
   providers: [
     {

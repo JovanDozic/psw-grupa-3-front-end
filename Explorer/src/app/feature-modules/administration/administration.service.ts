@@ -4,6 +4,7 @@ import { Equipment } from './model/equipment.model';
 import { environment } from 'src/env/environment';
 import { Observable } from 'rxjs';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
+import { Person } from './model/userprofile.model';
 import { Problem } from '../tour-authoring/model/problem.model';
 
 import { Overview } from './model/overview.model';
@@ -36,6 +37,16 @@ export class AdministrationService {
     return this.http.put<Equipment>(environment.apiHost + 'administration/equipment/' + equipment.id, equipment);
   }
 
+  //User Profile
+
+  getUser(id: number): Observable<Person>{
+    return this.http.get<Person>(environment.apiHost + 'userprofile/' + id);
+  }
+
+  updateUser(profile: Person): Observable<Person> {
+    console.log(profile);
+    return this.http.put<Person>(environment.apiHost + 'userprofile/' + profile.id, profile);
+  }
   getProblems(): Observable<PagedResults<Problem>> {
     return this.http.get<PagedResults<Problem>>(environment.apiHost + 'administration/problems')
   }

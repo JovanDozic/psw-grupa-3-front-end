@@ -1,0 +1,34 @@
+   
+<div id="myInvitations">
+        <p>Invitations for me:</p>
+        <hr>
+        <div id="myInvitations-details">
+        <div>
+            <table align="center">
+                <thead>
+                    <tr>
+                        <th>From club</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let clubInvitation of clubInvitations">
+                        <td>{{clubInvitation.clubId}}</td>
+                        
+                        <td>
+                            <button color="accent" (click)="deleteClubInvitation(clubInvitation.id || 0)" mat-icon-button>
+                                <mat-icon>delete</mat-icon>
+                                
+                            </button>
+                        </td>
+                    </tr>
+                  
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+
+    
+    
+    

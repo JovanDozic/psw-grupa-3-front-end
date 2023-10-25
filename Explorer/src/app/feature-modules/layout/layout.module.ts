@@ -5,24 +5,32 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 import { RouterModule } from '@angular/router';
 import { RatingsComponent } from './ratings/ratings.component';
+import { SearchComponent } from './home/search/search.component';
+import { FormsModule } from '@angular/forms';
+import { RecommendedToursComponent } from './recommended-tours/recommended-tours.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     HomeComponent,
     NavbarComponent,
-    RatingsComponent
+    RatingsComponent,
+    SearchComponent,
+    RecommendedToursComponent,
   ],
   imports: [
     CommonModule,
     MaterialModule,
     RouterModule,
-    NgbModule
+    FormsModule,
+    NgbModule,
   ],
   exports: [
     NavbarComponent,
     HomeComponent,
-    RatingsComponent
+    RatingsComponent,
+    SearchComponent,
+    RecommendedToursComponent,
   ]
 })
 export class LayoutModule { }

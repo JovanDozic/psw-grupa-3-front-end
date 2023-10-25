@@ -14,7 +14,7 @@ div {
     margin-bottom: 10px;
 }
 
-.review-form {
+.club-invitation-form {
     width: 400px;
     display: flex;
     flex-direction: column;
@@ -34,10 +34,4 @@ div {
 .form-item label {
     text-align: left;
     font-weight: 500;
-  }
-
-  .tour-name {
-    text-align: center;
-    font-weight: 400;
-    font-size: 18px;
   }
