@@ -8,27 +8,29 @@ div {
     background-color: #f7fff7;
 }
 
-#buttons {
+.right-section {
+    display: flex;
+    justify-content: right;
     padding: 20px;
-    width: auto;
-    margin-left: auto;
-    margin-right: 3%;
 }
 
 .middle-section{
   display: flex; 
   justify-content: center;
+  vertical-align: center;
+  margin-left: 28%;
+  margin-top: 15px;
 }
 
 .custom-menu {
   display: flex;
   position: relative;
   text-align: center;
-  width: 10%; 
+  width: 20%; 
+  height: 40px;
 }
 
-.custom-menu-trigger { 
- 
+.custom-menu-trigger {
   background-color: transparent;
   color: #1F7A8C;
   padding: 10px 20px;
@@ -79,10 +81,16 @@ div {
 .logo-section{
   width: 70px; 
   height: 70px;
-  margin-left: 20px;
+  margin-left: 30px;
 }
 
 .custom-button {
-  border-radius: 15px;
+  border-radius: 17px;
+  align-content: center;
+  margin-top: 2px;
   color: #ffffff; 
+}
+
+.navbar-section{
+  margin-top: 15px;
 }

@@ -1,5 +1,5 @@
 <mat-toolbar class="toolbar">
-    <div>
+    <div class="navbar-section">
         <div class="logo-section">
           <a [routerLink]="['/home']">
           <img src="assets/icons/3p-logo.png">
@@ -42,7 +42,7 @@
               </div>
             </div>  
         </div>
-        <div id="buttons">
+        <div class="right-section">
             <button *ngIf="user && user.username === ''" mat-raised-button class="custom-button" [style.background-color]="'#00BBFF'" [style.color]="'#F7FFF7'" [routerLink]="['login']">Login</button>
             <button *ngIf="user && user.username !== ''" mat-raised-button class="custom-button" [style.background-color]="'#00BBFF'" [style.color]="'#F7FFF7'" (click)="onLogout()">Logout</button>
             <div class="custom-menu" *ngIf="user && user.username !== ''">
@@ -74,6 +74,9 @@
                 </div>
                 <div class="custom-menu-item" *ngIf="user && user.role === 'tourist'" color="primary" [routerLink]="['equipment-record']">
                   <div class="custom-menu-item-text">Equipment record</div>
+                </div>
+                <div class="custom-menu-item" *ngIf="user && user.role === 'tourist'" color="primary" [routerLink]="['preference']">
+                  <div class="custom-menu-item-text">Preferences</div>
                 </div>
               </div>
             </div>
