@@ -9,6 +9,7 @@ import {Points} from "./model/points.model";
 import { TourReview } from './model/tourReview.model';
 import { Club } from './model/club.model';
 import { ClubInvitation } from './model/clubInvitation.model';
+import { MembershipRequest } from './model/membership-request.model';
 import { ClubMember } from './model/clubMember.model';
 
 @Injectable({
@@ -81,6 +82,23 @@ export class TourAuthoringService {
 
    addProblem(problem: Problem): Observable<Problem> {
     return this.http.post<Problem>(environment.apiHost + 'tourist/problem', problem);
+  }
+
+  createMembershipRequest(membershipRequest:MembershipRequest){
+    return this.http.post<MembershipRequest>(environment.apiHost + 'membershipRequests', membershipRequest);
+  }
+
+  getAllMembershipRequests (){
+    return this.http.get<PagedResults<MembershipRequest>>(environment.apiHost + 'membershipRequests/getAll')
+  }
+
+  acceptMembershipRequest (membershipRequest:MembershipRequest){
+    console.log(membershipRequest);
+    return this.http.put<MembershipRequest>(environment.apiHost + 'membershipRequests/accept/' + membershipRequest.id, membershipRequest)
+  }
+
+  rejectMembershipRequest (membershipRequest:MembershipRequest){
+    return this.http.put<MembershipRequest>(environment.apiHost + 'membershipRequests/reject/' + membershipRequest.id, membershipRequest)
   }
 
   getClubMembers(): Observable<PagedResults<ClubMember>> {
