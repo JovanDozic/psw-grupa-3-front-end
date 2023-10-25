@@ -110,5 +110,8 @@ export class TourAuthoringService {
     return this.http.delete<ClubMember>(environment.apiHost + 'tourist/clubMember/' + id);
   }
 
+  getPointsForTour(id: number): Observable<any> {
+    return this.http.get<any>(environment.apiHost + `author/points/getAllForTour/${id}`);
+  }
 }
  

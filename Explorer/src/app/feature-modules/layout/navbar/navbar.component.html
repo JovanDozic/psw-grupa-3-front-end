@@ -1,119 +1,100 @@
 <mat-toolbar class="toolbar">
-  <div class="navbar-section">
-    <div class="logo-section">
-      <a [routerLink]="['/home']">
-        <img src="assets/icons/3p-logo.png">
-      </a>
+    <div class="navbar-section">
+        <div class="logo-section">
+          <a [routerLink]="['/home']">
+          <img src="assets/icons/3p-logo.png">
+        </a>
+        </div>
+        <div class="middle-section">
+            <div class="custom-menu">
+              <button class="custom-menu-trigger">Explore</button>
+              <div class="custom-menu-content">
+                <div class="custom-menu-item">
+                  <div class="custom-menu-item-text">Top destinations</div>
+                </div>
+                <div class="custom-menu-item">
+                  <div class="custom-menu-item-text">Popular restaurants</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="custom-menu">
+              <button class="custom-menu-trigger">Trips</button>
+              <div class="custom-menu-content">
+                <div class="custom-menu-item">
+                  <div class="custom-menu-item-text">Tours</div>
+                </div>
+                <div class="custom-menu-item">
+                  <div class="custom-menu-item-text">Places</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="custom-menu">
+              <button class="custom-menu-trigger">Community</button>
+              <div class="custom-menu-content">
+                <div class="custom-menu-item">
+                  <div class="custom-menu-item-text" [routerLink]="['blogCreation']">Create a blog</div>
+                </div>
+                <div class="custom-menu-item">
+                  <div class="custom-menu-item-text">View travel blogs</div>
+                </div>
+              </div>
+            </div>  
+        </div>
+        <div class="right-section">
+            <button *ngIf="user && user.username === ''" mat-raised-button class="custom-button" [style.background-color]="'#00BBFF'" [style.color]="'#F7FFF7'" [routerLink]="['login']">Login</button>
+            <button *ngIf="user && user.username !== ''" mat-raised-button class="custom-button" [style.background-color]="'#00BBFF'" [style.color]="'#F7FFF7'" (click)="onLogout()">Logout</button>
+            <div class="custom-menu" *ngIf="user && user.username !== ''">
+              <button class="custom-menu-trigger">User</button>
+              <div class="custom-menu-content">
+                <div class="custom-menu-item" *ngIf="user && user.role === 'administrator'"color="primary" [routerLink]="['equipment']">
+                  <div class="custom-menu-item-text">Manage equipment</div>
+                </div>
+                <div class="custom-menu-item" *ngIf="user && user.role === 'administrator'" color="primary" [routerLink]="['overview']">
+                  <div class="custom-menu-item-text">Overview of users</div>
+                </div>
+                <div class="custom-menu-item" *ngIf="user && (user.role === 'author' || user.role === 'tourist')" color="primary" [routerLink]="['blogCreation']">
+                  <div class="custom-menu-item-text">Create blog</div>
+                </div>
+                <div class="custom-menu-item" *ngIf="user && user.role === 'author'" color="primary" [routerLink]="['points']">
+                  <div class="custom-menu-item-text">Manage points</div>
+                </div>
+                <div class="custom-menu-item" *ngIf="user && (user.role === 'author' || user.role === 'tourist')" color="primary" [routerLink]="['app-rating-form']">
+                  <div class="custom-menu-item-text">Rate the App</div>
+                </div>
+                <div class="custom-menu-item" *ngIf="user && user.role === 'author'"color="primary" [routerLink]="['tours']">
+                  <div class="custom-menu-item-text">Manage tours</div>
+                </div>
+                <div class="custom-menu-item" *ngIf="user && user.role === 'administrator'" color="primary" [routerLink]="['app-ratings']">
+                  <div class="custom-menu-item-text">All App Ratings</div>
+                </div>
+                <div class="custom-menu-item" *ngIf="user && (user.role === 'author' || user.role === 'tourist')" color="primary" [routerLink]="['blog-comments']">
+                  <div class="custom-menu-item-text">Blog</div>
+                </div>
+                <div class="custom-menu-item" *ngIf="user && user.role === 'tourist'" color="primary" [routerLink]="['equipment-record']">
+                  <div class="custom-menu-item-text">Equipment record</div>
+                </div>
+                <div class="custom-menu-item" *ngIf="user && user.role === 'tourist'" color="primary" [routerLink]="['preference']">
+                  <div class="custom-menu-item-text">Preferences</div>
+                </div>
+                <div class="custom-menu-item" *ngIf="user && user.role === 'tourist'" color="primary" [routerLink]="['club']">
+                  <div class="custom-menu-item-text">Club management</div>
+                </div>
+                <div class="custom-menu-item" *ngIf="user && user.role === 'tourist'" color="primary" [routerLink]="['invitations']">
+                  <div class="custom-menu-item-text">Club invitations</div>
+                </div>
+                <div class="custom-menu-item" *ngIf="user && user.role !== 'administrator' && user && user.username !== ''" color="primary" [routerLink]="['profile']">
+                  <div class="custom-menu-item-text">Profile</div>
+                </div>
+                <div class="custom-menu-item" *ngIf="user && user.role === 'administrator'"color="primary" [routerLink]="['problems']">
+                  <div class="custom-menu-item-text">Show Tour Problems</div>
+                </div>
+                <div class="custom-menu-item" *ngIf="user && user.role === 'tourist'"color="primary" mat-raised-button [routerLink]="['problem-form']">
+                  <div class="custom-menu-item-text">All tours</div>
+                </div>
+              </div>
+            </div>
+        </div>
     </div>
-    <div class="middle-section">
-      <div class="custom-menu">
-        <button class="custom-menu-trigger">Explore</button>
-        <div class="custom-menu-content">
-          <div class="custom-menu-item">
-            <div class="custom-menu-item-text">Top destinations</div>
-          </div>
-          <div class="custom-menu-item">
-            <div class="custom-menu-item-text">Popular restaurants</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="custom-menu">
-        <button class="custom-menu-trigger">Trips</button>
-        <div class="custom-menu-content">
-          <div class="custom-menu-item">
-            <div class="custom-menu-item-text">Tours</div>
-          </div>
-          <div class="custom-menu-item">
-            <div class="custom-menu-item-text">Places</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="custom-menu">
-        <button class="custom-menu-trigger">Community</button>
-        <div class="custom-menu-content">
-          <div class="custom-menu-item">
-            <div class="custom-menu-item-text" [routerLink]="['blogCreation']">Create a blog</div>
-          </div>
-          <div class="custom-menu-item">
-            <div class="custom-menu-item-text">View travel blogs</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="right-section">
-      <button *ngIf="user && user.username === ''" mat-raised-button class="custom-button"
-        [style.background-color]="'#00BBFF'" [style.color]="'#F7FFF7'" [routerLink]="['login']">Login</button>
-      <button *ngIf="user && user.username !== ''" mat-raised-button class="custom-button"
-        [style.background-color]="'#00BBFF'" [style.color]="'#F7FFF7'" (click)="onLogout()">Logout</button>
-      <div class="custom-menu" *ngIf="user && user.username !== ''">
-        <button class="custom-menu-trigger">User</button>
-        <div class="custom-menu-content">
-          <div class="custom-menu-item" *ngIf="user && user.role === 'administrator'" color="primary"
-            [routerLink]="['equipment']">
-            <div class="custom-menu-item-text">Manage equipment</div>
-          </div>
-          <div class="custom-menu-item" *ngIf="user && user.role === 'administrator'" color="primary"
-            [routerLink]="['overview']">
-            <div class="custom-menu-item-text">Overview of users</div>
-          </div>
-          <div class="custom-menu-item" *ngIf="user && (user.role === 'author' || user.role === 'tourist')"
-            color="primary" [routerLink]="['blogCreation']">
-            <div class="custom-menu-item-text">Create blog</div>
-          </div>
-          <div class="custom-menu-item" *ngIf="user && user.role === 'author'" color="primary"
-            [routerLink]="['points']">
-            <div class="custom-menu-item-text">Manage points</div>
-          </div>
-          <div class="custom-menu-item" *ngIf="user && (user.role === 'author' || user.role === 'tourist')"
-            color="primary" [routerLink]="['app-rating-form']">
-            <div class="custom-menu-item-text">Rate the App</div>
-          </div>
-          <div class="custom-menu-item" *ngIf="user && user.role === 'author'" color="primary" [routerLink]="['tours']">
-            <div class="custom-menu-item-text">Manage tours</div>
-          </div>
-          <div class="custom-menu-item" *ngIf="user && user.role === 'administrator'" color="primary"
-            [routerLink]="['app-ratings']">
-            <div class="custom-menu-item-text">All App Ratings</div>
-          </div>
-          <div class="custom-menu-item" *ngIf="user && (user.role === 'author' || user.role === 'tourist')"
-            color="primary" [routerLink]="['blog-comments']">
-            <div class="custom-menu-item-text">Blog</div>
-          </div>
-          <div class="custom-menu-item" *ngIf="user && user.role === 'tourist'" color="primary"
-            [routerLink]="['equipment-record']">
-            <div class="custom-menu-item-text">Equipment record</div>
-          </div>
-          <div class="custom-menu-item" *ngIf="user && user.role === 'tourist'" color="primary"
-            [routerLink]="['preference']">
-            <div class="custom-menu-item-text">Preferences</div>
-          </div>
-          <div class="custom-menu-item" *ngIf="user && user.role === 'tourist'" color="primary" [routerLink]="['club']">
-            <div class="custom-menu-item-text">Club management</div>
-          </div>
-          <div class="custom-menu-item" *ngIf="user && user.role === 'tourist'" color="primary"
-            [routerLink]="['invitations']">
-            <div class="custom-menu-item-text">Club invitations</div>
-          </div>
-          <div class="custom-menu-item" *ngIf="user && user.role !== 'administrator' && user && user.username !== ''"
-            color="primary" [routerLink]="['profile']">
-            <div class="custom-menu-item-text">Profile</div>
-          </div>
-          <div class="custom-menu-item" *ngIf="user && user.role === 'administrator'" color="primary"
-            [routerLink]="['problems']">
-            <div class="custom-menu-item-text">Show Tour Problems</div>
-          </div>
-          <div class="custom-menu-item" *ngIf="user && user.role === 'tourist'" color="primary" mat-raised-button
-            [routerLink]="['problem-form']">
-            <div class="custom-menu-item-text">All tours</div>
-          </div>
-          <div class="custom-menu-item" *ngIf="user && user.role === 'administrator'" color="primary"
-            [routerLink]="['overview']">
-            <div class="custom-menu-item-text">Overview of users</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </mat-toolbar>
