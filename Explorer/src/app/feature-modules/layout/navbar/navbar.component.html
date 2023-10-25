@@ -18,6 +18,7 @@
             <button *ngIf="user && (user.role === 'author' || user.role === 'tourist')" color="primary" mat-raised-button [routerLink]="['blog-comments']">Blog</button>
             <button *ngIf="user && user.role === 'tourist'" color="primary" mat-raised-button [routerLink]="['equipment-record']">Equipment record</button>
             <button *ngIf="user && user.role === 'tourist'" color="primary" mat-raised-button [routerLink]="['invitations']">Club invitations</button>
+            <button *ngIf="user" color="primary" mat-raised-button [routerLink]="['membership-requests']">All Requests</button>
 
         </div>
     </div>

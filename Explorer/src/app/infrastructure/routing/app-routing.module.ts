@@ -20,6 +20,7 @@ import { BlogCommentsComponent } from 'src/app/feature-modules/blog/blog-comment
 import { EquipmentRecordComponent } from 'src/app/feature-modules/administration/equipment-record/equipment-record.component';
 import { ClubInvitationFormComponent } from 'src/app/feature-modules/tour-authoring/club-invitation-form/club-invitation-form.component';
 import { ClubInvitationsComponent } from 'src/app/feature-modules/tour-authoring/club-invitations/club-invitations.component';
+import { MembershipRequestComponent } from 'src/app/feature-modules/tour-authoring/membership-request/membership-request.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -40,8 +41,8 @@ const routes: Routes = [
   {path: 'blog-comments', component: BlogCommentsComponent, canActivate: [AuthGuard]},
   {path: 'equipment-record', component: EquipmentRecordComponent},
   {path: 'invitations', component: ClubInvitationFormComponent},
-  {path: 'club-invitations', component: ClubInvitationsComponent}
-  
+  {path: 'club-invitations', component: ClubInvitationsComponent},
+  {path: 'membership-requests', component: MembershipRequestComponent}
 ];
 
 @NgModule({

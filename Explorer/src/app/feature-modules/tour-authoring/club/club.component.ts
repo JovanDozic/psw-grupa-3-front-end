@@ -2,9 +2,11 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TourAuthoringService } from '../tour-authoring.service'
 import { Club } from '../model/club.model'
+import { Person } from '../../administration/model/userprofile.model'
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { MembershipRequest } from '../model/membership-request.model';
 
 @Component({
   selector: 'xp-club',
@@ -14,11 +16,12 @@ import { User } from 'src/app/infrastructure/auth/model/user.model';
 export class ClubComponent {
 
   constructor(private service: TourAuthoringService, private authService: AuthService, private cd: ChangeDetectorRef) { }
-  
+  membershipRequest: MembershipRequest = {};  
   clubs: Club[] = [];
   selectedClub: Club;
   shouldRenderClubForm: boolean = false;
   shouldEdit: boolean = false;
+  flag : boolean = false;
 
   user: User | undefined;
 
@@ -26,6 +29,7 @@ export class ClubComponent {
     this.getClubs();
     this.authService.user$.subscribe(user => {
       this.user = user;
+      if(this.user.id !== 0)this.flag = true;
     })
   } 
 
@@ -79,5 +83,11 @@ export class ClubComponent {
   onAddClicked() : void {
     this.shouldEdit = false;
     this.shouldRenderClubForm = true;
+  }
+
+  join(club: Club): void {
+    this.membershipRequest.touristId = this.user?.id
+    this.membershipRequest.clubId = club.id
+    this.service.createMembershipRequest(this.membershipRequest).subscribe();
   }
 }

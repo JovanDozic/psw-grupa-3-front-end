@@ -18,6 +18,7 @@ import { ClubInvitationsComponent } from './club-invitations/club-invitations.co
 
 
 import { ProblemFormComponent } from './problem-form/problem-form.component';
+import { MembershipRequestComponent } from './membership-request/membership-request.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ProblemFormComponent } from './problem-form/problem-form.component';
     ClubFormComponent,
     ClubInvitationFormComponent,
     ClubInvitationsComponent,
-    ProblemFormComponent
+    ProblemFormComponent,
+    MembershipRequestComponent
   ],
   imports: [
     CommonModule,
