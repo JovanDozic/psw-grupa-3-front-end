@@ -1,0 +1,70 @@
+  <div id="tours">
+    <p>Tours</p>
+    <hr>
+    <div id="tours-details">
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Tags</th>
+                        <th>Status</th>
+                        <th>Difficult</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let tour of tours">
+                        <td>{{tour.name}}</td>
+                        <td>{{tour.description}}</td>
+                        <td>{{tour.tags}}</td>
+                        <td>{{tour.status}}</td>
+                        <td>{{tour.difficult}}</td>
+                        <td>{{tour.price}}</td>
+                        <td class="button-td">
+                            <button color="primary" (click)="onProblemClicked(tour)" mat-icon-button>
+                                <mat-icon>error</mat-icon>
+                            </button>
+                            <button color="primary" (click)="onRatingClicked(tour)" mat-icon-button>
+                              <mat-icon>stars</mat-icon>
+                          </button>
+                        </td>
+                    </tr>
+                    <tr>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <div *ngIf="shouldRenderProblemForm">
+              <div class="problem-header">
+                <p>Report a Problem</p>
+              </div>
+              <form [formGroup]="problemForm">
+                <div>
+                  <mat-form-field>
+                    <mat-label>Category</mat-label>
+                    <input matInput formControlName="category" type="text"/>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-checkbox formControlName="priority">High Priority</mat-checkbox>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <mat-label>Description</mat-label>
+                    <input matInput formControlName="description" type="text"/>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <button *ngIf="!shouldEdit" color="primary" type="submit" (click)="addProblem()" mat-raised-button>Done</button>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+    <div>
+      <xp-tour-review-form *ngIf="shouldRenderTourReviewForm" (visibilityFlag)="changeReviewVisibility()" [tour]="selectedTour"></xp-tour-review-form>
+    </div>
+</div>  

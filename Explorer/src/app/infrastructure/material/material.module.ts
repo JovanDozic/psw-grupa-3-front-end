@@ -6,6 +6,9 @@ import {MatFormField, MatFormFieldModule, MatLabel} from '@angular/material/form
 import {MatInput, MatInputModule} from '@angular/material/input';
 import {MatTable, MatTableModule} from '@angular/material/table';
 import {MatIcon, MatIconModule} from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import {MatCheckbox,MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDatepicker,MatDatepickerModule } from '@angular/material/datepicker';
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import {MatIcon, MatIconModule} from '@angular/material/icon';
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
   ],
   exports: [
     MatToolbar,
@@ -27,7 +33,10 @@ import {MatIcon, MatIconModule} from '@angular/material/icon';
     MatInput,
     MatTable,
     MatIconButton,
-    MatIcon
+    MatIcon,
+    MatMenuModule,
+    MatCheckbox,
+    MatDatepicker,
   ]
 })
 export class MaterialModule { }
