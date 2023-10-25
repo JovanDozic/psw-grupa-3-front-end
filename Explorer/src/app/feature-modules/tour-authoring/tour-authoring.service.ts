@@ -10,6 +10,7 @@ import { TourReview } from './model/tourReview.model';
 import { Club } from './model/club.model';
 import { ClubInvitation } from './model/clubInvitation.model';
 import { MembershipRequest } from './model/membership-request.model';
+import { ClubMember } from './model/clubMember.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ import { MembershipRequest } from './model/membership-request.model';
 export class TourAuthoringService {
 
   constructor(private http: HttpClient) { }
-  
+
   getPoints(): Observable<PagedResults<Points>>{
     return this.http.get<PagedResults<Points>>(environment.apiHost + 'author/points');
   }
@@ -31,11 +32,11 @@ export class TourAuthoringService {
   }
 
   updatePoint(point: Points): Observable<Points> {
-    return this.http.put<Points>(environment.apiHost + 'author/points/' + point.id, point);
+      return this.http.put<Points>(environment.apiHost + 'author/points/' + point.id, point);
   }
   
   getTours(): Observable<PagedResults<Tour>> {
-    return this.http.get<PagedResults<Tour>>(environment.apiHost + 'author/tour/getAll')
+    return this.http.get<PagedResults<Tour>>(environment.apiHost + 'author/tour/getAll');
   }
 
   deleteTour(id: number): Observable<Tour> {
@@ -99,5 +100,15 @@ export class TourAuthoringService {
   rejectMembershipRequest (membershipRequest:MembershipRequest){
     return this.http.put<MembershipRequest>(environment.apiHost + 'membershipRequests/reject/' + membershipRequest.id, membershipRequest)
   }
+
+  getClubMembers(): Observable<PagedResults<ClubMember>> {
+    return this.http.get<PagedResults<ClubMember>>(environment.apiHost + 'tourist/clubMember/getAll')
+  }
+
+
+  deleteClubMember(id: number): Observable<ClubMember> {
+    return this.http.delete<ClubMember>(environment.apiHost + 'tourist/clubMember/' + id);
+  }
+
 }
  

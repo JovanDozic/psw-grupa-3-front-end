@@ -20,6 +20,9 @@
                         <button color="primary" (click)="onEditClicked(c)" mat-icon-button>
                             <mat-icon>edit</mat-icon>
                         </button>
+                        <button color="primary" (click)="onMemberClicked(c)" mat-icon-button>
+                            <mat-icon>people</mat-icon>
+                        </button>
                     </td>
                     <td *ngIf = "flag">
                         <button color="primary"(click)="join(c)" mat-icon-button>
@@ -36,6 +39,8 @@
     </div>
     <div>
         <xp-club-form *ngIf="shouldRenderClubForm" [shouldEdit]="shouldEdit" [club]="selectedClub"  (clubsUpdated)="getClubs()"></xp-club-form>
+        <xp-club-members *ngIf="shouldRenderClubMemberForm" (visibilityFlag)="changeReviewVisibility()" [club]="selectedClub"></xp-club-members>
+    
     </div>
 </div>
 
