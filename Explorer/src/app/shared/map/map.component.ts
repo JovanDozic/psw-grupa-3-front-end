@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import {Component, AfterViewInit, Output, EventEmitter} from '@angular/core';
 import { MapService } from './map.service';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
@@ -15,6 +15,8 @@ export class MapComponent implements AfterViewInit {
   searchAddress: string = '';
   startingAddress: string = '';
   endingAddress: string = '';
+  @Output() longitude: EventEmitter<number> = new EventEmitter<number>();
+  @Output() latitude: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private mapService: MapService) { }
 
@@ -23,7 +25,7 @@ export class MapComponent implements AfterViewInit {
       center: [45.2396, 19.8227],
       zoom: 13,
     });
-    
+
     const tiles = L.tileLayer(
       'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       {
@@ -37,13 +39,13 @@ export class MapComponent implements AfterViewInit {
     this.registerOnClick();
   }
 
-
-
   registerOnClick(): void {
     this.map.on('click', (e: any) => {
       const coord = e.latlng;
       const lat = coord.lat;
       const lng = coord.lng;
+      this.latitude.emit(coord.lat);
+      this.longitude.emit(coord.lng);
       console.log(
         'You clicked the map at latitude: ' + lat + ' and longitude: ' + lng
       );
@@ -68,6 +70,8 @@ export class MapComponent implements AfterViewInit {
     this.mapService.search(searchAddress).subscribe({
       next: (result: any) => {
         console.log(result);
+        this.latitude.emit(result[0].lat);
+        this.longitude.emit(result[0].lon);
         if (result[0]) {
           L.marker([result[0].lat, result[0].lon])
             .addTo(this.map)
