@@ -20,6 +20,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 
 import { ProblemFormComponent } from './problem-form/problem-form.component';
+import { ClubMembersComponent } from './club-members/club-members.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ProblemFormComponent } from './problem-form/problem-form.component';
     ClubFormComponent,
     ClubInvitationFormComponent,
     ClubInvitationsComponent,
-    ProblemFormComponent
+    ProblemFormComponent,
+    ClubMembersComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +57,8 @@ import { ProblemFormComponent } from './problem-form/problem-form.component';
     ClubFormComponent,
     ClubInvitationFormComponent,
     ClubInvitationsComponent,
-    ProblemFormComponent
+    ProblemFormComponent,
+    ClubMembersComponent
   ]
 })
 export class TourAuthoringModule { }
