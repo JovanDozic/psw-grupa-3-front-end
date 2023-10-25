@@ -93,9 +93,6 @@
                 <div class="custom-menu-item" *ngIf="user && user.role === 'tourist'"color="primary" mat-raised-button [routerLink]="['problem-form']">
                   <div class="custom-menu-item-text">All tours</div>
                 </div>
-                <div class="custom-menu-item" *ngIf="user && user.role === 'administrator'" color="primary" [routerLink]="['overview']">
-                  <div class="custom-menu-item-text">Overview of users</div>
-                </div>
               </div>
             </div>
         </div>
