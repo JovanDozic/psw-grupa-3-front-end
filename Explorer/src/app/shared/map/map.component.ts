@@ -1,8 +1,9 @@
-import {Component, AfterViewInit, Output, EventEmitter} from '@angular/core';
+import {Component, AfterViewInit, Output, EventEmitter, Input} from '@angular/core';
 import { MapService } from './map.service';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import { environment } from 'src/env/environment';
+import { Points } from 'src/app/feature-modules/tour-authoring/model/points.model';
 
 @Component({
   selector: 'xp-map',
@@ -17,6 +18,8 @@ export class MapComponent implements AfterViewInit {
   endingAddress: string = '';
   @Output() longitude: EventEmitter<number> = new EventEmitter<number>();
   @Output() latitude: EventEmitter<number> = new EventEmitter<number>();
+  @Input() points: Points[] = [];
+  private markers : L.Marker[] = [];
 
   constructor(private mapService: MapService) { }
 
@@ -37,6 +40,16 @@ export class MapComponent implements AfterViewInit {
     );
     tiles.addTo(this.map);
     this.registerOnClick();
+  }
+
+  ngOnChanges(){
+    this.markers.forEach((marker) => {
+      this.map.removeLayer(marker);
+    })
+    this.points.forEach((point) => {
+      var marker = new L.Marker([point.latitude, point.longitude]).addTo(this.map);
+      this.markers.push(marker);
+    })
   }
 
   registerOnClick(): void {

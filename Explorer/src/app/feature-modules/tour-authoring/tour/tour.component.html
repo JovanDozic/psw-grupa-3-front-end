@@ -1,4 +1,4 @@
-<xp-map></xp-map>
+<xp-map [points]="points"></xp-map>
 <div id="tours">
     <p>Tours</p>
     <hr>
@@ -29,6 +29,9 @@
                         </button>
                         <button color="primary" (click)="onEditClicked(tour)" mat-icon-button>
                             <mat-icon>edit</mat-icon>
+                        </button>
+                        <button color="primary" (click)="getTourPoints(tour.id || 0)">
+                            View points
                         </button>
                     </td>
                 </tr>
