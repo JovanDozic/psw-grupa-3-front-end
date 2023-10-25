@@ -21,6 +21,7 @@ import { EquipmentRecordComponent } from 'src/app/feature-modules/administration
 import { ClubComponent } from 'src/app/feature-modules/tour-authoring/club/club.component';
 import { ClubInvitationFormComponent } from 'src/app/feature-modules/tour-authoring/club-invitation-form/club-invitation-form.component';
 import { ClubInvitationsComponent } from 'src/app/feature-modules/tour-authoring/club-invitations/club-invitations.component';
+import { MembershipRequestComponent } from 'src/app/feature-modules/tour-authoring/membership-request/membership-request.component';
 import { ClubMembersComponent } from 'src/app/feature-modules/tour-authoring/club-members/club-members.component';
 
 const routes: Routes = [
@@ -45,6 +46,7 @@ const routes: Routes = [
   {path: 'club', component: ClubComponent},
   {path: 'invitations', component: ClubInvitationFormComponent},
   {path: 'club-invitations', component: ClubInvitationsComponent},
+  {path: 'membership-requests', component: MembershipRequestComponent}
   {path: 'club-members', component: ClubMembersComponent}
 ];
 
