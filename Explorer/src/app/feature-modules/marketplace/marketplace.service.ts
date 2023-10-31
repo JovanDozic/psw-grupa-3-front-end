@@ -20,8 +20,12 @@ export class MarketplaceService {
     return this.http.get<Preference>(environment.apiHost + 'personalization/preference/' + id);
   }
 
-  getPreferences(): Observable<PagedResults<Preference>> {
+  getAllPreferences(): Observable<PagedResults<Preference>> {
     return this.http.get<PagedResults<Preference>>(environment.apiHost + 'personalization/preference/');
+  }
+
+  getAllForTourist(touristId: number): Observable<Preference[]>{
+    return this.http.get<Preference[]>(environment.apiHost + 'personalization/preference/getAllForTourist/' + touristId);
   }
 
   updatePreference(updatedPreference: Preference): Observable<Preference> {
