@@ -55,6 +55,10 @@ export class TourAuthoringService {
     return this.http.post<TourReview>(environment.apiHost + 'tourist/tourReview', tourReview);
   }
 
+  getTourReviews(): Observable<PagedResults<TourReview>> {
+    return this.http.get<PagedResults<TourReview>>(environment.apiHost + 'tourist/tourReview');
+  }
+
   addClub(club: Club) : Observable<Club>{
     return this.http.post<Club>(environment.apiHost + 'club', club)
   }
