@@ -44,7 +44,8 @@ export class TourReviewFormComponent implements OnInit{
       images: this.images || [],
       creationDate: new Date(),
       tourId: this.tour.id || -1,
-      touristId: this.user?.id || -1
+      touristId: this.user?.id || -1,
+      touristUsername: this.user?.username || ''
     }
     this.service.addTourReview(review).subscribe({
       next: () => { this.visibilityFlag.emit() }

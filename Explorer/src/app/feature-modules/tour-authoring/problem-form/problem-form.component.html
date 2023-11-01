@@ -28,7 +28,10 @@
                             </button>
                             <button color="primary" (click)="onRatingClicked(tour)" mat-icon-button>
                               <mat-icon>stars</mat-icon>
-                          </button>
+                            </button>
+                            <button color="primary" (click)="showTourReviews(tour)">
+                                Show reviews
+                            </button>
                         </td>
                     </tr>
                     <tr>
@@ -66,5 +69,8 @@
     </div>
     <div>
       <xp-tour-review-form *ngIf="shouldRenderTourReviewForm" (visibilityFlag)="changeReviewVisibility()" [tour]="selectedTour"></xp-tour-review-form>
+    </div>
+    <div>
+      <xp-tour-review *ngIf="shouldRenderTourReviewList" [tour]="selectedTour"></xp-tour-review>
     </div>
 </div>  

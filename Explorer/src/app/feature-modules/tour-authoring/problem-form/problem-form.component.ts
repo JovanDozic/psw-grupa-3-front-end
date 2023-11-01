@@ -19,6 +19,7 @@ export class ProblemFormComponent implements OnChanges {
   selectedTour: Tour;
   shouldRenderProblemForm: boolean = false;
   shouldRenderTourReviewForm: boolean = false;
+  shouldRenderTourReviewList : boolean = false;
 
   user: User | undefined;
   
@@ -27,6 +28,7 @@ export class ProblemFormComponent implements OnChanges {
   @Input() shouldEdit: boolean = false;
 
   constructor(private authService: AuthService, private service: TourAuthoringService) {}
+
 
   ngOnInit(): void {
     this.authService.user$.subscribe(user => {
@@ -83,6 +85,7 @@ export class ProblemFormComponent implements OnChanges {
     this.selectedTour = tour;
     this.shouldRenderProblemForm = true;
     this.shouldRenderTourReviewForm = false;
+    this.shouldRenderTourReviewList = false;
   }
 
   changeProblemVisibility(): void {
@@ -93,9 +96,17 @@ export class ProblemFormComponent implements OnChanges {
     this.selectedTour = tour;
     this.shouldRenderTourReviewForm = true;
     this.shouldRenderProblemForm = false;
+    this.shouldRenderTourReviewList = false;
   }
 
   changeReviewVisibility(): void {
+    this.shouldRenderTourReviewForm = false;
+  }
+
+  showTourReviews(tour: Tour) : void {
+    this.selectedTour = tour;
+    this.shouldRenderTourReviewList = true;
+    this.shouldRenderProblemForm = false;
     this.shouldRenderTourReviewForm = false;
   }
 }
