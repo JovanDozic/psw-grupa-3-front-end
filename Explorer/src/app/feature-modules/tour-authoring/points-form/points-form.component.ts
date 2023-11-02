@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {TourAuthoringService} from "../tour-authoring.service";
 import {Points} from "../model/points.model";
-import {MapComponent} from "../../../shared/map/map.component";
 
 @Component({
   selector: 'xp-points-form',
@@ -18,7 +17,7 @@ export class PointsFormComponent implements OnChanges {
   constructor(private service: TourAuthoringService) {
   }
 
-  pointsFrom = new FormGroup({
+  pointsForm = new FormGroup({
     longitude: new FormControl(-1, [Validators.required]),
     latitude: new FormControl(-1, [Validators.required]),
     name: new FormControl('', [Validators.required]),
@@ -27,14 +26,14 @@ export class PointsFormComponent implements OnChanges {
   })
 
   addPoint() {
-    console.log(this.pointsFrom.value);
+    console.log(this.pointsForm.value);
     const point: Points = {
       id: 0,
-      longitude: Number(this.pointsFrom.value.longitude),
-      latitude: Number(this.pointsFrom.value.latitude),
-      name: this.pointsFrom.value.name || '',
-      description: this.pointsFrom.value.description || '',
-      picture: this.pointsFrom.value.picture || '',
+      longitude: Number(this.pointsForm.value.longitude),
+      latitude: Number(this.pointsForm.value.latitude),
+      name: this.pointsForm.value.name || '',
+      description: this.pointsForm.value.description || '',
+      picture: this.pointsForm.value.picture || '',
       tourId: 0
     }
 
@@ -48,11 +47,11 @@ export class PointsFormComponent implements OnChanges {
   updatePoint(): void {
     const point: Points = {
       id: this.point.id,
-      longitude: Number(this.pointsFrom.value.longitude),
-      latitude: Number(this.pointsFrom.value.latitude),
-      name: this.pointsFrom.value.name || '',
-      description: this.pointsFrom.value.description || '',
-      picture: this.pointsFrom.value.picture || '',
+      longitude: Number(this.pointsForm.value.longitude),
+      latitude: Number(this.pointsForm.value.latitude),
+      name: this.pointsForm.value.name || '',
+      description: this.pointsForm.value.description || '',
+      picture: this.pointsForm.value.picture || '',
       tourId: 0
     }
 
@@ -64,20 +63,20 @@ export class PointsFormComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.pointsFrom.reset();
+    this.pointsForm.reset();
     if (this.shouldEdit) {
-      this.pointsFrom.patchValue(this.point);
+      this.pointsForm.patchValue(this.point);
     }
   }
 
   GetLatitude(latitude: number) {
     console.log(latitude);
-    this.pointsFrom.get('latitude')?.patchValue(latitude);
+    this.pointsForm.get('latitude')?.patchValue(latitude);
   }
 
   GetLongitude(longitude: number) {
     console.log(longitude);
-    this.pointsFrom.get('longitude')?.patchValue(longitude);
+    this.pointsForm.get('longitude')?.patchValue(longitude);
 
   }
 }

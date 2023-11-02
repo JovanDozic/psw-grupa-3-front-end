@@ -11,6 +11,7 @@ import { Club } from './model/club.model';
 import { ClubInvitation } from './model/clubInvitation.model';
 import { MembershipRequest } from './model/membership-request.model';
 import { ClubMember } from './model/clubMember.model';
+import {Object} from "./model/object.model";
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,7 @@ export class TourAuthoringService {
   updatePoint(point: Points): Observable<Points> {
       return this.http.put<Points>(environment.apiHost + 'author/points/' + point.id, point);
   }
-  
+
   getTours(): Observable<PagedResults<Tour>> {
     return this.http.get<PagedResults<Tour>>(environment.apiHost + 'author/tour/getAll');
   }
@@ -117,5 +118,21 @@ export class TourAuthoringService {
   getPointsForTour(id: number): Observable<any> {
     return this.http.get<any>(environment.apiHost + `author/points/getAllForTour/${id}`);
   }
+
+  getObjects(): Observable<PagedResults<Object>>{
+    return this.http.get<PagedResults<Object>>(environment.apiHost + 'author/objects');
+  }
+
+  deleteObjects(id: number | undefined): Observable<Object> {
+    return this.http.delete<Object>(environment.apiHost + 'author/objects/' + id);
+  }
+
+  addObject(object: Object): Observable<Object> {
+    return this.http.post<Object>(environment.apiHost + 'author/objects',object);
+  }
+
+  updateObject(object: Object): Observable<Object> {
+    return this.http.put<Object>(environment.apiHost + 'author/objects/' + object.id, object);
+  }
 }
- 
+

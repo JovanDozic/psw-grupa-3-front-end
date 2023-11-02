@@ -66,6 +66,10 @@
                         [routerLink]="['points']">
                         <div class="custom-menu-item-text">Manage points</div>
                     </div>
+                  <div class="custom-menu-item" *ngIf="user && user.role === 'author'" color="primary"
+                       [routerLink]="['objects']">
+                    <div class="custom-menu-item-text">Manage objects</div>
+                  </div>
                     <div class="custom-menu-item" *ngIf="user && (user.role === 'author' || user.role === 'tourist')"
                         color="primary" [routerLink]="['app-rating-form']">
                         <div class="custom-menu-item-text">Rate the App</div>

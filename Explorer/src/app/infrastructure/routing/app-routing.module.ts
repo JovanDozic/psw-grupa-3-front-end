@@ -23,6 +23,7 @@ import { ClubInvitationFormComponent } from 'src/app/feature-modules/tour-author
 import { ClubInvitationsComponent } from 'src/app/feature-modules/tour-authoring/club-invitations/club-invitations.component';
 import { MembershipRequestComponent } from 'src/app/feature-modules/tour-authoring/membership-request/membership-request.component';
 import { ClubMembersComponent } from 'src/app/feature-modules/tour-authoring/club-members/club-members.component';
+import {ObjectComponent} from "../../feature-modules/tour-authoring/object/object.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -47,7 +48,8 @@ const routes: Routes = [
   {path: 'invitations', component: ClubInvitationFormComponent},
   {path: 'club-invitations', component: ClubInvitationsComponent},
   {path: 'membership-requests', component: MembershipRequestComponent},
-  {path: 'club-members', component: ClubMembersComponent}
+  {path: 'club-members', component: ClubMembersComponent},
+  {path: 'objects', component: ObjectComponent},
 ];
 
 @NgModule({
