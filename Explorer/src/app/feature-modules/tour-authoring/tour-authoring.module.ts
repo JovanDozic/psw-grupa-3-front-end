@@ -20,6 +20,8 @@ import { ProblemFormComponent } from './problem-form/problem-form.component';
 import { MembershipRequestComponent } from './membership-request/membership-request.component';
 import { ClubMembersComponent } from './club-members/club-members.component';
 import { TourReviewComponent } from './tour-review/tour-review.component';
+import { ObjectComponent } from './object/object.component';
+import { ObjectFormComponent } from './object-form/object-form.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { TourReviewComponent } from './tour-review/tour-review.component';
     ProblemFormComponent,
     MembershipRequestComponent,
     ClubMembersComponent,
-    TourReviewComponent
+    TourReviewComponent,
+    ObjectComponent,
+    ObjectFormComponent
   ],
   imports: [
     CommonModule,
@@ -53,13 +57,15 @@ import { TourReviewComponent } from './tour-review/tour-review.component';
     PointsFormComponent,
     TourComponent,
     TourFormComponent,
-    TourReviewFormComponent, 
+    TourReviewFormComponent,
     ClubComponent,
     ClubFormComponent,
     ClubInvitationFormComponent,
     ClubInvitationsComponent,
     ProblemFormComponent,
-    ClubMembersComponent
+    ClubMembersComponent,
+    ObjectComponent,
+    ObjectFormComponent
   ]
 })
 export class TourAuthoringModule { }
