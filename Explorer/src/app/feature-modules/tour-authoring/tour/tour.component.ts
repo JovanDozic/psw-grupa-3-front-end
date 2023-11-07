@@ -2,7 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Tour } from '../model/tour.model';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { TourAuthoringService } from '../tour-authoring.service';
-import { Points } from '../model/points.model';
+import { Point } from '../model/points.model';
 
 @Component({
   selector: 'xp-tour',
@@ -12,7 +12,7 @@ import { Points } from '../model/points.model';
 export class TourComponent implements OnInit {
 
   tours: Tour[] =  [];
-  @Output() points: Points[] = [];
+  @Output() points: Point[] = [];
   selectedTour: Tour;
   shouldRenderTourForm: boolean = false;
   shouldEdit: boolean = false;
@@ -54,7 +54,7 @@ export class TourComponent implements OnInit {
 
   getTourPoints(id: number): void {
     this.service.getPointsForTour(id).subscribe({
-      next: (result: Points[]) => {
+      next: (result: Point[]) => {
         this.points = result
       }
     })

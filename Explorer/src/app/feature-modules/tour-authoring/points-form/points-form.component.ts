@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {TourAuthoringService} from "../tour-authoring.service";
-import {Points} from "../model/points.model";
+import {Point} from "../model/points.model";
 
 @Component({
   selector: 'xp-points-form',
@@ -11,7 +11,7 @@ import {Points} from "../model/points.model";
 export class PointsFormComponent implements OnChanges {
 
   @Output() pointUpdated = new EventEmitter<null>;
-  @Input() point: Points;
+  @Input() point: Point;
   @Input() shouldEdit: boolean = false;
 
   constructor(private service: TourAuthoringService) {
@@ -27,7 +27,7 @@ export class PointsFormComponent implements OnChanges {
 
   addPoint() {
     console.log(this.pointsForm.value);
-    const point: Points = {
+    const point: Point = {
       id: 0,
       longitude: Number(this.pointsForm.value.longitude),
       latitude: Number(this.pointsForm.value.latitude),
@@ -45,7 +45,7 @@ export class PointsFormComponent implements OnChanges {
   }
 
   updatePoint(): void {
-    const point: Points = {
+    const point: Point = {
       id: this.point.id,
       longitude: Number(this.pointsForm.value.longitude),
       latitude: Number(this.pointsForm.value.latitude),

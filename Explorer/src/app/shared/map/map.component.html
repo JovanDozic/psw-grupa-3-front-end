@@ -1,30 +1,3 @@
 <div class="map-frame">
     <div id="map"></div>
-
-    <!-- Primer sam dao za search -->
-    <div class="map-search">
-        <mat-form-field appearance="fill">
-            <mat-label>Enter an address</mat-label>
-            <input matInput type="text" [(ngModel)]="searchAddress">
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="search(searchAddress)">
-            <mat-icon>search</mat-icon>
-            Search
-        </button>
-    </div>
-
-    <div class="map-search-route">
-        <mat-form-field appearance="fill">
-            <mat-label>Enter a starting address</mat-label>
-            <input matInput type="text" [(ngModel)]="startingAddress">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Enter an ending address</mat-label>
-            <input matInput type="text" [(ngModel)]="endingAddress">
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="findRoute(startingAddress, endingAddress)">
-            <mat-icon>search</mat-icon>
-            Search route
-        </button>
-    </div>
 </div>
