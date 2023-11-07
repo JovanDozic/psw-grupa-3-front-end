@@ -20,6 +20,7 @@ export class ProblemFormComponent implements OnChanges {
   shouldRenderProblemForm: boolean = false;
   shouldRenderTourReviewForm: boolean = false;
   shouldRenderTourReviewList : boolean = false;
+  averageRatings: { [tourId: number]: number } = {};
 
   user: User | undefined;
   
@@ -75,6 +76,12 @@ export class ProblemFormComponent implements OnChanges {
     this.service.getTours().subscribe({
       next: (result: PagedResults<Tour>) => {
         this.tours = result.results;
+        for (const tour of this.tours) {
+          if (tour.id !== undefined) { 
+            this.calculateAverageRating(tour.id);
+          }
+        }
+        
       },
       error: () => {
       }
@@ -108,5 +115,15 @@ export class ProblemFormComponent implements OnChanges {
     this.shouldRenderTourReviewList = true;
     this.shouldRenderProblemForm = false;
     this.shouldRenderTourReviewForm = false;
+  }
+  calculateAverageRating(tourId: number): void {
+    this.service.getAverageRating(tourId).subscribe(
+      (averageRating: number) => {
+        this.averageRatings[tourId] = averageRating; 
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
   }
 }
