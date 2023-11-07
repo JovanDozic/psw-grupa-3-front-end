@@ -24,6 +24,7 @@ import { ClubInvitationsComponent } from 'src/app/feature-modules/tour-authoring
 import { MembershipRequestComponent } from 'src/app/feature-modules/tour-authoring/membership-request/membership-request.component';
 import { ClubMembersComponent } from 'src/app/feature-modules/tour-authoring/club-members/club-members.component';
 import {ObjectComponent} from "../../feature-modules/tour-authoring/object/object.component";
+import { ShoppingCartComponent } from 'src/app/feature-modules/marketplace/shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -50,6 +51,7 @@ const routes: Routes = [
   {path: 'membership-requests', component: MembershipRequestComponent},
   {path: 'club-members', component: ClubMembersComponent},
   {path: 'objects', component: ObjectComponent},
+  {path: 'shopping-cart', component: ShoppingCartComponent}
 ];
 
 @NgModule({
