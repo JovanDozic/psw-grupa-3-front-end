@@ -12,6 +12,7 @@
                         <th>Status</th>
                         <th>Difficult</th>
                         <th>Price</th>
+                        <th>Average rating</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,6 +23,9 @@
                         <td>{{tour.status}}</td>
                         <td>{{tour.difficult}}</td>
                         <td>{{tour.price}}</td>
+                        <td>{{tour.id !== undefined ? (averageRatings[tour.id] !== undefined ? averageRatings[tour.id] : "No reviews") : "No reviews"}}</td>
+
+
                         <td class="button-td">
                             <button color="primary" (click)="onProblemClicked(tour)" mat-icon-button>
                                 <mat-icon>error</mat-icon>
