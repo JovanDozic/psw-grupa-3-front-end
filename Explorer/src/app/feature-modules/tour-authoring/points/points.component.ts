@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Points} from "../model/points.model";
+import {Point} from "../model/points.model";
 import {TourAuthoringService} from "../tour-authoring.service";
 import {PagedResults} from "../../../shared/model/paged-results.model";
 
@@ -10,8 +10,8 @@ import {PagedResults} from "../../../shared/model/paged-results.model";
 })
 export class PointsComponent implements OnInit{
 
-  points: Points[] = [];
-  selectedPoint: Points;
+  points: Point[] = [];
+  selectedPoint: Point;
   shouldEdit: boolean;
   shouldRenderPointForm: boolean = false;
   constructor(private service: TourAuthoringService) {
@@ -23,7 +23,7 @@ export class PointsComponent implements OnInit{
 
   getPoints(): void {
     this.service.getPoints().subscribe({
-      next: (result: PagedResults<Points>) => {
+      next: (result: PagedResults<Point>) => {
         this.points = result.results;
       },
       error: (err: any) => {
@@ -32,7 +32,7 @@ export class PointsComponent implements OnInit{
     })
   }
 
-  onEditClicked(point: Points): void{
+  onEditClicked(point: Point): void{
     this.shouldEdit = true;
     this.selectedPoint = point;
   }

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Tour } from './model/tour.model';
 import { Problem } from './model/problem.model';
 import {PagedResults} from "../../shared/model/paged-results.model";
-import {Points} from "./model/points.model";
+import {Point} from "./model/points.model";
 import { TourReview } from './model/tourReview.model';
 import { Club } from './model/club.model';
 import { ClubInvitation } from './model/clubInvitation.model';
@@ -20,20 +20,20 @@ export class TourAuthoringService {
 
   constructor(private http: HttpClient) { }
 
-  getPoints(): Observable<PagedResults<Points>>{
-    return this.http.get<PagedResults<Points>>(environment.apiHost + 'author/points');
+  getPoints(): Observable<PagedResults<Point>>{
+    return this.http.get<PagedResults<Point>>(environment.apiHost + 'author/points');
   }
 
-  deletePoints(id: number | undefined): Observable<Points> {
-    return this.http.delete<Points>(environment.apiHost + 'author/points/' + id);
+  deletePoints(id: number | undefined): Observable<Point> {
+    return this.http.delete<Point>(environment.apiHost + 'author/points/' + id);
   }
 
-  addPoint(point: Points): Observable<Points> {
-    return this.http.post<Points>(environment.apiHost + 'author/points',point);
+  addPoint(point: Point): Observable<Point> {
+    return this.http.post<Point>(environment.apiHost + 'author/points',point);
   }
 
-  updatePoint(point: Points): Observable<Points> {
-      return this.http.put<Points>(environment.apiHost + 'author/points/' + point.id, point);
+  updatePoint(point: Point): Observable<Point> {
+      return this.http.put<Point>(environment.apiHost + 'author/points/' + point.id, point);
   }
 
   getTours(): Observable<PagedResults<Tour>> {
