@@ -1,0 +1,14 @@
+<form [formGroup]="positionForm">
+  <xp-map (latitude)="GetLatitude($event)" (longitude)="GetLongitude($event)"></xp-map>
+  <div>
+    <mat-form-field>
+      <mat-label>Longitude</mat-label>
+      <input matInput formControlName="longitude" type="number" readonly>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Latitude</mat-label>
+      <input matInput formControlName="latitude" type="number" readonly>
+    </mat-form-field>
+    <button mat-raised-button type="submit" color="primary" (click)="confirmPosition()">Confirm position</button>
+  </div>
+</form>
