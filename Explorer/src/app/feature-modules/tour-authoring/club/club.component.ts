@@ -25,7 +25,7 @@ export class ClubComponent {
   shouldEdit: boolean = false;
   flag : boolean = false;
 
-  user: User | undefined;
+  user: User;
 
   ngOnInit(): void {
     this.getClubs();
@@ -47,7 +47,7 @@ export class ClubComponent {
         console.log(result.results)
         const temp = result.results;
         for(const club of temp){
-          if(club.ownerId === 1){
+          if(club.ownerId === this.user.id){
             this.clubs.push(club)
             console.log(club.name)
             console.log(club.url)
@@ -67,7 +67,7 @@ export class ClubComponent {
       name: this.clubForm.value.name || "",
       description: this.clubForm.value.description || "",
       url: this.clubForm.value.url || "",
-      ownerId: 1
+      ownerId: this.user.id
     }
 
     this.service.addClub(club).subscribe(() => {

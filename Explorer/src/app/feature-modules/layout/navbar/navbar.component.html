@@ -123,6 +123,10 @@
                         mat-raised-button [routerLink]="['membership-requests']">
                         <div class="custom-menu-item-text">All Requests</div>
                     </div>
+                    <div class="custom-menu-item" *ngIf="user && user.role === 'tourist'" color="primary"
+                        mat-raised-button [routerLink]="['shopping-cart']">
+                    <div class="custom-menu-item-text">My cart</div>
+                </div>
                 </div>
             </div>
         </div>
