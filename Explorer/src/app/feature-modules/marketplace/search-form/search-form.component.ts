@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { MarketplaceService } from '../marketplace.service';
 
 @Component({
   selector: 'xp-search-form',
@@ -9,7 +10,8 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./search-form.component.css']
 })
 export class SearchFormComponent implements OnInit {
-
+  @Output() searchClicked = new EventEmitter<null>();
+  
   searchForm = new FormGroup({
     longitude: new FormControl('', [Validators.required]),
     latitude: new FormControl('', [Validators.required]),
@@ -17,15 +19,23 @@ export class SearchFormComponent implements OnInit {
   })
   public isCollapsed = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private route: ActivatedRoute) {
   }
   ngOnInit(): void {
     let map = document.getElementById("map");
     if (map != null) {
       map.style.height = "20rem";
       map.style.width = "55rem";
-      map.style.zIndex = "1";
     }
+
+    this.router.events.subscribe((event) => { //TREBALO BI DA RADI OVAKO, ISTESTIRAO SAM
+      if (event instanceof NavigationEnd) {
+        const currentUrl = this.router.createUrlTree(this.route.snapshot.url).toString();
+        if (currentUrl === '/search-results') {
+          this.searchClicked.emit();
+        }
+      }
+    });
   }
 
   setLongitude(long: number) {
@@ -46,7 +56,6 @@ export class SearchFormComponent implements OnInit {
       let longitudeValue = this.searchForm.value.longitude;
       let latitudeValue = this.searchForm.value.latitude;
       let distanceValue = this.searchForm.value.distance;
-      this.router.navigate(['/search-results'], { queryParams: { longitude: longitudeValue, latitude: latitudeValue, distance: distanceValue}})
-    }
+      this.router.navigate(['/search-results'], { queryParams: { longitude: longitudeValue, latitude: latitudeValue, distance: distanceValue}})    }
   }
 }

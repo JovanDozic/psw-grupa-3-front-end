@@ -1,4 +1,4 @@
-<xp-search-form></xp-search-form>
+<xp-search-form (searchClicked)="getSearchResults()"></xp-search-form>
 <div class="search-results-container">
     <div class="header-container">
         <h1 class="header">Search results</h1>
@@ -18,7 +18,6 @@
                     <span>13,257</span>
                 </div>
                 <p>from <span class="price">${{tour.price}}</span></p>
-
             </div>
         </div>
     </div>

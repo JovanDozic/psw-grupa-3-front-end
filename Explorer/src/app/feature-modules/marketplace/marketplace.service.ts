@@ -57,6 +57,6 @@ export class MarketplaceService {
       .set('latitude', latitude)
       .set('distance', distance);
 
-    return this.http.get<SearchResultTour[]>(environment.apiHost + 'author/tour', { params: queryParams });
+    return this.http.get<SearchResultTour[]>(environment.apiHost + 'author/tour/searchByPointDistance', { params: queryParams });
   }
 }

@@ -4,6 +4,7 @@
   }
 
 #map {
-    height: 600px;
+    height: 20rem;
+    width: 55rem;
     border-radius: 2rem;
   }

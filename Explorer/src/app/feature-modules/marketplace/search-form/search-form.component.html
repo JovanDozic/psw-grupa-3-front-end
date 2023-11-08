@@ -23,17 +23,16 @@
             <div class="wrapper" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
                 <div class="map-container">
                     <div>
-                        <xp-map class="map card-body" (longitude)="setLongitude($event)"
+                        <xp-map class="map" (longitude)="setLongitude($event)"
                             (latitude)="setLatitude($event)"></xp-map>
                     </div>
                     <div class="distance-container">
                         <label class="distance-label">Distance</label>
-                        <input type="range" class="form-range distance-range" min="0" max="200"
+                        <input type="range" class="form-range distance-range" min="0" max="100"
                             formControlName="distance" (input)="setDistance($event)">
                     </div>
                 </div>
             </div>
-
         </form>
     </div>
 </div>
