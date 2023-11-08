@@ -7,9 +7,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { PreferenceComponent } from './preference/preference.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
-import { LayoutModule } from "../layout/layout.module";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SearchFormComponent } from '../layout/home/search-form/search-form.component';
+import { SearchFormComponent } from './search-form/search-form.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -18,14 +18,15 @@ import { SearchFormComponent } from '../layout/home/search-form/search-form.comp
     PreferenceComponent,
     ShoppingCartComponent,
     SearchResultsComponent,
+    SearchFormComponent,
   ],
   imports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
     MatSelectModule,
-    LayoutModule,
     NgbModule,
+    SharedModule,
   ],
   exports: [
     PreferenceFormComponent,

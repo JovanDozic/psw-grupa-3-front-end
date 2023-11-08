@@ -9,9 +9,10 @@ import { SearchComponent } from './home/search/search.component';
 import { FormsModule } from '@angular/forms';
 import { RecommendedToursComponent } from './home/recommended-tours/recommended-tours.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SearchFormComponent } from '../marketplace/search-form/search-form.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SearchFormComponent } from '../marketplace/search-form/search-form.component';
+import { MarketplaceModule } from '../marketplace/marketplace.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     RatingsComponent,
     SearchComponent,
     RecommendedToursComponent,
-    SearchFormComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +30,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgbModule,
     SharedModule,
     ReactiveFormsModule,
+    MarketplaceModule,
   ],
   exports: [
     NavbarComponent,
@@ -37,7 +38,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     RatingsComponent,
     SearchComponent,
     RecommendedToursComponent,
-    SearchFormComponent,
   ]
 })
 export class LayoutModule { }
