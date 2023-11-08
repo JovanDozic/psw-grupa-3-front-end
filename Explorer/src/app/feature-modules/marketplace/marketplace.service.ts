@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Preference } from './model/preference.model';
 import { environment } from 'src/env/environment';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
+import { ShoppingCart } from './model/shopping-cart.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,15 @@ export class MarketplaceService {
     return this.http.delete<Preference>(environment.apiHost + 'personalization/preference/' + id);
   }
 
+  getCartByUserId(id: number): Observable<ShoppingCart> {
+    return this.http.get<ShoppingCart>(environment.apiHost + 'tourist/order/' + id)
+  }
 
+  updateCart(cart: ShoppingCart): Observable<ShoppingCart> {
+    return this.http.put<ShoppingCart>(environment.apiHost + 'tourist/order', cart);
+  }
+  
+  buyUpdate(cart: ShoppingCart): Observable<ShoppingCart> {
+    return this.http.put<ShoppingCart>(environment.apiHost + 'tourist/order/buy', cart);
+  }
 }

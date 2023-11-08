@@ -13,45 +13,105 @@ import { User } from 'src/app/infrastructure/auth/model/user.model';
 })
 export class ShoppingCartComponent {
   constructor(private service: MarketplaceService, private authService: AuthService) { }
+ 
   ngOnInit(): void {
-    this.getSum();
     this.authService.user$.subscribe(user => {
       this.user = user;
+      //this.shoppingCart.idUser = 1;
+      this.getSum();
     })
   } 
 
-  user: User
+ tour1: Tour = {
+    name: 'Tura u planinama',
+    description: 'Istraživanje prelepih planinskih predela.',
+    difficult: 4,
+    tags: 'Planinarenje, Priroda',
+    status: 'Aktivna',
+    price: 120.00,
+    authorId: 1
+  };
+  
+  tour2: Tour = {
+    name: 'Pustolovna avantura',
+    description: 'Najuzbudljivija avantura vašeg života!',
+    difficult: 5,
+    tags: 'Pustinja, Avantura',
+    status: 'Aktivna',
+    price: 200.00,
+    authorId: 2
+  };
+  
+ tour3: Tour = {
+    name: 'Istorijski obilazak grada',
+    description: 'Upoznajte bogatu istoriju našeg grada.',
+    difficult: 2,
+    tags: 'Istorija, Turizam',
+    status: 'Nedostupna',
+    price: 50.00,
+    authorId: 1
+  };
+  
+  tours: Tour[] = [this.tour1, this.tour2, this.tour3];
 
-  orderItem1: OrderItem = {
-    idTour: 1,
-    name: 'Tura 1',
-    price: 50.00
-  };
-  
-  orderItem2: OrderItem = {
-    idTour: 2,
-    name: 'Tura 2',
-    price: 75.00
-  };
-  
-  // Kreirajte objekat ShoppingCart sa listom OrderItem
-  shoppingCart: ShoppingCart = {
-    items: [this.orderItem1, this.orderItem2],
-    id: 0,
-    idUser: 0
-  };
+  shoppingCart: ShoppingCart
+
+  user: User
 
   sum: number = 0
 
   getSum() : void{
-    for(let o of this.shoppingCart.items){
+    for(let o of this.tours){
       this.sum = this.sum + o.price
     }
   }
-  onRemoveClicked(o: OrderItem) : void{
-    this.shoppingCart.items = this.shoppingCart.items.filter(item => item !== o);
+
+  onRemoveClicked(t: Tour) : void{
+    this.tours = this.tours.filter(item => item !== t);
+    this.sum = 0;
+    this.getSum();
+    this.changeCart();
+    this.updateCart();
   }
-  buy(cart: ShoppingCart) : void{
-    
+
+  buy() : void {
+    this.changeCart();
+    this.buyUpdate()
+  }
+
+  changeCart() : void {
+    this.shoppingCart.items = []
+    for(let tour of this.tours){
+      if(tour.id !== undefined){
+      const item: OrderItem = {
+        idTour: tour.id,
+        name: tour.name,
+        price: tour.price
+      }
+      this.shoppingCart.items.push(item);
+    }
+    }
+  }
+
+  updateCart() {
+    this.service.updateCart(this.shoppingCart).subscribe({
+      next: (result: ShoppingCart) => {
+        if(result == null){
+          console.log("update error!")
+        }
+        console.log("successfully updated!");
+      }
+    })
+  }
+
+  buyUpdate() {
+    this.service.buyUpdate(this.shoppingCart).subscribe({
+      next: (result: ShoppingCart) => {
+        if(result == null){
+          console.log("update error!")
+        }
+        console.log("successfully updated!");
+      }
+    })
   }
 }
