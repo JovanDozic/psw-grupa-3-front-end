@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Preference } from './model/preference.model';
 import { environment } from 'src/env/environment';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { ShoppingCart } from './model/shopping-cart.model';
+import { SearchResultTour } from './model/search-result-tour.model';
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +49,14 @@ export class MarketplaceService {
   
   buyUpdate(cart: ShoppingCart): Observable<ShoppingCart> {
     return this.http.put<ShoppingCart>(environment.apiHost + 'tourist/order/buy', cart);
+  }
+
+  getSearchResults(longitude: number, latitude: number, distance: number): Observable<SearchResultTour[]>{
+    const queryParams  = new HttpParams()
+      .set('longitude', longitude)
+      .set('latitude', latitude)
+      .set('distance', distance);
+
+    return this.http.get<SearchResultTour[]>(environment.apiHost + 'author/tour/searchByPointDistance', { params: queryParams });
   }
 }
