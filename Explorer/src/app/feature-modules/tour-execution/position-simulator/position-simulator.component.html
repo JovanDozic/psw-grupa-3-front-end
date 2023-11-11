@@ -9,6 +9,26 @@
       <mat-label>Latitude</mat-label>
       <input matInput formControlName="latitude" type="number" readonly>
     </mat-form-field>
-    <button mat-raised-button type="submit" color="primary" (click)="confirmPosition()">Confirm position</button>
+    <button data-bs-toggle="modal" data-bs-target="#staticBackdrop"  mat-raised-button type="submit" color="primary" (click)="confirmPosition()">Confirm position</button>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            iconsDB.com currently has 4215 icons in the database that you can customize and download in any color and any size you want ! 792,396,833 icon downloads and counting ! 2739 icons can be used freely in both personal and commercial projects with no attribution required, but always appreciated and 1476 icons require a link to be used. All logos and trademarks presented in some icons are copyright of their respective trademark owners.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+          <!-- Modal -->
+
+
 </form>
+
