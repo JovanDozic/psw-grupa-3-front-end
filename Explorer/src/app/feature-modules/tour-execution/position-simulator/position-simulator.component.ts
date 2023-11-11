@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TourExecutionService} from "../tour-execution.service";
 import {Position} from "../model/position.model";
+import { Point } from '../../tour-authoring/model/points.model';
 
 @Component({
   selector: 'xp-position-simulator',
@@ -9,6 +10,11 @@ import {Position} from "../model/position.model";
   styleUrls: ['./position-simulator.component.css']
 })
 export class PositionSimulatorComponent {
+
+  @Output() updatedPosition = new EventEmitter<Position>();
+  @Output() points: Point[] = [{id: 1, longitude: 19.83966064452716 , latitude: 45.2517365956994,
+    name:"prva", description:"nista", picture:"nista", tourId: 1}]
+
   positionForm = new FormGroup({
     longitude: new FormControl(-1, [Validators.required]),
     latitude: new FormControl(-1, [Validators.required])
@@ -33,11 +39,6 @@ export class PositionSimulatorComponent {
       latitude: Number(this.positionForm.value.latitude),
       touristId: this.service.user.value.id
     }
-    console.log(position)
-    this.service.updatePosition(position).subscribe({
-      next: ()=> {
-        console.log("Updated position")
+    this.updatedPosition.emit(position);
     }
-    })
-  }
 }

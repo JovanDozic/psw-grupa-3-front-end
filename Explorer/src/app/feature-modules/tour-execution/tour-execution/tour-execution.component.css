@@ -1,0 +1,21 @@
+.execution {
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* Prvi red za naslov, drugi red za mapu, treći red za kontrole. */
+    gap: 20px; /* Razmak između elemenata. */
+    max-width: 800px; /* Prilagodite maksimalnu širinu po potrebi. */
+    margin: 0 auto; /* Centrirajte sadržaj u kontejneru. */
+}
+
+
+.controls {
+    text-align: center; /* Centrirajte sadržaj u kontroli. */
+}
+
+.stop-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}

@@ -1,5 +1,5 @@
 <form [formGroup]="positionForm">
-  <xp-map (latitude)="GetLatitude($event)" (longitude)="GetLongitude($event)"></xp-map>
+  <xp-map [points]="points" (latitude)="GetLatitude($event)" (longitude)="GetLongitude($event)"></xp-map>
   <div>
     <mat-form-field>
       <mat-label>Longitude</mat-label>
