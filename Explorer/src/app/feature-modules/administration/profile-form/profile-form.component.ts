@@ -10,7 +10,7 @@ import { AdministrationService } from '../administration.service';
   styleUrls: ['./profile-form.component.css']
 })
 export class ProfileFormComponent implements OnChanges {
-..
+
   @Input() profile: Person;
   @Output() profileUpdated = new EventEmitter<null>();
   
