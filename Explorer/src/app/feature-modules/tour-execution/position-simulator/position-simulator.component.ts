@@ -13,7 +13,12 @@ export class PositionSimulatorComponent {
 
   @Output() updatedPosition = new EventEmitter<Position>();
   @Output() points: Point[] = [{id: 1, longitude: 19.83966064452716 , latitude: 45.2517365956994,
-    name:"prva", description:"nista", picture:"nista", tourId: 1}]
+    name:"prva", description:"nista", picture:"nista", tourId: 1},
+    {id: 2, longitude: 19.84902279858312 , latitude: 45.24806268406058,
+      name:"druga", description:"nista", picture:"nista", tourId: 1},
+      {id: 3, longitude: 19.850053025386785 , latitude: 45.239239491988556,
+        name:"treca", description:"nista", picture:"nista", tourId: 1}
+  ]
 
   positionForm = new FormGroup({
     longitude: new FormControl(-1, [Validators.required]),
