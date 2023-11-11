@@ -15,15 +15,15 @@ export class ProfileComponent implements OnInit {
   user: User;
   person: Person;
   selectedProfile: Person;
-  shouldRenderProfileForm: boolean = false;
 
   constructor(private authService: AuthService, private service: AdministrationService) {}
 
   ngOnInit(): void {
     this.getUser();
+    this.getFollowers();
   }
 
-  getUser(): void{
+  getUser(): void {
     this.authService.user$.pipe(
       switchMap((user: User) => {
         this.user = user;
@@ -35,9 +35,15 @@ export class ProfileComponent implements OnInit {
     });
   } 
 
-  onEditClicked(profile: Person): void{
-      this.selectedProfile = profile;
-      this.shouldRenderProfileForm = true;
-  }
+  getFollowers(): void {
+    this.service.getUserFollowers(this.user.id).subscribe((result: any) => {
+      this.user.followers = result;
+      // console.log("EOME OVDE: " + this.user.followers);
+      // if (this.user.followers == null) return;
+      // this.user.followers.forEach((follower) => {
+      //   console.log(follower);
+      // });
+    });
+  } 
 
 }

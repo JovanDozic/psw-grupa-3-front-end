@@ -11,6 +11,7 @@ import { Overview } from './model/overview.model';
 
 import { AppRating } from './model/app-rating.model';
 import { TouristEquipment } from './model/tourist-equipment.model';
+import { User } from 'src/app/infrastructure/auth/model/user.model';
 
 
 @Injectable({
@@ -61,7 +62,9 @@ export class AdministrationService {
   }
   
   
-
+  getUserFollowers(id: number): Observable<PagedResults<User>> {
+    return this.http.get<PagedResults<User>>(environment.apiHost + 'userprofile/followers/' + id);
+  }
 
   // App ratings
   getAppRatings(): Observable<PagedResults<AppRating>> {
@@ -71,10 +74,6 @@ export class AdministrationService {
     return this.http.post<AppRating>(environment.apiHost + 'administration/app-ratings', rating);
   }
 
-  // TODO: Check if user already rated the app
-  // getAppRating(id: number) {
-  //   throw new Error('Method not implemented.');
-  // }
 
   //Tourist equipment record
   getTouristEquipment(): Observable<PagedResults<TouristEquipment>> {

@@ -1,41 +1,71 @@
 <div id="profile">
-    <p><b>Korisnik</b></p>
-    <div id="profile-details">
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Fotografija</th>
-                    <th>Ime</th>
-                    <th>Prezime</th>
-                    <th>Biografija</th>
-                    <th>Citat</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    
-                    <td *ngIf="person">
-                  <img  src="{{person.picture}}"
-                            class="img-responsive img-thumbnail" style="width:160px;height:140px">
-                    </td>
-                    <td *ngIf="person"><b>{{person.name}}</b></td>
-                    <td *ngIf="person"><b>{{person.surname}}</b></td>   
-                    <td *ngIf="person"><b>{{person.bio}}</b></td>
-                    <td *ngIf="person"><b>{{person.quote}}</b></td>
-                    <td>
-                        <button (click)="onEditClicked(person)" color="primary" mat-icon-button>
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                    </td>
-                </tr>
-                
-            </tbody>
-        </table>
-    </div>
-    <xp-profile-form *ngIf="shouldRenderProfileForm"  [profile]="selectedProfile" (profileUpdated)="getUser()" ></xp-profile-form>
-    </div>
 
-    
+    <div class="container position-relative">
+
+        <div class="row">
+            <div class="col-12">
+                <h1 style="font-size: xx-large; font-weight: semibold;">My profile</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 text-center mt-5">
+
+                <img src="{{person.picture}}" class="rounded-circle" height="200">
+                <h1 class="m-4" style="font-size:xx-large">{{person.name}} {{person.surname}}</h1>
+
+                <p class="text-center m-2">{{person.bio}}</p>
+
+                <p class="text-center m-2">{{person.quote}}</p>
+
+                <button type="button" class="btn btn-secondary m-5" data-bs-toggle="modal"
+                    data-bs-target="#EditProfileFormModal">
+                    Edit profile
+                </button>
+
+                <button type="button" class="btn btn-primary m-5" data-bs-toggle="modal"
+                    data-bs-target="#ProfileFollowersModal">
+                    View my followers
+                </button>
+
+                <div class="modal fade" id="EditProfileFormModal" data-bs-backdrop="static" tabindex="-1"
+                    aria-labelledby="EditProfileFormModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="EditProfileFormModalLabel">Edit profile</h1>
+                                <button class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <xp-profile-form [profile]="selectedProfile" (profileUpdated)="getUser()">
+                                </xp-profile-form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal fade" id="ProfileFollowersModal" data-bs-backdrop="static" tabindex="-1"
+                    aria-labelledby="ProfileFollowersModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="ProfileFollowersModalLabel">My followers</h1>
+                                <button class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div *ngFor="let follower of this.user.followers" class="card m-2">
+                                    <div class="card-body">
+                                        <h3 class="card-title">{{follower.username}}</h3>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
