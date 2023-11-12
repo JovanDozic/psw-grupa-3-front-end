@@ -1,4 +1,6 @@
-export interface Tour {
+import { Point } from "../../tour-authoring/model/points.model"
+
+export interface Tour{
     id?: number,
     name: string,
     description: string,
@@ -6,5 +8,6 @@ export interface Tour {
     tags: string,
     status: string,
     price: number,
+    points: Point[],
     authorId: number
 }

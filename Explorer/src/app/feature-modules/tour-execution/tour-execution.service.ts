@@ -18,15 +18,16 @@ export class TourExecutionService {
     this.user = authService.user$;
   }
 
-  startExecution(tour: Tour): Observable<TourExecution>{
-    return this.http.post<TourExecution>(environment.apiHost + 'start-execution/' + tour.id, tour); 
+  startExecution(tour: Tour): Observable<TourExecution> {
+    const url = `${environment.apiHost}tourist/tourExecution/start-execution/${tour.id}`;
+    return this.http.post<TourExecution>(url, tour);
   }
 
   updatePosition(tourExecutionId: number, position: Position): Observable<TourExecution> {
-    return this.http.put<TourExecution>(environment.apiHost + 'update-position/' + tourExecutionId, position);
+    return this.http.put<TourExecution>(environment.apiHost + 'tourist/tourExecution/update-position/' + tourExecutionId, position);
   }
 
   exitTour(tourExecution: TourExecution): Observable<TourExecution>{
-    return this.http.patch<TourExecution>(environment.apiHost + 'quit/' + tourExecution.id, tourExecution);
+    return this.http.patch<TourExecution>(environment.apiHost + 'tourist/tourExecution/quit/' + tourExecution.id, tourExecution);
   }
 }

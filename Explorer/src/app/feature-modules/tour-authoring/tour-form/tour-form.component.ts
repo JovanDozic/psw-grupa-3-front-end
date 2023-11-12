@@ -43,7 +43,8 @@ export class TourFormComponent  implements OnChanges, OnInit{
     tags: new FormControl('', [Validators.required]),
     status: new FormControl('',[Validators.required]),
     difficult: new FormControl(),
-    price: new FormControl()
+    price: new FormControl(),
+    points: new FormControl(),
   });
 
   addTour(): void {
@@ -55,7 +56,8 @@ export class TourFormComponent  implements OnChanges, OnInit{
       status: "Draft",
       difficult: Number(this.tourForm.value.difficult),
       price: 0,
-      authorId: this.user.id
+      authorId: this.user.id,
+      points: [],
     };
     this.service.addTour(tour).subscribe({
       next: () => { this.tourUpdated.emit() }
@@ -71,6 +73,7 @@ export class TourFormComponent  implements OnChanges, OnInit{
       status: "Draft",
       price: 0,
       authorId: this.user.id,
+      points: [],
     };
     tour.id = this.tour.id;
     this.service.updateTour(tour).subscribe({
