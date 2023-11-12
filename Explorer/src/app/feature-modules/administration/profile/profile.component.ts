@@ -38,11 +38,6 @@ export class ProfileComponent implements OnInit {
   getFollowers(): void {
     this.service.getUserFollowers(this.user.id).subscribe((result: any) => {
       this.user.followers = result;
-      // console.log("EOME OVDE: " + this.user.followers);
-      // if (this.user.followers == null) return;
-      // this.user.followers.forEach((follower) => {
-      //   console.log(follower);
-      // });
     });
   } 
 

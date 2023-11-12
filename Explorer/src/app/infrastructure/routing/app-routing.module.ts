@@ -29,6 +29,7 @@ import {
   PositionSimulatorComponent
 } from "../../feature-modules/tour-execution/position-simulator/position-simulator.component";
 import { SearchResultsComponent } from 'src/app/feature-modules/marketplace/search-results/search-results.component';
+import { FindPeopleComponent } from 'src/app/feature-modules/administration/find-people/find-people.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -58,6 +59,7 @@ const routes: Routes = [
   {path: 'shopping-cart', component: ShoppingCartComponent},
   {path: 'position-simulator', component: PositionSimulatorComponent},
   {path: 'search-results', component: SearchResultsComponent},
+  {path: 'find-people', component: FindPeopleComponent},
 ];
 
 @NgModule({

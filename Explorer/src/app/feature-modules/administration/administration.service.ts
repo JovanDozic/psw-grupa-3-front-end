@@ -61,9 +61,12 @@ export class AdministrationService {
     return this.http.post(url, [username]);
   }
   
-  
   getUserFollowers(id: number): Observable<PagedResults<User>> {
     return this.http.get<PagedResults<User>>(environment.apiHost + 'userprofile/followers/' + id);
+  }
+
+  getUsersToFollow(): Observable<PagedResults<User>> {
+    return this.http.get<PagedResults<User>>(environment.apiHost + 'userprofile/allUsers');
   }
 
   // App ratings
@@ -73,7 +76,6 @@ export class AdministrationService {
   addAppRating(rating: AppRating): Observable<AppRating> {
     return this.http.post<AppRating>(environment.apiHost + 'administration/app-ratings', rating);
   }
-
 
   //Tourist equipment record
   getTouristEquipment(): Observable<PagedResults<TouristEquipment>> {

@@ -1,4 +1,4 @@
-<mat-toolbar class="toolbar">
+<mat-toolbar class="toolbar" style="z-index: 999999999 !important;">
     <div class="navbar-section">
         <div class="logo-section">
             <a [routerLink]="['/home']">
@@ -39,6 +39,12 @@
                     <div class="custom-menu-item">
                         <div class="custom-menu-item-text">View travel blogs</div>
                     </div>
+
+                    <div class="custom-menu-item" *ngIf="user && user.username !== ''" color="primary"
+                        [routerLink]="['find-people']">
+                        <div class="custom-menu-item-text">Find people</div>
+                    </div>
+
                 </div>
             </div>
         </div>
