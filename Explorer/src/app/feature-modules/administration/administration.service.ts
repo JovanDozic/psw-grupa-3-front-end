@@ -19,6 +19,7 @@ import { User } from 'src/app/infrastructure/auth/model/user.model';
 })
 export class AdministrationService {
   
+  
 
   constructor(private http: HttpClient) { }
 
@@ -67,6 +68,14 @@ export class AdministrationService {
 
   getUsersToFollow(): Observable<PagedResults<User>> {
     return this.http.get<PagedResults<User>>(environment.apiHost + 'userprofile/allUsers');
+  }
+
+  followUser(userId: number, userToFollowId: number) {
+    return this.http.patch<User>(environment.apiHost + 'userprofile/followers/' + userId + '/follow/' + userToFollowId, {});
+  }
+
+  unfollowUser(userId: number, userToUnfollowId: number) {
+    return this.http.patch<User>(environment.apiHost + 'userprofile/followers/' + userId + '/unfollow/' + userToUnfollowId, {});
   }
 
   // App ratings

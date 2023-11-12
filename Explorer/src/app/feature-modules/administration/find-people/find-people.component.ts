@@ -35,6 +35,18 @@ export class FindPeopleComponent {
 
   followUser(user: User): void {
     console.log(user);
+    this.service.followUser(this.user.id, user.id).subscribe((result: any) => {
+      console.log(result);
+      user.followers?.push(this.user);
+    });
+  }
+
+  unfollowUser(user: User): void {
+    console.log(user);
+    this.service.unfollowUser(this.user.id, user.id).subscribe((result: any) => {
+      console.log(result);
+      user.followers?.splice(user.followers.findIndex((u: User) => u.id === this.user.id), 1);
+    });
   }
 
   isUserFollowed(current: User): boolean {
