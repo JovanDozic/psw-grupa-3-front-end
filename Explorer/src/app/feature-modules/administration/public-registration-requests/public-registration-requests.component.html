@@ -1,9 +1,9 @@
-<div id="registrationRequests">
+<div >
     <h1>Public Registration Requests</h1>
     <hr>
-    <div id="requests-details">
+    <div >
     <div>
-        <table>
+        <table class="table">
             <thead>
                 <tr>
                     <th>Type</th>
@@ -15,8 +15,12 @@
                     <td>{{ request.tourId === -1 ? 'Object' : (request.objectId === -1 ? 'Point' : 'Undefined') }}</td>
                     <td>{{ request.tourId === -1 ? request.objectName : (request.objectId === -1 ? request.pointName : 'Undefined name') }}</td>
                     <td>
-                        <button type="button" 
-                        >
+                        <button type="button" class="btn btn-secondary m-5" data-bs-toggle="modal"
+                        data-bs-target="#ApproveRequestFormModal" (click)="selectRequest(request)">
+                            Approve request
+                        </button>
+                        <button type="button" class="btn btn-secondary m-5" data-bs-toggle="modal"
+                        data-bs-target="#RejectRequestFormModal" (click)="selectRequest(request)">
                             Reject request
                         </button>
                     </td>
@@ -24,5 +28,43 @@
             </tbody>
         </table>
     </div>
+    </div>
+</div>
+
+<div  class="modal fade" id="RejectRequestFormModal" data-bs-backdrop="static" tabindex="-1"
+aria-labelledby="RejectRequestFormModalLabel"  aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <label class="modal-title fs-5" id="RejectRequestFormModalLabel">Rejection Confirmation</label>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" [formGroup]="rejectionForm">
+                    <label for="rejectionComment">Rejection request comment:</label>
+                    <input type="text" class="form-control" id="rejectionComment" formControlName="rejectionComment">
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="confirmReject()" >Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div  class="modal fade" id="ApproveRequestFormModal" data-bs-backdrop="static" tabindex="-1"
+aria-labelledby="ApproveRequestFormModallLabel"  aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <label class="modal-title fs-5" id="ApproveRequestFormModallLabel">Approvement Confirmation</label>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="confirmApprove()" >Confirm</button>
+            </div>
+        </div>
     </div>
 </div>
