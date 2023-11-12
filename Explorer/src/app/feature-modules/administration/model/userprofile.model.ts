@@ -7,5 +7,4 @@ export interface Person {
     bio: string;
     quote: string;
     email: string;
-
 }
