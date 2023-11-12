@@ -20,6 +20,7 @@ import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {TourExecutionService} from "./feature-modules/tour-execution/tour-execution.service";
 import {TourExecutionModule} from "./feature-modules/tour-execution/tour-execution.module";
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import {TourExecutionModule} from "./feature-modules/tour-execution/tour-executi
     RouterModule,
     SharedModule,
     NgbModule,
+    MatCheckboxModule,
   ],
   providers: [
     {

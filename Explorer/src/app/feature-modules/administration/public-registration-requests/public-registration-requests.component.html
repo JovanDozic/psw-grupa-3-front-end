@@ -1,0 +1,28 @@
+<div id="registrationRequests">
+    <h1>Public Registration Requests</h1>
+    <hr>
+    <div id="requests-details">
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let request of registrationRequests">
+                    <td>{{ request.tourId === -1 ? 'Object' : (request.objectId === -1 ? 'Point' : 'Undefined') }}</td>
+                    <td>{{ request.tourId === -1 ? request.objectName : (request.objectId === -1 ? request.pointName : 'Undefined name') }}</td>
+                    <td>
+                        <button type="button" 
+                        >
+                            Reject request
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>

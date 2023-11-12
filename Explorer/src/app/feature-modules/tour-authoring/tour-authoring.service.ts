@@ -127,8 +127,11 @@ export class TourAuthoringService {
     return this.http.put<Object>(environment.apiHost + 'author/objects/' + object.id, object);
   }
 
+  setPublicObject(id: number): Observable<Object> {
+    return this.http.patch<Object>(environment.apiHost + 'author/objects/setPublic/' + id, {});
+  }
+
   getAverageRating(tourId: number): Observable<number> {
-   
     return this.http.get<number>(environment.apiHost + 'tourist/tourReview/average-rating/' + tourId)
   }
 
