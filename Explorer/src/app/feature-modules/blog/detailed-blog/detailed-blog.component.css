@@ -1,0 +1,31 @@
+.blog-details-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .blog-info {
+    margin-bottom: 20px;
+  }
+  
+  .blog-images {
+    text-align: center;
+  }
+  
+  .comment-section {
+    margin-top: 20px;
+  }
+
+  textarea {
+    width: 100%; 
+    resize: vertical; 
+  }
+  
+  .thumb-up-active {
+    color: green; /* Boja za thumb_up kada je ocenjeno */
+  }
+  
+  .thumb-down-active {
+    color: red; /* Boja za thumb_down kada je ocenjeno */
+  }
