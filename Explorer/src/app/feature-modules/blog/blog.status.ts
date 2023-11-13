@@ -1,5 +1,5 @@
 export enum BlogStatus{
-    Draft, 
+    Draft = 1, 
     Active,
     Famous,
     Published,

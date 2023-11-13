@@ -32,6 +32,13 @@ export class BlogsPageComponent implements OnInit {
   }
 
   filterBlogs(filter: BlogStatus): void{
-
+      this.service.getFilteredBlogs(filter).subscribe({
+        next: (result: Blog[]) => {
+          this.blogs = result;
+        },
+        error: () => {
+          console.log("Error! Could not filter blogs!");
+        }
+      })
   }
 }
