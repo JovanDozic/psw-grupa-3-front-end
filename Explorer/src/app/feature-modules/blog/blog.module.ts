@@ -4,14 +4,12 @@ import { BlogFormComponent } from './blog-form/blog-form.component';
 import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { BlogCommentFormComponent } from './blog-comment-form/blog-comment-form.component';
-import { BlogCommentsComponent } from './blog-comments/blog-comments.component';
+import { DetailedBlogComponent } from './detailed-blog/detailed-blog.component';
 
 @NgModule({
   declarations: [
     BlogFormComponent,
-    BlogCommentsComponent,
-    BlogCommentFormComponent
+    DetailedBlogComponent
   ],
   imports: [
     CommonModule, 
@@ -22,7 +20,7 @@ import { BlogCommentsComponent } from './blog-comments/blog-comments.component';
   ],
   exports: [
     BlogFormComponent,
-    BlogCommentsComponent
+    DetailedBlogComponent
   ]
 })
 export class BlogModule { }

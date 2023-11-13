@@ -16,7 +16,6 @@ import { TourReviewFormComponent } from 'src/app/feature-modules/tour-authoring/
 import { TourComponent } from 'src/app/feature-modules/tour-authoring/tour/tour.component';
 import { AppRatingsComponent } from 'src/app/feature-modules/administration/app-ratings/app-ratings.component';
 import { AppRatingFormComponent } from 'src/app/feature-modules/administration/app-rating-form/app-rating-form.component';
-import { BlogCommentsComponent } from 'src/app/feature-modules/blog/blog-comments/blog-comments.component';
 import { EquipmentRecordComponent } from 'src/app/feature-modules/administration/equipment-record/equipment-record.component';
 import { ClubComponent } from 'src/app/feature-modules/tour-authoring/club/club.component';
 import { ClubInvitationFormComponent } from 'src/app/feature-modules/tour-authoring/club-invitation-form/club-invitation-form.component';
@@ -30,6 +29,8 @@ import {
 } from "../../feature-modules/tour-execution/position-simulator/position-simulator.component";
 import { SearchResultsComponent } from 'src/app/feature-modules/marketplace/search-results/search-results.component';
 import { FindPeopleComponent } from 'src/app/feature-modules/administration/find-people/find-people.component';
+import { DetailedBlogComponent } from 'src/app/feature-modules/blog/detailed-blog/detailed-blog.component';
+
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -48,7 +49,6 @@ const routes: Routes = [
   {path: 'tours', component: TourComponent, canActivate: [AuthGuard]},
   {path: 'app-ratings', component: AppRatingsComponent},
   {path: 'app-rating-form', component: AppRatingFormComponent},
-  {path: 'blog-comments', component: BlogCommentsComponent, canActivate: [AuthGuard]},
   {path: 'equipment-record', component: EquipmentRecordComponent},
   {path: 'club', component: ClubComponent},
   {path: 'invitations', component: ClubInvitationFormComponent},
@@ -60,6 +60,7 @@ const routes: Routes = [
   {path: 'position-simulator', component: PositionSimulatorComponent},
   {path: 'search-results', component: SearchResultsComponent},
   {path: 'find-people', component: FindPeopleComponent},
+  {path: 'detailed-blog/:blogId', component: DetailedBlogComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
