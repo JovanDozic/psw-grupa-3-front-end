@@ -1,0 +1,42 @@
+<div class="blogs-page container">
+    <div class="blogs-page-title row">
+        <div class="col blogs-page-title-h">
+            <p>All blogs</p>
+        </div>
+        <div class="col create-blog-btn">
+            <button>Create blog</button>
+        </div>
+
+    </div>
+    <div class="blogs-page-filter row">
+        <div class="col">
+            <input type="radio" id="radio1" name="filters" value="all">
+            <label for="radio1">All</label>
+        </div>
+        <div class="col">
+            <input type="radio" id="radio2" name="filters" value="active">
+            <label for="radio2">Active</label>
+        </div>
+        <div class="col">
+            <input type="radio" id="radio3" name="filters" value="famous">
+            <label for="radio3">Famous</label>
+        </div>
+    </div>
+    <div class="blogs-page-tiles row">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body" *ngFor="let b of blogs">
+              <h5 class="card-title">{{b.title}}</h5>
+              <h6 class="card-subtitle mb-2 text-body-secondary">{{b.creationDate}}</h6>
+              <p class="card-text">{{b.description}}</p>
+              <div class="row">
+                <p class="col card-text" *ngIf="b.status === 1">Draft</p>
+                <p class="col card-text" *ngIf="b.status === 2">Published</p>
+                <p class="col card-text" *ngIf="b.status === 3">Closed</p>
+                <p class="col card-text" *ngIf="b.status === 4">Active</p>
+                <p class="col card-text" *ngIf="b.status === 5">Famous</p>
+                <a href="#" class="card-link col">Discover more</a>
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
