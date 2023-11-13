@@ -10,6 +10,6 @@ export enum TourExecutionStatus{
 export interface TourExecution{
     id: number; 
     status: TourExecutionStatus;
-    position: Position | null; 
+    position: Position;
     tasks: PointTask[] | null; 
 }

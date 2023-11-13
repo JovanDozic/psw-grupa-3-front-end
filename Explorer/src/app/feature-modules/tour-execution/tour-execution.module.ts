@@ -11,12 +11,10 @@ import {SharedModule} from "../../shared/shared.module";
 import {LayoutModule} from "../layout/layout.module";
 import { TourAuthoringModule } from '../tour-authoring/tour-authoring.module';
 import { MapComponent } from 'src/app/shared/map/map.component';
-import { TourExitComponent } from './tour-exit/tour-exit.component';
 
 @NgModule({
   declarations: [
     PositionSimulatorComponent,
-    TourExitComponent,
   ],
   imports: [
     CommonModule,

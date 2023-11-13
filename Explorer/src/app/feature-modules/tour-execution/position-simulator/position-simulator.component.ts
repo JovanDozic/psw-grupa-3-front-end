@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {Component, OnInit, Output } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TourExecutionService} from "../tour-execution.service";
 import {Position} from "../model/position.model";
@@ -19,6 +19,10 @@ export class PositionSimulatorComponent implements OnInit{
   tourExecution: TourExecution
   updatedExecution: TourExecution
   doneTasks: PointTask[]
+  showMap: boolean = true;
+  showMessage: boolean = false;
+  showDiv: boolean = false
+
   lastTaskPoint: Point = {
     longitude: 1,
     latitude: 1,
@@ -26,7 +30,7 @@ export class PositionSimulatorComponent implements OnInit{
     description: "",
     picture: "",
     tourId: 1}
-  showModal: boolean = false;
+
 
   tour: Tour = {
     id: 1,
@@ -38,15 +42,15 @@ export class PositionSimulatorComponent implements OnInit{
     points: [
       {
         id: 1, longitude: 19.83966064452716, latitude: 45.2517365956994,
-        name: "prva", description: "nista", picture: "nista", tourId: 1
+        name: "prva", description: "prva nista", picture: "nista", tourId: 1
       },
       {
         id: 2, longitude: 19.84902279858312, latitude: 45.24806268406058,
-        name: "druga", description: "nista", picture: "nista", tourId: 1
+        name: "druga", description: "druga nista", picture: "nista", tourId: 1
       },
       {
         id: 3, longitude: 19.850053025386785, latitude: 45.239239491988556,
-        name: "treca", description: "nista", picture: "nista", tourId: 1
+        name: "treca", description: "treca nista", picture: "nista", tourId: 1
       }
     ],
     tags: '',
@@ -54,11 +58,11 @@ export class PositionSimulatorComponent implements OnInit{
   }
   
   @Output() points: Point[] = [{id: 1, longitude: 19.83966064452716 , latitude: 45.2517365956994,
-    name:"prva", description:"nista", picture:"nista", tourId: 1},
+    name:"prva", description:"prva nista", picture:"nista", tourId: 1},
     {id: 2, longitude: 19.84902279858312 , latitude: 45.24806268406058,
-      name:"druga", description:"nista", picture:"nista", tourId: 1},
+      name:"druga", description:"druga nista", picture:"nista", tourId: 1},
       {id: 3, longitude: 19.850053025386785 , latitude: 45.239239491988556,
-        name:"treca", description:"nista", picture:"nista", tourId: 1}
+        name:"treca", description:"treca nista", picture:"nista", tourId: 1}
   ]
 
   positionForm = new FormGroup({
@@ -101,39 +105,54 @@ export class PositionSimulatorComponent implements OnInit{
       touristId: this.service.user.value.id,
       lastActivity: new Date(Date.now())
     }
+
     this.service.updatePosition(this.tourExecution.id, position).subscribe({
       next: (result: TourExecution) => {
         this.updatedExecution = result
-        console.log('Updated: ', result)
+        this.setCurrentPosition()
         this.doneTasks = this.getCompletedPoints(this.updatedExecution)
-        if(this.doneTasks.length > 0){
-            if((this.doneTasks[this.doneTasks.length - 1].point.latitude != this.lastTaskPoint.latitude)
-                && (this.doneTasks[this.doneTasks.length - 1].point.longitude != this.lastTaskPoint.longitude))
-                {
-                    this.lastTaskPoint = this.doneTasks[this.doneTasks.length - 1].point;
-                    console.log("Last point: ",this.lastTaskPoint)
-                    //prikazi modal
-                }else{
-                    console.log("Last point: ", this.lastTaskPoint)
-                    //nemoj prikazati modal
-                }
-
-        }
-        console.log("Last point: ", this.lastTaskPoint)
-        console.log("Done tasks: ",this.doneTasks)
+        this.setLastPoint()
+        this.completeTour()
       }
   })
     }
 
-    getCompletedPoints(tourExecution: TourExecution): PointTask[] {
-      // Koristimo filter metodu da izdvojimo samo tačke sa Done = true
-      if (tourExecution.tasks) {
-             return tourExecution.tasks.filter((pointTask) => pointTask.done === true);
-      } else {
-        return [];
-      }
+    completeTour(){
+
+        if(this.isTourCompleted()){
+            this.showMessage = true;
+            this.showMap = false;          
+        }
     }
 
+    isTourCompleted(): boolean{
+        return this.doneTasks.length == this.tour.points.length
+    }
+
+    setLastPoint(){
+        if(this.doneTasks.length > 0){
+            
+            if(this.isPointClose())
+            {
+                    this.lastTaskPoint = this.doneTasks[this.doneTasks.length - 1].point;
+            }else{
+                    
+                    this.setCurrentPosition()
+                 }
+        }
+    }
+
+    isPointClose():boolean{
+        return (this.doneTasks[this.doneTasks.length - 1].point.latitude !== this.lastTaskPoint.latitude)
+        && (this.doneTasks[this.doneTasks.length - 1].point.longitude !== this.lastTaskPoint.longitude)
+    }
+
+    getCompletedPoints(tourExecution: TourExecution): PointTask[] {
+      if (tourExecution.tasks) {
+             return tourExecution.tasks.filter((pointTask) => pointTask.done === true);
+      } else
+            return [];
+    }
 
     quitTour(){
       this.service.exitTour(this.tourExecution).subscribe({
@@ -141,6 +160,20 @@ export class PositionSimulatorComponent implements OnInit{
             console.log(result)
         }
       })
-      this.router.navigate(['/tour-exit']);
+      this.showMessage = true
+      this.showMap = false
+    }
+
+    returnToHomePage(){
+        this.router.navigate(['/']);
+    }
+
+    hideDiv() {
+        this.showDiv = false;
+    }
+
+    setCurrentPosition() {
+        this.lastTaskPoint.name = 'Current position';
+        this.lastTaskPoint.description = `Longitude: ${this.updatedExecution.position.longitude}\nLatitude: ${this.updatedExecution.position.latitude}`;
     }
 }
