@@ -51,7 +51,37 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row mt-3">
+        <div class="col-6">
+            <div class="mb-3">
+                <label for="inputLengthTour" class="form-label">Length (km):</label>
+                <input type="number" name="inputLengthTour" id="inputLengthTour" class="form-control" disabled>
+            </div>
+        </div>
+        <div class="col-6">
+
+            <div class="row">
+                <div class="col-6">
+                    <label for="inputRequiredTimeTour" class="form-label">Required time (minutes):</label>
+                    <input type="number" name="inputRequiredTimeTour" id="inputRequiredTimeTour" class="form-control">
+                </div>
+                <div class="col-6">
+                    <label for="inputLengthTour" class="form-label">Transport type:</label>
+                    <select class="form-select">
+                        <option selected>Select one</option>
+                        <option value="0">Walking</option>
+                        <option value="1">Bicycle</option>
+                        <option value="2">Car</option>
+                        <option value="3">Boat</option>
+                      </select>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="row mt-3">
         <div class="col-12">
             <button class="btn btn-primary">Create</button>
         </div>
