@@ -30,7 +30,7 @@ import {
 import { SearchResultsComponent } from 'src/app/feature-modules/marketplace/search-results/search-results.component';
 import { FindPeopleComponent } from 'src/app/feature-modules/administration/find-people/find-people.component';
 import { DetailedBlogComponent } from 'src/app/feature-modules/blog/detailed-blog/detailed-blog.component';
-
+import { BlogsPageComponent } from 'src/app/feature-modules/blog/blogs-page/blogs-page.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -42,7 +42,7 @@ const routes: Routes = [
   {path: 'problem-form', component: ProblemFormComponent},
   {path: 'problems', component: ProblemsComponent},
   {path: 'overview', component: OverviewComponent},
-  {path: 'blogCreation', component: BlogFormComponent, canActivate: [AuthGuard]},
+  {path: 'blog-creation', component: BlogFormComponent, canActivate: [AuthGuard]},
   {path: 'points', component: PointsComponent, canActivate: [AuthGuard]},
   {path: 'preference', component: PreferenceComponent, canActivate: [AuthGuard]},
   {path: 'tour-review', component: TourReviewFormComponent},
@@ -60,7 +60,8 @@ const routes: Routes = [
   {path: 'position-simulator', component: PositionSimulatorComponent},
   {path: 'search-results', component: SearchResultsComponent},
   {path: 'find-people', component: FindPeopleComponent},
-  {path: 'detailed-blog/:blogId', component: DetailedBlogComponent, canActivate: [AuthGuard]}
+  {path: 'detailed-blog/:blogId', component: DetailedBlogComponent, canActivate: [AuthGuard]},
+  {path: 'all-blogs', component: BlogsPageComponent}
 ];
 
 @NgModule({
