@@ -5,6 +5,7 @@ import {Position} from "../model/position.model";
 import { Point } from '../../tour-authoring/model/points.model';
 import { TourExecution } from '../model/tour-lifecycle.model';
 import { Tour } from '../../tour-authoring/model/tour.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'xp-position-simulator',
@@ -16,6 +17,7 @@ export class PositionSimulatorComponent implements OnInit{
   position: Position
   tourExecution: TourExecution
   updatedExecution: TourExecution
+  stopped: TourExecution
 
   tour: Tour = {
     id: 1,
@@ -55,7 +57,7 @@ export class PositionSimulatorComponent implements OnInit{
     latitude: new FormControl(-1, [Validators.required])
   })
 
-  constructor(private service: TourExecutionService) {
+  constructor(private service: TourExecutionService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -87,7 +89,8 @@ export class PositionSimulatorComponent implements OnInit{
       id: 1,
       longitude: Number(this.positionForm.value.longitude),
       latitude: Number(this.positionForm.value.latitude),
-      touristId: this.service.user.value.id
+      touristId: this.service.user.value.id,
+      lastActivity: new Date(Date.now())
     }
     this.service.updatePosition(this.tourExecution.id, position).subscribe({
       next: (result: TourExecution) => {
@@ -99,5 +102,14 @@ export class PositionSimulatorComponent implements OnInit{
         */
       }
   })
+    }
+
+    quitTour(){
+      this.service.exitTour(this.tourExecution).subscribe({
+        next: (result: TourExecution) => {
+            console.log(result)
+        }
+      })
+      this.router.navigate(['/tour-exit']);
     }
 }

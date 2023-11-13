@@ -14,7 +14,7 @@
       </mat-form-field>
       <button data-bs-toggle="modal" data-bs-target="#staticBackdrop"  mat-raised-button type="submit" color="primary" (click)="confirmPosition()">Confirm position</button>
       <div margin-bottom="10px">
-        <button class="stop-button">Zaustavi rutu</button>
+        <button (click)="quitTour()" class="stop-button">Zaustavi rutu</button>
     </div>
     </div>
   </form>

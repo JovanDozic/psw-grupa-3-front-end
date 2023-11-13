@@ -27,6 +27,7 @@ import {ObjectComponent} from "../../feature-modules/tour-authoring/object/objec
 import {
   PositionSimulatorComponent
 } from "../../feature-modules/tour-execution/position-simulator/position-simulator.component";
+import { TourExitComponent } from 'src/app/feature-modules/tour-execution/tour-exit/tour-exit.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -54,6 +55,7 @@ const routes: Routes = [
   {path: 'club-members', component: ClubMembersComponent},
   {path: 'objects', component: ObjectComponent},
   {path: 'position-simulator', component: PositionSimulatorComponent},
+  {path: 'tour-exit', component: TourExitComponent}
 ];
 
 @NgModule({
