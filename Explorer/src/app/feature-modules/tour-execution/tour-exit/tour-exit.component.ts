@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'xp-tour-exit',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./tour-exit.component.css']
 })
 export class TourExitComponent {
+
+  constructor(private router: Router) {}
+
+  returnToHomePage() {
+    this.router.navigate(['/']);
+  }
 
 }

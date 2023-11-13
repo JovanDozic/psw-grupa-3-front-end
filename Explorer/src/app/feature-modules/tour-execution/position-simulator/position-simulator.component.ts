@@ -6,6 +6,7 @@ import { Point } from '../../tour-authoring/model/points.model';
 import { TourExecution } from '../model/tour-lifecycle.model';
 import { Tour } from '../../tour-authoring/model/tour.model';
 import { Router } from '@angular/router';
+import { PointTask } from '../model/point-task.model';
 
 @Component({
   selector: 'xp-position-simulator',
@@ -17,7 +18,15 @@ export class PositionSimulatorComponent implements OnInit{
   position: Position
   tourExecution: TourExecution
   updatedExecution: TourExecution
-  stopped: TourExecution
+  doneTasks: PointTask[]
+  lastTaskPoint: Point = {
+    longitude: 1,
+    latitude: 1,
+    name: "",
+    description: "",
+    picture: "",
+    tourId: 1}
+  showModal: boolean = false;
 
   tour: Tour = {
     id: 1,
@@ -96,13 +105,35 @@ export class PositionSimulatorComponent implements OnInit{
       next: (result: TourExecution) => {
         this.updatedExecution = result
         console.log('Updated: ', result)
-        /*
-        uporedjujem ako su iste
-        poslednja = updated.poslednja
-        */
+        this.doneTasks = this.getCompletedPoints(this.updatedExecution)
+        if(this.doneTasks.length > 0){
+            if((this.doneTasks[this.doneTasks.length - 1].point.latitude != this.lastTaskPoint.latitude)
+                && (this.doneTasks[this.doneTasks.length - 1].point.longitude != this.lastTaskPoint.longitude))
+                {
+                    this.lastTaskPoint = this.doneTasks[this.doneTasks.length - 1].point;
+                    console.log("Last point: ",this.lastTaskPoint)
+                    //prikazi modal
+                }else{
+                    console.log("Last point: ", this.lastTaskPoint)
+                    //nemoj prikazati modal
+                }
+
+        }
+        console.log("Last point: ", this.lastTaskPoint)
+        console.log("Done tasks: ",this.doneTasks)
       }
   })
     }
+
+    getCompletedPoints(tourExecution: TourExecution): PointTask[] {
+      // Koristimo filter metodu da izdvojimo samo tačke sa Done = true
+      if (tourExecution.tasks) {
+             return tourExecution.tasks.filter((pointTask) => pointTask.done === true);
+      } else {
+        return [];
+      }
+    }
+
 
     quitTour(){
       this.service.exitTour(this.tourExecution).subscribe({
