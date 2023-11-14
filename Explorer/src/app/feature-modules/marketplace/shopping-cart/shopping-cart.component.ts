@@ -41,7 +41,7 @@ export class ShoppingCartComponent {
         copiedCart.items = [];
         this.service.updateCart(copiedCart).subscribe({
           next: result => {
-            this.shoppingCart = result;
+            this.getShoppingCart();
           }
         })
       }
