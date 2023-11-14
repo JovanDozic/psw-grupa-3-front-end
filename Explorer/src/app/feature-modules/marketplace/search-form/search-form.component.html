@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="wrapper" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-                <div class="map-container">
+                <div class="map-container" style="width: 60;">
                     <div>
                         <xp-map class="map" (longitude)="setLongitude($event)"
                             (latitude)="setLatitude($event)"></xp-map>
