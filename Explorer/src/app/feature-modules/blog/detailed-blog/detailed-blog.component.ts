@@ -24,11 +24,13 @@ export class DetailedBlogComponent {
   editingComments: { [comment: string]: boolean } = {};
 
   blog: Blog;
-  owner: User;
   blogId: number;
   commentForm: FormGroup;
   addingComment: boolean = false;
   isClosed : boolean = false;
+  blogImages: string[];
+  currentImageIndex: number = 0;
+  currentPicture: string = '';
 
   constructor(private service: BlogService, private authService: AuthService, private route: ActivatedRoute, private fb: FormBuilder){
     this.commentForm = this.fb.group({
@@ -44,6 +46,7 @@ export class DetailedBlogComponent {
         this.blogId = +blogIdParam; // + konvertuje string u broj
         this.service.getBlog(this.blogId).subscribe(blog => {
           this.blog = blog;
+          this.loadPictures(blog);
           if(this.blog.status == BlogStatus.CLOSED){
             this.isClosed = true;
           }
@@ -72,7 +75,29 @@ export class DetailedBlogComponent {
     });
   }
 
-  
+  loadPictures(blog : Blog) {
+    if(blog != null) {
+      this.blogImages = blog.images;
+      this.currentPicture = this.blogImages[this.currentImageIndex];
+      
+    }
+  }
+
+  previousImage() {
+    if (this.currentImageIndex > 0) {
+      this.currentImageIndex--;
+      this.currentPicture = this.blogImages[this.currentImageIndex];
+    }
+  }
+
+  nextImage() {
+    if (this.currentImageIndex < this.blogImages.length - 1) {
+      this.currentImageIndex++;
+      this.currentPicture = this.blogImages[this.currentImageIndex];
+    }
+  }
+
+
   addComment() {
     this.addingComment = true;
   }
