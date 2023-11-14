@@ -28,6 +28,18 @@ export class TourAuthoringService {
     return this.http.delete<Point>(environment.apiHost + 'author/points/' + id);
   }
 
+  addPoint(point: Point): Observable<Point> {
+    return this.http.post<Point>(environment.apiHost + 'author/points',point);
+  }
+
+  updatePoint(point: Point): Observable<Point> {
+      return this.http.put<Point>(environment.apiHost + 'author/points/' + point.id, point);
+  }
+
+  setPublicPoint(id: number, pointName: string): Observable<Tour> {
+    return this.http.patch<Tour>(environment.apiHost + 'author/tour/publishPoint/' + id + '?pointName=' + pointName, {});
+  }
+
   getTours(): Observable<PagedResults<Tour>> {
     return this.http.get<PagedResults<Tour>>(environment.apiHost + 'author/tour/getAll');
   }

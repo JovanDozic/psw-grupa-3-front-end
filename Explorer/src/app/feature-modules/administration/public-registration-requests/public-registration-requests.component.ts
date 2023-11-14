@@ -59,9 +59,15 @@ export class PublicRegistrationRequestsComponent implements OnInit {
 
       this.service.updatePublicRegistrationRequest(foundRequest).subscribe({
         next: () => {
-          if(foundRequest.objectId !== -1)
+          if(foundRequest.objectId !== -1 && foundRequest.tourId === -1)
           {
             this.tourService.setPublicObject(foundRequest.objectId).subscribe({
+              next: () => {}
+            })
+          }
+          if(foundRequest.objectId === -1 && foundRequest.tourId !== -1)
+          {
+            this.tourService.setPublicPoint(foundRequest.tourId, foundRequest.pointName).subscribe({
               next: () => {}
             })
           }
