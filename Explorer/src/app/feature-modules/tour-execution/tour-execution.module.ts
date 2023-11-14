@@ -9,10 +9,12 @@ import {MatRadioModule} from "@angular/material/radio";
 import {RouterModule} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
 import {LayoutModule} from "../layout/layout.module";
+import { PurchasedToursComponent } from './purchased-tours/purchased-tours.component';
 
 @NgModule({
   declarations: [
-    PositionSimulatorComponent
+    PositionSimulatorComponent,
+    PurchasedToursComponent,
   ],
   imports: [
     CommonModule,
@@ -24,10 +26,11 @@ import {LayoutModule} from "../layout/layout.module";
     MatRadioModule,
     RouterModule,
     SharedModule,
-    LayoutModule
+    LayoutModule,
   ],
   exports: [
-    PositionSimulatorComponent
+    PositionSimulatorComponent,
+    PurchasedToursComponent,
   ]
 })
 export class TourExecutionModule { }
