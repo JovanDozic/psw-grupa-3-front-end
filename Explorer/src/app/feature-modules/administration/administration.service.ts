@@ -84,6 +84,10 @@ export class AdministrationService {
     return this.http.get<PagedResults<User>>(environment.apiHost + 'notifications/' + userId);
   }
 
+  markAsReadNotification(userId: number, notificationId: number){
+    return this.http.patch<User>(environment.apiHost + 'notifications/user/' + userId + '/status/' + notificationId, {});
+  }
+
   // App ratings
   getAppRatings(): Observable<PagedResults<AppRating>> {
     return this.http.get<PagedResults<AppRating>>(environment.apiHost + 'administration/app-ratings')

@@ -7,10 +7,10 @@ export interface User {
 }
   
 export interface Notification {
-    id?: number;
+    notificationId: number;
     senderId: number;
     message: string;
-    notificationStatus: string;
+    status: notificationStatus;
     timestamp: Date;
 }
 
