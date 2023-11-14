@@ -3,11 +3,11 @@
         <div class="col-6">
             <div class="mb-3">
                 <label for="inputNameTour" class="form-label">Name:</label>
-                <input type="text" name="inputNameTour" id="inputNameTour" class="form-control">
+                <input type="text" name="inputNameTour" id="inputNameTour" class="form-control" value="{{tour.name}}">
             </div>
             <div class="mb-3">
                 <label for="inputDescriptionTour" class="form-label">Description:</label>
-                <input type="text" name="inputDescriptionTour" id="inputDescriptionTour" class="form-control">
+                <input type="text" name="inputDescriptionTour" id="inputDescriptionTour" class="form-control" value="{{tour.description}}">
             </div>
         </div>
 
@@ -83,7 +83,8 @@
 
     <div class="row mt-3">
         <div class="col-12">
-            <button class="btn btn-primary">Create</button>
+            <button class="btn btn-primary me-3">Publish</button>
+            <button class="btn btn-secondary">Save as Draft</button>
         </div>
     </div>
 

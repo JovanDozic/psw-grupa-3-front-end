@@ -11,7 +11,7 @@ import { Point } from '../model/points.model';
 })
 export class TourComponent implements OnInit {
 
-  tours: Tour[] =  [];
+  tours: Tour[] = [];
   @Output() points: Point[] = [];
   selectedTour: Tour;
   shouldRenderTourForm: boolean = false;
@@ -19,8 +19,19 @@ export class TourComponent implements OnInit {
 
   constructor(private service: TourAuthoringService) { }
 
-  ngOnInit() : void {
-    this.getTours();
+  ngOnInit(): void {
+    // TODO: uncomment this
+    // this.getTours();
+
+    // TODO: remove this
+    this.tours = [
+      { id: 1, name: 'Tour 1', description: 'This is tour 1', difficult: 1, tags: 'tag1, tag2', status: 'Draft', price: 0, authorId: 1},
+      { id: 2, name: 'Tour 2', description: 'This is tour 2', difficult: 2, tags: 'tag1, tag2', status: 'Draft', price: 0, authorId: 1},
+      { id: 3, name: 'Tour 3', description: 'This is tour 3', difficult: 3, tags: 'tag1, tag2', status: 'Draft', price: 0, authorId: 1},
+      { id: 4, name: 'Tour 4', description: 'This is tour 4', difficult: 4, tags: 'tag1, tag2', status: 'Draft', price: 0, authorId: 1},
+      { id: 5, name: 'Tour 5', description: 'This is tour 5', difficult: 5, tags: 'tag1, tag2', status: 'Draft', price: 0, authorId: 1}
+    ];
+
   }
 
   deleteTour(id: number): void {

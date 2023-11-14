@@ -55,7 +55,9 @@
                 <li class="nav-item dropdown dropdown-center" *ngIf="user && user.username !== ''">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink4" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        User
+                        
+                        User (<span *ngIf="user.role === 'administrator'">Admin</span><span *ngIf="user.role === 'author'">Author</span><span *ngIf="user.role === 'tourist'">Tourist</span>)
+
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink4">
 
