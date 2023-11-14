@@ -12,106 +12,63 @@ import { User } from 'src/app/infrastructure/auth/model/user.model';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent {
+  shoppingCart: ShoppingCart;
+  user: User;
+  sum: number;
+
   constructor(private service: MarketplaceService, private authService: AuthService) { }
- 
+
   ngOnInit(): void {
     this.authService.user$.subscribe(user => {
       this.user = user;
-      //this.shoppingCart.idUser = 1;
-      this.getSum();
+      this.getShoppingCart();
     })
-  } 
-
- tour1: Tour = {
-    name: 'Tura u planinama',
-    description: 'Istraživanje prelepih planinskih predela.',
-    difficult: 4,
-    tags: 'Planinarenje, Priroda',
-    status: 'Aktivna',
-    price: 120.00,
-    authorId: 1
-  };
-  
-  tour2: Tour = {
-    name: 'Pustolovna avantura',
-    description: 'Najuzbudljivija avantura vašeg života!',
-    difficult: 5,
-    tags: 'Pustinja, Avantura',
-    status: 'Aktivna',
-    price: 200.00,
-    authorId: 2
-  };
-  
- tour3: Tour = {
-    name: 'Istorijski obilazak grada',
-    description: 'Upoznajte bogatu istoriju našeg grada.',
-    difficult: 2,
-    tags: 'Istorija, Turizam',
-    status: 'Nedostupna',
-    price: 50.00,
-    authorId: 1
-  };
-  
-  tours: Tour[] = [this.tour1, this.tour2, this.tour3];
-
-  shoppingCart: ShoppingCart
-
-  user: User
-
-  sum: number = 0
-
-  getSum() : void{
-    for(let o of this.tours){
-      this.sum = this.sum + o.price
-    }
   }
 
-  onRemoveClicked(t: Tour) : void{
-    this.tours = this.tours.filter(item => item !== t);
+  getShoppingCart() {
+    this.service.getCartByUserId(this.user.id).subscribe({
+      next: (result: ShoppingCart) => {
+        this.shoppingCart = result;
+        this.getSum();
+      }
+    })
+  }
+
+  purchaseFromCart() {
+    this.service.purchaseFromCart(this.shoppingCart).subscribe({
+      next: result => {
+        let copiedCart = Object.assign({}, this.shoppingCart);
+        copiedCart.items = [];
+        this.service.updateCart(copiedCart).subscribe({
+          next: result => {
+            this.shoppingCart = result;
+          }
+        })
+      }
+    })
+  }
+
+  onRemoveClicked(t: OrderItem): void {
+    let copiedCart = Object.assign({}, this.shoppingCart);
+    let i = copiedCart.items.findIndex((x: OrderItem) => x.idTour === t.idTour);
+    copiedCart.items.splice(i, 1);
+
+    this.service.updateCart(copiedCart).subscribe({
+      next: (result: ShoppingCart) => {
+        this.shoppingCart = result;
+        this.getSum();
+        alert('Successfully removed from cart!');
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+  }
+
+  getSum(): void {
     this.sum = 0;
-    this.getSum();
-    this.changeCart();
-    this.updateCart();
-  }
-
-  buy() : void {
-    this.changeCart();
-    this.buyUpdate()
-  }
-
-  changeCart() : void {
-    this.shoppingCart.items = []
-    for(let tour of this.tours){
-      if(tour.id !== undefined){
-      const item: OrderItem = {
-        idTour: tour.id,
-        name: tour.name,
-        price: tour.price
-      }
-      this.shoppingCart.items.push(item);
+    for (let o of this.shoppingCart.items) {
+      this.sum += o.price
     }
-    }
-  }
-
-  updateCart() {
-    this.service.updateCart(this.shoppingCart).subscribe({
-      next: (result: ShoppingCart) => {
-        if(result == null){
-          console.log("update error!")
-        }
-        console.log("successfully updated!");
-      }
-    })
-  }
-
-  buyUpdate() {
-    this.service.buyUpdate(this.shoppingCart).subscribe({
-      next: (result: ShoppingCart) => {
-        if(result == null){
-          console.log("update error!")
-        }
-        console.log("successfully updated!");
-      }
-    })
   }
 }
