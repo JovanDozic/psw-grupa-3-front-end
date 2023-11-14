@@ -79,6 +79,11 @@ export class AdministrationService {
     return this.http.patch<User>(environment.apiHost + 'userprofile/followers/' + userId + '/unfollow/' + userToUnfollowId, {});
   }
 
+  //Notifications
+  getUserNotifications(userId: number): Observable<PagedResults<User>> {
+    return this.http.get<PagedResults<User>>(environment.apiHost + 'notifications/' + userId);
+  }
+
   // App ratings
   getAppRatings(): Observable<PagedResults<AppRating>> {
     return this.http.get<PagedResults<AppRating>>(environment.apiHost + 'administration/app-ratings')

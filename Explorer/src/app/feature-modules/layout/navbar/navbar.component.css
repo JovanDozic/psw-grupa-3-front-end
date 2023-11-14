@@ -98,3 +98,22 @@ div {
 .navbar-section{
   margin-top: 15px;
 }
+
+.btn-secondary {
+  background-color: transparent;
+  color: inherit;
+  border: 0px;
+}
+
+.btn-secondary::after {
+  display: none;
+}
+
+.notification-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.notification-container p {
+  margin-bottom: 0.5rem;
+}
