@@ -29,7 +29,7 @@ export class PreferenceComponent implements OnInit {
   }
 
   getPreferences() {
-    this.service.getAllForTourist(this.user.id).subscribe({
+    this.service.getAllTouristPreferences(this.user.id).subscribe({
       next: (result: Preference[]) => {
         this.preferences = result;
       }

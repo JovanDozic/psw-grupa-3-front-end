@@ -14,10 +14,9 @@
                     <div class="star-placeholder">
                         <ngb-rating [max]="5" [(rate)]="starRating" [readonly]="true"></ngb-rating>
                     </div>
-
                     <span>13,257</span>
                 </div>
-                <p>from <span class="price">${{tour.price}}</span></p>
+                <button type="button" class="btn btn-info" (click)="addToCart(tour)">Add to cart</button>
             </div>
         </div>
     </div>
