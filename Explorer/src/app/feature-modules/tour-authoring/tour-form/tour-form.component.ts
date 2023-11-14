@@ -55,10 +55,22 @@ export class TourFormComponent implements OnChanges, OnInit {
       name: this.tourForm.value.name || "",
       description: this.tourForm.value.description || "",
       tags: this.tourForm.value.tags || "",
-      status: "Draft",
       difficult: Number(this.tourForm.value.difficult),
+      status: "Draft",
       price: 0,
-      authorId: this.user.id
+      guide: {
+        name: 'string',
+        surname: 'string',
+        email: 'string'
+      },
+      length: 0,
+      publishTime: '',
+      arhiveTime: '',
+      points: [],
+      requiredTime: {
+        transportType: 'Bike',
+        minutes: 20
+      }
     };
     this.service.addTour(tour).subscribe({
       next: () => { this.tourUpdated.emit() }
@@ -67,13 +79,26 @@ export class TourFormComponent implements OnChanges, OnInit {
 
   updateTour(): void {
     const tour: Tour = {
+      id: 0,
       name: this.tourForm.value.name || "",
       description: this.tourForm.value.description || "",
       tags: this.tourForm.value.tags || "",
       difficult: Number(this.tourForm.value.difficult),
       status: "Draft",
       price: 0,
-      authorId: this.user.id,
+      guide: {
+        name: 'string',
+        surname: 'string',
+        email: 'string'
+      },
+      length: 0,
+      publishTime: '',
+      arhiveTime: '',
+      points: [],
+      requiredTime: {
+        transportType: 'Bike',
+        minutes: 20
+      }
     };
     tour.id = this.tour.id;
     this.service.updateTour(tour).subscribe({
@@ -90,8 +115,8 @@ export class TourFormComponent implements OnChanges, OnInit {
   }
 
   resetSelectedPoint(): void {
-    // this.map.points = [];
-    // this.longitude = 0;
-    // this.latitude = 0;
+    this.map.points = [];
+    this.longitude = 0;
+    this.latitude = 0;
   }
 }
