@@ -15,6 +15,6 @@ export class ShowTourComponent {
     tags: 'Planinarenje, Priroda',
     status: 'Aktivna',
     price: 120.00,
-    authorId: 1
+    points: []
   };
 }
