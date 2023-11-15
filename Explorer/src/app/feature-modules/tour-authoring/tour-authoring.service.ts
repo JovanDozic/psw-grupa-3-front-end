@@ -150,7 +150,7 @@ export class TourAuthoringService {
   }
 
   publishTour(id: number): Observable<any> {
-    return this.http.get<any>(environment.apiHost + 'author/tour/publishTour' + id);
+    return this.http.get<any>(environment.apiHost + 'author/tour/publishTour/' + id);
   }
   
   getAllProblems(): Observable<PagedResults<Problem>> {
