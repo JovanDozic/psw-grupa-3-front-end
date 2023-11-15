@@ -1,7 +1,7 @@
 import { Component, Output } from '@angular/core';
 import { Tour } from '../../tour-authoring/model/tour.model';
 import { Point } from '../../tour-authoring/model/points.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TourAuthoringService } from '../../tour-authoring/tour-authoring.service';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
@@ -16,7 +16,7 @@ import { MarketplaceService } from '../marketplace.service';
 })
 export class ShowTourComponent {
 
-  constructor(private marketService: MarketplaceService, private route: ActivatedRoute, private checkpointService: TourAuthoringService, private service: AuthService) {}
+  constructor(private marketService: MarketplaceService, private route: ActivatedRoute, private checkpointService: TourAuthoringService, private service: AuthService, private router: Router) {}
 
   tour: Tour
 
@@ -73,5 +73,9 @@ export class ShowTourComponent {
         }
       });
     }
+  }
+
+  activateTour(){
+    this.router.navigate(['/tour-execution-lifecycle'], { state: { tour: this.tour } });
   }
 }

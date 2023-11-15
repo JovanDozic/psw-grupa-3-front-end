@@ -9,6 +9,7 @@ import {MatRadioModule} from "@angular/material/radio";
 import {RouterModule} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
 import {LayoutModule} from "../layout/layout.module";
+import { TourAuthoringModule } from '../tour-authoring/tour-authoring.module';
 import { PurchasedToursComponent } from './purchased-tours/purchased-tours.component';
 
 @NgModule({
@@ -27,6 +28,7 @@ import { PurchasedToursComponent } from './purchased-tours/purchased-tours.compo
     RouterModule,
     SharedModule,
     LayoutModule,
+    TourAuthoringModule
   ],
   exports: [
     PositionSimulatorComponent,

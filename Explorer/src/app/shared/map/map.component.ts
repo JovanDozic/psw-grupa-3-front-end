@@ -37,7 +37,7 @@ export class MapComponent implements AfterViewInit {
         attribution:
           '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }
-    );
+    );  
     
     this.points.forEach((point) => {
       const redIcon = L.icon({
@@ -48,7 +48,7 @@ export class MapComponent implements AfterViewInit {
 
       const marker = new L.Marker([point.latitude, point.longitude], { icon: redIcon }).addTo(this.map);
       this.markers.push(marker);
-    });
+    });  
     tiles.addTo(this.map);
     this.registerOnClick();
   }
@@ -57,10 +57,7 @@ export class MapComponent implements AfterViewInit {
     this.markers.forEach((marker) => {
       this.map.removeLayer(marker);
     })
-    this.points.forEach((point) => {
-      var marker = new L.Marker([point.latitude, point.longitude]).addTo(this.map);
-      this.markers.push(marker);
-    })
+    
   }
 
   registerOnClick(): void {

@@ -60,6 +60,8 @@ export class TourFormComponent implements OnChanges, OnInit {
       status: "Draft",
       price: 0,
       authorId: this.user.id,
+      points: [],
+
       guide: {
         name: 'string',
         surname: 'string',
@@ -68,7 +70,6 @@ export class TourFormComponent implements OnChanges, OnInit {
       length: 0,
       publishTime: '',
       arhiveTime: '',
-      points: [],
       requiredTime: {
         transportType: 'Bike',
         minutes: 20
@@ -90,6 +91,8 @@ export class TourFormComponent implements OnChanges, OnInit {
       status: "Draft",
       price: 0,
       authorId: this.user.id,
+      points: [],
+
       guide: {
         name: 'string',
         surname: 'string',
@@ -98,7 +101,6 @@ export class TourFormComponent implements OnChanges, OnInit {
       length: 0,
       publishTime: '',
       arhiveTime: '',
-      points: [],
       requiredTime: {
         transportType: 'Bike',
         minutes: 20
