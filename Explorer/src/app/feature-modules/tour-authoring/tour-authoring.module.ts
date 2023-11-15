@@ -20,6 +20,8 @@ import { ClubMembersComponent } from './club-members/club-members.component';
 import { TourReviewComponent } from './tour-review/tour-review.component';
 import { ObjectComponent } from './object/object.component';
 import { ObjectFormComponent } from './object-form/object-form.component';
+import { AuthorsProblemsComponent } from './authors-problems/authors-problems.component';
+import { TouristsProblemsComponent } from './tourists-problems/tourists-problems.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { ObjectFormComponent } from './object-form/object-form.component';
     ClubMembersComponent,
     TourReviewComponent,
     ObjectComponent,
-    ObjectFormComponent
+    ObjectFormComponent,
+    AuthorsProblemsComponent,
+    TouristsProblemsComponent
   ],
   imports: [
     CommonModule,
@@ -59,7 +63,9 @@ import { ObjectFormComponent } from './object-form/object-form.component';
     ProblemFormComponent,
     ClubMembersComponent,
     ObjectComponent,
-    ObjectFormComponent
+    ObjectFormComponent,
+    AuthorsProblemsComponent,
+    TouristsProblemsComponent
   ]
 })
 export class TourAuthoringModule { }
