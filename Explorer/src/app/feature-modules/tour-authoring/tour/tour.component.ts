@@ -33,7 +33,8 @@ export class TourComponent implements OnInit {
     requiredTime: {
       transportType: 'Bike',
       minutes: 0
-    }
+    },
+    authorId: 0
   };
   shouldRenderTourForm: boolean = false;
   shouldEdit: boolean = false;
