@@ -18,8 +18,7 @@ export class AuthService {
 
   constructor(private http: HttpClient,
     private tokenStorage: TokenStorage,
-    private router: Router
-    ) { }
+    private router: Router) { }
 
   login(login: Login): Observable<AuthenticationResponse> {
     return this.http
