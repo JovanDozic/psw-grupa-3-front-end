@@ -70,7 +70,8 @@ export class TourFormComponent implements OnChanges, OnInit {
       requiredTime: {
         transportType: 'Bike',
         minutes: 20
-      }
+      },
+      reviews: []
     };
     this.service.addTour(tour).subscribe({
       next: () => { this.tourUpdated.emit() }
@@ -98,7 +99,8 @@ export class TourFormComponent implements OnChanges, OnInit {
       requiredTime: {
         transportType: 'Bike',
         minutes: 20
-      }
+      },
+      reviews: []
     };
     tour.id = this.tour.id;
     this.service.updateTour(tour).subscribe({
