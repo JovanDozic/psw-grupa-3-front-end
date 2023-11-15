@@ -44,11 +44,6 @@ export class ShowTourComponent {
   }
 
   @Output() points: Point[] = []
-  
-  checkpoints: Point[] = [{
-    longitude: 19.83966064452716, latitude: 45.2517365956994,
-    name: "prva", description: "nista", picture: "nista"
-  }]
 
   private loadTourData() {
     if (this.currentTourId) {
