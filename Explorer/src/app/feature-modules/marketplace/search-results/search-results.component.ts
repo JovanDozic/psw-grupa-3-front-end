@@ -26,25 +26,7 @@ export class SearchResultsComponent implements OnInit {
     this.getSearchResults();
     this.authService.user$.subscribe(user => {
       this.user = user;
-      this.getShoppingCart();
     })
-  }
-
-  getShoppingCart() {
-    this.marketplaceService.getCartByUserId(this.user.id).subscribe({
-      next: (result: ShoppingCart) => {
-        this.shoppingCart = result;
-      },
-      error: err => {
-        console.log(err);
-        this.shoppingCart = {
-          id: 0,
-          idUser: this.user.id,
-          items: []
-        }
-      }
-    })
-    
   }
 
   getSearchResults() {
@@ -61,32 +43,5 @@ export class SearchResultsComponent implements OnInit {
         console.log(error);
       }
     })
-
-
-  }
-
-  addToCart(tour: SearchResultTour) {
-    if (this.shoppingCart.items.findIndex((x: OrderItem) => x.idTour === tour.id) === -1) {
-      const orderItem: OrderItem = {
-        idTour: tour.id,
-        name: tour.name,
-        price: tour.price,
-        image: tour.points[0].picture,
-      };
-
-      this.marketplaceService.addToCart(orderItem, this.user.id).subscribe({
-        next: result => {
-          alert('Added to cart!');
-          this.getShoppingCart();
-        },
-        error: (err) => {
-          console.log(err);
-          alert('Error while adding to cart!');
-        }
-      })
-    }
-    else {
-      alert('Tour is already in cart!');
-    }
   }
 }
