@@ -50,7 +50,7 @@ import { TouristsProblemsComponent } from './tourists-problems/tourists-problems
     TextFieldModule,
     MatRadioModule,
     RouterModule,
-    SharedModule,
+    SharedModule
   ],
   exports: [
     TourComponent,

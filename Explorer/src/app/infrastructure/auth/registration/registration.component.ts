@@ -4,7 +4,6 @@ import { Registration } from '../model/registration.model';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'xp-registration',
   templateUrl: './registration.component.html',
@@ -33,7 +32,6 @@ export class RegistrationComponent {
       username: this.registrationForm.value.username || "",
       password: this.registrationForm.value.password || "",
     };
-   
 
     if (this.registrationForm.valid) {
       this.authService.register(registration).subscribe({
