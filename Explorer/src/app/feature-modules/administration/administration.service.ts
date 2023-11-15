@@ -7,16 +7,20 @@ import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { Person } from './model/userprofile.model';
 import { Problem } from '../tour-authoring/model/problem.model';
 
-import { Overview } from './model/overview.model';
+import { Overview, UserRole } from './model/overview.model';
 
 import { AppRating } from './model/app-rating.model';
 import { TouristEquipment } from './model/tourist-equipment.model';
+import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { PublicRegistrationRequest } from './model/public-registration-request.model';
+import { UserNotification } from 'src/app/infrastructure/auth/model/user.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdministrationService {
+  
   
 
   constructor(private http: HttpClient) { }
@@ -60,8 +64,42 @@ export class AdministrationService {
     return this.http.post(url, [username]);
   }
   
-  
+  getUserFollowers(id: number): Observable<PagedResults<User>> {
+    return this.http.get<PagedResults<User>>(environment.apiHost + 'userprofile/followers/' + id);
+  }
 
+  getUsersToFollow(): Observable<PagedResults<User>> {
+    return this.http.get<PagedResults<User>>(environment.apiHost + 'userprofile/allUsers');
+  }
+
+  followUser(userId: number, userToFollowId: number) {
+    return this.http.patch<User>(environment.apiHost + 'userprofile/followers/' + userId + '/follow/' + userToFollowId, {});
+  }
+
+  unfollowUser(userId: number, userToUnfollowId: number) {
+    return this.http.patch<User>(environment.apiHost + 'userprofile/followers/' + userId + '/unfollow/' + userToUnfollowId, {});
+  }
+
+  //Notifications
+  getUserNotifications(userId: number): Observable<PagedResults<User>> {
+    return this.http.get<PagedResults<User>>(environment.apiHost + 'notifications/' + userId);
+  }
+
+  markAsReadNotification(userId: number, notificationId: number | undefined){
+    return this.http.patch<User>(environment.apiHost + 'notifications/user/' + userId + '/status/' + notificationId, {});
+  }
+
+  sendNotificationToFollowers(notification: UserNotification){
+    return this.http.patch<User>(environment.apiHost + 'notifications', notification);
+  }
+
+  notifyUser(receiverId: number, notification: UserNotification){
+    return this.http.patch<User>(environment.apiHost + 'notifications/' + receiverId, notification);
+  }
+
+  removeNotification(userId: number, notificationId: number | undefined){
+    return this.http.patch<User>(environment.apiHost + 'notifications/user/' + userId + '/delete/' + notificationId, {})
+  }
 
   // App ratings
   getAppRatings(): Observable<PagedResults<AppRating>> {
@@ -70,11 +108,6 @@ export class AdministrationService {
   addAppRating(rating: AppRating): Observable<AppRating> {
     return this.http.post<AppRating>(environment.apiHost + 'administration/app-ratings', rating);
   }
-
-  // TODO: Check if user already rated the app
-  // getAppRating(id: number) {
-  //   throw new Error('Method not implemented.');
-  // }
 
   //Tourist equipment record
   getTouristEquipment(): Observable<PagedResults<TouristEquipment>> {
@@ -88,4 +121,21 @@ export class AdministrationService {
     return this.http.delete<TouristEquipment>(environment.apiHost + 'tourist/equipment/' + id);
   }
 
+  //Public registration request
+
+  getPublicRegistrationRequests() : Observable<PagedResults<PublicRegistrationRequest>> {
+    return this.http.get<PagedResults<PublicRegistrationRequest>>(environment.apiHost + 'administration/registrationRequests')
+  }
+
+  getAllPendingRequests() : Observable<PublicRegistrationRequest[]> {
+    return this.http.get<PublicRegistrationRequest[]>(environment.apiHost + 'administration/registrationRequests/getAllPending')
+  }
+
+  addPublicRegistrationRequest(publicRegistrationRequest: PublicRegistrationRequest): Observable<PublicRegistrationRequest>{
+    return this.http.post<PublicRegistrationRequest>(environment.apiHost + 'administration/registrationRequests', publicRegistrationRequest);
+  }
+
+  updatePublicRegistrationRequest(publicRegistrationRequest: PublicRegistrationRequest): Observable<PublicRegistrationRequest>{
+    return this.http.put<PublicRegistrationRequest>(environment.apiHost + 'administration/registrationRequests/' + publicRegistrationRequest.id, publicRegistrationRequest);
+  }
 }

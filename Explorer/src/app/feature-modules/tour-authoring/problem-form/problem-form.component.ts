@@ -19,6 +19,8 @@ export class ProblemFormComponent implements OnChanges {
   selectedTour: Tour;
   shouldRenderProblemForm: boolean = false;
   shouldRenderTourReviewForm: boolean = false;
+  shouldRenderTourReviewList : boolean = false;
+  averageRatings: { [tourId: number]: number } = {};
 
   user: User | undefined;
   
@@ -27,6 +29,7 @@ export class ProblemFormComponent implements OnChanges {
   @Input() shouldEdit: boolean = false;
 
   constructor(private authService: AuthService, private service: TourAuthoringService) {}
+
 
   ngOnInit(): void {
     this.authService.user$.subscribe(user => {
@@ -49,7 +52,7 @@ export class ProblemFormComponent implements OnChanges {
     time: new FormControl(new Date(Date.now()), [Validators.required]), 
   });
 
-  addProblem(): void {
+  /*addProblem(): void {
     const problem: Problem = {
         category: this.problemForm.value.category || "",
         priority: this.problemForm.value.priority || false, 
@@ -61,7 +64,7 @@ export class ProblemFormComponent implements OnChanges {
     this.service.addProblem(problem).subscribe({
       next: () => { this.problemUpdated.emit() }
     });
-  }
+  }*/
 
   formatDate(selectedDate: Date | null | undefined): Date {
     const datePipe = new DatePipe('en-US');
@@ -73,6 +76,12 @@ export class ProblemFormComponent implements OnChanges {
     this.service.getTours().subscribe({
       next: (result: PagedResults<Tour>) => {
         this.tours = result.results;
+        for (const tour of this.tours) {
+          if (tour.id !== undefined) { 
+            this.calculateAverageRating(tour.id);
+          }
+        }
+        
       },
       error: () => {
       }
@@ -83,6 +92,7 @@ export class ProblemFormComponent implements OnChanges {
     this.selectedTour = tour;
     this.shouldRenderProblemForm = true;
     this.shouldRenderTourReviewForm = false;
+    this.shouldRenderTourReviewList = false;
   }
 
   changeProblemVisibility(): void {
@@ -93,9 +103,27 @@ export class ProblemFormComponent implements OnChanges {
     this.selectedTour = tour;
     this.shouldRenderTourReviewForm = true;
     this.shouldRenderProblemForm = false;
+    this.shouldRenderTourReviewList = false;
   }
 
   changeReviewVisibility(): void {
     this.shouldRenderTourReviewForm = false;
+  }
+
+  showTourReviews(tour: Tour) : void {
+    this.selectedTour = tour;
+    this.shouldRenderTourReviewList = true;
+    this.shouldRenderProblemForm = false;
+    this.shouldRenderTourReviewForm = false;
+  }
+  calculateAverageRating(tourId: number): void {
+    this.service.getAverageRating(tourId).subscribe(
+      (averageRating: number) => {
+        this.averageRatings[tourId] = averageRating; 
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
   }
 }

@@ -3,7 +3,7 @@ import { MapService } from './map.service';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import { environment } from 'src/env/environment';
-import { Points } from 'src/app/feature-modules/tour-authoring/model/points.model';
+import { Point } from 'src/app/feature-modules/tour-authoring/model/points.model';
 
 @Component({
   selector: 'xp-map',
@@ -18,7 +18,7 @@ export class MapComponent implements AfterViewInit {
   endingAddress: string = '';
   @Output() longitude: EventEmitter<number> = new EventEmitter<number>();
   @Output() latitude: EventEmitter<number> = new EventEmitter<number>();
-  @Input() points: Points[] = [];
+  @Input() points: Point[] = [];
   private markers : L.Marker[] = [];
 
   constructor(private mapService: MapService) { }
@@ -37,7 +37,18 @@ export class MapComponent implements AfterViewInit {
         attribution:
           '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }
-    );
+    );  
+    
+    this.points.forEach((point) => {
+      const redIcon = L.icon({
+        iconUrl: 'https://icons.veryicon.com/png/System/Small%20%26%20Flat/map%20marker.png',
+        iconSize: [31, 41],
+        iconAnchor: [13, 41],
+      });
+
+      const marker = new L.Marker([point.latitude, point.longitude], { icon: redIcon }).addTo(this.map);
+      this.markers.push(marker);
+    });  
     tiles.addTo(this.map);
     this.registerOnClick();
   }
@@ -46,10 +57,7 @@ export class MapComponent implements AfterViewInit {
     this.markers.forEach((marker) => {
       this.map.removeLayer(marker);
     })
-    this.points.forEach((point) => {
-      var marker = new L.Marker([point.latitude, point.longitude]).addTo(this.map);
-      this.markers.push(marker);
-    })
+    
   }
 
   registerOnClick(): void {

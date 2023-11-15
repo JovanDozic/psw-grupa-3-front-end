@@ -1,9 +1,7 @@
-export interface Points {
-  id?: number,
+export interface Point {
   longitude: number,
   latitude: number,
   name: string,
   description: string,
   picture: string,
-  tourId: number
 }

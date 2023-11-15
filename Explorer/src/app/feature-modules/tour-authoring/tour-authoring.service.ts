@@ -5,12 +5,14 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Tour } from './model/tour.model';
 import { Problem } from './model/problem.model';
 import {PagedResults} from "../../shared/model/paged-results.model";
-import {Points} from "./model/points.model";
+import {Point} from "./model/points.model";
 import { TourReview } from './model/tourReview.model';
 import { Club } from './model/club.model';
 import { ClubInvitation } from './model/clubInvitation.model';
 import { MembershipRequest } from './model/membership-request.model';
 import { ClubMember } from './model/clubMember.model';
+import {Object} from "./model/object.model";
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,24 +21,25 @@ export class TourAuthoringService {
 
   constructor(private http: HttpClient) { }
 
-  getPoints(): Observable<PagedResults<Points>>{
-    return this.http.get<PagedResults<Points>>(environment.apiHost + 'author/points');
+  getPoints(): Observable<PagedResults<Point>>{
+    return this.http.get<PagedResults<Point>>(environment.apiHost + 'author/points');
   }
 
-  deletePoints(id: number | undefined): Observable<Points> {
-    return this.http.delete<Points>(environment.apiHost + 'author/points/' + id);
+  deletePoints(id: number | undefined): Observable<Point> {
+    return this.http.delete<Point>(environment.apiHost + 'author/points/' + id);
   }
 
-  addPoint(point: Points): Observable<Points> {
-    return this.http.post<Points>(environment.apiHost + 'author/points',point);
+  setPublicPoint(id: number, pointName: string): Observable<Tour> {
+    return this.http.patch<Tour>(environment.apiHost + 'author/tour/publishPoint/' + id + '?pointName=' + pointName, {});
   }
 
-  updatePoint(point: Points): Observable<Points> {
-      return this.http.put<Points>(environment.apiHost + 'author/points/' + point.id, point);
-  }
-  
   getTours(): Observable<PagedResults<Tour>> {
     return this.http.get<PagedResults<Tour>>(environment.apiHost + 'author/tour/getAll');
+  }
+
+  getTourById(id: number | undefined): Observable<Tour> {
+    console.log(id);
+    return this.http.get<Tour>(environment.apiHost + 'author/tour/getById/' + id);
   }
 
   deleteTour(id: number): Observable<Tour> {
@@ -51,8 +54,12 @@ export class TourAuthoringService {
     return this.http.put<Tour>(environment.apiHost + 'author/tour/' + tour.id, tour);
   }
 
-  addTourReview(tourReview: TourReview): Observable<TourReview>{
-    return this.http.post<TourReview>(environment.apiHost + 'tourist/tourReview', tourReview);
+  addTourReview(tour:Tour,tourReview: TourReview): Observable<TourReview>{
+    return this.http.post<TourReview>(environment.apiHost + 'author/tour/rateTour/'+ tour.id,tourReview);
+  }
+
+  getTourReviews(): Observable<PagedResults<TourReview>> {
+    return this.http.get<PagedResults<TourReview>>(environment.apiHost + 'author/tour/get');
   }
 
   addClub(club: Club) : Observable<Club>{
@@ -113,5 +120,69 @@ export class TourAuthoringService {
   getPointsForTour(id: number): Observable<any> {
     return this.http.get<any>(environment.apiHost + `author/points/getAllForTour/${id}`);
   }
+
+  getObjects(): Observable<PagedResults<Object>>{
+    return this.http.get<PagedResults<Object>>(environment.apiHost + 'author/objects');
+  }
+
+  deleteObjects(id: number | undefined): Observable<Object> {
+    return this.http.delete<Object>(environment.apiHost + 'author/objects/' + id);
+  }
+
+  addObject(object: Object): Observable<Object> {
+    return this.http.post<Object>(environment.apiHost + 'author/objects',object);
+  }
+
+  updateObject(object: Object): Observable<Object> {
+    return this.http.put<Object>(environment.apiHost + 'author/objects/' + object.id, object);
+  }
+
+  setPublicObject(id: number): Observable<Object> {
+    return this.http.patch<Object>(environment.apiHost + 'author/objects/setPublic/' + id, {});
+  }
+
+  getAverageRating(tourId: number): Observable<number> {
+    return this.http.get<number>(environment.apiHost + 'author/tour/averageRating/' + tourId)
+  }
+
+  arhiveTour(id: number): Observable<any> {
+    return this.http.get<any>(environment.apiHost + 'author/tour/arhiveTour/' + id);
+  }
+
+  publishTour(id: number): Observable<any> {
+    return this.http.get<any>(environment.apiHost + 'author/tour/publishTour' + id);
+  }
+  
+  getAllProblems(): Observable<PagedResults<Problem>> {
+    return this.http.get<PagedResults<Problem>>(environment.apiHost + 'author/problems/getAll')
+     .pipe(
+       tap(data => console.log('API Response:', data)),
+     );
+  }
+  respondToProblem(id: number, response: string): Observable<PagedResults<Problem>> {
+    return this.http.patch<PagedResults<Problem>>(`${environment.apiHost}author/problems/respondToProblem/${id}/${response}`, null)
+      .pipe(
+        tap(data => console.log('Response to problem:', data)),
+      );
+  }
+  getProblemsForTour(id: number): Observable<any> {
+    return this.http.get<any>(environment.apiHost + `author/problems/getToursProblems/${id}`);
+  }
+  problemNotSolved(id: number, comment: string): Observable<PagedResults<Problem>> {
+    return this.http.patch<PagedResults<Problem>>(`${environment.apiHost}tourist/problem/problemNotSolved/${id}/${comment}`, comment)
+      .pipe(
+        tap(data => console.log('Problem marked as not solved:', data)),
+      );
+  }
+
+  solveProblem(id: number): Observable<PagedResults<Problem>> {
+    return this.http.patch<PagedResults<Problem>>(`${environment.apiHost}tourist/problem/solveProblem/${id}`, null)
+      .pipe(
+        tap(data => console.log('Response to problem:', data)),
+      );
+  }
+  getAllTouristsProblems(): Observable<PagedResults<Problem>> {
+    return this.http.get<PagedResults<Problem>>(environment.apiHost + 'tourist/problem/getAll');
+  }
 }
- 
+

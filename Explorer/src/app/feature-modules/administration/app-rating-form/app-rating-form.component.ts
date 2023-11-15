@@ -5,7 +5,6 @@ import { AppRating } from '../model/app-rating.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 
-
 @Component({
   selector: 'xp-app-rating-form',
   templateUrl: './app-rating-form.component.html',
@@ -20,22 +19,6 @@ export class AppRatingFormComponent implements OnInit {
   ngOnInit(): void {
     this.authService.user$.subscribe(user => {
       this.user = user;
-
-      // TODO: Check if user already rated the app
-      // if (user) {
-      //   this.service.getAppRating(user.id).subscribe(
-      //     (appRating) => {
-      //       if (appRating) {
-      //         // User has already rated the app, disable the rating form
-      //         this.appRatingForm.disable();
-      //       }
-      //     },
-      //     (error) => {
-      //       console.log(error);
-      //       alert(error.error.message);
-      //     }
-      //   );
-      // }
     });
   }
 
@@ -67,6 +50,4 @@ export class AppRatingFormComponent implements OnInit {
       }
     )
   }
-
-
 }

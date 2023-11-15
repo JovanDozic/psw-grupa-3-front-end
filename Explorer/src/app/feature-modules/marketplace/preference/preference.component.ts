@@ -3,7 +3,6 @@ import { Preference } from '../model/preference.model';
 import { MarketplaceService } from '../marketplace.service';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
-import { PagedResults } from 'src/app/shared/model/paged-results.model';
 
 @Component({
   selector: 'xp-preference',
@@ -30,9 +29,9 @@ export class PreferenceComponent implements OnInit {
   }
 
   getPreferences() {
-    this.service.getPreferences().subscribe({
-      next: (result: PagedResults<Preference>) => {
-        this.preferences = result.results;
+    this.service.getAllTouristPreferences(this.user.id).subscribe({
+      next: (result: Preference[]) => {
+        this.preferences = result;
       }
     })
   }

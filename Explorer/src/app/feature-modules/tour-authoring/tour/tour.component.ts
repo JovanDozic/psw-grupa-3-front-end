@@ -2,7 +2,8 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Tour } from '../model/tour.model';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { TourAuthoringService } from '../tour-authoring.service';
-import { Points } from '../model/points.model';
+import { Point } from '../model/points.model';
+import { TourReview } from '../model/tourReview.model';
 
 @Component({
   selector: 'xp-tour',
@@ -11,16 +12,41 @@ import { Points } from '../model/points.model';
 })
 export class TourComponent implements OnInit {
 
-  tours: Tour[] =  [];
-  @Output() points: Points[] = [];
-  selectedTour: Tour;
+  public tours: Tour[] = [];
+  @Output() points: Point[] = [];
+  @Output() reviews: TourReview[] = [];
+  selectedTour: Tour = {
+    id: 0,
+    name: '',
+    description: '',
+    difficult: 0,
+    tags: undefined,
+    status: '',
+    price: 0,
+    authorId: 0,
+    guide: {
+      name: '',
+      surname: '',
+      email: ''
+    },
+    length: 0,
+    publishTime: '',
+    arhiveTime: '',
+    points: [],
+    requiredTime: {
+      transportType: 'Bike',
+      minutes: 0
+    },
+    reviews:[]
+  };
   shouldRenderTourForm: boolean = false;
   shouldEdit: boolean = false;
 
   constructor(private service: TourAuthoringService) { }
 
-  ngOnInit() : void {
+  ngOnInit(): void {
     this.getTours();
+
   }
 
   deleteTour(id: number): void {
@@ -54,9 +80,21 @@ export class TourComponent implements OnInit {
 
   getTourPoints(id: number): void {
     this.service.getPointsForTour(id).subscribe({
-      next: (result: Points[]) => {
+      next: (result: Point[]) => {
         this.points = result
       }
+    })
+  }
+
+  
+
+  arhive(id: number){
+    this.service.arhiveTour(id).subscribe({
+    })
+  }
+
+  publish(id: number){
+    this.service.publishTour(id).subscribe({
     })
   }
 }

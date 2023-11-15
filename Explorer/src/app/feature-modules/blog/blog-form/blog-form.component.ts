@@ -28,7 +28,7 @@ export class BlogFormComponent {
   }
   
   addBlog(): void{
-    const blog: Blog = {
+    /*const blog: Blog = {
       title: this.blogForm.value.title || "",
       description: this.blogForm.value.description || "",
       images: this.imageUrls,
@@ -39,6 +39,6 @@ export class BlogFormComponent {
 
     this.service.addBlog(blog).subscribe({
         next: () => {console.log("New blog created")}
-    });
+    });*/
   }
 }

@@ -11,6 +11,8 @@ import { OverviewComponent } from './admin/overview.component';
 import { AppRatingFormComponent } from './app-rating-form/app-rating-form.component';
 import { AppRatingsComponent } from './app-ratings/app-ratings.component';
 import { EquipmentRecordComponent } from './equipment-record/equipment-record.component';
+import { FindPeopleComponent } from './find-people/find-people.component';
+import { PublicRegistrationRequestsComponent } from './public-registration-requests/public-registration-requests.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { EquipmentRecordComponent } from './equipment-record/equipment-record.co
     OverviewComponent,
     AppRatingFormComponent,
     AppRatingsComponent,
-    EquipmentRecordComponent
+    EquipmentRecordComponent,
+    FindPeopleComponent,
+    PublicRegistrationRequestsComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +38,7 @@ import { EquipmentRecordComponent } from './equipment-record/equipment-record.co
     EquipmentFormComponent,
     ProfileFormComponent,
     ProfileComponent,
+    FindPeopleComponent,
     ProblemsComponent,
     OverviewComponent,
     EquipmentRecordComponent,

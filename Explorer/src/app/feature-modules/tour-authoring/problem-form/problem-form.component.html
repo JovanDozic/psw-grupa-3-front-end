@@ -12,6 +12,7 @@
                         <th>Status</th>
                         <th>Difficult</th>
                         <th>Price</th>
+                        <th>Average rating</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,13 +23,19 @@
                         <td>{{tour.status}}</td>
                         <td>{{tour.difficult}}</td>
                         <td>{{tour.price}}</td>
+                        <td>{{tour.id !== undefined ? (averageRatings[tour.id] !== undefined ? averageRatings[tour.id] : "No reviews") : "No reviews"}}</td>
+
+
                         <td class="button-td">
                             <button color="primary" (click)="onProblemClicked(tour)" mat-icon-button>
                                 <mat-icon>error</mat-icon>
                             </button>
                             <button color="primary" (click)="onRatingClicked(tour)" mat-icon-button>
                               <mat-icon>stars</mat-icon>
-                          </button>
+                            </button>
+                            <button color="primary" (click)="showTourReviews(tour)">
+                                Show reviews
+                            </button>
                         </td>
                     </tr>
                     <tr>
@@ -58,7 +65,6 @@
                   </mat-form-field>
                 </div>
                 <div>
-                  <button *ngIf="!shouldEdit" color="primary" type="submit" (click)="addProblem()" mat-raised-button>Done</button>
                 </div>
               </form>
             </div>
@@ -66,5 +72,8 @@
     </div>
     <div>
       <xp-tour-review-form *ngIf="shouldRenderTourReviewForm" (visibilityFlag)="changeReviewVisibility()" [tour]="selectedTour"></xp-tour-review-form>
+    </div>
+    <div>
+      <xp-tour-review *ngIf="shouldRenderTourReviewList" [tour]="selectedTour"></xp-tour-review>
     </div>
 </div>  
