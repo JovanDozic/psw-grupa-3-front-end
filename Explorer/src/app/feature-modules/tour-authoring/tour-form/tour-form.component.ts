@@ -46,7 +46,8 @@ export class TourFormComponent implements OnChanges, OnInit {
     tags: new FormControl('', [Validators.required]),
     status: new FormControl('', [Validators.required]),
     difficult: new FormControl(),
-    price: new FormControl()
+    price: new FormControl(),
+    points: new FormControl()
   });
 
   addTour(): void {

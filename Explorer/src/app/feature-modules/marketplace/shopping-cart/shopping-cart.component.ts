@@ -23,7 +23,78 @@ export class ShoppingCartComponent {
       this.user = user;
       this.getShoppingCart();
     })
-  }
+  } 
+
+ tour1: Tour = {
+  id: 1,
+    name: 'Tura u planinama',
+    description: 'Istraživanje prelepih planinskih predela.',
+    difficult: 4,
+    tags: 'Planinarenje, Priroda',
+    status: 'Aktivna',
+    price: 120.00,
+    guide: {
+      name: 'string',
+      surname: 'string',
+      email: 'string'
+    },
+    length: 0,
+    publishTime: '',
+    arhiveTime: '',
+    points: [],
+    requiredTime: {
+      transportType: 'Bike',
+      minutes: 20
+    }
+  };
+  
+  tour2: Tour = {
+    id: 2,
+    name: 'Pustolovna avantura',
+    description: 'Najuzbudljivija avantura vašeg života!',
+    difficult: 5,
+    tags: 'Pustinja, Avantura',
+    status: 'Aktivna',
+    price: 200.00,
+    guide: {
+      name: 'string',
+      surname: 'string',
+      email: 'string'
+    },
+    length: 0,
+    publishTime: '',
+    arhiveTime: '',
+    points: [],
+    requiredTime: {
+      transportType: 'Bike',
+      minutes: 20
+    }
+  };
+  
+ tour3: Tour = {
+  id: 3,
+    name: 'Istorijski obilazak grada',
+    description: 'Upoznajte bogatu istoriju našeg grada.',
+    difficult: 2,
+    tags: 'Istorija, Turizam',
+    status: 'Nedostupna',
+    price: 50.00,
+    guide: {
+      name: 'string',
+      surname: 'string',
+      email: 'string'
+    },
+    length: 0,
+    publishTime: '',
+    arhiveTime: '',
+    points: [],
+    requiredTime: {
+      transportType: 'Bike',
+      minutes: 20
+    }
+  };
+  
+  tours: Tour[] = [this.tour1, this.tour2, this.tour3];
 
   getShoppingCart() {
     this.service.getCartByUserId(this.user.id).subscribe({

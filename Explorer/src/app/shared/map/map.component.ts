@@ -38,6 +38,17 @@ export class MapComponent implements AfterViewInit {
           '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }
     );
+    
+    this.points.forEach((point) => {
+      const redIcon = L.icon({
+        iconUrl: 'https://icons.veryicon.com/png/System/Small%20%26%20Flat/map%20marker.png',
+        iconSize: [31, 41],
+        iconAnchor: [13, 41],
+      });
+
+      const marker = new L.Marker([point.latitude, point.longitude], { icon: redIcon }).addTo(this.map);
+      this.markers.push(marker);
+    });
     tiles.addTo(this.map);
     this.registerOnClick();
   }

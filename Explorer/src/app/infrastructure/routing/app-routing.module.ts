@@ -32,6 +32,7 @@ import { DetailedBlogComponent } from 'src/app/feature-modules/blog/detailed-blo
 import { BlogsPageComponent } from 'src/app/feature-modules/blog/blogs-page/blogs-page.component';
 import { PublicRegistrationRequestsComponent } from 'src/app/feature-modules/administration/public-registration-requests/public-registration-requests.component';
 import { PurchasedToursComponent } from 'src/app/feature-modules/tour-execution/purchased-tours/purchased-tours.component';
+import { ShowTourComponent } from 'src/app/feature-modules/marketplace/show-tour/show-tour.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -64,6 +65,7 @@ const routes: Routes = [
   {path: 'all-blogs', component: BlogsPageComponent},
   {path: 'public-registration-requests', component: PublicRegistrationRequestsComponent},
   {path: 'purchased-tours', component: PurchasedToursComponent},
+  {path: 'show-tour/:tourId', component: ShowTourComponent}
 ];
 
 @NgModule({

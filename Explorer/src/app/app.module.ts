@@ -18,7 +18,6 @@ import { RouterModule } from '@angular/router';
 import { TourComponent } from './feature-modules/tour-authoring/tour/tour.component';
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {TourExecutionService} from "./feature-modules/tour-execution/tour-execution.service";
 import {TourExecutionModule} from "./feature-modules/tour-execution/tour-execution.module";
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
