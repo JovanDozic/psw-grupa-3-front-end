@@ -29,6 +29,7 @@
       <mat-label>Category</mat-label>
       <input matInput formControlName="category" type="text">
     </mat-form-field>
+    <mat-checkbox formControlName="checkBoxControl">Public object</mat-checkbox>
     <button *ngIf="!shouldEdit" mat-raised-button type="submit" color="primary" (click)="addObject()">Done</button>
     <button *ngIf="shouldEdit" mat-raised-button type="submit" color="primary" (click)="updateObject()">Done</button>
   </div>

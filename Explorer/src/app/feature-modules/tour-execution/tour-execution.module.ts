@@ -10,11 +10,12 @@ import {RouterModule} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
 import {LayoutModule} from "../layout/layout.module";
 import { TourAuthoringModule } from '../tour-authoring/tour-authoring.module';
-import { MapComponent } from 'src/app/shared/map/map.component';
+import { PurchasedToursComponent } from './purchased-tours/purchased-tours.component';
 
 @NgModule({
   declarations: [
     PositionSimulatorComponent,
+    PurchasedToursComponent,
   ],
   imports: [
     CommonModule,
@@ -30,7 +31,8 @@ import { MapComponent } from 'src/app/shared/map/map.component';
     TourAuthoringModule
   ],
   exports: [
-    PositionSimulatorComponent
+    PositionSimulatorComponent,
+    PurchasedToursComponent,
   ]
 })
 export class TourExecutionModule { }

@@ -11,16 +11,38 @@ import { Point } from '../model/points.model';
 })
 export class TourComponent implements OnInit {
 
-  tours: Tour[] =  [];
+  public tours: Tour[] = [];
   @Output() points: Point[] = [];
-  selectedTour: Tour;
+  selectedTour: Tour = {
+    id: 0,
+    name: '',
+    description: '',
+    difficult: 0,
+    tags: undefined,
+    status: '',
+    price: 0,
+    guide: {
+      name: '',
+      surname: '',
+      email: ''
+    },
+    length: 0,
+    publishTime: '',
+    arhiveTime: '',
+    points: [],
+    requiredTime: {
+      transportType: 'Bike',
+      minutes: 0
+    }
+  };
   shouldRenderTourForm: boolean = false;
   shouldEdit: boolean = false;
 
   constructor(private service: TourAuthoringService) { }
 
-  ngOnInit() : void {
+  ngOnInit(): void {
     this.getTours();
+
   }
 
   deleteTour(id: number): void {
@@ -57,6 +79,16 @@ export class TourComponent implements OnInit {
       next: (result: Point[]) => {
         this.points = result
       }
+    })
+  }
+
+  arhive(id: number){
+    this.service.arhiveTour(id).subscribe({
+    })
+  }
+
+  publish(id: number){
+    this.service.publishTour(id).subscribe({
     })
   }
 }

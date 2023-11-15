@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PointsComponent } from './points/points.component';
-import { PointsFormComponent } from './points-form/points-form.component';
 import { MatButtonModule } from "@angular/material/button";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TextFieldModule } from "@angular/cdk/text-field";
@@ -25,8 +23,6 @@ import { ObjectFormComponent } from './object-form/object-form.component';
 
 @NgModule({
   declarations: [
-    PointsComponent,
-    PointsFormComponent,
     TourReviewFormComponent,
     TourComponent,
     TourFormComponent,
@@ -53,8 +49,6 @@ import { ObjectFormComponent } from './object-form/object-form.component';
     SharedModule
   ],
   exports: [
-    PointsComponent,
-    PointsFormComponent,
     TourComponent,
     TourFormComponent,
     TourReviewFormComponent,

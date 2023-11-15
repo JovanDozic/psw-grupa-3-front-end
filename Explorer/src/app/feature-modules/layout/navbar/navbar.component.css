@@ -6,6 +6,7 @@ div {
 
 .toolbar {
     background-color: #fff;
+    z-index: 99999999;
 }
 
 .right-section {
@@ -57,7 +58,7 @@ div {
   border-radius: 15px;
   min-width: 100%;
   width:180px;
-  z-index: 3; 
+  z-index: 999999999; 
 }
 
 .custom-menu:hover .custom-menu-content {

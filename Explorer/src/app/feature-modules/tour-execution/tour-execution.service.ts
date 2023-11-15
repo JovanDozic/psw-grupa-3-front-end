@@ -8,6 +8,7 @@ import {AuthService} from "../../infrastructure/auth/auth.service";
 import {BehaviorSubject} from "rxjs";
 import { TourExecution } from './model/tour-lifecycle.model';
 import { Tour } from '../tour-authoring/model/tour.model';
+import { TourPurchaseToken } from './model/tour-purchase-token.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,9 @@ export class TourExecutionService {
 
   exitTour(tourExecution: TourExecution): Observable<TourExecution>{
     return this.http.patch<TourExecution>(environment.apiHost + 'tourist/tourExecution/quit/' + tourExecution.id, tourExecution);
+  }
+
+  getTouristTokens(userId: number): Observable<TourPurchaseToken[]> {
+    return this.http.get<TourPurchaseToken[]>(environment.apiHost + 'tourist/tourPurchaseToken/' + userId);
   }
 }

@@ -4,25 +4,34 @@ import { BlogFormComponent } from './blog-form/blog-form.component';
 import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { BlogCommentFormComponent } from './blog-comment-form/blog-comment-form.component';
-import { BlogCommentsComponent } from './blog-comments/blog-comments.component';
+import { DetailedBlogComponent } from './detailed-blog/detailed-blog.component';
+import { BlogsPageComponent } from './blogs-page/blogs-page.component';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatRadioModule } from '@angular/material/radio';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
     BlogFormComponent,
-    BlogCommentsComponent,
-    BlogCommentFormComponent
+    DetailedBlogComponent,
+    BlogsPageComponent
   ],
   imports: [
     CommonModule, 
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    TextFieldModule,
+    MatRadioModule,
+    RouterModule,
+    SharedModule
   ],
   exports: [
     BlogFormComponent,
-    BlogCommentsComponent
+    DetailedBlogComponent,
+    BlogsPageComponent
   ]
 })
 export class BlogModule { }

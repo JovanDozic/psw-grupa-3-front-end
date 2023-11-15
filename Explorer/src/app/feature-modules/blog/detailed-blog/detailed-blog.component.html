@@ -1,0 +1,105 @@
+<div class="container blog-details-container">
+    <div class="row blog-info">
+      <div class="col-md-6">
+        <h1>{{ blog.title }}</h1>
+        <p>{{ blog.description }}</p>
+        <p>Creation Date: {{ blog.creationDate | date }}</p>
+        <p>Status: {{ convertStatusToString(blog.status) }}</p>
+      </div>
+      <div class="col-md-6 blog-images">
+        <div class="image-dimensions">
+          <div class="image-container">
+            <img [src]="currentPicture" alt="Slika" class="fit-image">
+            <div class="navigation-buttons">
+              <button mat-icon-button (click)="previousImage()" *ngIf="currentImageIndex > 0" class="prev-button">
+                <mat-icon>keyboard_arrow_left</mat-icon>
+              </button>
+              <button mat-icon-button (click)="nextImage()" *ngIf="currentImageIndex < blogImages.length - 1" class="next-button">
+                <mat-icon>keyboard_arrow_right</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <div>
+        <button mat-icon-button (click)="rate(1)" [class.thumb-up-active]="isUserRated(1)" *ngIf="!isClosed">
+            <mat-icon>thumb_up</mat-icon>
+        </button>
+        <span>{{ blog.netVotes }}</span>
+        <button mat-icon-button (click)="rate(2)" [class.thumb-down-active]="isUserRated(2)" *ngIf="!isClosed">
+            <mat-icon>thumb_down</mat-icon>
+        </button>
+    </div>
+    <div class="row comment-section">
+      <div class="col-md-12">
+        <h2>Comments</h2>
+            <div *ngIf="blog && blog.blogComments && blog.blogComments.length > 0">
+                <div class="card mb-3" *ngFor="let comment of blog.blogComments; let i = index">
+                    <div class="card-body d-flex">
+                        <div class="flex-grow-1" style="width: 80%;">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="card-title mb-0">User {{ comment.userId }}</h5>
+                                <small class="text-muted">
+                                Created: {{ comment.timeCreated | date:'short' }}, 
+                                Updated: {{ comment.timeUpdated | date:'short' }}
+                                </small>
+                            </div>
+                            <div *ngIf="!editingComments[i]">
+                                <p class="card-text" [class.editable]="comment.userId === loggedInUserId" >
+                                    {{ comment.comment }}
+                                </p>
+                            </div>
+                            <div *ngIf="editingComments[i]">
+                                <form [formGroup]="commentForm" (ngSubmit)="updateComment(i)">
+                                  <textarea formControlName="comment"></textarea>
+                                  <div class="d-flex justify-content-end">
+                                    <button color="primary" mat-icon-button type="submit">
+                                      <mat-icon style="font-size: 1.5rem;">done</mat-icon>
+                                    </button>
+                                    <button color="warn" mat-icon-button type="button" (click)="disableEditMode(i)">
+                                      <mat-icon style="font-size: 1.5rem;">cancel</mat-icon>
+                                    </button>
+                                  </div>
+                                </form>
+                            </div>
+                        </div>
+                                              
+                        <div class="flex-shrink-0" style="width: 20%;" >
+                            <div class="d-flex justify-content-end" *ngIf="comment.userId === loggedInUserId && !editingComments[i] && !isClosed">
+                              <button color="accent" mat-icon-button (click)="deleteComment(comment)">
+                                <mat-icon style="font-size: 1.5rem;">delete</mat-icon>
+                              </button>
+                              <button color="primary" mat-icon-button (click)="enableEditMode(i)">
+                                <mat-icon style="font-size: 1.5rem;">edit</mat-icon>
+                              </button>
+                            </div>
+                          </div>
+                    </div>
+            </div>
+        </div>
+        
+        <div *ngIf="blog && (!blog.blogComments || blog.blogComments.length === 0)">
+            <p>No comments yet.</p>
+        </div>
+        <div class="container blog-details-container">
+          <div *ngIf="!addingComment">
+            <button class="btn btn-primary" (click)="addComment()">Add a Comment</button>
+          </div>
+          <div *ngIf="addingComment">
+            <form [formGroup]="commentForm" (ngSubmit)="leaveAComment()">
+              <div class="form-group">
+                <label for="comment">Your Comment:</label>
+                <textarea formControlName="comment" class="form-control"></textarea>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-primary" type="submit">Leave a Comment</button>
+                <button class="btn btn-secondary" type="button" (click)="cancelComment()">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        </div>
+    </div>
+</div>
