@@ -37,7 +37,6 @@ export class TourComponent implements OnInit {
       transportType: 'Bike',
       minutes: 0
     },
-    authorId: 0,
     reviews:[]
   };
   shouldRenderTourForm: boolean = false;

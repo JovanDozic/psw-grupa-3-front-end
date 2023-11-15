@@ -19,5 +19,4 @@ export interface Tour {
     arhiveTime: string,
     requiredTime: RequiredTime,
     reviews: TourReview[],
-    authorId: number,
 }
