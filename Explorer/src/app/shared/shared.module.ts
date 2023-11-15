@@ -10,14 +10,16 @@ import { AuthModule } from "../infrastructure/auth/auth.module";
 import { MaterialModule } from "../infrastructure/material/material.module";
 import { AppRoutingModule } from "../infrastructure/routing/app-routing.module";
 
+
 @NgModule({
     declarations: [
         MapComponent
     ],
-    imports: [
+    imports: [ 
         BrowserModule,
         AppRoutingModule,
-        //LayoutModule,
+        SharedModule,
+       // LayoutModule,
         BrowserAnimationsModule,
         MaterialModule,
         AuthModule,
