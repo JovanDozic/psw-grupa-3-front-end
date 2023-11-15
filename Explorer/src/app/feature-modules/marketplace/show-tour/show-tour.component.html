@@ -35,8 +35,9 @@
 </mat-grid-list>
 <div class="button-div"> 
   <button *ngIf="forCart" mat-raised-button class="buy-button"
-  [style.background-color]="'#00BBFF'" [style.color]="'#F7FFF7'">Add to cart
+  [style.background-color]="'#00BBFF'" [style.color]="'#F7FFF7'" (click)="addToCart()">Add to cart
   </button>
+
   <button *ngIf="isPaid" mat-raised-button class="buy-button"
   [style.background-color]="'#00BBFF'" [style.color]="'#F7FFF7'" (click)="activateTour()">Activate
   </button></div>
