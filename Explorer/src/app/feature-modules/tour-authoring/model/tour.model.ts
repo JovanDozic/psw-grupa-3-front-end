@@ -18,4 +18,5 @@ export interface Tour {
     points: Point[],
     requiredTime: RequiredTime,
     reviews: TourReview[],
+    authorId: number,
 }

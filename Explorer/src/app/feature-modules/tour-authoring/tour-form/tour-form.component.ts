@@ -59,6 +59,7 @@ export class TourFormComponent implements OnChanges, OnInit {
       difficult: Number(this.tourForm.value.difficult),
       status: "Draft",
       price: 0,
+      authorId: this.user.id,
       guide: {
         name: 'string',
         surname: 'string',
@@ -88,6 +89,7 @@ export class TourFormComponent implements OnChanges, OnInit {
       difficult: Number(this.tourForm.value.difficult),
       status: "Draft",
       price: 0,
+      authorId: this.user.id,
       guide: {
         name: 'string',
         surname: 'string',
