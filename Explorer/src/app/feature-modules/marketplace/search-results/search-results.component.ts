@@ -53,22 +53,22 @@ export class SearchResultsComponent implements OnInit {
     const latitude = queryParams['latitude'];
     const distance = queryParams['distance'];
 
-    // this.marketplaceService.getSearchResults(longitude, latitude, distance).subscribe({
-    //   next: (results: SearchResultTour[]) => {
-    //     this.tours = results;
-    //   },
-    //   error: (error) => {
-    //     console.log(error);
-    //   }
-    // })
+    this.marketplaceService.getSearchResults(longitude, latitude, distance).subscribe({
+      next: (results: SearchResultTour[]) => {
+        this.tours = results;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
 
-    this.tours = [
-      { name: 'Result 1', description: 'Description 1', price: 55.23, id: 1 },
-      { name: 'Result 2', description: 'Description 2', price: 69.57, id: 2 },
-      { name: 'Result 3', description: 'Description 3', price: 25.12, id: 3 },
-      { name: 'Result 4', description: 'Description 4', price: 34.68, id: 4 },
-      { name: 'Result 5', description: 'Description 5', price: 43.93, id: 5 },
-    ];
+    // this.tours = [
+    //   { name: 'Result 1', description: 'Description 1', price: 55.23, id: 1 },
+    //   { name: 'Result 2', description: 'Description 2', price: 69.57, id: 2 },
+    //   { name: 'Result 3', description: 'Description 3', price: 25.12, id: 3 },
+    //   { name: 'Result 4', description: 'Description 4', price: 34.68, id: 4 },
+    //   { name: 'Result 5', description: 'Description 5', price: 43.93, id: 5 },
+    // ];
   }
 
   addToCart(tour: SearchResultTour) {
@@ -77,6 +77,7 @@ export class SearchResultsComponent implements OnInit {
         idTour: tour.id,
         name: tour.name,
         price: tour.price,
+        image: 'https://media.tacdn.com/media/attractions-splice-spp-674x446/08/ba/a5/2c.jpg',
       };
 
       this.marketplaceService.addToCart(orderItem, this.user.id).subscribe({

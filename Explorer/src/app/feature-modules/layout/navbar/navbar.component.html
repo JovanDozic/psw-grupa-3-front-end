@@ -90,6 +90,7 @@
                             <a class="dropdown-item" [routerLink]="['problem-form']">All tours</a>
                             <a class="dropdown-item" [routerLink]="['membership-requests']">All Requests</a>
                             <a class="dropdown-item" [routerLink]="['shopping-cart']">My cart</a>
+                            <a class="dropdown-item" [routerLink]="['purchased-tours']">Purchased tours</a>
                         </li>
 
                         <li *ngIf="user && user.role !== 'administrator' && user.username !== ''">
