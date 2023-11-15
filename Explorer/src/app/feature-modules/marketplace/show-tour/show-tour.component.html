@@ -1,0 +1,32 @@
+<div class="main">
+<mat-grid-list cols="2" rowHeight="400px">
+    <mat-grid-tile>
+        <div class="tour-info-container">
+            <div class="header-div">{{tour.name}}</div>
+            <p>{{tour.description}}</p>
+            <p>Difficulty: {{tour.difficult}}</p>
+            <p>Status: {{tour.status}}</p>
+            <p>Price: {{tour.price}}€</p>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="image-container">
+        <ngb-carousel>
+          <ng-template ngbSlide>
+            <img src="https://media.tacdn.com/media/attractions-splice-spp-674x446/08/ba/a5/2c.jpg" alt="Image 1" class="d-block w-100">
+          </ng-template>
+          <ng-template ngbSlide>
+            <img src="https://www.trolleytours.com/wp-content/uploads/2016/07/trolley-tours-of-key-west.jpg" alt="Image 2" class="d-block w-100">
+          </ng-template>
+        </ngb-carousel>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>3</mat-grid-tile>
+    <mat-grid-tile>4</mat-grid-tile>
+</mat-grid-list>
+</div>
+
+
+
+
+
