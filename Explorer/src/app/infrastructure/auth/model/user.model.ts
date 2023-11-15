@@ -3,15 +3,15 @@ export interface User {
     username: string;
     role: string;
     followers?: User[];
-    notifications?: Notification[]; 
+    notifications?: UserNotification[]; 
 }
   
-export interface Notification {
-    notificationId: number;
+export interface UserNotification {
+    notificationId?: number;
     senderId: number;
     message: string;
-    status: notificationStatus;
-    timestamp: Date;
+    status?: notificationStatus;
+    timestamp?: Date;
 }
 
 export enum notificationStatus {
