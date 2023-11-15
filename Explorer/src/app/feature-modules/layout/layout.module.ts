@@ -13,6 +13,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SearchFormComponent } from '../marketplace/search-form/search-form.component';
 import { MarketplaceModule } from '../marketplace/marketplace.module';
+import { AuthorsProblemsComponent } from '../tour-authoring/authors-problems/authors-problems.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { MarketplaceModule } from '../marketplace/marketplace.module';
     NavbarComponent,
     RatingsComponent,
     SearchComponent,
-    RecommendedToursComponent,
+    RecommendedToursComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +38,7 @@ import { MarketplaceModule } from '../marketplace/marketplace.module';
     HomeComponent,
     RatingsComponent,
     SearchComponent,
-    RecommendedToursComponent,
+    RecommendedToursComponent
   ]
 })
 export class LayoutModule { }

@@ -23,6 +23,7 @@ export class TourComponent implements OnInit {
     tags: undefined,
     status: '',
     price: 0,
+    authorId: 0,
     guide: {
       name: '',
       surname: '',

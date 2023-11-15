@@ -33,6 +33,8 @@ import { BlogsPageComponent } from 'src/app/feature-modules/blog/blogs-page/blog
 import { PublicRegistrationRequestsComponent } from 'src/app/feature-modules/administration/public-registration-requests/public-registration-requests.component';
 import { PurchasedToursComponent } from 'src/app/feature-modules/tour-execution/purchased-tours/purchased-tours.component';
 import { ShowTourComponent } from 'src/app/feature-modules/marketplace/show-tour/show-tour.component';
+import { AuthorsProblemsComponent } from '../../feature-modules/tour-authoring/authors-problems/authors-problems.component';
+import { TouristsProblemsComponent } from 'src/app/feature-modules/tour-authoring/tourists-problems/tourists-problems.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -65,7 +67,9 @@ const routes: Routes = [
   {path: 'all-blogs', component: BlogsPageComponent},
   {path: 'public-registration-requests', component: PublicRegistrationRequestsComponent},
   {path: 'purchased-tours', component: PurchasedToursComponent},
-  {path: 'show-tour/:tourId', component: ShowTourComponent}
+  {path: 'show-tour/:tourId', component: ShowTourComponent},
+  {path: 'authors-problems', component: AuthorsProblemsComponent},
+  {path: 'tourists-problems', component: TouristsProblemsComponent}
 ];
 
 @NgModule({

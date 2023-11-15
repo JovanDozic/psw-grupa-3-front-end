@@ -61,6 +61,7 @@ export class TourFormComponent implements OnChanges, OnInit {
       price: 0,
       authorId: this.user.id,
       points: [],
+
       guide: {
         name: 'string',
         surname: 'string',
@@ -91,6 +92,7 @@ export class TourFormComponent implements OnChanges, OnInit {
       price: 0,
       authorId: this.user.id,
       points: [],
+
       guide: {
         name: 'string',
         surname: 'string',

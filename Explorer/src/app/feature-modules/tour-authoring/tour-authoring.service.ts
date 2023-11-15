@@ -12,6 +12,7 @@ import { ClubInvitation } from './model/clubInvitation.model';
 import { MembershipRequest } from './model/membership-request.model';
 import { ClubMember } from './model/clubMember.model';
 import {Object} from "./model/object.model";
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,7 @@ export class TourAuthoringService {
     return this.http.get<PagedResults<Tour>>(environment.apiHost + 'author/tour/getAll');
   }
 
-  getTourById(id: number): Observable<Tour> {
+  getTourById(id: number | undefined): Observable<Tour> {
     console.log(id);
     return this.http.get<Tour>(environment.apiHost + 'author/tour/getById/' + id);
   }
@@ -150,6 +151,38 @@ export class TourAuthoringService {
 
   publishTour(id: number): Observable<any> {
     return this.http.get<any>(environment.apiHost + 'author/tour/publishTour' + id);
+  }
+  
+  getAllProblems(): Observable<PagedResults<Problem>> {
+    return this.http.get<PagedResults<Problem>>(environment.apiHost + 'author/problems/getAll')
+     .pipe(
+       tap(data => console.log('API Response:', data)),
+     );
+  }
+  respondToProblem(id: number, response: string): Observable<PagedResults<Problem>> {
+    return this.http.patch<PagedResults<Problem>>(`${environment.apiHost}author/problems/respondToProblem/${id}/${response}`, null)
+      .pipe(
+        tap(data => console.log('Response to problem:', data)),
+      );
+  }
+  getProblemsForTour(id: number): Observable<any> {
+    return this.http.get<any>(environment.apiHost + `author/problems/getToursProblems/${id}`);
+  }
+  problemNotSolved(id: number, comment: string): Observable<PagedResults<Problem>> {
+    return this.http.patch<PagedResults<Problem>>(`${environment.apiHost}tourist/problem/problemNotSolved/${id}/${comment}`, comment)
+      .pipe(
+        tap(data => console.log('Problem marked as not solved:', data)),
+      );
+  }
+
+  solveProblem(id: number): Observable<PagedResults<Problem>> {
+    return this.http.patch<PagedResults<Problem>>(`${environment.apiHost}tourist/problem/solveProblem/${id}`, null)
+      .pipe(
+        tap(data => console.log('Response to problem:', data)),
+      );
+  }
+  getAllTouristsProblems(): Observable<PagedResults<Problem>> {
+    return this.http.get<PagedResults<Problem>>(environment.apiHost + 'tourist/problem/getAll');
   }
 }
 

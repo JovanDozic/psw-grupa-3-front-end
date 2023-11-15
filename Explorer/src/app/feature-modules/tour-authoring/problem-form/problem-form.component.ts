@@ -52,7 +52,7 @@ export class ProblemFormComponent implements OnChanges {
     time: new FormControl(new Date(Date.now()), [Validators.required]), 
   });
 
-  addProblem(): void {
+  /*addProblem(): void {
     const problem: Problem = {
         category: this.problemForm.value.category || "",
         priority: this.problemForm.value.priority || false, 
@@ -64,7 +64,7 @@ export class ProblemFormComponent implements OnChanges {
     this.service.addProblem(problem).subscribe({
       next: () => { this.problemUpdated.emit() }
     });
-  }
+  }*/
 
   formatDate(selectedDate: Date | null | undefined): Date {
     const datePipe = new DatePipe('en-US');
