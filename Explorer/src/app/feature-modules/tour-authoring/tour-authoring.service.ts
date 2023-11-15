@@ -37,7 +37,7 @@ export class TourAuthoringService {
     return this.http.get<PagedResults<Tour>>(environment.apiHost + 'author/tour/getAll');
   }
 
-  getTourById(id: number): Observable<Tour> {
+  getTourById(id: number | undefined): Observable<Tour> {
     console.log(id);
     return this.http.get<Tour>(environment.apiHost + 'author/tour/getById/' + id);
   }
