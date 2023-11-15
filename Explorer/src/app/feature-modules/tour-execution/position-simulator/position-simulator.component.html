@@ -21,6 +21,8 @@
       <h1><b>The tour is finished</b></h1>
       <h2>Return to the home page:</h2>
       <button (click)="returnToHomePage()" class="button-exit">Return</button>
+      <button (click)="showReviewForm()" class="button" class="btn btn-secondary m-2">Review</button>
+      <xp-tour-review-form *ngIf="isShowReviewFormEnabled" [tour]="tour"></xp-tour-review-form>
     </div>
     <div *ngIf="showMap" class="d-flex justify-content-between">
       <div>
