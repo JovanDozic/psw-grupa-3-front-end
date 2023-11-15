@@ -12,6 +12,7 @@ import { SearchFormComponent } from './search-form/search-form.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ShowTourComponent } from './show-tour/show-tour.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ShowTourComponent } from './show-tour/show-tour.component';
     MatSelectModule,
     NgbModule,
     SharedModule,
-    MatGridListModule
+    MatGridListModule,
+    RouterModule,
   ],
   exports: [
     PreferenceFormComponent,

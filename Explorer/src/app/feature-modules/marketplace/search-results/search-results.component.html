@@ -5,8 +5,8 @@
     </div>
     <div class="search-results-grid">
         <div class="search-result" *ngFor="let tour of tours">
-            <div class="box">
-                <img class="image" src="https://media.tacdn.com/media/attractions-splice-spp-674x446/08/ba/a5/2c.jpg"
+            <div class="box" [routerLink]="['../show-tour/' + tour.id]">
+                <img class="image" [src]="tour.points[0].picture"
                     alt="TURA">
                 <span class="title-box">{{tour.name}}</span>
                 <span class="description-box">{{tour.description}}</span>

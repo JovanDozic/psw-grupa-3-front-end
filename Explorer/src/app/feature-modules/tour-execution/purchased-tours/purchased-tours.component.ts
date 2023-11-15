@@ -19,13 +19,7 @@ export class PurchasedToursComponent implements OnInit {
       this.user = user;
       this.getPurchasedTours();
     })
-    // this.tokens = [
-    //   { id: 1, name: 'Result 1', tourId: 1, purchaseTime: '1/1/2023' },
-    //   { id: 2, name: 'Result 2', tourId: 2, purchaseTime: '1/1/2023' },
-    //   { id: 3, name: 'Result 3', tourId: 3, purchaseTime: '1/1/2023' },
-    //   { id: 4, name: 'Result 4', tourId: 4, purchaseTime: '1/1/2023' },
-    //   { id: 5, name: 'Result 5', tourId: 5, purchaseTime: '1/1/2023' },
-    // ];
+    
   }
 
   getPurchasedTours() {
