@@ -5,7 +5,7 @@ import {Position} from "../model/position.model";
 import { Point } from '../../tour-authoring/model/points.model';
 import { TourExecution } from '../model/tour-lifecycle.model';
 import { Tour } from '../../tour-authoring/model/tour.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PointTask } from '../model/point-task.model';
 
 @Component({
@@ -15,7 +15,6 @@ import { PointTask } from '../model/point-task.model';
 })
 export class PositionSimulatorComponent implements OnInit{
 
-  position: Position
   tourExecution: TourExecution
   updatedExecution: TourExecution
   doneTasks: PointTask[]
@@ -57,33 +56,30 @@ export class PositionSimulatorComponent implements OnInit{
     authorId: 1
   }
   
-  @Output() points: Point[] = [{id: 1, longitude: 19.83966064452716 , latitude: 45.2517365956994,
-    name:"prva", description:"prva nista", picture:"nista", tourId: 1},
-    {id: 2, longitude: 19.84902279858312 , latitude: 45.24806268406058,
-      name:"druga", description:"druga nista", picture:"nista", tourId: 1},
-      {id: 3, longitude: 19.850053025386785 , latitude: 45.239239491988556,
-        name:"treca", description:"treca nista", picture:"nista", tourId: 1}
-  ]
+  @Output() points: Point[] = []
 
   positionForm = new FormGroup({
     longitude: new FormControl(-1, [Validators.required]),
     latitude: new FormControl(-1, [Validators.required])
   })
 
-  constructor(private service: TourExecutionService, private router: Router) {
+  constructor(private service: TourExecutionService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    console.log('Tour:', this.tour);
+    this.tour = history.state.tour;
+    console.log('Received tour:', this.tour);
+    this.points = this.tour.points
     this.service.startExecution(this.tour).subscribe({
       next: (result: TourExecution) => {
         this.tourExecution = result;
-        console.log('Tour Execution Result:', result);
       },
       error: (error) => {
         console.error('Error starting execution:', error);
       }
     });
+
+
   }
 
   GetLatitude(latitude: number) {
@@ -118,11 +114,10 @@ export class PositionSimulatorComponent implements OnInit{
     }
 
     completeTour(){
-
-        if(this.isTourCompleted()){
-            this.showMessage = true;
-            this.showMap = false;          
-        }
+      if(this.isTourCompleted()){
+          this.showMessage = true;
+          this.showMap = false;          
+      }
     }
 
     isTourCompleted(): boolean{
@@ -130,15 +125,12 @@ export class PositionSimulatorComponent implements OnInit{
     }
 
     setLastPoint(){
-        if(this.doneTasks.length > 0){
-            
+        if(this.doneTasks.length > 0){        
             if(this.isPointClose())
             {
-                    this.lastTaskPoint = this.doneTasks[this.doneTasks.length - 1].point;
-            }else{
-                    
-                    this.setCurrentPosition()
-                 }
+              this.lastTaskPoint = this.doneTasks[this.doneTasks.length - 1].point;
+            }else                 
+              this.setCurrentPosition()
         }
     }
 
@@ -148,10 +140,11 @@ export class PositionSimulatorComponent implements OnInit{
     }
 
     getCompletedPoints(tourExecution: TourExecution): PointTask[] {
-      if (tourExecution.tasks) {
-             return tourExecution.tasks.filter((pointTask) => pointTask.done === true);
+      if (tourExecution.tasks)
+      {
+          return tourExecution.tasks.filter((pointTask) => pointTask.done === true);
       } else
-            return [];
+          return [];
     }
 
     quitTour(){

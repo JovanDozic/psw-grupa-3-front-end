@@ -1,8 +1,4 @@
-<div *ngIf="showMessage" class="container-exit">
-  <h1><b>Tura je završena</b></h1>
-  <h2>Povratak na početnu stranicu:</h2>
-  <button (click)="returnToHomePage()" class="button-exit">Povratak</button>
-</div>
+
 <div class="execution">
   <form [formGroup]="positionForm">
     <div align="center">
@@ -20,6 +16,11 @@
         <mat-label>Latitude</mat-label>
         <input matInput formControlName="latitude" type="number" readonly>
       </mat-form-field>    
+    </div>
+    <div *ngIf="showMessage" class="container-exit">
+      <h1><b>The tour is finished</b></h1>
+      <h2>Return to the home page:</h2>
+      <button (click)="returnToHomePage()" class="button-exit">Return</button>
     </div>
     <div *ngIf="showMap" class="d-flex justify-content-between">
       <div>
@@ -49,4 +50,5 @@
     </div>
   </div>
 </div>
+
 
