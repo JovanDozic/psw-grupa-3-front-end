@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "ngx-google-analytics": "^14.0.1",
     "tslib": "^2.6.2"
   }
 }
+
