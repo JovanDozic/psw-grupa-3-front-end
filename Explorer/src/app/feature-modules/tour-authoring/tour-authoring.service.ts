@@ -28,6 +28,10 @@ export class TourAuthoringService {
     return this.http.delete<Point>(environment.apiHost + 'author/points/' + id);
   }
 
+  setPublicPoint(id: number, pointName: string): Observable<Tour> {
+    return this.http.patch<Tour>(environment.apiHost + 'author/tour/publishPoint/' + id + '?pointName=' + pointName, {});
+  }
+
   getTours(): Observable<PagedResults<Tour>> {
     return this.http.get<PagedResults<Tour>>(environment.apiHost + 'author/tour/getAll');
   }
@@ -127,8 +131,11 @@ export class TourAuthoringService {
     return this.http.put<Object>(environment.apiHost + 'author/objects/' + object.id, object);
   }
 
+  setPublicObject(id: number): Observable<Object> {
+    return this.http.patch<Object>(environment.apiHost + 'author/objects/setPublic/' + id, {});
+  }
+
   getAverageRating(tourId: number): Observable<number> {
-   
     return this.http.get<number>(environment.apiHost + 'tourist/tourReview/average-rating/' + tourId)
   }
 

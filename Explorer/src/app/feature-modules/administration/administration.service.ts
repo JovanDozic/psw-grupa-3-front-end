@@ -12,6 +12,7 @@ import { Overview } from './model/overview.model';
 import { AppRating } from './model/app-rating.model';
 import { TouristEquipment } from './model/tourist-equipment.model';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { PublicRegistrationRequest } from './model/public-registration-request.model';
 
 
 @Injectable({
@@ -98,4 +99,21 @@ export class AdministrationService {
     return this.http.delete<TouristEquipment>(environment.apiHost + 'tourist/equipment/' + id);
   }
 
+  //Public registration request
+
+  getPublicRegistrationRequests() : Observable<PagedResults<PublicRegistrationRequest>> {
+    return this.http.get<PagedResults<PublicRegistrationRequest>>(environment.apiHost + 'administration/registrationRequests')
+  }
+
+  getAllPendingRequests() : Observable<PublicRegistrationRequest[]> {
+    return this.http.get<PublicRegistrationRequest[]>(environment.apiHost + 'administration/registrationRequests/getAllPending')
+  }
+
+  addPublicRegistrationRequest(publicRegistrationRequest: PublicRegistrationRequest): Observable<PublicRegistrationRequest>{
+    return this.http.post<PublicRegistrationRequest>(environment.apiHost + 'administration/registrationRequests', publicRegistrationRequest);
+  }
+
+  updatePublicRegistrationRequest(publicRegistrationRequest: PublicRegistrationRequest): Observable<PublicRegistrationRequest>{
+    return this.http.put<PublicRegistrationRequest>(environment.apiHost + 'administration/registrationRequests/' + publicRegistrationRequest.id, publicRegistrationRequest);
+  }
 }

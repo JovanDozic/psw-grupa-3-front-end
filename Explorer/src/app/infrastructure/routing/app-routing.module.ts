@@ -30,6 +30,7 @@ import { SearchResultsComponent } from 'src/app/feature-modules/marketplace/sear
 import { FindPeopleComponent } from 'src/app/feature-modules/administration/find-people/find-people.component';
 import { DetailedBlogComponent } from 'src/app/feature-modules/blog/detailed-blog/detailed-blog.component';
 import { BlogsPageComponent } from 'src/app/feature-modules/blog/blogs-page/blogs-page.component';
+import { PublicRegistrationRequestsComponent } from 'src/app/feature-modules/administration/public-registration-requests/public-registration-requests.component';
 import { PurchasedToursComponent } from 'src/app/feature-modules/tour-execution/purchased-tours/purchased-tours.component';
 
 const routes: Routes = [
@@ -61,6 +62,7 @@ const routes: Routes = [
   {path: 'find-people', component: FindPeopleComponent},
   {path: 'detailed-blog/:blogId', component: DetailedBlogComponent, canActivate: [AuthGuard]},
   {path: 'all-blogs', component: BlogsPageComponent},
+  {path: 'public-registration-requests', component: PublicRegistrationRequestsComponent},
   {path: 'purchased-tours', component: PurchasedToursComponent},
 ];
 

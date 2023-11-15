@@ -2,6 +2,9 @@ import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '
 import {Category, Object} from "../model/object.model";
 import {TourAuthoringService} from "../tour-authoring.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { AdministrationService } from '../../administration/administration.service';
+import { Obj } from '@popperjs/core';
+import { PublicRegistrationRequest } from '../../administration/model/public-registration-request.model';
 
 @Component({
   selector: 'xp-object-form',
@@ -13,8 +16,9 @@ export class ObjectFormComponent implements OnChanges {
   @Output() objectUpdated = new EventEmitter<null>;
   @Input() object: Object;
   @Input() shouldEdit: boolean = false;
+  addedObject: Object | null = null;
 
-  constructor(private service: TourAuthoringService) {
+  constructor(private service: TourAuthoringService, private administrationService: AdministrationService) {
   }
 
   objectsForm = new FormGroup({
@@ -23,7 +27,8 @@ export class ObjectFormComponent implements OnChanges {
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
     picture: new FormControl('', [Validators.required]),
-    category: new FormControl(Category.other, [Validators.required])
+    category: new FormControl(Category.other, [Validators.required]),
+    checkBoxControl: new FormControl(false),
   })
 
   addObject() {
@@ -39,10 +44,29 @@ export class ObjectFormComponent implements OnChanges {
     }
 
     this.service.addObject(object).subscribe({
-      next: (_) => {
+      next: (result : Object) => {
         this.objectUpdated.emit()
+        this.addedObject = result;
+
+        const checkBoxValue = this.objectsForm.value.checkBoxControl;
+        if(checkBoxValue) {
+          const registrationRequest: PublicRegistrationRequest = {
+            objectId : this.addedObject?.id || 0,
+            objectName: this.addedObject?.name || '',
+            tourId: -1,
+            pointName: '',
+            comment: '',
+            status: 'Pending'
+        }
+
+        this.administrationService.addPublicRegistrationRequest(registrationRequest).subscribe({
+          next: () => {
+          }
+        })
+        }
       }
     });
+
   }
 
   updateObject(): void {

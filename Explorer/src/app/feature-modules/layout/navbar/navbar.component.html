@@ -66,6 +66,7 @@
                             <a class="dropdown-item" [routerLink]="['overview']">Overview of users</a>
                             <a class="dropdown-item" [routerLink]="['app-ratings']">All App Ratings</a>
                             <a class="dropdown-item" [routerLink]="['problems']">Show Tour Problems</a>
+                            <a class="dropdown-item" [routerLink]="['public-registration-requests']">Manage registration requests</a>
                         </li>
 
                         <li *ngIf="user && (user.role === 'author' || user.role === 'tourist')">

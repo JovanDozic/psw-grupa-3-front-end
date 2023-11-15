@@ -12,6 +12,7 @@ import { AppRatingFormComponent } from './app-rating-form/app-rating-form.compon
 import { AppRatingsComponent } from './app-ratings/app-ratings.component';
 import { EquipmentRecordComponent } from './equipment-record/equipment-record.component';
 import { FindPeopleComponent } from './find-people/find-people.component';
+import { PublicRegistrationRequestsComponent } from './public-registration-requests/public-registration-requests.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FindPeopleComponent } from './find-people/find-people.component';
     AppRatingFormComponent,
     AppRatingsComponent,
     EquipmentRecordComponent,
-    FindPeopleComponent
+    FindPeopleComponent,
+    PublicRegistrationRequestsComponent,
   ],
   imports: [
     CommonModule,
