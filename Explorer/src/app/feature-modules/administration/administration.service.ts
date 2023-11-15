@@ -7,12 +7,13 @@ import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { Person } from './model/userprofile.model';
 import { Problem } from '../tour-authoring/model/problem.model';
 
-import { Overview } from './model/overview.model';
+import { Overview, UserRole } from './model/overview.model';
 
 import { AppRating } from './model/app-rating.model';
 import { TouristEquipment } from './model/tourist-equipment.model';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { PublicRegistrationRequest } from './model/public-registration-request.model';
+import { UserNotification } from 'src/app/infrastructure/auth/model/user.model';
 
 
 @Injectable({
@@ -77,6 +78,27 @@ export class AdministrationService {
 
   unfollowUser(userId: number, userToUnfollowId: number) {
     return this.http.patch<User>(environment.apiHost + 'userprofile/followers/' + userId + '/unfollow/' + userToUnfollowId, {});
+  }
+
+  //Notifications
+  getUserNotifications(userId: number): Observable<PagedResults<User>> {
+    return this.http.get<PagedResults<User>>(environment.apiHost + 'notifications/' + userId);
+  }
+
+  markAsReadNotification(userId: number, notificationId: number | undefined){
+    return this.http.patch<User>(environment.apiHost + 'notifications/user/' + userId + '/status/' + notificationId, {});
+  }
+
+  sendNotificationToFollowers(notification: UserNotification){
+    return this.http.patch<User>(environment.apiHost + 'notifications', notification);
+  }
+
+  notifyUser(receiverId: number, notification: UserNotification){
+    return this.http.patch<User>(environment.apiHost + 'notifications/' + receiverId, notification);
+  }
+
+  removeNotification(userId: number, notificationId: number | undefined){
+    return this.http.patch<User>(environment.apiHost + 'notifications/user/' + userId + '/delete/' + notificationId, {})
   }
 
   // App ratings

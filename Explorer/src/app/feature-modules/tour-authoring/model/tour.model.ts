@@ -1,6 +1,7 @@
 import { Point } from "../../tour-authoring/model/points.model"
 import { Guide } from "./guide.model";
 import { RequiredTime } from "./requiredTime.model";
+import { TourReview } from "./tourReview.model";
 
 export interface Tour {
     id: number,
@@ -17,4 +18,5 @@ export interface Tour {
     publishTime: string,
     arhiveTime: string,
     requiredTime: RequiredTime,
+    reviews: TourReview[],
 }

@@ -47,7 +47,7 @@ export class TourFormComponent implements OnChanges, OnInit {
     status: new FormControl('', [Validators.required]),
     difficult: new FormControl(),
     price: new FormControl(),
-    points: new FormControl(),
+    points: new FormControl()
   });
 
   addTour(): void {
@@ -72,7 +72,8 @@ export class TourFormComponent implements OnChanges, OnInit {
       requiredTime: {
         transportType: 'Bike',
         minutes: 20
-      }
+      },
+      reviews: []
     };
     this.service.addTour(tour).subscribe({
       next: () => { this.tourUpdated.emit() }
@@ -101,7 +102,8 @@ export class TourFormComponent implements OnChanges, OnInit {
       requiredTime: {
         transportType: 'Bike',
         minutes: 20
-      }
+      },
+      reviews: []
     };
     tour.id = this.tour.id;
     this.service.updateTour(tour).subscribe({
