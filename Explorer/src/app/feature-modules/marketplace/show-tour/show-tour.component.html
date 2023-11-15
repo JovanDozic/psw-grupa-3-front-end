@@ -38,7 +38,7 @@
   [style.background-color]="'#00BBFF'" [style.color]="'#F7FFF7'">Add to cart
   </button>
   <button *ngIf="isPaid" mat-raised-button class="buy-button"
-  [style.background-color]="'#00BBFF'" [style.color]="'#F7FFF7'">Activate
+  [style.background-color]="'#00BBFF'" [style.color]="'#F7FFF7'" (click)="activateTour()">Activate
   </button></div>
 </div>
 

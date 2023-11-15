@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PointTask } from '../model/point-task.model';
 
 @Component({
-  selector: 'xp-position-simulator',
+  selector: 'xp-tour-execution-lifecycle',
   templateUrl: './position-simulator.component.html',
   styleUrls: ['./position-simulator.component.css']
 })
@@ -30,8 +30,7 @@ export class PositionSimulatorComponent implements OnInit{
     picture: ""
 }
 
-  tour: Tour
-  
+  tour: Tour 
   @Output() points: Point[] = []
 
   positionForm = new FormGroup({
@@ -43,6 +42,14 @@ export class PositionSimulatorComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    const isReloaded = sessionStorage.getItem('isReloaded');
+    if (!isReloaded) {
+      sessionStorage.setItem('isReloaded', 'true');
+      window.location.reload();
+    } else {
+    sessionStorage.removeItem('isReloaded');
+    }
+
     this.tour = history.state.tour;
     console.log('Received tour:', this.tour);
     this.points = this.tour.points

@@ -58,7 +58,7 @@ const routes: Routes = [
   {path: 'club-members', component: ClubMembersComponent},
   {path: 'objects', component: ObjectComponent},
   {path: 'shopping-cart', component: ShoppingCartComponent},
-  {path: 'position-simulator', component: PositionSimulatorComponent},
+  {path: 'tour-execution-lifecycle', component: PositionSimulatorComponent},
   {path: 'search-results', component: SearchResultsComponent},
   {path: 'find-people', component: FindPeopleComponent},
   {path: 'detailed-blog/:blogId', component: DetailedBlogComponent, canActivate: [AuthGuard]},
