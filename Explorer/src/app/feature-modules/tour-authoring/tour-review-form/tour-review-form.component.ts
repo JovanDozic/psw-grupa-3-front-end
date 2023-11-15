@@ -28,6 +28,10 @@ export class TourReviewFormComponent implements OnInit{
     })
   }
 
+  onDataReceived(emittedTour: any) {
+    this.tour = emittedTour;
+  }
+
   images: string[] = [];
   reviewForm = new FormGroup({
     rating: new FormControl(null, [Validators.required]),

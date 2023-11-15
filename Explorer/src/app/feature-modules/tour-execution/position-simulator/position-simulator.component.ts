@@ -1,4 +1,4 @@
-import {Component, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TourExecutionService} from "../tour-execution.service";
 import {Position} from "../model/position.model";
@@ -14,6 +14,11 @@ import { PointTask } from '../model/point-task.model';
   styleUrls: ['./position-simulator.component.css']
 })
 export class PositionSimulatorComponent implements OnInit{
+  isShowReviewFormEnabled: boolean = false;
+
+showReviewForm() {
+  this.isShowReviewFormEnabled = !this.isShowReviewFormEnabled;
+}
 
   tourExecution: TourExecution
   updatedExecution: TourExecution
