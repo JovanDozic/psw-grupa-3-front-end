@@ -23,8 +23,8 @@ export class ShoppingCartComponent {
       this.user = user;
       this.getShoppingCart();
     })
-  } 
-  
+  }
+
   getShoppingCart() {
     this.service.getCartByUserId(this.user.id).subscribe({
       next: (result: ShoppingCart) => {
