@@ -23,6 +23,10 @@ export class MarketplaceService {
     return this.http.get<Preference>(environment.apiHost + 'personalization/preference/' + id);
   }
 
+  getToken(idUser: number, idTour: number): Observable<boolean> {
+    return this.http.get<boolean>(environment.apiHost + 'tourist/tourPurchaseToken/' + idUser + '/' + idTour);
+  }
+
   getAllPreferences(): Observable<PagedResults<Preference>> {
     return this.http.get<PagedResults<Preference>>(environment.apiHost + 'personalization/preference/');
   }
