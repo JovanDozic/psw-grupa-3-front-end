@@ -138,4 +138,18 @@ export class AdministrationService {
   updatePublicRegistrationRequest(publicRegistrationRequest: PublicRegistrationRequest): Observable<PublicRegistrationRequest>{
     return this.http.put<PublicRegistrationRequest>(environment.apiHost + 'administration/registrationRequests/' + publicRegistrationRequest.id, publicRegistrationRequest);
   }
+  setProblemDeadline(id: number, newDeadline: Date): Observable<Problem> {
+    const formattedDeadline = newDeadline.toISOString(); // Formatiranje datuma pre slanja
+
+    const url = `${environment.apiHost}administration/problems/set-deadline/${id}`;
+    return this.http.patch<Problem>(url, { newDeadline: formattedDeadline });
+  }
+  deleteProblem(id: number): Observable<Problem> {
+    return this.http.delete<Problem>(environment.apiHost + 'administration/problems/' + id + '/delete');
+  }
+  getUnresolvedProblemsWithDeadline(): Observable<PagedResults<Problem>> {
+    return this.http.get<PagedResults<Problem>>(environment.apiHost + 'administration/problems/getall');
+  }
+
+
 }
