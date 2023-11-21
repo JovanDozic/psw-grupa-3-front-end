@@ -17,7 +17,7 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class ProblemsComponent {
-  problems: Problem[] = [];
+  problems: Problem[]  | undefined;
   selectedDeadline: Date;
   newDeadlineValue: string; 
   datePipe : DatePipe;
@@ -45,15 +45,8 @@ export class ProblemsComponent {
   setDeadlineForProblem(problemId: number): void {
     const newDeadline = new Date(this.newDeadlineForm.value.newDeadlineValue);
     
-    this.service.setProblemDeadline(problemId, newDeadline).subscribe(
-      (result) => {
-        console.log('Problem uspešno ažuriran:', result);
-        // Ovde možete dodati dodatnu logiku ili ažurirati korisnički interfejs
-      },
-      (error) => {
-        console.error('Greška pri ažuriranju problema:', error);
-        // Ovde možete dodati logiku za prikazivanje greške korisniku
-      }
+    this.service.setDeadlineForProblem(problemId, newDeadline).subscribe(
+      
     );
   }
 
@@ -73,9 +66,12 @@ export class ProblemsComponent {
   }
 
   refreshProblems(): void {
-    this.service.getUnresolvedProblemsWithDeadline().subscribe(
+    this.service.getProblems().subscribe(
       (data) => {
+      
+
         this.problems = data.results;
+        console.log('Problems:', this.problems);
       },
       (error) => {
         console.error('Failed to refresh problems:', error);
