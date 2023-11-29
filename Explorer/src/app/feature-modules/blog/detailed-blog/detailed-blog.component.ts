@@ -83,6 +83,14 @@ export class DetailedBlogComponent {
     }
   }
 
+  publishBlog(){
+    this.service.publishBlog(this.blogId).subscribe({
+      next: (result: any) => {
+          this.blog = result;
+      }
+    })
+  }
+
   previousImage() {
     if (this.currentImageIndex > 0) {
       this.currentImageIndex--;

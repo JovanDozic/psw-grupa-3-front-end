@@ -5,6 +5,7 @@
         <p>{{ blog.description }}</p>
         <p>Creation Date: {{ blog.creationDate | date }}</p>
         <p>Status: {{ convertStatusToString(blog.status) }}</p>
+        <button *ngIf="blog.status == 1 && user?.id == blog.userId" class="btn btn-primary" (click)="publishBlog()">Publish blog</button>
       </div>
       <div class="col-md-6 blog-images">
         <div class="image-dimensions">

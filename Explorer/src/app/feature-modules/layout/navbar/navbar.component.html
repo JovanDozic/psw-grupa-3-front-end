@@ -70,7 +70,6 @@
                         </li>
 
                         <li *ngIf="user && (user.role === 'author' || user.role === 'tourist')">
-                            <a class="dropdown-item" [routerLink]="['blogCreation']">Create blog</a>
                             <a class="dropdown-item" [routerLink]="['app-rating-form']">Rate the App</a>
                         </li>
 
