@@ -7,6 +7,8 @@ import { TourExecution } from '../model/tour-lifecycle.model';
 import { Tour } from '../../tour-authoring/model/tour.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PointTask } from '../model/point-task.model';
+import { Encounter } from '../../encounter/model/encounter.model';
+import { EncounterService } from '../../encounter/encounter.service';
 
 @Component({
   selector: 'xp-tour-execution-lifecycle',
@@ -32,10 +34,91 @@ showReviewForm() {
     latitude: 1,
     name: "",
     description: "",
-    picture: ""
-}
+    picture: "",
+    public: false
+  }
 
-  tour: Tour 
+  @Output() encounters: Encounter[]
+  /* = [{
+    "name": "Encounter Name",
+    "description": "Encounter Description",
+    "location": {
+      "latitude": 45.248376910202616,
+      "longitude": 19.836076282798334,
+    },
+    "experience": 50,
+    "status": 2,
+    "type": 1,
+    "radius": 100,
+    "participants": [
+      {
+        "username": "Participant 1",
+      },
+      {
+        "username": "Participant 2",
+      }
+    ],
+    "completers": [
+      {
+        "username": "Completer 1",
+        "completionDate": undefined
+      },
+      {
+        "username": "Completer 2",
+        "completionDate": undefined
+      }
+    ]
+  }]
+*/
+  tour: Tour = {
+    "id": 1,
+    "name": "Tour Name",
+    "guide": {
+      "name": "Guide Name",
+      "email": "guide@example.com",
+      "surname": "Guide Surname"
+    },
+    "price": 50,
+    "points": [
+      {
+        "name": "Prva tacka",
+        "public": true,
+        "picture": "nista",
+        "latitude": 45.2517365956994,
+        "longitude": 19.83966064452716,
+        "description": "prva nista"
+      },
+      {
+        "name": "Druga tacka",
+        "public": true,
+        "picture": "nista",
+        "latitude": 45.24806268406058,
+        "longitude": 19.84902279858312,
+        "description": "druga nista"
+      },
+      {
+        "name": "treca",
+        "public": true,
+        "picture": "nista",
+        "latitude": 45.239239491988556,
+        "longitude": 19.850053025386785,
+        "description": "treca nista"
+      }
+    ],
+    "status": "Published",
+    "difficult": 2,
+    "description": "Tour Description",
+    "tags": undefined,
+    "authorId": 0,
+    "length": 0,
+    "publishTime": '',
+    "arhiveTime": '',
+    "requiredTime": {
+      "transportType": "",
+      "minutes": 0,
+    },
+    "reviews": []
+  }
   @Output() points: Point[] = []
 
   positionForm = new FormGroup({
@@ -43,7 +126,7 @@ showReviewForm() {
     latitude: new FormControl(-1, [Validators.required])
   })
 
-  constructor(private service: TourExecutionService, private router: Router, private route: ActivatedRoute) {
+  constructor(private service: TourExecutionService, private encounterService: EncounterService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -55,7 +138,11 @@ showReviewForm() {
     sessionStorage.removeItem('isReloaded');
     }
 
-    this.tour = history.state.tour;
+    this.encounterService.getAllEncounters().subscribe(
+      (data) => {
+        this.encounters = data.results;
+      });
+    //this.tour = history.state.tour;
     console.log('Received tour:', this.tour);
     this.points = this.tour.points
     this.service.startExecution(this.tour).subscribe({

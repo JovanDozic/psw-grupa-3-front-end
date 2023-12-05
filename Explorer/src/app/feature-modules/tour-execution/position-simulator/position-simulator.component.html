@@ -5,7 +5,7 @@
       <h1>{{tour.name}}</h1>
     </div>
     <div class="map-container">
-    <xp-map  [points]="points" (latitude)="GetLatitude($event)" (longitude)="GetLongitude($event)"></xp-map>
+    <xp-map  [points]="points" [encounters]="encounters" (latitude)="GetLatitude($event)" (longitude)="GetLongitude($event)"></xp-map>
     </div>
     <div *ngIf="showDiv" >
       <mat-form-field>

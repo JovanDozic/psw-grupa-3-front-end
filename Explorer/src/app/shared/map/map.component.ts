@@ -4,6 +4,7 @@ import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import { environment } from 'src/env/environment';
 import { Point } from 'src/app/feature-modules/tour-authoring/model/points.model';
+import { Encounter } from 'src/app/feature-modules/encounter/model/encounter.model';
 
 @Component({
   selector: 'xp-map',
@@ -19,6 +20,7 @@ export class MapComponent implements AfterViewInit {
   @Output() longitude: EventEmitter<number> = new EventEmitter<number>();
   @Output() latitude: EventEmitter<number> = new EventEmitter<number>();
   @Input() points: Point[] = [];
+  @Input() encounters: Encounter[] = [];
   private markers : L.Marker[] = [];
 
   constructor(private mapService: MapService) { }
@@ -48,6 +50,22 @@ export class MapComponent implements AfterViewInit {
 
       const marker = new L.Marker([point.latitude, point.longitude], { icon: redIcon }).addTo(this.map);
       this.markers.push(marker);
+    });  
+
+    this.encounters.forEach((encounter) => {
+      const greenIcon = L.icon({
+        iconUrl: 'https://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Marker-Outside-Chartreuse-icon.png',
+        iconSize: [31, 41],
+        iconAnchor: [13, 41],
+      });
+
+      const marker = new L.Marker([encounter.location.latitude, encounter.location.longitude], { icon: greenIcon }).addTo(this.map);
+      this.markers.push(marker);
+
+      marker.on('click', () => {
+        $('#staticBackdrop').modal('show');
+      });
+
     });  
     tiles.addTo(this.map);
     this.registerOnClick();
