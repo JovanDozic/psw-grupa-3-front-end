@@ -1,26 +1,34 @@
-<form>
-    <div>
+        <h1>Create a blog:</h1>
         <form [formGroup]="blogForm">
-            <mat-form-field>
-                <mat-label>Naslov: </mat-label>
-                <input matInput formControlName="title" type="text">
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Opis: </mat-label>
-                <textarea matInput
-                cdkTextareaAutosize
-                cdkAutosizeMinRows="1"
-                formControlName="description"
-                cdkAutosizeMaxRows="5"></textarea>
-            </mat-form-field>
+            <div>
+                <div class="form-item">
+                    <label>Title:</label>
+                    <input matInput formControlName="title" type="text">
+                </div>
+                <div class="form-item">
+                    <label>Description:</label>
+                    <textarea 
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="3"
+                    formControlName="description"
+                    cdkAutosizeMaxRows="6"></textarea>
+                </div>
+                <div class="image-flex-box form-item">
+                    <div>
+                        <label>Image URL:</label>
+                    </div>
+                    <div>
+                        <input name="imageUrl" [(ngModel)]="imageUrl" type="text" style="width: 250px;">
+                    </div>
+                    <div>
+                        <button (click)="addImage()">Add image</button>
+                    </div>
+                </div>
+                <div>
+                    <button (click)="addBlog()">Create blog</button>
+                </div>
+                <div *ngIf="blogForm.invalid" class="error-message">
+                    <label>You must enter title and description to create a blog!</label>
+                </div>
+            </div>
         </form>
-        <div>
-            <mat-label>Url slike: </mat-label>
-            <span class="blog-image-url">
-                <input name="imageUrl" matInput [(ngModel)]="imageUrl" type="text">
-                <button type="button" color="primary" (click)="addImage()" mat-raised-button>Dodaj sliku</button>
-            </span>
-        </div>
-        <button color="primary" (click)="addBlog()" mat-raised-button>Kreiraj blog</button>
-    </div>
-</form>

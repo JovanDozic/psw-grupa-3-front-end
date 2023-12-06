@@ -20,8 +20,13 @@ import { ClubMembersComponent } from './club-members/club-members.component';
 import { TourReviewComponent } from './tour-review/tour-review.component';
 import { ObjectComponent } from './object/object.component';
 import { ObjectFormComponent } from './object-form/object-form.component';
+import { BundleComponent } from './bundle/bundle.component';
+import { CreateBundleComponent } from './bundle/create-bundle/create-bundle.component';
 import { AuthorsProblemsComponent } from './authors-problems/authors-problems.component';
 import { TouristsProblemsComponent } from './tourists-problems/tourists-problems.component';
+import { PointsViewComponent } from './points-view/points-view.component';
+import { TourCampaignsComponent } from './tour-campaigns/tour-campaigns.component';
+import { TourCampaignFormComponent } from './tour-campaign-form/tour-campaign-form.component';
 
 @NgModule({
   declarations: [
@@ -38,8 +43,13 @@ import { TouristsProblemsComponent } from './tourists-problems/tourists-problems
     TourReviewComponent,
     ObjectComponent,
     ObjectFormComponent,
+    BundleComponent,
+    CreateBundleComponent,
     AuthorsProblemsComponent,
-    TouristsProblemsComponent
+    TouristsProblemsComponent,
+    PointsViewComponent,
+    TourCampaignsComponent,
+    TourCampaignFormComponent
   ],
   imports: [
     CommonModule,
@@ -65,7 +75,10 @@ import { TouristsProblemsComponent } from './tourists-problems/tourists-problems
     ObjectComponent,
     ObjectFormComponent,
     AuthorsProblemsComponent,
-    TouristsProblemsComponent
+    TouristsProblemsComponent,
+    PointsViewComponent,
+    TourCampaignsComponent,
+    TourCampaignFormComponent
   ]
 })
 export class TourAuthoringModule { }

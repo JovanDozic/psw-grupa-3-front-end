@@ -1,12 +1,13 @@
 export interface Overview {
-  Id: number;
+  userId: number;
   username: string; 
   email: string;     
   role: UserRole;    
   isSelected: boolean;
+  coins?: number;
 }
 export enum UserRole {
-  Guide = 'vodič',
-  Tourist = 'turista',
+  Guide = 'author',
+  Tourist = 'tourist',
   Administrator = 'administrator'
 }

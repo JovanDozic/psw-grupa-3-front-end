@@ -13,11 +13,16 @@ import { MembershipRequest } from './model/membership-request.model';
 import { ClubMember } from './model/clubMember.model';
 import {Object} from "./model/object.model";
 import { tap } from 'rxjs';
+import { Sale } from '../marketplace/model/sale.model';
+import { Bundle } from './model/bundle.model';
+import { Campaign } from './model/campaign.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TourAuthoringService {
+    
+
 
   constructor(private http: HttpClient) { }
 
@@ -183,6 +188,50 @@ export class TourAuthoringService {
   }
   getAllTouristsProblems(): Observable<PagedResults<Problem>> {
     return this.http.get<PagedResults<Problem>>(environment.apiHost + 'tourist/problem/getAll');
+  }
+  getToursOnSale(): Observable<PagedResults<Tour>> {
+    console.log('Entering getToursOnSale in service');
+    return this.http.get<PagedResults<Tour>>(environment.apiHost + 'author/sale/getAllToursOnSale');
+  }
+  getAllSales(): Observable<PagedResults<Sale>> { 
+    return this.http.get<PagedResults<Sale>>(environment.apiHost + 'author/sale/getAll');
+  }
+
+  activateSale(saleId: number) {
+    return this.http.get<any>(environment.apiHost + 'author/sale/activate/' + saleId);
+  }
+  getAllBundles(): Observable<any> {
+    return this.http.get<any>(environment.apiHost + 'author/bundle/getAll');
+  }
+
+  archiveBundle(id: number): Observable<any>{
+    return this.http.get<any>(environment.apiHost + 'author/bundle/archive/' + id);
+  }
+
+  publishBundle(id: number): Observable<any>{
+    return this.http.get<any>(environment.apiHost + 'author/bundle/publish/' + id);
+  }
+
+  deleteBundle(id: number): Observable<any>{
+    return this.http.delete<any>(environment.apiHost + 'author/bundle/delete/' + id);
+  }
+  getAllPublicPointsForTours(): Observable<Point []> {
+    return this.http.get<Point []>(environment.apiHost + 'author/tour/getAllPointsForTours');
+  }
+  findToursContainingPoints(selectedPoints: Point[]): Observable<Tour []> {
+    return this.http.put<Tour[]>(environment.apiHost + 'author/tour/findTours', selectedPoints);
+  }
+  createBundle(dataIn: any): Observable<any>{
+    return this.http.post<any>(environment.apiHost + 'author/bundle/create', dataIn);
+  }
+
+
+  createCampaign(campaign: Campaign): Observable<any> {
+    return this.http.post<Campaign>(environment.apiHost + 'tourist/campaign', campaign);
+  }
+
+  getCampaigns(touristId: number): Observable<PagedResults<Campaign>> {
+    return this.http.get<PagedResults<Campaign>>(environment.apiHost + 'tourist/campaign/getAll/' + touristId);
   }
 }
 
