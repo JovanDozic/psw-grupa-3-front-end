@@ -25,7 +25,6 @@ export interface Encounter{
     experience: number,
     status: EncounterStatus,
     type: EncounterType,
-    radius: number,
     participants: Participant[],
     completers: Completer[]
 }

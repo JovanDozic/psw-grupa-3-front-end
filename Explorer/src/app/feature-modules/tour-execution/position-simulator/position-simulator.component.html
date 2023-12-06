@@ -5,7 +5,11 @@
       <h1>{{tour.name}}</h1>
     </div>
     <div class="map-container">
-    <xp-map  [points]="points" [encounters]="encounters" (latitude)="GetLatitude($event)" (longitude)="GetLongitude($event)"></xp-map>
+    <xp-map  
+    (markerClicked)="handleMarkerClick($event)"
+    [points]="points" 
+    [encounters]="encounters" 
+    (latitude)="GetLatitude($event)" (longitude)="GetLongitude($event)"></xp-map>
     </div>
     <div *ngIf="showDiv" >
       <mat-form-field>
@@ -28,14 +32,17 @@
       <div>
       <button data-bs-toggle="modal" data-bs-target="#staticBackdrop"  mat-raised-button type="submit" color="primary" (click)="confirmPosition()">Confirm position</button>
       </div>
-      <div margin-bottom="10px" margin-top="10px">
+      <div   margin-bottom="10px" margin-top="10px">
         <button (click)="quitTour()" [routerLink]="['tour-exit']" class="stop-button">Quit</button>
+    </div>
+    <div>
+      <button *ngIf="clickedMarker"  mat-raised-button data-bs-toggle="modal" data-bs-target="#staticBackdrop1" color="primary" (click)="encounterButton()" >Encounter</button>
     </div>
     </div>
     
   </form>
 
-  <div  class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div  #staticBackdrop class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
@@ -48,6 +55,30 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div  #staticBackdrop class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">{{encounterModal.name}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <p><strong>Description:</strong></p>
+            <p>{{ encounterModal.description }}</p>
+          </div>
+            <p><strong>Longitude: </strong> {{encounterModal.location.longitude}} <strong> Latitude:</strong> {{ encounterModal.location.latitude }} </p>
+            <p><strong>Experience:</strong> {{ encounterModal.experience }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" >Activate</button>
+          <button type="button" class="btn btn-secondary">Solve</button>
+        </div>
+
       </div>
     </div>
   </div>

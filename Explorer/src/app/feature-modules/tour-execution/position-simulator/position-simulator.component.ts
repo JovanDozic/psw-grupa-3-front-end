@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PointTask } from '../model/point-task.model';
 import { Encounter } from '../../encounter/model/encounter.model';
 import { EncounterService } from '../../encounter/encounter.service';
+import { PagedResults } from 'src/app/shared/model/paged-results.model';
 
 @Component({
   selector: 'xp-tour-execution-lifecycle',
@@ -37,11 +38,43 @@ showReviewForm() {
     picture: "",
     public: false
   }
+clickedMarker: boolean = false
+encounterModal: Encounter ={
+  "name": "",
+  "description": "Encounter Description",
+  "location": {
+    "latitude": 45.248376910202616,
+    "longitude": 19.836076282798334,
+  },
+  "experience": 50,
+  "status": 2,
+  "type": 1,
+  "participants": [
+    {
+      "username": "Participant 1",
+    },
+    {
+      "username": "Participant 2",
+    }
+  ],
+  "completers": [
+    {
+      "username": "Completer 1",
+      "completionDate": undefined
+    },
+    {
+      "username": "Completer 2",
+      "completionDate": undefined
+    }
+  ]
+};
 
-  @Output() encounters: Encounter[]
-  /* = [{
-    "name": "Encounter Name",
-    "description": "Encounter Description",
+encounters: Encounter[] = []
+ 
+   = [{
+    "id": 1,
+    "name": "Forest Exploration",
+    "description": "A guided tour through a dense forest. Explore the diverse flora and fauna, witness breathtaking landscapes, and learn about the ecological significance of the forest.",
     "location": {
       "latitude": 45.248376910202616,
       "longitude": 19.836076282798334,
@@ -49,7 +82,36 @@ showReviewForm() {
     "experience": 50,
     "status": 2,
     "type": 1,
-    "radius": 100,
+    "participants": [
+      {
+        "username": "Participant 1",
+      },
+      {
+        "username": "Participant 2",
+      }
+    ],
+    "completers": [
+      {
+        "username": "Completer 1",
+        "completionDate": undefined
+      },
+      {
+        "username": "Completer 2",
+        "completionDate": undefined
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Historic City Walk",
+    "description": "Embark on a captivating walk through the ancient streets of the city. Discover historical landmarks, learn about centuries-old architecture, and delve into captivating stories of the city's past.",
+    "location": {
+      "latitude":  45.24934374669789,
+      "longitude": 19.844318097227706,
+    },
+    "experience": 50,
+    "status": 2,
+    "type": 1,
     "participants": [
       {
         "username": "Participant 1",
@@ -69,7 +131,7 @@ showReviewForm() {
       }
     ]
   }]
-*/
+
   tour: Tour = {
     "id": 1,
     "name": "Tour Name",
@@ -137,13 +199,22 @@ showReviewForm() {
     } else {
     sessionStorage.removeItem('isReloaded');
     }
-
+    
+    /*
     this.encounterService.getAllEncounters().subscribe(
       (data) => {
         this.encounters = data.results;
-      });
+        console.log(this.encounters)
+      },
+      (error) => {
+        console.log(error); 
+        alert(error.error.message);
+      }
+    )
+    */
     //this.tour = history.state.tour;
     console.log('Received tour:', this.tour);
+    console.log('Received encounters:', this.encounters);
     this.points = this.tour.points
     this.service.startExecution(this.tour).subscribe({
       next: (result: TourExecution) => {
@@ -153,6 +224,17 @@ showReviewForm() {
         console.error('Error starting execution:', error);
       }
     });
+  }
+
+  
+  handleMarkerClick(encounter: Encounter) {
+    console.log('Marker clicked:', encounter);
+    this.encounterModal = encounter;
+    this.clickedMarker = true;
+  }
+
+  encounterButton(){
+    this.clickedMarker = false;
   }
 
   GetLatitude(latitude: number) {

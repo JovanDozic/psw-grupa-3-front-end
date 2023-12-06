@@ -19,6 +19,7 @@ export class MapComponent implements AfterViewInit {
   endingAddress: string = '';
   @Output() longitude: EventEmitter<number> = new EventEmitter<number>();
   @Output() latitude: EventEmitter<number> = new EventEmitter<number>();
+  @Output() markerClicked: EventEmitter<Encounter> = new EventEmitter<Encounter>();
   @Input() points: Point[] = [];
   @Input() encounters: Encounter[] = [];
   private markers : L.Marker[] = [];
@@ -50,7 +51,9 @@ export class MapComponent implements AfterViewInit {
 
       const marker = new L.Marker([point.latitude, point.longitude], { icon: redIcon }).addTo(this.map);
       this.markers.push(marker);
-    });  
+    }); 
+    
+    console.log("Mapa enc:",this.encounters)
 
     this.encounters.forEach((encounter) => {
       const greenIcon = L.icon({
@@ -60,18 +63,28 @@ export class MapComponent implements AfterViewInit {
       });
 
       const marker = new L.Marker([encounter.location.latitude, encounter.location.longitude], { icon: greenIcon }).addTo(this.map);
+      
+      marker.on('click', () => {
+        this.handleGreenMarkerClick(encounter); // Emit marker data on marker click
+      });
+
       this.markers.push(marker);
 
-      marker.on('click', () => {
-        $('#staticBackdrop').modal('show');
-      });
+      
+     
 
     });  
     tiles.addTo(this.map);
     this.registerOnClick();
   }
 
+  private handleGreenMarkerClick(encounter: Encounter) {
+    //console.log('Green marker clicked:', encounter);
+    this.markerClicked.emit(encounter); // Emitting the encounter data when a green marker is clicked
+  }
+
   ngOnChanges(){
+    //console.log('Encounters received:', this.encounters);
     this.markers.forEach((marker) => {
       this.map.removeLayer(marker);
     })
