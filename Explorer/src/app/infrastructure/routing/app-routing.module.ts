@@ -36,6 +36,8 @@ import { BundleComponent } from 'src/app/feature-modules/tour-authoring/bundle/b
 import { ShowTourComponent } from 'src/app/feature-modules/marketplace/show-tour/show-tour.component';
 import { AuthorsProblemsComponent } from '../../feature-modules/tour-authoring/authors-problems/authors-problems.component';
 import { TouristsProblemsComponent } from 'src/app/feature-modules/tour-authoring/tourists-problems/tourists-problems.component';
+import { ToursOnSaleComponent } from 'src/app/feature-modules/marketplace/tours-on-sale/tours-on-sale.component';
+import { ActivateSaleComponent } from 'src/app/feature-modules/marketplace/activate-sale/activate-sale.component';
 import { ActivateAccountComponent } from '../auth/activate-account/activate-account.component';
 import { PointsViewComponent } from 'src/app/feature-modules/tour-authoring/points-view/points-view.component';
 
@@ -74,6 +76,8 @@ const routes: Routes = [
   {path: 'show-tour/:tourId', component: ShowTourComponent},
   {path: 'authors-problems', component: AuthorsProblemsComponent},
   {path: 'tourists-problems', component: TouristsProblemsComponent},
+  {path: 'tours-on-sale', component: ToursOnSaleComponent},
+  {path: 'activate-sale', component: ActivateSaleComponent},
   {path: 'activate', component: ActivateAccountComponent},
   {path: 'points-view', component: PointsViewComponent}
 ];

@@ -13,12 +13,14 @@ import { MembershipRequest } from './model/membership-request.model';
 import { ClubMember } from './model/clubMember.model';
 import {Object} from "./model/object.model";
 import { tap } from 'rxjs';
+import { Sale } from '../marketplace/model/sale.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TourAuthoringService {
     
+
 
   constructor(private http: HttpClient) { }
 
@@ -185,7 +187,17 @@ export class TourAuthoringService {
   getAllTouristsProblems(): Observable<PagedResults<Problem>> {
     return this.http.get<PagedResults<Problem>>(environment.apiHost + 'tourist/problem/getAll');
   }
+  getToursOnSale(): Observable<PagedResults<Tour>> {
+    console.log('Entering getToursOnSale in service');
+    return this.http.get<PagedResults<Tour>>(environment.apiHost + 'author/sale/getAllToursOnSale');
+  }
+  getAllSales(): Observable<PagedResults<Sale>> { 
+    return this.http.get<PagedResults<Sale>>(environment.apiHost + 'author/sale/getAll');
+  }
 
+  activateSale(saleId: number) {
+    return this.http.get<any>(environment.apiHost + 'author/sale/activate/' + saleId);
+  }
   getAllBundles(): Observable<any> {
     return this.http.get<any>(environment.apiHost + 'author/bundle/getAll');
   }
