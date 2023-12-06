@@ -3,7 +3,7 @@
             <div>
                 <div class="form-item">
                     <label>Title:</label>
-                    <input matInput formControlName="title" type="text">
+                    <input matInput formControlName="title" type="text" [readonly]="tour != null">
                 </div>
                 <div class="form-item">
                     <label>Description:</label>
@@ -11,7 +11,17 @@
                     cdkTextareaAutosize
                     cdkAutosizeMinRows="3"
                     formControlName="description"
-                    cdkAutosizeMaxRows="6"></textarea>
+                    cdkAutosizeMaxRows="6"
+                    [readonly]="tour != null"></textarea>
+                </div>
+                <div class="form-item" *ngIf="tour != null">
+                    <label>Additional Description:</label>
+                    <textarea 
+                        cdkTextareaAutosize
+                        cdkAutosizeMinRows="3"
+                        formControlName="additionalDescription"
+                        cdkAutosizeMaxRows="6">
+                    </textarea>
                 </div>
                 <div class="image-flex-box form-item">
                     <div>

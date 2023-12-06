@@ -15,9 +15,14 @@ import { PointTask } from '../model/point-task.model';
 })
 export class PositionSimulatorComponent implements OnInit{
   isShowReviewFormEnabled: boolean = false;
+  isCreateBlogFormEnabled: boolean = false;
 
 showReviewForm() {
   this.isShowReviewFormEnabled = !this.isShowReviewFormEnabled;
+}
+
+showBlogForm() {
+  this.isCreateBlogFormEnabled = !this.isShowReviewFormEnabled;
 }
 
   tourExecution: TourExecution
