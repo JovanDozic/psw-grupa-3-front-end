@@ -28,37 +28,40 @@ export class BundleComponent implements OnInit{
 
   archive(id: number){
     this.service.archiveBundle(id).subscribe({
+      next: () =>
+        this.service.getAllBundles().subscribe({
+          next: (result: PagedResults<Bundle>) => {
+            this.bundles = result.results;
+          },
+          error: () => {
+          }
+        })
     });
-    this.service.getAllBundles().subscribe({
-      next: (result: PagedResults<Bundle>) => {
-        this.bundles = result.results;
-      },
-      error: () => {
-      }
-    })
   }
   
   publish(id: number){
     this.service.publishBundle(id).subscribe({
+      next: () =>
+        this.service.getAllBundles().subscribe({
+          next: (result: PagedResults<Bundle>) => {
+            this.bundles = result.results;
+          },
+          error: () => {
+          }
+        })
     });
-    this.service.getAllBundles().subscribe({
-      next: (result: PagedResults<Bundle>) => {
-        this.bundles = result.results;
-      },
-      error: () => {
-      }
-    })
   }
 
   delete(id: number){
     this.service.deleteBundle(id).subscribe({
-    })
-    this.service.getAllBundles().subscribe({
-      next: (result: PagedResults<Bundle>) => {
-        this.bundles = result.results;
-      },
-      error: () => {
-      }
+      next: () =>
+      this.service.getAllBundles().subscribe({
+        next: (result: PagedResults<Bundle>) => {
+          this.bundles = result.results;
+        },
+        error: () => {
+        }
+      })
     })
   }
 
