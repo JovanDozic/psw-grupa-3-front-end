@@ -1,0 +1,32 @@
+<div id="tourReviews">
+    <div class="tourReviewHeader">
+        <p>Bundles</p>
+    </div>
+    <hr>
+    <div id="tourReview-details">
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let bundle of bundles">
+                        <td>{{bundle.name}}</td>
+                        <td>{{bundle.price}}</td>
+                        <th>
+                            <button class="btn btn-outline-warning" *ngIf="bundle.status == '0'" (click)="publish(bundle.id)">Publish</button>
+                            <button class="btn btn-outline-warning" *ngIf="bundle.status == '1'" (click)="archive(bundle.id)">Archive</button>
+                            <button class="btn-close" *ngIf="bundle.status == '0'" (click)="delete(bundle.id)">Delete</button>
+                        </th>
+                    </tr>
+                    <tr>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

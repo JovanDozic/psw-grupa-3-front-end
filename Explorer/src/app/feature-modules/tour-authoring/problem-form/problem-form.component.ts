@@ -7,6 +7,7 @@ import { Tour } from '../model/tour.model';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
+import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 @Component({
   selector: 'xp-problem-form',
@@ -15,20 +16,26 @@ import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 })
 export class ProblemFormComponent implements OnChanges {
 
-  tours: Tour[] =  [];
+  tours: Tour[] = [];
+  tours_original: Tour[] = [];
   selectedTour: Tour;
   shouldRenderProblemForm: boolean = false;
   shouldRenderTourReviewForm: boolean = false;
-  shouldRenderTourReviewList : boolean = false;
+  shouldRenderTourReviewList: boolean = false;
   averageRatings: { [tourId: number]: number } = {};
 
+  sortDirection?: boolean = undefined
+  selectedPrice?: number = undefined
+  selectedDifficulty?: number = undefined
+  selectedRating?: number = undefined
+
   user: User | undefined;
-  
+
   @Output() problemUpdated = new EventEmitter<null>();
   @Input() problem: Problem;
   @Input() shouldEdit: boolean = false;
 
-  constructor(private authService: AuthService, private service: TourAuthoringService) {}
+  constructor(private authService: AuthService, private service: TourAuthoringService) { }
 
 
   ngOnInit(): void {
@@ -40,7 +47,7 @@ export class ProblemFormComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.problemForm.reset();
-    if(this.shouldEdit) {
+    if (this.shouldEdit) {
       this.problemForm.patchValue(this.problem);
     }
   }
@@ -49,7 +56,7 @@ export class ProblemFormComponent implements OnChanges {
     category: new FormControl('', [Validators.required]),
     priority: new FormControl(false),
     description: new FormControl('', [Validators.required]),
-    time: new FormControl(new Date(Date.now()), [Validators.required]), 
+    time: new FormControl(new Date(Date.now()), [Validators.required]),
   });
 
   /*addProblem(): void {
@@ -76,12 +83,13 @@ export class ProblemFormComponent implements OnChanges {
     this.service.getTours().subscribe({
       next: (result: PagedResults<Tour>) => {
         this.tours = result.results;
+        this.tours_original = result.results;
         for (const tour of this.tours) {
-          if (tour.id !== undefined) { 
+          if (tour.id !== undefined) {
             this.calculateAverageRating(tour.id);
           }
         }
-        
+
       },
       error: () => {
       }
@@ -110,7 +118,7 @@ export class ProblemFormComponent implements OnChanges {
     this.shouldRenderTourReviewForm = false;
   }
 
-  showTourReviews(tour: Tour) : void {
+  showTourReviews(tour: Tour): void {
     this.selectedTour = tour;
     this.shouldRenderTourReviewList = true;
     this.shouldRenderProblemForm = false;
@@ -119,11 +127,114 @@ export class ProblemFormComponent implements OnChanges {
   calculateAverageRating(tourId: number): void {
     this.service.getAverageRating(tourId).subscribe(
       (averageRating: number) => {
-        this.averageRatings[tourId] = averageRating; 
+        this.averageRatings[tourId] = averageRating;
       },
       (error) => {
         console.error('Error:', error);
       }
     );
   }
+
+  // ovde dezic radi filtriranje
+
+
+  toggleSortDirection() {
+    if (this.sortDirection === undefined) {
+      this.sortDirection = true;
+    }
+    else {
+      this.sortDirection = !this.sortDirection;
+    }
+    this.applySorting();
+  }
+
+  removeFilters() {
+    this.selectedPrice = undefined;
+    this.selectedDifficulty = undefined;
+    this.selectedRating = undefined;
+    this.sortDirection = undefined;
+    this.resetTours();
+  }
+
+  resetTours() {
+    this.tours = this.tours_original;
+  }
+
+  applyFilters() {
+    this.resetTours();
+
+    if (this.selectedPrice !== undefined && this.selectedPrice !== null) {
+      if (this.selectedPrice == 0) {
+
+        this.tours = this.tours.filter(tour => {
+          return (tour.price ?? 0) >= 200;
+        });
+      }
+      else {
+        this.tours = this.tours.filter(tour => {
+          return (tour.price ?? 0) <= this.selectedPrice!;
+        });
+      }
+    }
+
+    if (this.selectedDifficulty) {
+      this.tours = this.tours.filter(tour => {
+        return (tour.difficult ?? 0) == this.selectedDifficulty!;
+      });
+    }
+
+    if (this.selectedRating) {
+      this.tours = this.tours.filter(tour => {
+        console.log(this.averageRatings[tour.id ?? 0]);
+        return (this.averageRatings[tour.id ?? 0] ?? 0) <= this.selectedRating!;
+      });
+    }
+
+    this.applySorting();
+  }
+
+  applySorting() {
+    if (this.sortDirection != undefined) {
+      this.tours.sort((a, b) => {
+        if (this.sortDirection) {
+          console.log("true strana");
+          return a.name.localeCompare(b.name);
+        }
+        else {
+          console.log("false strana");
+          return b.name.localeCompare(a.name);
+        }
+      });
+    }
+  }
+
+  setPriceFilter(price: number) {
+    this.selectedPrice = price;
+  }
+
+  setDifficultyFilter(difficulty: number) {
+    this.selectedDifficulty = difficulty;
+  }
+
+  setRatingFilter(rating: number) {
+    this.selectedRating = rating;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -1,24 +1,13 @@
-#equipment {
-    margin-top: 20px;
-    margin-left: 20px;
-}
-
-#equipment-details {
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-    align-items: flex-start;
-}
-
 p {
     margin-top: 50px;
     font-size: 20px;
-    text-align: center; 
+    text-align: center;
     font-weight: bold;
 }
 
 #tours {
-    margin: 0 auto; 
+    margin: 0 auto;
+    text-align: center;
 }
 
 table {
@@ -30,9 +19,9 @@ table {
 }
 
 thead tr {
-    background-color: #3f51b5;
+    background-color: #363636; /* Dark gray background color */
     color: #ffffff;
-    text-align: left;
+    text-align: center;
 }
 
 th, td {
@@ -58,9 +47,30 @@ tbody tr.active-row {
 
 .problem-header {
     text-align: center;
-  }
+}
 
 .button-td {
     display: flex;
     flex-direction: row;
+} 
+
+td.old-price {
+    text-decoration: line-through;
+    color: #ca2525; /* Adjust the color as needed */
+}
+
+/* Style for New Price */
+td.new-price {
+    font-weight: bold;
+    color: #4caf50; /* Adjust the color as needed */
+}
+
+button {
+    margin-top: 20px;
+    border: none;
+    border-radius: 25px;
+    background-color: #363636; /* Dark gray background color */
+    color: #ffffff; /* White text color */
+    padding: 10px 20px; /* Adjust padding as needed */
+    cursor: pointer;
 }

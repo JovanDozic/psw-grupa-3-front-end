@@ -15,6 +15,10 @@ import { ShowTourComponent } from './show-tour/show-tour.component';
 import { RouterModule } from '@angular/router';
 import { CouponComponents } from './coupons/coupons.components';
 import { CouponFormComponents } from './coupons-form/coupons-form.component';
+import { ToursOnSaleComponent } from './tours-on-sale/tours-on-sale.component';
+import { ActivateSaleComponent } from './activate-sale/activate-sale.component';
+
+
 
 @NgModule({
   declarations: [
@@ -25,7 +29,9 @@ import { CouponFormComponents } from './coupons-form/coupons-form.component';
     SearchFormComponent,
     ShowTourComponent,
     CouponComponents,
-    CouponFormComponents
+    CouponFormComponents,
+    ToursOnSaleComponent,
+    ActivateSaleComponent
   ],
   imports: [
     CommonModule,

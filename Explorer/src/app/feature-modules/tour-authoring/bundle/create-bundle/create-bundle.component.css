@@ -1,24 +1,5 @@
-#equipment {
-    margin-top: 20px;
-    margin-left: 20px;
-}
-
-#equipment-details {
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-    align-items: flex-start;
-}
-
 p {
-    margin-top: 50px;
     font-size: 20px;
-    text-align: center; 
-    font-weight: bold;
-}
-
-#tours {
-    margin: 0 auto; 
 }
 
 table {
@@ -56,11 +37,15 @@ tbody tr.active-row {
     color: #3f51b5;
 }
 
-.problem-header {
-    text-align: center;
-  }
+.card {
+    width: 100%;
+}
 
-.button-td {
-    display: flex;
-    flex-direction: row;
+.card p {
+    font-size: medium;
+    line-height: normal;
+}
+
+#createTourModal {
+    padding: 0px !important;
 }

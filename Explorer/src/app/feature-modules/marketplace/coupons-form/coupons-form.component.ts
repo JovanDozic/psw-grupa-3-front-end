@@ -66,7 +66,7 @@ couponsform = new FormGroup({
   }
   editCoupon(): void {
     const coupon: Coupon = {
-      id: 0,
+      id: this.coupons.id,
       code: this.couponsform.value.code || "",
       discount: this.couponsform.value.discount || 0,
       expiryDate: this.formatDate(this.couponsform.value.expiryDate),
