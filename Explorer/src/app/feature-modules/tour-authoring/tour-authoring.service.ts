@@ -15,6 +15,7 @@ import {Object} from "./model/object.model";
 import { tap } from 'rxjs';
 import { Sale } from '../marketplace/model/sale.model';
 import { Bundle } from './model/bundle.model';
+import { Campaign } from './model/campaign.model';
 
 @Injectable({
   providedIn: 'root'
@@ -224,5 +225,13 @@ export class TourAuthoringService {
     return this.http.post<any>(environment.apiHost + 'author/bundle/create', dataIn);
   }
 
+
+  createCampaign(campaign: Campaign): Observable<any> {
+    return this.http.post<Campaign>(environment.apiHost + 'tourist/campaign', campaign);
+  }
+
+  getCampaigns(touristId: number): Observable<PagedResults<Campaign>> {
+    return this.http.get<PagedResults<Campaign>>(environment.apiHost + 'tourist/campaign/getAll/' + touristId);
+  }
 }
 
