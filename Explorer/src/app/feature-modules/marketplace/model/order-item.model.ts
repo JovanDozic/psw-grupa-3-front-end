@@ -3,7 +3,7 @@ export interface OrderItem {
     name: string;
     price: number;
     image: string;
-    type: OrderItemType;
+    type: string;
 }
 
 export enum OrderItemType {

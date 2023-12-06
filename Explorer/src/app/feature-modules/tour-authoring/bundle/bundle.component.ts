@@ -95,7 +95,7 @@ export class BundleComponent implements OnInit{
       name: bundle.name,
       price: bundle.price,
       image: bundle.tours[0].points[0].picture,
-      type: OrderItemType.bundle
+      type: "Bundle",
     }
 
     if(this.shoppingCart.items.findIndex((x: OrderItem) => x.idType === bundle.id && x.type === OrderItemType.bundle) === -1){
