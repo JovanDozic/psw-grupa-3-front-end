@@ -14,6 +14,8 @@ import { ClubMember } from './model/clubMember.model';
 import {Object} from "./model/object.model";
 import { tap } from 'rxjs';
 import { Sale } from '../marketplace/model/sale.model';
+import { Bundle } from './model/bundle.model';
+import { Campaign } from './model/campaign.model';
 
 @Injectable({
   providedIn: 'root'
@@ -219,6 +221,17 @@ export class TourAuthoringService {
   findToursContainingPoints(selectedPoints: Point[]): Observable<Tour []> {
     return this.http.put<Tour[]>(environment.apiHost + 'author/tour/findTours', selectedPoints);
   }
+  createBundle(dataIn: any): Observable<any>{
+    return this.http.post<any>(environment.apiHost + 'author/bundle/create', dataIn);
+  }
 
+
+  createCampaign(campaign: Campaign): Observable<any> {
+    return this.http.post<Campaign>(environment.apiHost + 'tourist/campaign', campaign);
+  }
+
+  getCampaigns(touristId: number): Observable<PagedResults<Campaign>> {
+    return this.http.get<PagedResults<Campaign>>(environment.apiHost + 'tourist/campaign/getAll/' + touristId);
+  }
 }
 

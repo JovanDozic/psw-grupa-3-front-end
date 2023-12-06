@@ -1,6 +1,6 @@
 <div id="tours">
 
-    <h2>All tours</h2>
+    <h1 class="mt-5 text-center">All tours</h1>
 
     <div class="container my-5">
         <div class="input-group d-flex align-items-center justify-content-center">
@@ -93,18 +93,17 @@
                     <tr>
                         <th>Name</th>
                         <th>Description</th>
-                        <th>Tags</th>
                         <th>Status</th>
                         <th>Difficult</th>
                         <th>Price</th>
                         <th>Average rating</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let tour of tours">
                         <td>{{tour.name}}</td>
                         <td>{{tour.description}}</td>
-                        <td>{{tour.tags}}</td>
                         <td>{{tour.status}}</td>
                         <td>{{tour.difficult}}</td>
                         <td>{{tour.price}}</td>

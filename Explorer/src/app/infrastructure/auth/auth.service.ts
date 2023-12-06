@@ -9,6 +9,8 @@ import { Login } from './model/login.model';
 import { AuthenticationResponse } from './model/authentication-response.model';
 import { User } from './model/user.model';
 import { Registration } from './model/registration.model';
+import { ShoppingCart } from 'src/app/feature-modules/marketplace/model/shopping-cart.model';
+import { Wallet } from 'src/app/feature-modules/marketplace/model/wallet.model';
 
 @Injectable({
   providedIn: 'root'
@@ -77,5 +79,13 @@ export class AuthService {
       password: ""
     }
     return this.http.patch<boolean>(environment.apiHost + `users/activate/` + id, credentials);
+  }
+
+  createShoppingCart(shoppingCart: ShoppingCart): Observable<ShoppingCart> {
+    return this.http.post<ShoppingCart>(environment.apiHost + 'tourist/order', shoppingCart);
+  }
+
+  createWallet(wallet: Wallet):Observable<Wallet> {
+    return this.http.post<Wallet>(environment.apiHost + 'tourist/wallet', wallet);
   }
 }

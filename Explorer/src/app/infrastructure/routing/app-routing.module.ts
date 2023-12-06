@@ -41,6 +41,8 @@ import { ToursOnSaleComponent } from 'src/app/feature-modules/marketplace/tours-
 import { ActivateSaleComponent } from 'src/app/feature-modules/marketplace/activate-sale/activate-sale.component';
 import { ActivateAccountComponent } from '../auth/activate-account/activate-account.component';
 import { PointsViewComponent } from 'src/app/feature-modules/tour-authoring/points-view/points-view.component';
+import { TourCampaignsComponent } from 'src/app/feature-modules/tour-authoring/tour-campaigns/tour-campaigns.component';
+import { TourCampaignFormComponent } from 'src/app/feature-modules/tour-authoring/tour-campaign-form/tour-campaign-form.component';
 
 
 const routes: Routes = [
@@ -83,6 +85,8 @@ const routes: Routes = [
   {path: 'activate-sale', component: ActivateSaleComponent},
   {path: 'activate', component: ActivateAccountComponent},
   {path: 'points-view', component: PointsViewComponent},
+  {path: 'tour-campaigns', component: TourCampaignsComponent},
+  {path: 'tour-campaign-form', component: TourCampaignFormComponent},
 ];
 
 @NgModule({
