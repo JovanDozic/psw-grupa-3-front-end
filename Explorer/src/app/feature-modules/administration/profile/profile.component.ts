@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { Person } from '../model/userprofile.model';
 import { switchMap } from 'rxjs/operators';
+import { Wallet } from '../../marketplace/model/wallet.model';
 
 @Component({
   selector: 'xp-profile',
@@ -15,6 +16,7 @@ export class ProfileComponent implements OnInit {
   user: User;
   person: Person;
   selectedProfile: Person;
+  wallet: Wallet;
 
   constructor(private authService: AuthService, private service: AdministrationService) {}
 
@@ -27,6 +29,7 @@ export class ProfileComponent implements OnInit {
     this.authService.user$.pipe(
       switchMap((user: User) => {
         this.user = user;
+        this.getWallet(user.id);
         return this.service.getUser(this.user.id);
       })
     ).subscribe((result: any) => {
@@ -40,5 +43,14 @@ export class ProfileComponent implements OnInit {
       this.user.followers = result;
     });
   } 
+
+  getWallet(userId: number): void{
+    this.service.getUserWallet(userId).subscribe({
+      next: (response: Wallet) => {
+        this.wallet = response;
+        console.log(this.wallet);
+      }
+    })
+  }
 
 }

@@ -7,13 +7,14 @@ import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { Person } from './model/userprofile.model';
 import { Problem } from '../tour-authoring/model/problem.model';
 
-import { Overview, UserRole } from './model/overview.model';
+import { Overview } from './model/overview.model';
 
 import { AppRating } from './model/app-rating.model';
 import { TouristEquipment } from './model/tourist-equipment.model';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { PublicRegistrationRequest } from './model/public-registration-request.model';
 import { UserNotification } from 'src/app/infrastructure/auth/model/user.model';
+import { Wallet } from '../marketplace/model/wallet.model';
 
 
 @Injectable({
@@ -78,6 +79,18 @@ export class AdministrationService {
 
   unfollowUser(userId: number, userToUnfollowId: number) {
     return this.http.patch<User>(environment.apiHost + 'userprofile/followers/' + userId + '/unfollow/' + userToUnfollowId, {});
+  }
+
+  getUserWallet(userId: number): Observable<Wallet> {
+    return this.http.get<Wallet>(environment.apiHost + 'tourist/wallet/getByUserId/' + userId);
+  }
+
+  getAllWallets(): Observable<PagedResults<Wallet>> {
+    return this.http.get<PagedResults<Wallet>>(environment.apiHost + 'tourist/wallet');
+  }
+
+  addCoins(userId: number, coins: number): Observable<Wallet> {
+    return this.http.patch<Wallet>(environment.apiHost + 'tourist/wallet/addCoins/' + userId, coins)
   }
 
   //Notifications
