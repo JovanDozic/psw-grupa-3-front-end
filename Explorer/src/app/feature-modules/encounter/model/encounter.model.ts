@@ -18,7 +18,7 @@ export enum EncounterStatus
 
 export interface Encounter{
 
-    id?: number,
+    id: number,
     name: string,
     description: string,
     location: Location,

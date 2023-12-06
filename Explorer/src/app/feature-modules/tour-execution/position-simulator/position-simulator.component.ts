@@ -10,6 +10,7 @@ import { PointTask } from '../model/point-task.model';
 import { Encounter } from '../../encounter/model/encounter.model';
 import { EncounterService } from '../../encounter/encounter.service';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
+import { ParticipantLocation } from '../../encounter/model/participantLocation.model';
 
 @Component({
   selector: 'xp-tour-execution-lifecycle',
@@ -39,7 +40,12 @@ showReviewForm() {
     public: false
   }
 clickedMarker: boolean = false
+activatedEncounter: Encounter
+partLocation: ParticipantLocation
+canActivate: boolean
+
 encounterModal: Encounter ={
+  "id": 0,
   "name": "",
   "description": "Encounter Description",
   "location": {
@@ -72,37 +78,30 @@ encounterModal: Encounter ={
 encounters: Encounter[] = []
  
    = [{
-    "id": 1,
+    "id": 4,
     "name": "Forest Exploration",
     "description": "A guided tour through a dense forest. Explore the diverse flora and fauna, witness breathtaking landscapes, and learn about the ecological significance of the forest.",
     "location": {
-      "latitude": 45.248376910202616,
       "longitude": 19.836076282798334,
+      "latitude": 45.248376910202616
     },
-    "experience": 50,
-    "status": 2,
+    "experience": 0,
+    "status": 1,
     "type": 1,
     "participants": [
       {
-        "username": "Participant 1",
-      },
-      {
-        "username": "Participant 2",
+        "username": "string"
       }
     ],
     "completers": [
       {
-        "username": "Completer 1",
-        "completionDate": undefined
-      },
-      {
-        "username": "Completer 2",
+        "username": "string",
         "completionDate": undefined
       }
     ]
   },
   {
-    "id": 2,
+    "id": 5,
     "name": "Historic City Walk",
     "description": "Embark on a captivating walk through the ancient streets of the city. Discover historical landmarks, learn about centuries-old architecture, and delve into captivating stories of the city's past.",
     "location": {
@@ -111,22 +110,15 @@ encounters: Encounter[] = []
     },
     "experience": 50,
     "status": 2,
-    "type": 1,
+    "type": 2,
     "participants": [
       {
-        "username": "Participant 1",
-      },
-      {
-        "username": "Participant 2",
+        "username": "string"
       }
     ],
     "completers": [
       {
-        "username": "Completer 1",
-        "completionDate": undefined
-      },
-      {
-        "username": "Completer 2",
+        "username": "string",
         "completionDate": undefined
       }
     ]
@@ -230,10 +222,13 @@ encounters: Encounter[] = []
   handleMarkerClick(encounter: Encounter) {
     console.log('Marker clicked:', encounter);
     this.encounterModal = encounter;
-    this.clickedMarker = true;
+    if(this.encounterModal.type === 1)
+        this.clickedMarker = true;
   }
 
   encounterButton(){
+    if(this.encounterModal.participants.some(participant => participant.username === this.service.user.value.username))
+        this.canActivate = false;
     this.clickedMarker = false;
   }
 
@@ -256,6 +251,7 @@ encounters: Encounter[] = []
       touristId: this.service.user.value.id,
       lastActivity: new Date(Date.now())
     }
+    
 
     this.service.updatePosition(this.tourExecution.id, position).subscribe({
       next: (result: TourExecution) => {
@@ -266,6 +262,25 @@ encounters: Encounter[] = []
         this.completeTour()
       }
   })
+    }
+
+    activateEncounter(){
+      if(this.encounterModal.name != ""){
+        this.partLocation =
+         {"username": this.service.user.value.username,
+          "latitude": this.updatedExecution.position.latitude,
+          "longitude": this.updatedExecution.position.longitude,
+                    }
+        this.encounterService.activateEncounter(this.encounterModal.id, this.partLocation).subscribe({
+          next: (result: Encounter) => {
+                this.activatedEncounter = result;
+                if(this.activatedEncounter.participants.some(participant => participant.username === this.service.user.value.username))
+                    this.canActivate = false;
+                console.log("aktivirani: ", result)
+          }
+        })
+    }
+
     }
 
     completeTour(){

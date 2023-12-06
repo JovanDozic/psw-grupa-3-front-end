@@ -56,19 +56,42 @@ export class MapComponent implements AfterViewInit {
     console.log("Mapa enc:",this.encounters)
 
     this.encounters.forEach((encounter) => {
-      const greenIcon = L.icon({
-        iconUrl: 'https://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Marker-Outside-Chartreuse-icon.png',
-        iconSize: [31, 41],
-        iconAnchor: [13, 41],
-      });
 
-      const marker = new L.Marker([encounter.location.latitude, encounter.location.longitude], { icon: greenIcon }).addTo(this.map);
+      if(encounter.type == 1){
+
+        const greenIcon = L.icon({
+          iconUrl: 'https://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Marker-Outside-Chartreuse-icon.png',
+          iconSize: [31, 41],
+          iconAnchor: [13, 41],
+        });
+  
+        const marker = new L.Marker([encounter.location.latitude, encounter.location.longitude], { icon: greenIcon }).addTo(this.map);
+        
+        marker.on('click', () => {
+          this.handleGreenMarkerClick(encounter); // Emit marker data on marker click
+        });
+
+        this.markers.push(marker);
+
+      }else{
+
+        const greenIcon = L.icon({
+          iconUrl: 'https://static.thenounproject.com/png/37658-200.png',
+          iconSize: [31, 41],
+          iconAnchor: [13, 41],
+        });
+  
+        const marker = new L.Marker([encounter.location.latitude, encounter.location.longitude], { icon: greenIcon }).addTo(this.map);
+        
+        marker.on('click', () => {
+          this.handleGreenMarkerClick(encounter); // Emit marker data on marker click
+        });
+
+        this.markers.push(marker);
+      }
       
-      marker.on('click', () => {
-        this.handleGreenMarkerClick(encounter); // Emit marker data on marker click
-      });
 
-      this.markers.push(marker);
+      
 
       
      

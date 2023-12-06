@@ -75,8 +75,8 @@
             <p><strong>Experience:</strong> {{ encounterModal.experience }}</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" >Activate</button>
-          <button type="button" class="btn btn-secondary">Solve</button>
+          <button *ngIf="canActivate" type="button" class="btn btn-secondary" (click)="activateEncounter()" >Activate</button>
+          <button *ngIf="!canActivate" type="button" class="btn btn-secondary">Solve</button>
         </div>
 
       </div>
