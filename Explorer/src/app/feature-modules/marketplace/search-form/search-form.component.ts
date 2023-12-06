@@ -25,7 +25,7 @@ export class SearchFormComponent implements OnInit {
     let map = document.getElementById("map");
     if (map != null) {
       map.style.height = "20rem";
-      map.style.width = "55rem";
+      map.style.width = "65rem";
     }
 
     this.router.events.subscribe((event) => { //TREBALO BI DA RADI OVAKO, ISTESTIRAO SAM

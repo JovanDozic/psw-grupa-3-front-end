@@ -18,34 +18,39 @@ import { RouterModule } from '@angular/router';
 import { TourComponent } from './feature-modules/tour-authoring/tour/tour.component';
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {TourExecutionService} from "./feature-modules/tour-execution/tour-execution.service";
 import {TourExecutionModule} from "./feature-modules/tour-execution/tour-execution.module";
+
+import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule  } from 'ngx-google-analytics';  
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { EncounterModule } from './feature-modules/encounter/encounter.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    // MapComponent,
-    // TourComponent
+    //MapComponent,
+    //TourComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LayoutModule,
-    BrowserAnimationsModule,
     MaterialModule,
     AdministrationModule,
     BlogModule,
-    MarketplaceModule,
-    TourAuthoringModule,
-    TourExecutionModule,
     AuthModule,
     HttpClientModule,
     FormsModule,
     RouterModule,
-    SharedModule,
     NgbModule,
+    NgxGoogleAnalyticsModule.forRoot('G-S37GC75RZ8'),
+    NgxGoogleAnalyticsRouterModule,
+    SharedModule,
+    LayoutModule,
+    BrowserAnimationsModule,
+    MarketplaceModule,
+    TourAuthoringModule,
+    TourExecutionModule,
     MatCheckboxModule,
+    EncounterModule,
   ],
   providers: [
     {

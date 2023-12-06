@@ -7,6 +7,7 @@ import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { ShoppingCart } from './model/shopping-cart.model';
 import { SearchResultTour } from './model/search-result-tour.model';
 import { OrderItem } from './model/order-item.model';
+import { Wallet } from './model/wallet.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,10 @@ export class MarketplaceService {
 
   getPreference(id: number): Observable<Preference> {
     return this.http.get<Preference>(environment.apiHost + 'personalization/preference/' + id);
+  }
+
+  getToken(idUser: number, idTour: number): Observable<boolean> {
+    return this.http.get<boolean>(environment.apiHost + 'tourist/tourPurchaseToken/' + idUser + '/' + idTour);
   }
 
   getAllPreferences(): Observable<PagedResults<Preference>> {
@@ -44,8 +49,16 @@ export class MarketplaceService {
     return this.http.get<ShoppingCart>(environment.apiHost + 'tourist/order/' + id);
   }
 
+  getWalletByUserId(id: number): Observable<Wallet> {
+    return this.http.get<Wallet>(environment.apiHost + 'tourist/wallet/' + id);
+  }
+
   updateCart(cart: ShoppingCart): Observable<ShoppingCart> {
     return this.http.put<ShoppingCart>(environment.apiHost + 'tourist/order', cart);
+  }
+
+  updateWallet(wallet: Wallet): Observable<Wallet> {
+    return this.http.put<Wallet>(environment.apiHost + 'tourist/wallet', wallet);
   }
 
   deleteCart(id: number): Observable<any>{

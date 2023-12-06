@@ -22,6 +22,8 @@ import { ObjectComponent } from './object/object.component';
 import { ObjectFormComponent } from './object-form/object-form.component';
 import { BundleComponent } from './bundle/bundle.component';
 import { CreateBundleComponent } from './bundle/create-bundle/create-bundle.component';
+import { AuthorsProblemsComponent } from './authors-problems/authors-problems.component';
+import { TouristsProblemsComponent } from './tourists-problems/tourists-problems.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { CreateBundleComponent } from './bundle/create-bundle/create-bundle.comp
     ObjectFormComponent,
     BundleComponent,
     CreateBundleComponent
+    AuthorsProblemsComponent,
+    TouristsProblemsComponent
   ],
   imports: [
     CommonModule,
@@ -63,7 +67,9 @@ import { CreateBundleComponent } from './bundle/create-bundle/create-bundle.comp
     ProblemFormComponent,
     ClubMembersComponent,
     ObjectComponent,
-    ObjectFormComponent
+    ObjectFormComponent,
+    AuthorsProblemsComponent,
+    TouristsProblemsComponent
   ]
 })
 export class TourAuthoringModule { }

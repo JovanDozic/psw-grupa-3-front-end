@@ -4,8 +4,8 @@
 <div class="search-results-container">
     <div class="search-results-grid">
         <div class="search-result" *ngFor="let token of tokens">
-            <div class="box" [routerLink]="['show-tour/' + token.tourId]">
-                <img class="image" src="https://media.tacdn.com/media/attractions-splice-spp-674x446/08/ba/a5/2c.jpg"
+            <div class="box" [routerLink]="['../show-tour/' + token.tourId]">
+                <img class="image" [src]="token.tourImage"
                     alt="TURA">
                 <span class="title-box">{{token.tourName}}</span>
                 <span>Purchased on: {{token.purchaseTime}}</span>

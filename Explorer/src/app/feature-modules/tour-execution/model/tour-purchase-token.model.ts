@@ -3,4 +3,5 @@ export interface TourPurchaseToken{
     tourName: string;
     tourId: number;
     purchaseTime: Date;
+    tourImage: string;
 }
