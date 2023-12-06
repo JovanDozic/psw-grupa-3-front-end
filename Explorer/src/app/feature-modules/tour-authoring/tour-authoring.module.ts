@@ -20,6 +20,8 @@ import { ClubMembersComponent } from './club-members/club-members.component';
 import { TourReviewComponent } from './tour-review/tour-review.component';
 import { ObjectComponent } from './object/object.component';
 import { ObjectFormComponent } from './object-form/object-form.component';
+import { BundleComponent } from './bundle/bundle.component';
+import { CreateBundleComponent } from './bundle/create-bundle/create-bundle.component';
 import { AuthorsProblemsComponent } from './authors-problems/authors-problems.component';
 import { TouristsProblemsComponent } from './tourists-problems/tourists-problems.component';
 
@@ -38,6 +40,8 @@ import { TouristsProblemsComponent } from './tourists-problems/tourists-problems
     TourReviewComponent,
     ObjectComponent,
     ObjectFormComponent,
+    BundleComponent,
+    CreateBundleComponent
     AuthorsProblemsComponent,
     TouristsProblemsComponent
   ],

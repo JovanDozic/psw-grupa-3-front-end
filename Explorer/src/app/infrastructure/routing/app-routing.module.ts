@@ -32,6 +32,7 @@ import { DetailedBlogComponent } from 'src/app/feature-modules/blog/detailed-blo
 import { BlogsPageComponent } from 'src/app/feature-modules/blog/blogs-page/blogs-page.component';
 import { PublicRegistrationRequestsComponent } from 'src/app/feature-modules/administration/public-registration-requests/public-registration-requests.component';
 import { PurchasedToursComponent } from 'src/app/feature-modules/tour-execution/purchased-tours/purchased-tours.component';
+import { BundleComponent } from 'src/app/feature-modules/tour-authoring/bundle/bundle.component';
 import { ShowTourComponent } from 'src/app/feature-modules/marketplace/show-tour/show-tour.component';
 import { AuthorsProblemsComponent } from '../../feature-modules/tour-authoring/authors-problems/authors-problems.component';
 import { TouristsProblemsComponent } from 'src/app/feature-modules/tour-authoring/tourists-problems/tourists-problems.component';
@@ -68,6 +69,7 @@ const routes: Routes = [
   {path: 'all-blogs', component: BlogsPageComponent},
   {path: 'public-registration-requests', component: PublicRegistrationRequestsComponent},
   {path: 'purchased-tours', component: PurchasedToursComponent},
+  {path: 'all-bundles', component: BundleComponent},
   {path: 'show-tour/:tourId', component: ShowTourComponent},
   {path: 'authors-problems', component: AuthorsProblemsComponent},
   {path: 'tourists-problems', component: TouristsProblemsComponent},
