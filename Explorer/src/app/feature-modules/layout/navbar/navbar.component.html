@@ -86,8 +86,10 @@
                             <a class="dropdown-item" [routerLink]="['tours']">Manage tours</a>
                             <a class="dropdown-item" [routerLink]="['blog-comments']">Blog</a>
                             <a class="dropdown-item" [routerLink]="['authors-problems']">Respond to problems</a>
+                            <a class="dropdown-item" [routerLink]="['coupons']">Coupons</a>
                             <a class="dropdown-item" [routerLink]="['activate-sale']">Activate sale</a>
                             <a class="dropdown-item" [routerLink]="['all-bundles']">Manage bundles</a>
+
                         </li>
 
                         <li *ngIf="user && user.role === 'tourist'">
@@ -102,6 +104,7 @@
                             <a class="dropdown-item" [routerLink]="['purchased-tours']">Purchased tours</a>
                             <a class="dropdown-item" [routerLink]="['tourists-problems']">Responds to problems</a>
                             <a class="dropdown-item" [routerLink]="['tours-on-sale']">Tours on sale</a>
+
                         </li>
 
                         <li *ngIf="user && user.role !== 'administrator' && user.username !== ''">

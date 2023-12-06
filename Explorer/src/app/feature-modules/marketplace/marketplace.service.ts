@@ -7,7 +7,9 @@ import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { ShoppingCart } from './model/shopping-cart.model';
 import { SearchResultTour } from './model/search-result-tour.model';
 import { OrderItem } from './model/order-item.model';
+import { Coupon } from './model/coupons.model';
 import { Wallet } from './model/wallet.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -82,4 +84,23 @@ export class MarketplaceService {
   purchaseFromCart(shoppingCart: ShoppingCart): Observable<any[]>{
     return this.http.post<any[]>(environment.apiHost + 'tourist/tourPurchaseToken', shoppingCart);
   }
+  getAllCoupons(): Observable<PagedResults<Coupon>> {
+    return this.http.get<PagedResults<Coupon>>(environment.apiHost + 'author/coupons/');
+  }
+
+  createCoupon(coupon: Coupon): Observable<Coupon> {
+    return this.http.post<Coupon>(environment.apiHost + 'author/coupons/', coupon);
+    
+  }
+
+  updateCoupon(updatedCoupon: Coupon): Observable<Coupon> {
+    return this.http.put<Coupon>(environment.apiHost + 'author/coupons/' + updatedCoupon.id ,
+    updatedCoupon);
+  }
+
+  deleteCoupon(id: number): Observable<Coupon> {
+    return this.http.delete<Coupon>(environment.apiHost + 'author/coupons/' + id);
+  }
+
+
 }

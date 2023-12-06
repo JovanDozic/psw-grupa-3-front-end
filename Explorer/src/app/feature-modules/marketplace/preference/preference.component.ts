@@ -46,8 +46,7 @@ export class PreferenceComponent implements OnInit {
   }
 
   onEditClicked(preference: Preference) {
-    this.selectedPreference = preference;
-    this.shouldRenderPreferenceForm = true;
+       this.shouldRenderPreferenceForm = true;
     this.shouldEdit = true;
   }
 

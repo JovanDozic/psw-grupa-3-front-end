@@ -13,8 +13,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ShowTourComponent } from './show-tour/show-tour.component';
 import { RouterModule } from '@angular/router';
+import { CouponComponents } from './coupons/coupons.components';
+import { CouponFormComponents } from './coupons-form/coupons-form.component';
 import { ToursOnSaleComponent } from './tours-on-sale/tours-on-sale.component';
 import { ActivateSaleComponent } from './activate-sale/activate-sale.component';
+
 
 
 @NgModule({
@@ -25,6 +28,8 @@ import { ActivateSaleComponent } from './activate-sale/activate-sale.component';
     SearchResultsComponent,
     SearchFormComponent,
     ShowTourComponent,
+    CouponComponents,
+    CouponFormComponents,
     ToursOnSaleComponent,
     ActivateSaleComponent
   ],
@@ -44,7 +49,9 @@ import { ActivateSaleComponent } from './activate-sale/activate-sale.component';
     ShoppingCartComponent,
     SearchFormComponent,
     SearchResultsComponent,
-    ShowTourComponent
+    ShowTourComponent,
+    CouponComponents,
+    CouponFormComponents
   ]
 })
 export class MarketplaceModule { }

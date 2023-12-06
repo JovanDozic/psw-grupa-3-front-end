@@ -30,7 +30,12 @@ export class ShowTourComponent {
   forCart: boolean = true
 
   currentTourId: number
+  couponCode: string = '';
 
+  onCouponCodeChange(event: any) {
+    this.couponCode = event.target.value;
+  }
+  
   ngOnInit() {
     this.route.params.subscribe(params => {
       const tourIdFromParams = params['tourId'];
@@ -106,6 +111,7 @@ getShoppingCart() {
         name: this.tour.name,
         price: this.tour.price,
         image: this.tour.points[0].picture,
+        couponCode: this.couponCode,
         type: OrderItemType.singleTour
       };
       console.log(orderItem);
