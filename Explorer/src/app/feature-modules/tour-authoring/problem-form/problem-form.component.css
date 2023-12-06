@@ -17,6 +17,14 @@ p {
     font-weight: bold;
 }
 
+div {
+    width: 400px;
+    display:flex;
+    gap: 20px;
+    flex-direction: column;
+    place-items: center;
+}
+
 #tours {
     margin: 0 auto; 
 }
