@@ -19,10 +19,6 @@ export class BlogService {
     return this.http.post<Blog>(environment.apiHost + `blog`, blog);
   }
 
-  publishBlog(blogId: number): Observable<Blog>{
-    return this.http.patch<Blog>(environment.apiHost + `blog/publish/` + blogId, {});
-  }
-
   getBlog(blogId: number): Observable<Blog>{
     return this.http.get<Blog>(environment.apiHost + `blog/get/` + blogId);
   }
