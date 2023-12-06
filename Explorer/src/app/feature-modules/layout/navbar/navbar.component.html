@@ -29,11 +29,14 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Trips
+                        Tours
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                        <li><a class="dropdown-item" href="#">Tours</a></li>
-                        <li><a class="dropdown-item" href="#">Places</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['problem-form']">All tours</a></li>
+                        <li *ngIf="user && user.role === 'tourist'">
+                            <a class="dropdown-item" [routerLink]="['tour-campaigns']">Your campaigns</a>
+                            <a class="dropdown-item" [routerLink]="['tour-campaign-form']">Create a campaign</a>
+                        </li>
                     </ul>
                 </li>
 
