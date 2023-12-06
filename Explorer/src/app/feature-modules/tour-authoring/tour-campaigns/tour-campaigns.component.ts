@@ -23,6 +23,7 @@ export class TourCampaignsComponent implements OnInit {
     this.authService.user$.subscribe(user => {
       this.user = user;
     });
+    this.getCampaigns();
     // Covek se zabavlja
     // timer(1500).subscribe(() => {
     //   this.getCampaigns();
