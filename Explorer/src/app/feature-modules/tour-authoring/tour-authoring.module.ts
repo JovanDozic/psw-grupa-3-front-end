@@ -41,7 +41,7 @@ import { TouristsProblemsComponent } from './tourists-problems/tourists-problems
     ObjectComponent,
     ObjectFormComponent,
     BundleComponent,
-    CreateBundleComponent
+    CreateBundleComponent,
     AuthorsProblemsComponent,
     TouristsProblemsComponent
   ],
