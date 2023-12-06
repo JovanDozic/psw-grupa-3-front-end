@@ -40,6 +40,7 @@
                             <button class="btn-primary" *ngIf="bundle.status ==  0" (click)="publish(bundle.id)">Publish</button>
                             <button class="btn-primary" *ngIf="bundle.status == 1" (click)="archive(bundle.id)">Archive</button>
                             <button class="btn-danger" *ngIf="bundle.status == 0" (click)="delete(bundle.id)">Delete</button>
+                            <button class="btn-primary" *ngIf="bundle.status == 1" (click)="addToCart(bundle)">Add to cart</button>
                         </th>
                     </tr>
                     <tr>
