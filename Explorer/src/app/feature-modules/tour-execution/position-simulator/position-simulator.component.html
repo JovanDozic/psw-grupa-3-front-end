@@ -5,9 +5,13 @@
       <h1>{{tour.name}}</h1>
     </div>
     <div class="map-container">
-    <xp-map  [points]="points" (latitude)="GetLatitude($event)" (longitude)="GetLongitude($event)"></xp-map>
+    <xp-map  [points]="points" 
+    [hiddenEncounters]="hiddenEncounters" 
+    (blackMarkerClicked)="handleBlackMarkerClick($event)"
+    (latitude)="GetLatitude($event)" 
+    (longitude)="GetLongitude($event)"></xp-map>
     </div>
-    <div *ngIf="showDiv" >
+    <div *ngIf="showDiv">
       <mat-form-field>
         <mat-label>Longitude</mat-label>
         <input matInput formControlName="longitude" type="number" readonly>
@@ -53,6 +57,8 @@
       </div>
     </div>
   </div>
+  
 </div>
+
 
 

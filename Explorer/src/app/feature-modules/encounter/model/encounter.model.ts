@@ -2,7 +2,7 @@ import { Completer } from "./completer.model";
 import { Location } from "./location.model";
 import { Participant } from "./participant.model";
 
-export interface Encounter{
+export interface Encounter {
     id?: number;
     name: string;
     description: string;
@@ -19,10 +19,10 @@ export enum EncounterStatus {
     DRAFT = 1,
     ACTIVE,
     ARCHIVED,
-  }
+}
 
-  export enum EncounterType {
+export enum EncounterType {
     SOCIAL = 1,
     LOCATION,
     MISC,
-  }
+}
