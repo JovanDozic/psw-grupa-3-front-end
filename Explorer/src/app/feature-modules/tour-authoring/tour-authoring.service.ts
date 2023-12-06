@@ -146,5 +146,21 @@ export class TourAuthoringService {
   publishTour(id: number): Observable<any> {
     return this.http.get<any>(environment.apiHost + 'author/tour/publishTour' + id);
   }
+
+  getAllBundles(): Observable<any> {
+    return this.http.get<any>(environment.apiHost + 'author/bundle/getAll');
+  }
+
+  archiveBundle(id: number): Observable<any>{
+    return this.http.get<any>(environment.apiHost + 'author/bundle/archive/' + id);
+  }
+
+  publishBundle(id: number): Observable<any>{
+    return this.http.get<any>(environment.apiHost + 'author/bundle/publish/' + id);
+  }
+
+  deleteBundle(id: number): Observable<any>{
+    return this.http.delete<any>(environment.apiHost + 'author/bundle/delete/' + id);
+  }
 }
 
