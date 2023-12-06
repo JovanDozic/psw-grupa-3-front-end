@@ -112,7 +112,7 @@ getShoppingCart() {
         price: this.tour.price,
         image: this.tour.points[0].picture,
         couponCode: this.couponCode,
-        type: OrderItemType.singleTour
+        type: "SingleTour"
       };
       console.log(orderItem);
 
