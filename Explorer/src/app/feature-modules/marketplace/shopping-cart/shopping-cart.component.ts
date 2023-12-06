@@ -5,6 +5,7 @@ import { OrderItem } from '../model/order-item.model';
 import { Tour } from '../../tour-authoring/model/tour.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { Wallet } from '../model/wallet.model';
 
 @Component({
   selector: 'xp-shopping-cart',
@@ -15,6 +16,7 @@ export class ShoppingCartComponent {
   shoppingCart: ShoppingCart;
   user: User;
   sum: number;
+  wallet: Wallet;
 
   constructor(private service: MarketplaceService, private authService: AuthService) { }
 
@@ -22,6 +24,7 @@ export class ShoppingCartComponent {
     this.authService.user$.subscribe(user => {
       this.user = user;
       this.getShoppingCart();
+      this.getWallet();
     })
   }
 
@@ -48,6 +51,33 @@ export class ShoppingCartComponent {
     })
   }
 
+  purchaseFromCartUsingAC() {
+    if(this.wallet.coins < this.sum/15){
+      return
+    } else {
+
+    this.wallet = {
+      id: this.wallet.id,
+      userId: this.wallet.userId,
+      coins: Math.floor(this.wallet.coins - this.sum/15)
+    }
+
+    this.purchaseFromCart()
+    this.updateWallet()
+    }
+  }
+
+  updateWallet(){
+    this.service.updateWallet(this.wallet).subscribe({
+      next: (result: Wallet) => {
+        this.wallet = result
+      },
+      error: error => {
+        console.error('Greška pri ažuriranju novčanika:', error);
+      }
+    })
+  }
+
   onRemoveClicked(t: OrderItem): void {
     let copiedCart = Object.assign({}, this.shoppingCart);
     let i = copiedCart.items.findIndex((x: OrderItem) => x.idTour === t.idTour);
@@ -70,5 +100,13 @@ export class ShoppingCartComponent {
     for (let o of this.shoppingCart.items) {
       this.sum += o.price
     }
+  }
+
+  getWallet() : void {
+    this.service.getWalletByUserId(this.user.id).subscribe({
+      next: (result: Wallet) => {
+        this.wallet = result;
+      }
+    })
   }
 }
