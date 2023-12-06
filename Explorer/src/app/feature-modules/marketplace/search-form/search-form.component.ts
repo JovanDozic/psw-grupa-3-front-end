@@ -22,6 +22,14 @@ export class SearchFormComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) {
   }
   ngOnInit(): void {
+    const isReloaded = sessionStorage.getItem('isReloaded');
+    if (!isReloaded) {
+      sessionStorage.setItem('isReloaded', 'true');
+      window.location.reload();
+    } else {
+    sessionStorage.removeItem('isReloaded');
+    }
+    
     let map = document.getElementById("map");
     if (map != null) {
       map.style.height = "20rem";
