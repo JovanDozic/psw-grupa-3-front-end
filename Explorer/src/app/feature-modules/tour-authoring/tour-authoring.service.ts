@@ -19,6 +19,7 @@ import { Sale } from '../marketplace/model/sale.model';
   providedIn: 'root'
 })
 export class TourAuthoringService {
+    
 
 
   constructor(private http: HttpClient) { }
@@ -197,5 +198,27 @@ export class TourAuthoringService {
   activateSale(saleId: number) {
     return this.http.get<any>(environment.apiHost + 'author/sale/activate/' + saleId);
   }
+  getAllBundles(): Observable<any> {
+    return this.http.get<any>(environment.apiHost + 'author/bundle/getAll');
+  }
+
+  archiveBundle(id: number): Observable<any>{
+    return this.http.get<any>(environment.apiHost + 'author/bundle/archive/' + id);
+  }
+
+  publishBundle(id: number): Observable<any>{
+    return this.http.get<any>(environment.apiHost + 'author/bundle/publish/' + id);
+  }
+
+  deleteBundle(id: number): Observable<any>{
+    return this.http.delete<any>(environment.apiHost + 'author/bundle/delete/' + id);
+  }
+  getAllPublicPointsForTours(): Observable<Point []> {
+    return this.http.get<Point []>(environment.apiHost + 'author/tour/getAllPointsForTours');
+  }
+  findToursContainingPoints(selectedPoints: Point[]): Observable<Tour []> {
+    return this.http.put<Tour[]>(environment.apiHost + 'author/tour/findTours', selectedPoints);
+  }
+
 }
 

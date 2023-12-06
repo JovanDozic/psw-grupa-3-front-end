@@ -37,7 +37,7 @@ export class AuthService {
     .pipe(
       tap((authenticationResponse) => {
         this.tokenStorage.saveAccessToken(authenticationResponse.accessToken);
-        this.setUser();
+        //this.setUser();
       })
     );
   }
@@ -69,5 +69,13 @@ export class AuthService {
       ],
     };
     this.user$.next(user);
+  }
+
+  activateUser(id: number): Observable<boolean> {
+    const credentials : Login =  {
+      username: "",
+      password: ""
+    }
+    return this.http.patch<boolean>(environment.apiHost + `users/activate/` + id, credentials);
   }
 }

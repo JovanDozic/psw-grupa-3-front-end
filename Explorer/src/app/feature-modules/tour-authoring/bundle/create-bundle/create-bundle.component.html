@@ -1,0 +1,27 @@
+<h1>Create bundle</h1>
+
+<div id="tourReview-details">
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tour of tours">
+                    <td>{{tour.name}}</td>
+                    <td>{{tour.price}}</td>
+                    <th>
+                        <button class="btn" (click)="addTour(tour)">Add</button>
+                        <button class="btn" (click)="removeTour(tour)">Remove</button>
+                    </th>
+                </tr>
+                <tr>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
