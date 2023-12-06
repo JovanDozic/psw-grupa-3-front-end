@@ -3,4 +3,5 @@ export interface OrderItem {
     name: string;
     price: number;
     image: string;
+   couponCode: string;
 }

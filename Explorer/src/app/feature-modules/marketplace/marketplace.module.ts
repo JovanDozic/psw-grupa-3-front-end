@@ -13,7 +13,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ShowTourComponent } from './show-tour/show-tour.component';
 import { RouterModule } from '@angular/router';
-
+import { CouponComponents } from './coupons/coupons.components';
+import { CouponFormComponents } from './coupons-form/coupons-form.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,9 @@ import { RouterModule } from '@angular/router';
     ShoppingCartComponent,
     SearchResultsComponent,
     SearchFormComponent,
-    ShowTourComponent
+    ShowTourComponent,
+    CouponComponents,
+    CouponFormComponents
   ],
   imports: [
     CommonModule,
@@ -40,7 +43,9 @@ import { RouterModule } from '@angular/router';
     ShoppingCartComponent,
     SearchFormComponent,
     SearchResultsComponent,
-    ShowTourComponent
+    ShowTourComponent,
+    CouponComponents,
+    CouponFormComponents
   ]
 })
 export class MarketplaceModule { }
