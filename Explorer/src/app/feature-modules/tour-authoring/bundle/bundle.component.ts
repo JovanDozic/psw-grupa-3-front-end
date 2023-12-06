@@ -11,7 +11,8 @@ import { PagedResults } from 'src/app/shared/model/paged-results.model';
 export class BundleComponent implements OnInit{
   
   public bundles: Bundle[]
-  
+  shouldRenderBundleForm: boolean = false;
+  shouldEdit: boolean = false;
   
   constructor(private service: TourAuthoringService) { }
 
@@ -63,6 +64,15 @@ export class BundleComponent implements OnInit{
         }
       })
     })
+  }
+
+  onAddClicked(){
+    this.shouldEdit = false;
+    this.shouldRenderBundleForm = true;
+  }
+
+  closeModal(){
+    this.shouldRenderBundleForm = false;
   }
 
 }
