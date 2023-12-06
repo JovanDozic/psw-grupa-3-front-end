@@ -18,6 +18,7 @@ import { tap } from 'rxjs';
   providedIn: 'root'
 })
 export class TourAuthoringService {
+    
 
   constructor(private http: HttpClient) { }
 
@@ -200,5 +201,12 @@ export class TourAuthoringService {
   deleteBundle(id: number): Observable<any>{
     return this.http.delete<any>(environment.apiHost + 'author/bundle/delete/' + id);
   }
+  getAllPublicPointsForTours(): Observable<Point []> {
+    return this.http.get<Point []>(environment.apiHost + 'author/tour/getAllPointsForTours');
+  }
+  findToursContainingPoints(selectedPoints: Point[]): Observable<Tour []> {
+    return this.http.put<Tour[]>(environment.apiHost + 'author/tour/findTours', selectedPoints);
+  }
+
 }
 
