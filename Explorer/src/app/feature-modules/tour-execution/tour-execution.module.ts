@@ -11,6 +11,7 @@ import {SharedModule} from "../../shared/shared.module";
 import {LayoutModule} from "../layout/layout.module";
 import { TourAuthoringModule } from '../tour-authoring/tour-authoring.module';
 import { PurchasedToursComponent } from './purchased-tours/purchased-tours.component';
+import { BlogModule } from '../blog/blog.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PurchasedToursComponent } from './purchased-tours/purchased-tours.compo
     RouterModule,
     SharedModule,
     LayoutModule,
-    TourAuthoringModule
+    TourAuthoringModule,
+    BlogModule
   ],
   exports: [
     PositionSimulatorComponent,

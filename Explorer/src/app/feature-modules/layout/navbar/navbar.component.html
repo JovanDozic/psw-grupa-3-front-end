@@ -76,6 +76,10 @@
                             <a class="dropdown-item" [routerLink]="['app-rating-form']">Rate the App</a>
                         </li>
 
+                        <li *ngIf="user && (user.role === 'author' || user.role === 'administrator')">
+                            <a class="dropdown-item" [routerLink]="['hidden-encounter-form']">Create hidden encounter</a>
+                        </li>
+
                         <li *ngIf="user && user.role === 'author'">
                             <a class="dropdown-item" [routerLink]="['points']">Manage points</a>
                             <a class="dropdown-item" [routerLink]="['objects']">Manage objects</a>

@@ -80,7 +80,7 @@ export class ShoppingCartComponent {
 
   onRemoveClicked(t: OrderItem): void {
     let copiedCart = Object.assign({}, this.shoppingCart);
-    let i = copiedCart.items.findIndex((x: OrderItem) => x.idTour === t.idTour);
+    let i = copiedCart.items.findIndex((x: OrderItem) => x.idType === t.idType);
     copiedCart.items.splice(i, 1);
 
     this.service.updateCart(copiedCart).subscribe({

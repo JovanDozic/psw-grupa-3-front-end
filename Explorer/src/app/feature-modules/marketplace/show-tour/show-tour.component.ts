@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { MarketplaceService } from '../marketplace.service';
 import { ShoppingCart } from '../model/shopping-cart.model';
-import { OrderItem } from '../model/order-item.model';
+import { OrderItem, OrderItemType } from '../model/order-item.model';
 
 
 @Component({
@@ -102,17 +102,17 @@ getShoppingCart() {
         }
       }
     })
-
   }
 
   addToCart() {
-    if (this.shoppingCart.items.findIndex((x: OrderItem) => x.idTour === this.tour.id) === -1) {
+    if (this.shoppingCart.items.findIndex((x: OrderItem) => x.idType === this.tour.id && x.type === OrderItemType.singleTour) === -1) {
       const orderItem: OrderItem = {
-        idTour: this.tour.id,
+        idType: this.tour.id,
         name: this.tour.name,
         price: this.tour.price,
         image: this.tour.points[0].picture,
         couponCode: this.couponCode,
+        type: OrderItemType.singleTour
       };
       console.log(orderItem);
 

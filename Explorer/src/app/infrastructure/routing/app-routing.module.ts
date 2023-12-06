@@ -43,6 +43,7 @@ import { ActivateAccountComponent } from '../auth/activate-account/activate-acco
 import { PointsViewComponent } from 'src/app/feature-modules/tour-authoring/points-view/points-view.component';
 import { TourCampaignsComponent } from 'src/app/feature-modules/tour-authoring/tour-campaigns/tour-campaigns.component';
 import { TourCampaignFormComponent } from 'src/app/feature-modules/tour-authoring/tour-campaign-form/tour-campaign-form.component';
+import { HiddenEncounterFormComponent } from 'src/app/feature-modules/encounter/hidden-encounter-form/hidden-encounter-form.component';
 
 
 const routes: Routes = [
@@ -85,6 +86,7 @@ const routes: Routes = [
   {path: 'activate-sale', component: ActivateSaleComponent},
   {path: 'activate', component: ActivateAccountComponent},
   {path: 'points-view', component: PointsViewComponent},
+  {path: 'hidden-encounter-form', component: HiddenEncounterFormComponent},
   {path: 'tour-campaigns', component: TourCampaignsComponent},
   {path: 'tour-campaign-form', component: TourCampaignFormComponent},
 ];
