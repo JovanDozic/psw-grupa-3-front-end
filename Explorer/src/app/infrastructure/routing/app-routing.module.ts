@@ -36,6 +36,7 @@ import { ShowTourComponent } from 'src/app/feature-modules/marketplace/show-tour
 import { AuthorsProblemsComponent } from '../../feature-modules/tour-authoring/authors-problems/authors-problems.component';
 import { TouristsProblemsComponent } from 'src/app/feature-modules/tour-authoring/tourists-problems/tourists-problems.component';
 import { ActivateAccountComponent } from '../auth/activate-account/activate-account.component';
+import { PointsViewComponent } from 'src/app/feature-modules/tour-authoring/points-view/points-view.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -71,7 +72,8 @@ const routes: Routes = [
   {path: 'show-tour/:tourId', component: ShowTourComponent},
   {path: 'authors-problems', component: AuthorsProblemsComponent},
   {path: 'tourists-problems', component: TouristsProblemsComponent},
-  {path: 'activate', component: ActivateAccountComponent}
+  {path: 'activate', component: ActivateAccountComponent},
+  {path: 'points-view', component: PointsViewComponent}
 ];
 
 @NgModule({
