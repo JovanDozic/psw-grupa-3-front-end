@@ -38,6 +38,8 @@
             <table>
                 <thead>
                     <tr>
+                        <th>Select</th>
+                        <th>Id</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Difficult</th>
@@ -48,6 +50,11 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let tour of tours">
+                        <td>
+                            <input type="radio" name="selectedTour" (change)="onSelectTour(tour)" [checked]="selectedTour === tour">
+   
+                        </td>
+                        <td>{{tour.id}}</td>
                         <td>{{tour.name}}</td>
                         <td>{{tour.description}}</td>
                         <td>{{tour.difficult}}</td>
@@ -65,7 +72,7 @@
                    
                 </tbody>
             </table>
-            <button (click)="addMyTours()">Create own</button>
+            <button (click)="shopping()" [disabled]="!selectedTour">Shop tour</button>
         </div>
         
         
