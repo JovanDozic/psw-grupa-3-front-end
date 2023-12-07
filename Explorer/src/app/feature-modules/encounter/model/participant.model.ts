@@ -1,4 +1,3 @@
-export interface Participant{
-    
-    username: string
+export interface Participant {
+    username: string;
 }

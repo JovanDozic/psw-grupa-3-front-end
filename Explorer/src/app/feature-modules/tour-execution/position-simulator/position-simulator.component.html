@@ -9,9 +9,12 @@
     (markerClicked)="handleMarkerClick($event)"
     [points]="points" 
     [encounters]="encounters" 
-    (latitude)="GetLatitude($event)" (longitude)="GetLongitude($event)"></xp-map>
+    [hiddenEncounters]="hiddenEncounters" 
+    (blackMarkerClicked)="handleBlackMarkerClick($event)"
+    (latitude)="GetLatitude($event)" 
+    (longitude)="GetLongitude($event)"></xp-map>
     </div>
-    <div *ngIf="showDiv" >
+    <div *ngIf="showDiv">
       <mat-form-field>
         <mat-label>Longitude</mat-label>
         <input matInput formControlName="longitude" type="number" readonly>
@@ -26,7 +29,9 @@
       <h2>Return to the home page:</h2>
       <button (click)="returnToHomePage()" class="button-exit">Return</button>
       <button (click)="showReviewForm()" class="button" class="btn btn-secondary m-2">Review</button>
+      <button *ngIf="tour.myOwn" (click)="showBlogForm()" class="button" class="btn btn-secondary m-2">Create blog</button>
       <xp-tour-review-form *ngIf="isShowReviewFormEnabled" [tour]="tour"></xp-tour-review-form>
+      <xp-blog-form *ngIf="isCreateBlogFormEnabled" [tour]="tour"></xp-blog-form>
     </div>
     <div *ngIf="showMap" class="d-flex justify-content-between">
       <div>
@@ -38,6 +43,10 @@
     <div>
       <button class="button-social-encounter" *ngIf="clickedMarker"  data-bs-toggle="modal" data-bs-target="#staticBackdrop1" (click)="socialEncounterButton()" > Social Encounter</button>
     </div>
+      </div>
+      <div margin-bottom="10px" margin-top="10px">
+        <button *ngIf="clickedBlackMarker" (click)="hiddenEncounterButton()" mat-raised-button color="primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Hidden Encounter</button>
+      </div>
     </div>
     
   </form>
@@ -82,6 +91,35 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">{{selectedHiddenEncounter.name}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <p><strong>Description:</strong></p>
+            <p>{{ selectedHiddenEncounter.description }}</p>
+          </div>
+            <p><strong>Experience:</strong> {{ selectedHiddenEncounter.experience }}</p>
+            <div *ngIf="canSolveHiddenEncounter" class="text-center">
+              <img src="https://www.hotelfontana-trevi.com/wp-content/uploads/2022/12/beautiful-trevi-fountain-in-rome.jpg" alt="Encounter Image" class="img-fluid" style="max-width: 100%;" />
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button *ngIf="canActivateHiddenEncounter" type="button" class="btn btn-primary" (click)="activateHiddenEncounter()">Activate</button>
+        </div>
+        <div class="modal-footer">
+          <button *ngIf="canSolveHiddenEncounter" type="button" class="btn btn-success" (click)="solveHiddenEncounter()">Solve</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
+
 
 

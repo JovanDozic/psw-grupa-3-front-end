@@ -10,15 +10,18 @@
         </div>
     </mat-grid-tile>
     <mat-grid-tile>
+      <div>
         <div class="image-container">
-        <ngb-carousel>
-          <ng-template ngbSlide>
-            <img src="https://media.tacdn.com/media/attractions-splice-spp-674x446/08/ba/a5/2c.jpg" alt="Image 1" class="d-block w-100">
-          </ng-template>
-          <ng-template ngbSlide>
-            <img src="https://www.trolleytours.com/wp-content/uploads/2016/07/trolley-tours-of-key-west.jpg" alt="Image 2" class="d-block w-100">
-          </ng-template>
-        </ngb-carousel>
+          <img [src]="currentPicture" alt="Slika" class="fit-image">
+          <div class="navigation-buttons">
+            <button mat-icon-button (click)="previousImage()" *ngIf="currentImageIndex > 0" class="prev-button">
+              <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+            <button mat-icon-button (click)="nextImage()" *ngIf="currentImageIndex < images.length - 1" class="next-button">
+              <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+          </div>
+        </div>
       </div>
     </mat-grid-tile>
     <mat-grid-tile class="map-container">
@@ -34,6 +37,9 @@
     </mat-grid-tile>
 </mat-grid-list>
 <div class="button-div"> 
+
+  <input type="text" placeholder="Enter coupon code" (input)="onCouponCodeChange($event)">
+
   <button *ngIf="forCart" mat-raised-button class="buy-button"
   [style.background-color]="'#00BBFF'" [style.color]="'#F7FFF7'" (click)="addToCart()">Add to cart
   </button>

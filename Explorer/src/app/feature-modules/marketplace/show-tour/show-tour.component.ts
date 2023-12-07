@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { MarketplaceService } from '../marketplace.service';
 import { ShoppingCart } from '../model/shopping-cart.model';
-import { OrderItem } from '../model/order-item.model';
+import { OrderItem, OrderItemType } from '../model/order-item.model';
 
 
 @Component({
@@ -28,8 +28,11 @@ export class ShowTourComponent {
   shoppingCart: ShoppingCart;
 
   forCart: boolean = true
-
+  images : string[];
   currentTourId: number
+  couponCode: string = '';
+  currentImageIndex: number = 0;
+  currentPicture: string = '';
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -44,10 +47,45 @@ export class ShowTourComponent {
         this.getShoppingCart();
       });
       this.loadTourData();
+      
     });
   }
 
   @Output() points: Point[] = []
+
+  onCouponCodeChange(event: any) {
+    this.couponCode = event.target.value;
+  }
+
+  getImagesFromPoints(points: any[]): string[] {
+    const images: string[] = [];
+
+    points.forEach(point => {
+      if (point.picture && point.picture.length > 0) {
+        images.push(point.picture.toString());
+      }
+    });
+
+    return images;
+  }
+
+  
+
+
+  previousImage() {
+    if (this.currentImageIndex > 0) {
+      this.currentImageIndex--;
+      this.currentPicture = this.images[this.currentImageIndex];
+    }
+  }
+
+  nextImage() {
+    if (this.currentImageIndex < this.images.length - 1) {
+      this.currentImageIndex++;
+      this.currentPicture = this.images[this.currentImageIndex];
+    }
+  }
+
 
   private loadTourData() {
     if (this.currentTourId) {
@@ -55,6 +93,9 @@ export class ShowTourComponent {
         next: (result: Tour) => {
           this.tour = result;
           console.log(result);
+          this.images = this.getImagesFromPoints(this.tour.points)
+          console.log(this.images)
+          this.currentPicture = this.images[this.currentImageIndex];
         },
         error: (error: any) => {
           console.error(error);
@@ -97,16 +138,17 @@ getShoppingCart() {
         }
       }
     })
-
   }
 
   addToCart() {
-    if (this.shoppingCart.items.findIndex((x: OrderItem) => x.idTour === this.tour.id) === -1) {
+    if (this.shoppingCart.items.findIndex((x: OrderItem) => x.idType === this.tour.id && x.type === OrderItemType.singleTour) === -1) {
       const orderItem: OrderItem = {
-        idTour: this.tour.id,
+        idType: this.tour.id,
         name: this.tour.name,
         price: this.tour.price,
         image: this.tour.points[0].picture,
+        couponCode: this.couponCode,
+        type: "SingleTour"
       };
       console.log(orderItem);
 

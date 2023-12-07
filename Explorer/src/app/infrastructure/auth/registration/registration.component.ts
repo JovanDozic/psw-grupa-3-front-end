@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Registration } from '../model/registration.model';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { ShoppingCart } from 'src/app/feature-modules/marketplace/model/shopping-cart.model';
+import { Wallet } from 'src/app/feature-modules/marketplace/model/wallet.model';
 
 @Component({
   selector: 'xp-registration',
@@ -35,7 +37,19 @@ export class RegistrationComponent {
 
     if (this.registrationForm.valid) {
       this.authService.register(registration).subscribe({
-        next: () => {
+        next: (response) => {
+          const shoppingCart: ShoppingCart = {
+            id: 0,
+            idUser: response.id,
+            items: [],
+          }
+          const wallet: Wallet = {
+            id: 0,
+            userId: response.id,
+            coins: 0
+          }
+          this.authService.createShoppingCart(shoppingCart).subscribe({})
+          this.authService.createWallet(wallet).subscribe({})
           this.router.navigate(['home']);
         },
       });

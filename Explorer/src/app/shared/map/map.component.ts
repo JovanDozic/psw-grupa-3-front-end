@@ -5,6 +5,7 @@ import 'leaflet-routing-machine';
 import { environment } from 'src/env/environment';
 import { Point } from 'src/app/feature-modules/tour-authoring/model/points.model';
 import { Encounter } from 'src/app/feature-modules/encounter/model/encounter.model';
+import { HiddenEncounter } from 'src/app/feature-modules/encounter/model/hidden-encounter.model';
 
 @Component({
   selector: 'xp-map',
@@ -23,6 +24,9 @@ export class MapComponent implements AfterViewInit {
   @Input() points: Point[] = [];
   @Input() encounters: Encounter[] = [];
   private markers : L.Marker[] = [];
+  @Output() blackMarkerClicked: EventEmitter<HiddenEncounter> = new EventEmitter<HiddenEncounter>();
+  @Input() hiddenEncounters: HiddenEncounter[] = [];
+
 
   constructor(private mapService: MapService) { }
 
@@ -40,8 +44,9 @@ export class MapComponent implements AfterViewInit {
         attribution:
           '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }
-    );  
-    
+    );
+
+    console.log(this.points)
     this.points.forEach((point) => {
       const redIcon = L.icon({
         iconUrl: 'https://icons.veryicon.com/png/System/Small%20%26%20Flat/map%20marker.png',
@@ -53,7 +58,7 @@ export class MapComponent implements AfterViewInit {
       this.markers.push(marker);
     }); 
     
-    tiles.addTo(this.map);
+       tiles.addTo(this.map);
     this.registerOnClick();
   }
 
@@ -64,6 +69,28 @@ export class MapComponent implements AfterViewInit {
 
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes['hiddenEncounters']) {
+      console.log('New hiddenEncounters:', this.hiddenEncounters);
+
+      console.log(this.hiddenEncounters)
+      this.hiddenEncounters.forEach((hiddenEncounter) => {
+        const blackIcon = L.icon({
+          iconUrl: 'https://static.thenounproject.com/png/37658-200.png',
+          iconSize: [31, 41],
+          iconAnchor: [13, 41],
+        });
+
+        const marker = new L.Marker([hiddenEncounter.location.latitude, hiddenEncounter.location.longitude], { icon: blackIcon }).addTo(this.map);
+
+        marker.on('click', () => {
+          this.handleBlackMarkerClick(hiddenEncounter);
+        });
+
+        this.markers.push(marker);
+      });
+    }
+
+
     if (changes['encounters']) {
       console.log('New hiddenEncounters:', this.encounters);
       // Additional logic to handle the updated data
@@ -71,23 +98,29 @@ export class MapComponent implements AfterViewInit {
       console.log(this.encounters)
       this.encounters.forEach((encounter) => {
         if(encounter.type == 1){
-          const greenIcon = L.icon({
-            iconUrl: 'https://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Marker-Outside-Chartreuse-icon.png',
-            iconSize: [31, 41],
-            iconAnchor: [13, 41],
+            const greenIcon = L.icon({
+              iconUrl: 'https://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Marker-Outside-Chartreuse-icon.png',
+              iconSize: [31, 41],
+              iconAnchor: [13, 41],
+            });
+
+            const marker = new L.Marker([encounter.location.latitude, encounter.location.longitude], { icon: greenIcon }).addTo(this.map);
+
+            marker.on('click', () => {
+              this.handleGreenMarkerClick(encounter);
+            });
+
+            this.markers.push(marker);
+          }
           });
-
-          const marker = new L.Marker([encounter.location.latitude, encounter.location.longitude], { icon: greenIcon }).addTo(this.map);
-
-          marker.on('click', () => {
-            this.handleGreenMarkerClick(encounter);
-          });
-
-          this.markers.push(marker);
         }
-      });
     }
+      
+
+  handleBlackMarkerClick(hiddenEncounter: HiddenEncounter) {
+    this.blackMarkerClicked.emit(hiddenEncounter);
   }
+
 
   registerOnClick(): void {
     this.map.on('click', (e: any) => {
@@ -151,13 +184,13 @@ export class MapComponent implements AfterViewInit {
       next: (result: any) => {
         console.log(result);
         if (result[0]) {
-          startLatLng =  L.latLng(result[0].lat, result[0].lon);
+          startLatLng = L.latLng(result[0].lat, result[0].lon);
 
           this.mapService.search(endingAddress).subscribe({
             next: (result: any) => {
               console.log(result);
               if (result[0]) {
-                endLatLng =  L.latLng(result[0].lat, result[0].lon);
+                endLatLng = L.latLng(result[0].lat, result[0].lon);
                 this.setRoute(startLatLng, endLatLng);
               }
             },
