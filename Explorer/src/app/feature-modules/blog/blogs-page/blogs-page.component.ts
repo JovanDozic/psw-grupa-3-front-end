@@ -41,7 +41,7 @@ export class BlogsPageComponent implements OnInit {
                   if (blog.title.includes('My tour')) {
                     this.blogs = this.blogs.filter(b => b !== blog);
                   }
-                }else if (blog.userId !== this.loggedInUserId) {
+                }else if (blog.userId !== this.loggedInUserId && blog.title.includes('My tour')) {
                 this.administrationService.getUserFollowers(blog.userId).subscribe((result: any) => {
                   this.followers = result;
                   if(this.followers === null){

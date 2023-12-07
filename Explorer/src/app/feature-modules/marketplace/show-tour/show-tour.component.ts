@@ -28,14 +28,12 @@ export class ShowTourComponent {
   shoppingCart: ShoppingCart;
 
   forCart: boolean = true
-
+  images : string[];
   currentTourId: number
   couponCode: string = '';
+  currentImageIndex: number = 0;
+  currentPicture: string = '';
 
-  onCouponCodeChange(event: any) {
-    this.couponCode = event.target.value;
-  }
-  
   ngOnInit() {
     this.route.params.subscribe(params => {
       const tourIdFromParams = params['tourId'];
@@ -49,10 +47,45 @@ export class ShowTourComponent {
         this.getShoppingCart();
       });
       this.loadTourData();
+      
     });
   }
 
   @Output() points: Point[] = []
+
+  onCouponCodeChange(event: any) {
+    this.couponCode = event.target.value;
+  }
+
+  getImagesFromPoints(points: any[]): string[] {
+    const images: string[] = [];
+
+    points.forEach(point => {
+      if (point.picture && point.picture.length > 0) {
+        images.push(point.picture.toString());
+      }
+    });
+
+    return images;
+  }
+
+  
+
+
+  previousImage() {
+    if (this.currentImageIndex > 0) {
+      this.currentImageIndex--;
+      this.currentPicture = this.images[this.currentImageIndex];
+    }
+  }
+
+  nextImage() {
+    if (this.currentImageIndex < this.images.length - 1) {
+      this.currentImageIndex++;
+      this.currentPicture = this.images[this.currentImageIndex];
+    }
+  }
+
 
   private loadTourData() {
     if (this.currentTourId) {
@@ -60,6 +93,9 @@ export class ShowTourComponent {
         next: (result: Tour) => {
           this.tour = result;
           console.log(result);
+          this.images = this.getImagesFromPoints(this.tour.points)
+          console.log(this.images)
+          this.currentPicture = this.images[this.currentImageIndex];
         },
         error: (error: any) => {
           console.error(error);
