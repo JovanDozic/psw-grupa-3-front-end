@@ -36,7 +36,7 @@
         <button (click)="quitTour()" [routerLink]="['tour-exit']" class="stop-button">Quit</button>
     </div>
     <div>
-      <button *ngIf="clickedMarker"  mat-raised-button data-bs-toggle="modal" data-bs-target="#staticBackdrop1" color="primary" (click)="encounterButton()" >Encounter</button>
+      <button class="button-social-encounter" *ngIf="clickedMarker"  data-bs-toggle="modal" data-bs-target="#staticBackdrop1" (click)="encounterButton()" > Social Encounter</button>
     </div>
     </div>
     
@@ -75,8 +75,8 @@
             <p><strong>Experience:</strong> {{ encounterModal.experience }}</p>
         </div>
         <div class="modal-footer">
-          <button *ngIf="canActivate" type="button" class="btn btn-secondary" (click)="activateEncounter()" >Activate</button>
-          <button *ngIf="!canActivate" type="button" class="btn btn-secondary">Solve</button>
+          <button *ngIf="canActivate" type="button" class="button-social-encounter" (click)="activateSocialEncounter()" >Activate</button>
+          <button *ngIf="canSolve" type="button" class="button-social-encounter" (click)="solveSocialEncounter()">Solve</button>
         </div>
 
       </div>

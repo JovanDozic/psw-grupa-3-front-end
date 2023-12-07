@@ -11,6 +11,7 @@ import { Encounter } from '../../encounter/model/encounter.model';
 import { EncounterService } from '../../encounter/encounter.service';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { ParticipantLocation } from '../../encounter/model/participantLocation.model';
+import { SocialEncounter } from '../../encounter/model/socialEncounter.model';
 
 @Component({
   selector: 'xp-tour-execution-lifecycle',
@@ -39,10 +40,15 @@ showReviewForm() {
     picture: "",
     public: false
   }
+
+selectedSocialEncounter: SocialEncounter
+solvedIds: number[] = []
 clickedMarker: boolean = false
-activatedEncounter: Encounter
+activatedEncounter: Encounter 
 partLocation: ParticipantLocation
-canActivate: boolean
+canActivate: boolean = true
+canSolve: boolean = true
+solvedSocialEncounter: SocialEncounter
 
 encounterModal: Encounter ={
   "id": 0,
@@ -76,7 +82,7 @@ encounterModal: Encounter ={
 };
 
 encounters: Encounter[] = []
- 
+/*
    = [{
     "id": 4,
     "name": "Forest Exploration",
@@ -89,9 +95,7 @@ encounters: Encounter[] = []
     "status": 1,
     "type": 1,
     "participants": [
-      {
-        "username": "string"
-      }
+
     ],
     "completers": [
       {
@@ -123,8 +127,8 @@ encounters: Encounter[] = []
       }
     ]
   }]
-
-  tour: Tour = {
+*/
+  tour: Tour /*= {
     "id": 1,
     "name": "Tour Name",
     "guide": {
@@ -172,7 +176,7 @@ encounters: Encounter[] = []
       "minutes": 0,
     },
     "reviews": []
-  }
+  }*/
   @Output() points: Point[] = []
 
   positionForm = new FormGroup({
@@ -192,7 +196,6 @@ encounters: Encounter[] = []
     sessionStorage.removeItem('isReloaded');
     }
     
-    /*
     this.encounterService.getAllEncounters().subscribe(
       (data) => {
         this.encounters = data.results;
@@ -203,10 +206,9 @@ encounters: Encounter[] = []
         alert(error.error.message);
       }
     )
-    */
-    //this.tour = history.state.tour;
+    
+    this.tour = history.state.tour;
     console.log('Received tour:', this.tour);
-    console.log('Received encounters:', this.encounters);
     this.points = this.tour.points
     this.service.startExecution(this.tour).subscribe({
       next: (result: TourExecution) => {
@@ -217,20 +219,40 @@ encounters: Encounter[] = []
       }
     });
   }
-
-  
+ 
   handleMarkerClick(encounter: Encounter) {
     console.log('Marker clicked:', encounter);
     this.encounterModal = encounter;
+    this.encounterService.getSocialEncounterById(this.encounterModal.id).subscribe({
+      next: (result: SocialEncounter) =>{
+        this.selectedSocialEncounter = result;
+      }})
     if(this.encounterModal.type === 1)
         this.clickedMarker = true;
   }
 
   encounterButton(){
+
+    if(this.selectedSocialEncounter.currentlyInRange.some(participant => participant.username === this.service.user.value.username))
+        this.canSolve = false;
+    else
+        this.canSolve = true;
     if(this.encounterModal.participants.some(participant => participant.username === this.service.user.value.username))
         this.canActivate = false;
+    else
+        this.canActivate = true;
+    if(this.canActivate)
+      this.canSolve = false
     this.clickedMarker = false;
+
   }
+
+/*
+      if (this.solvedIds.includes(this.encounterModal.id)) {
+        this.canSolve = false;
+      }else
+        this.canSolve = true;
+  */
 
   GetLatitude(latitude: number) {
     console.log(latitude);
@@ -264,23 +286,49 @@ encounters: Encounter[] = []
   })
     }
 
-    activateEncounter(){
+    activateSocialEncounter(){
       if(this.encounterModal.name != ""){
         this.partLocation =
          {"username": this.service.user.value.username,
           "latitude": this.updatedExecution.position.latitude,
           "longitude": this.updatedExecution.position.longitude,
                     }
-        this.encounterService.activateEncounter(this.encounterModal.id, this.partLocation).subscribe({
+        this.encounterService.activateSocialEncounter(this.encounterModal.id, this.partLocation).subscribe({
           next: (result: Encounter) => {
                 this.activatedEncounter = result;
-                if(this.activatedEncounter.participants.some(participant => participant.username === this.service.user.value.username))
+                if(this.activatedEncounter.participants.some(participant => participant.username === this.service.user.value.username)){
                     this.canActivate = false;
+                    this.canSolve = true;
+                }
                 console.log("aktivirani: ", result)
           }
         })
+      } 
     }
 
+    solveSocialEncounter(){
+      if(this.encounterModal.name != ""){
+        this.partLocation =
+         {"username": this.service.user.value.username,
+          "latitude": this.updatedExecution.position.latitude,
+          "longitude": this.updatedExecution.position.longitude,
+                    }
+        this.encounterService.solveSocialEncounter(this.encounterModal.id, this.partLocation).subscribe({
+          next: (result: SocialEncounter) => {
+            this.solvedSocialEncounter = result;
+            if (
+              (!this.solvedSocialEncounter.participants || this.solvedSocialEncounter.participants.length === 0) ||
+              this.solvedSocialEncounter.currentlyInRange.some(
+                participant => participant.username === this.service.user.value.username
+              )
+            ) {
+              this.solvedIds.push(this.solvedSocialEncounter.id)
+              this.canSolve = false;
+            }
+            console.log(result);
+          }
+        })
+      } 
     }
 
     completeTour(){

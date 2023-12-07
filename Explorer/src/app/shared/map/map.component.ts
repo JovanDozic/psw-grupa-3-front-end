@@ -1,4 +1,4 @@
-import {Component, AfterViewInit, Output, EventEmitter, Input} from '@angular/core';
+import {Component, AfterViewInit, Output, EventEmitter, Input, SimpleChanges} from '@angular/core';
 import { MapService } from './map.service';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
@@ -53,50 +53,6 @@ export class MapComponent implements AfterViewInit {
       this.markers.push(marker);
     }); 
     
-    console.log("Mapa enc:",this.encounters)
-
-    this.encounters.forEach((encounter) => {
-
-      if(encounter.type == 1){
-
-        const greenIcon = L.icon({
-          iconUrl: 'https://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Marker-Outside-Chartreuse-icon.png',
-          iconSize: [31, 41],
-          iconAnchor: [13, 41],
-        });
-  
-        const marker = new L.Marker([encounter.location.latitude, encounter.location.longitude], { icon: greenIcon }).addTo(this.map);
-        
-        marker.on('click', () => {
-          this.handleGreenMarkerClick(encounter); // Emit marker data on marker click
-        });
-
-        this.markers.push(marker);
-
-      }else{
-
-        const greenIcon = L.icon({
-          iconUrl: 'https://static.thenounproject.com/png/37658-200.png',
-          iconSize: [31, 41],
-          iconAnchor: [13, 41],
-        });
-  
-        const marker = new L.Marker([encounter.location.latitude, encounter.location.longitude], { icon: greenIcon }).addTo(this.map);
-        
-        marker.on('click', () => {
-          this.handleGreenMarkerClick(encounter); // Emit marker data on marker click
-        });
-
-        this.markers.push(marker);
-      }
-      
-
-      
-
-      
-     
-
-    });  
     tiles.addTo(this.map);
     this.registerOnClick();
   }
@@ -106,12 +62,31 @@ export class MapComponent implements AfterViewInit {
     this.markerClicked.emit(encounter); // Emitting the encounter data when a green marker is clicked
   }
 
-  ngOnChanges(){
-    //console.log('Encounters received:', this.encounters);
-    this.markers.forEach((marker) => {
-      this.map.removeLayer(marker);
-    })
-    
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['encounters']) {
+      console.log('New hiddenEncounters:', this.encounters);
+      // Additional logic to handle the updated data
+
+      console.log(this.encounters)
+      this.encounters.forEach((encounter) => {
+        if(encounter.type == 1){
+          const greenIcon = L.icon({
+            iconUrl: 'https://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Marker-Outside-Chartreuse-icon.png',
+            iconSize: [31, 41],
+            iconAnchor: [13, 41],
+          });
+
+          const marker = new L.Marker([encounter.location.latitude, encounter.location.longitude], { icon: greenIcon }).addTo(this.map);
+
+          marker.on('click', () => {
+            this.handleGreenMarkerClick(encounter);
+          });
+
+          this.markers.push(marker);
+        }
+      });
+    }
   }
 
   registerOnClick(): void {
