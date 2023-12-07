@@ -92,7 +92,7 @@ export class MapComponent implements AfterViewInit {
 
 
     if (changes['encounters']) {
-      console.log('New hiddenEncounters:', this.encounters);
+      console.log('New Encounters:', this.encounters);
       // Additional logic to handle the updated data
 
       console.log(this.encounters)

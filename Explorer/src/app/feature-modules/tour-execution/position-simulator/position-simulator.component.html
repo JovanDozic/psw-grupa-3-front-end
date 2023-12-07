@@ -43,7 +43,7 @@
     <div>
       <button class="button-social-encounter" *ngIf="clickedMarker"  data-bs-toggle="modal" data-bs-target="#staticBackdrop1" (click)="socialEncounterButton()" > Social Encounter</button>
     </div>
-      </div>
+     
       <div margin-bottom="10px" margin-top="10px">
         <button *ngIf="clickedBlackMarker" (click)="hiddenEncounterButton()" mat-raised-button color="primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Hidden Encounter</button>
       </div>
@@ -116,9 +116,8 @@
           <button *ngIf="canSolveHiddenEncounter" type="button" class="btn btn-success" (click)="solveHiddenEncounter()">Solve</button>
         </div>
       </div>
-    </div>
-  </div>
-
+   </div>
+  </div>
 </div>
 
 
