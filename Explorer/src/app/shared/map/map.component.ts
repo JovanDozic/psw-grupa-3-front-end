@@ -1,9 +1,10 @@
-import {Component, AfterViewInit, Output, EventEmitter, Input} from '@angular/core';
+import { Component, AfterViewInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { MapService } from './map.service';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import { environment } from 'src/env/environment';
 import { Point } from 'src/app/feature-modules/tour-authoring/model/points.model';
+import { HiddenEncounter } from 'src/app/feature-modules/encounter/model/hidden-encounter.model';
 
 @Component({
   selector: 'xp-map',
@@ -18,8 +19,10 @@ export class MapComponent implements AfterViewInit {
   endingAddress: string = '';
   @Output() longitude: EventEmitter<number> = new EventEmitter<number>();
   @Output() latitude: EventEmitter<number> = new EventEmitter<number>();
+  @Output() blackMarkerClicked: EventEmitter<HiddenEncounter> = new EventEmitter<HiddenEncounter>();
   @Input() points: Point[] = [];
-  private markers : L.Marker[] = [];
+  @Input() hiddenEncounters: HiddenEncounter[] = [];
+  private markers: L.Marker[] = [];
 
   constructor(private mapService: MapService) { }
 
@@ -37,8 +40,9 @@ export class MapComponent implements AfterViewInit {
         attribution:
           '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }
-    );  
-    
+    );
+
+    console.log(this.points)
     this.points.forEach((point) => {
       const redIcon = L.icon({
         iconUrl: 'https://icons.veryicon.com/png/System/Small%20%26%20Flat/map%20marker.png',
@@ -48,16 +52,38 @@ export class MapComponent implements AfterViewInit {
 
       const marker = new L.Marker([point.latitude, point.longitude], { icon: redIcon }).addTo(this.map);
       this.markers.push(marker);
-    });  
+    });
+
     tiles.addTo(this.map);
     this.registerOnClick();
   }
 
-  ngOnChanges(){
-    this.markers.forEach((marker) => {
-      this.map.removeLayer(marker);
-    })
-    
+
+  handleBlackMarkerClick(hiddenEncounter: HiddenEncounter) {
+    this.blackMarkerClicked.emit(hiddenEncounter);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['hiddenEncounters']) {
+      console.log('New hiddenEncounters:', this.hiddenEncounters);
+
+      console.log(this.hiddenEncounters)
+      this.hiddenEncounters.forEach((hiddenEncounter) => {
+        const blackIcon = L.icon({
+          iconUrl: 'https://static.thenounproject.com/png/37658-200.png',
+          iconSize: [31, 41],
+          iconAnchor: [13, 41],
+        });
+
+        const marker = new L.Marker([hiddenEncounter.location.latitude, hiddenEncounter.location.longitude], { icon: blackIcon }).addTo(this.map);
+
+        marker.on('click', () => {
+          this.handleBlackMarkerClick(hiddenEncounter);
+        });
+
+        this.markers.push(marker);
+      });
+    }
   }
 
   registerOnClick(): void {
@@ -122,13 +148,13 @@ export class MapComponent implements AfterViewInit {
       next: (result: any) => {
         console.log(result);
         if (result[0]) {
-          startLatLng =  L.latLng(result[0].lat, result[0].lon);
+          startLatLng = L.latLng(result[0].lat, result[0].lon);
 
           this.mapService.search(endingAddress).subscribe({
             next: (result: any) => {
               console.log(result);
               if (result[0]) {
-                endLatLng =  L.latLng(result[0].lat, result[0].lon);
+                endLatLng = L.latLng(result[0].lat, result[0].lon);
                 this.setRoute(startLatLng, endLatLng);
               }
             },
