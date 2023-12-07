@@ -48,6 +48,7 @@ export class HiddenEncounterFormComponent implements OnInit {
       }
 
     const hiddenEncounter: HiddenEncounter = {
+      id: 0,
       name: this.encounterForm.value.name || "",
       description: this.encounterForm.value.description || "",
       location: EncounterLocation || null,

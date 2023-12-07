@@ -1,9 +1,10 @@
-import { Component, AfterViewInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
+import {Component, AfterViewInit, Output, EventEmitter, Input, SimpleChanges} from '@angular/core';
 import { MapService } from './map.service';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import { environment } from 'src/env/environment';
 import { Point } from 'src/app/feature-modules/tour-authoring/model/points.model';
+import { Encounter } from 'src/app/feature-modules/encounter/model/encounter.model';
 import { HiddenEncounter } from 'src/app/feature-modules/encounter/model/hidden-encounter.model';
 
 @Component({
@@ -19,10 +20,13 @@ export class MapComponent implements AfterViewInit {
   endingAddress: string = '';
   @Output() longitude: EventEmitter<number> = new EventEmitter<number>();
   @Output() latitude: EventEmitter<number> = new EventEmitter<number>();
-  @Output() blackMarkerClicked: EventEmitter<HiddenEncounter> = new EventEmitter<HiddenEncounter>();
+  @Output() markerClicked: EventEmitter<Encounter> = new EventEmitter<Encounter>();
   @Input() points: Point[] = [];
+  @Input() encounters: Encounter[] = [];
+  private markers : L.Marker[] = [];
+  @Output() blackMarkerClicked: EventEmitter<HiddenEncounter> = new EventEmitter<HiddenEncounter>();
   @Input() hiddenEncounters: HiddenEncounter[] = [];
-  private markers: L.Marker[] = [];
+
 
   constructor(private mapService: MapService) { }
 
@@ -52,16 +56,17 @@ export class MapComponent implements AfterViewInit {
 
       const marker = new L.Marker([point.latitude, point.longitude], { icon: redIcon }).addTo(this.map);
       this.markers.push(marker);
-    });
-
-    tiles.addTo(this.map);
+    }); 
+    
+       tiles.addTo(this.map);
     this.registerOnClick();
   }
 
-
-  handleBlackMarkerClick(hiddenEncounter: HiddenEncounter) {
-    this.blackMarkerClicked.emit(hiddenEncounter);
+  private handleGreenMarkerClick(encounter: Encounter) {
+    //console.log('Green marker clicked:', encounter);
+    this.markerClicked.emit(encounter); // Emitting the encounter data when a green marker is clicked
   }
+
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['hiddenEncounters']) {
@@ -84,7 +89,38 @@ export class MapComponent implements AfterViewInit {
         this.markers.push(marker);
       });
     }
+
+
+    if (changes['encounters']) {
+      console.log('New Encounters:', this.encounters);
+      // Additional logic to handle the updated data
+
+      console.log(this.encounters)
+      this.encounters.forEach((encounter) => {
+        if(encounter.type == 1){
+            const greenIcon = L.icon({
+              iconUrl: 'https://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Marker-Outside-Chartreuse-icon.png',
+              iconSize: [31, 41],
+              iconAnchor: [13, 41],
+            });
+
+            const marker = new L.Marker([encounter.location.latitude, encounter.location.longitude], { icon: greenIcon }).addTo(this.map);
+
+            marker.on('click', () => {
+              this.handleGreenMarkerClick(encounter);
+            });
+
+            this.markers.push(marker);
+          }
+          });
+        }
+    }
+      
+
+  handleBlackMarkerClick(hiddenEncounter: HiddenEncounter) {
+    this.blackMarkerClicked.emit(hiddenEncounter);
   }
+
 
   registerOnClick(): void {
     this.map.on('click', (e: any) => {
