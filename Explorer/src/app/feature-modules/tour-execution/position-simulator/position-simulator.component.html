@@ -105,8 +105,8 @@
             <p>{{ selectedHiddenEncounter.description }}</p>
           </div>
             <p><strong>Experience:</strong> {{ selectedHiddenEncounter.experience }}</p>
-            <div *ngIf="canSolveHiddenEncounter" class="text-center">
-              <img src="https://www.hotelfontana-trevi.com/wp-content/uploads/2022/12/beautiful-trevi-fountain-in-rome.jpg" alt="Encounter Image" class="img-fluid" style="max-width: 100%;" />
+            <div *ngIf="canSolveHiddenEncounter">
+              <img src="{{selectedHiddenEncounter.image}}" class="img-fluid" alt="" srcset="">
             </div>
         </div>
         <div class="modal-footer">
