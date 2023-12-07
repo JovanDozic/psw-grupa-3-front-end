@@ -10,6 +10,8 @@ import { PointTask } from '../model/point-task.model';
 import { HiddenEncounter } from '../../encounter/model/hidden-encounter.model';
 import { EncounterService } from '../../encounter/encounter.service';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
+import { ParticipantLocation } from '../../encounter/model/participant-location.model';
+import { Encounter } from '../../encounter/model/encounter.model';
 
 @Component({
   selector: 'xp-tour-execution-lifecycle',
@@ -33,11 +35,49 @@ showBlogForm() {
   tour: Tour
   doneTasks: PointTask[]
   hiddenEncounters: any[] = []
-  selectedHiddenEncounter: HiddenEncounter
+  selectedHiddenEncounter: HiddenEncounter = {
+    "id": 0,
+    "name": "",
+    "description": "Encounter Description",
+    "location": {
+      "latitude": 45.248376910202616,
+      "longitude": 19.836076282798334,
+    },
+    "experience": 50,
+    "status": 2,
+    "type": 1,
+    "radius": 100,
+    "participants": [],
+    "completers": [],
+    "image": "",
+    "pointLocation": {
+      "latitude": 0,
+      "longitude": 0
+    }
+  }
+  partLocation: ParticipantLocation
   showMap: boolean = true;
   showMessage: boolean = false;
   showDiv: boolean = false
   clickedBlackMarker: boolean = false
+  canActivateHiddenEncounter: boolean = true
+  canSolveHiddenEncounter: boolean = false
+
+  activatedHiddenEncounter: Encounter = {
+    "id": 0,
+    "name": "",
+    "description": "Encounter Description",
+    "location": {
+      "latitude": 45.248376910202616,
+      "longitude": 19.836076282798334,
+    },
+    "experience": 50,
+    "status": 2,
+    "type": 1,
+    "radius": 100,
+    "participants": [],
+    "completers": []
+  }
 
   lastTaskPoint: Point = {
     longitude: 1,
@@ -48,45 +88,6 @@ showBlogForm() {
     public: true,
   }
 
-  // tour: Tour = {
-  //   "id": 1,
-  //   "name": "tura mrtva",
-  //   "tags": [
-  //     {
-  //       "Name": "city"
-  //     }
-  //   ],
-  //   "price": 1000,
-  //   "length": 100,
-  //   "points": [
-  //     {
-  //       "name": "mrtva tacka",
-  //       "public": true,
-  //       "picture": "string",
-  //       "latitude": 45.2517365956994,
-  //       "longitude": 19.83966064452716,
-  //       "description": "opsi tacke"
-  //     }
-  //   ],
-  //   "status": "1",
-  //   "reviews": [],
-  //   "authorId": 1,
-  //   "difficult": 1,
-  //   "arhiveTime": "2023-12-06T13:35:26.746Z",
-  //   "description": "opis mrtvi",
-  //   "publishTime": "2023-12-06T13:35:26.746Z",
-  //   "requiredTime":
-  //   {
-  //     "transportType": "0",
-  //     "minutes": 10
-  //   },
-  //   "guide":
-  //   {
-  //     "name": "string",
-  //     "surname": "string",
-  //     "email": "string"
-  //   }
-  // }
   @Output() points: Point[] = []
 
   positionForm = new FormGroup({
@@ -123,12 +124,58 @@ showBlogForm() {
     });
   }
 
-
   handleBlackMarkerClick(hiddenEncounter: HiddenEncounter) {
-    //console.log('Marker clicked:', encounter);
-    //this.encounterModal = encounter;
-    //if(this.encounterModal.type === 1)
-    //   this.clickedMarker = true;
+    this.selectedHiddenEncounter = hiddenEncounter;
+    if (this.selectedHiddenEncounter.type == 2) {
+      this.clickedBlackMarker = true;
+    }
+  }
+
+  hiddenEncounterButton() {
+    this.clickedBlackMarker = false;
+  }
+
+  activateHiddenEncounter() {
+    if (this.selectedHiddenEncounter.id != null) {
+      this.partLocation =
+      {
+        "username": this.service.user.value.username,
+        "latitude": this.updatedExecution.position.latitude,
+        "longitude": this.updatedExecution.position.longitude,
+      }
+
+      this.encounterService.activateHiddenEncounter(this.selectedHiddenEncounter.id, this.partLocation).subscribe({
+        next: (result: Encounter) => {
+          this.activatedHiddenEncounter = result;
+          console.log(this.service.user.value.username)
+          if (this.activatedHiddenEncounter && this.activatedHiddenEncounter.participants?.some(participant => participant.username === this.service.user.value.username)) {
+            this.canActivateHiddenEncounter = false;
+            this.canSolveHiddenEncounter = true;
+          }
+        }
+      })
+    }
+  }
+
+
+  solveHiddenEncounter() {
+    if (this.selectedHiddenEncounter.id != null) {
+      this.partLocation =
+      {
+        "username": this.service.user.value.username,
+        "latitude": this.updatedExecution.position.latitude,
+        "longitude": this.updatedExecution.position.longitude,
+      }
+      this.encounterService.solveHiddenEncounter(this.selectedHiddenEncounter.id, this.partLocation).subscribe({
+        next: (result: HiddenEncounter) => {
+          this.activatedHiddenEncounter = result;
+          if (this.activatedHiddenEncounter && this.activatedHiddenEncounter.completers?.some(completer => completer.username === this.service.user.value.username)) {
+            this.canSolveHiddenEncounter = false;
+            this.canActivateHiddenEncounter = true;
+          }
+        }
+      })
+    }
   }
 
   GetLatitude(latitude: number) {
