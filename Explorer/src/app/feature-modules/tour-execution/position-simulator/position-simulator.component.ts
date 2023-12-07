@@ -26,9 +26,9 @@ export class PositionSimulatorComponent implements OnInit, OnChanges {
     this.isShowReviewFormEnabled = !this.isShowReviewFormEnabled;
   }
 
-showBlogForm() {
-  this.isCreateBlogFormEnabled = !this.isShowReviewFormEnabled;
-}
+  showBlogForm() {
+    this.isCreateBlogFormEnabled = !this.isShowReviewFormEnabled;
+  }
 
   tourExecution: TourExecution
   updatedExecution: TourExecution
