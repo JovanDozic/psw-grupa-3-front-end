@@ -41,142 +41,49 @@ showReviewForm() {
     public: false
   }
 
-selectedSocialEncounter: SocialEncounter
-solvedIds: number[] = []
-clickedMarker: boolean = false
-activatedEncounter: Encounter 
-partLocation: ParticipantLocation
-canActivate: boolean = true
-canSolve: boolean = true
-solvedSocialEncounter: SocialEncounter
+  selectedSocialEncounter: SocialEncounter
+  clickedMarker: boolean = false
+  activatedEncounter: Encounter 
+  partLocation: ParticipantLocation
+  canActivate: boolean = true
+  canSolve: boolean = true
+  solvedSocialEncounter: SocialEncounter
 
-encounterModal: Encounter ={
-  "id": 0,
-  "name": "",
-  "description": "Encounter Description",
-  "location": {
-    "latitude": 45.248376910202616,
-    "longitude": 19.836076282798334,
-  },
-  "experience": 50,
-  "status": 2,
-  "type": 1,
-  "participants": [
-    {
-      "username": "Participant 1",
-    },
-    {
-      "username": "Participant 2",
-    }
-  ],
-  "completers": [
-    {
-      "username": "Completer 1",
-      "completionDate": undefined
-    },
-    {
-      "username": "Completer 2",
-      "completionDate": undefined
-    }
-  ]
-};
-
-encounters: Encounter[] = []
-/*
-   = [{
-    "id": 4,
-    "name": "Forest Exploration",
-    "description": "A guided tour through a dense forest. Explore the diverse flora and fauna, witness breathtaking landscapes, and learn about the ecological significance of the forest.",
+  encounterModal: Encounter ={
+    "id": 0,
+    "name": "",
+    "description": "Encounter Description",
     "location": {
+      "latitude": 45.248376910202616,
       "longitude": 19.836076282798334,
-      "latitude": 45.248376910202616
-    },
-    "experience": 0,
-    "status": 1,
-    "type": 1,
-    "participants": [
-
-    ],
-    "completers": [
-      {
-        "username": "string",
-        "completionDate": undefined
-      }
-    ]
-  },
-  {
-    "id": 5,
-    "name": "Historic City Walk",
-    "description": "Embark on a captivating walk through the ancient streets of the city. Discover historical landmarks, learn about centuries-old architecture, and delve into captivating stories of the city's past.",
-    "location": {
-      "latitude":  45.24934374669789,
-      "longitude": 19.844318097227706,
     },
     "experience": 50,
     "status": 2,
-    "type": 2,
+    "type": 1,
     "participants": [
       {
-        "username": "string"
+        "username": "Participant 1",
+      },
+      {
+        "username": "Participant 2",
       }
     ],
     "completers": [
       {
-        "username": "string",
+        "username": "Completer 1",
+        "completionDate": undefined
+      },
+      {
+        "username": "Completer 2",
         "completionDate": undefined
       }
     ]
-  }]
-*/
-  tour: Tour /*= {
-    "id": 1,
-    "name": "Tour Name",
-    "guide": {
-      "name": "Guide Name",
-      "email": "guide@example.com",
-      "surname": "Guide Surname"
-    },
-    "price": 50,
-    "points": [
-      {
-        "name": "Prva tacka",
-        "public": true,
-        "picture": "nista",
-        "latitude": 45.2517365956994,
-        "longitude": 19.83966064452716,
-        "description": "prva nista"
-      },
-      {
-        "name": "Druga tacka",
-        "public": true,
-        "picture": "nista",
-        "latitude": 45.24806268406058,
-        "longitude": 19.84902279858312,
-        "description": "druga nista"
-      },
-      {
-        "name": "treca",
-        "public": true,
-        "picture": "nista",
-        "latitude": 45.239239491988556,
-        "longitude": 19.850053025386785,
-        "description": "treca nista"
-      }
-    ],
-    "status": "Published",
-    "difficult": 2,
-    "description": "Tour Description",
-    "tags": undefined,
-    "authorId": 0,
-    "length": 0,
-    "publishTime": '',
-    "arhiveTime": '',
-    "requiredTime": {
-      "transportType": "",
-      "minutes": 0,
-    },
-    "reviews": []
-  }*/
+  };
+
+  encounters: Encounter[] = []
+
+  tour: Tour 
+
   @Output() points: Point[] = []
 
   positionForm = new FormGroup({
@@ -231,28 +138,32 @@ encounters: Encounter[] = []
         this.clickedMarker = true;
   }
 
-  encounterButton(){
+  socialEncounterButton(){
 
-    if(this.selectedSocialEncounter.currentlyInRange.some(participant => participant.username === this.service.user.value.username))
-        this.canSolve = false;
-    else
-        this.canSolve = true;
-    if(this.encounterModal.participants.some(participant => participant.username === this.service.user.value.username))
-        this.canActivate = false;
-    else
-        this.canActivate = true;
-    if(this.canActivate)
+    if(this.encounterModal.completers.some(participant => participant.username === this.service.user.value.username)){
       this.canSolve = false
-    this.clickedMarker = false;
-
+      this.canActivate = false     
   }
 
-/*
-      if (this.solvedIds.includes(this.encounterModal.id)) {
+    if(!this.selectedSocialEncounter.currentlyInRange.some(participant => participant.username === this.service.user.value.username) &&
+   this.encounterModal.completers.some(participant => participant.username === this.service.user.value.username)
+   || (this.selectedSocialEncounter.currentlyInRange.some(participant => participant.username === this.service.user.value.username) &&
+   !this.encounterModal.completers.some(participant => participant.username === this.service.user.value.username)))
         this.canSolve = false;
-      }else
+    else
         this.canSolve = true;
-  */
+
+    if(!this.encounterModal.participants.some(participant => participant.username === this.service.user.value.username)
+    && !this.encounterModal.completers.some(participant => participant.username === this.service.user.value.username))
+        this.canActivate = true;
+    else
+        this.canActivate = false;
+
+    if(this.canActivate)
+      this.canSolve = false
+
+    this.clickedMarker = false;
+  }
 
   GetLatitude(latitude: number) {
     console.log(latitude);
@@ -299,6 +210,7 @@ encounters: Encounter[] = []
                 if(this.activatedEncounter.participants.some(participant => participant.username === this.service.user.value.username)){
                     this.canActivate = false;
                     this.canSolve = true;
+                    this.ngOnInit();
                 }
                 console.log("aktivirani: ", result)
           }
@@ -322,8 +234,8 @@ encounters: Encounter[] = []
                 participant => participant.username === this.service.user.value.username
               )
             ) {
-              this.solvedIds.push(this.solvedSocialEncounter.id)
               this.canSolve = false;
+              this.ngOnInit();
             }
             console.log(result);
           }
