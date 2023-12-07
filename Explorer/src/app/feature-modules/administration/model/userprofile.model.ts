@@ -7,4 +7,6 @@ export interface Person {
     bio: string;
     quote: string;
     email: string;
+    xp: number;
+    level: number;
 }

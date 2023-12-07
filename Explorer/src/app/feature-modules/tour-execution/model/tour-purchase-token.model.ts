@@ -1,7 +1,7 @@
 export interface TourPurchaseToken{
     id: number;
     tourName: string;
-    tourId: number;
+    typeId: number;
     purchaseTime: Date;
     tourImage: string;
 }

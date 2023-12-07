@@ -13,10 +13,11 @@ export interface Tour {
     price: number,
     points: Point[],
     authorId: number
-    guide: Guide,
     length: number,
+    guide: Guide,
     publishTime: string,
     arhiveTime: string,
     requiredTime: RequiredTime,
     reviews: TourReview[],
+    myOwn?: boolean
 }

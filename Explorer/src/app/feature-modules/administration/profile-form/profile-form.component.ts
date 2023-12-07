@@ -40,7 +40,9 @@ export class ProfileFormComponent implements OnChanges {
       surname: this.profileForm.value.surname || "",
       bio: this.profileForm.value.bio || "",
       quote: this.profileForm.value.quote || "",
-      email: this.profile.email
+      email: this.profile.email,
+      xp: this.profile.xp,
+      level: this.profile.level
     };
     person.id = this.profile.id;
     console.log(person);
