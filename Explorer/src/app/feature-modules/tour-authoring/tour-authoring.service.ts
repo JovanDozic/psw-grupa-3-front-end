@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/env/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { Tour } from './model/tour.model';
@@ -16,6 +16,8 @@ import { tap } from 'rxjs';
 import { Sale } from '../marketplace/model/sale.model';
 import { Bundle } from './model/bundle.model';
 import { Campaign } from './model/campaign.model';
+import { OrderItem } from '../marketplace/model/order-item.model';
+import { ShoppingCart } from '../marketplace/model/shopping-cart.model';
 
 @Injectable({
   providedIn: 'root'
@@ -232,6 +234,10 @@ export class TourAuthoringService {
 
   getCampaigns(touristId: number): Observable<PagedResults<Campaign>> {
     return this.http.get<PagedResults<Campaign>>(environment.apiHost + 'tourist/campaign/getAll/' + touristId);
+  }
+  addToCart(orderItem: OrderItem, userId: number): Observable<ShoppingCart>{
+    const queryParams  = new HttpParams().set('userId', userId);
+    return this.http.post<ShoppingCart>(environment.apiHost + 'tourist/order/addToCart', orderItem, { params: queryParams });
   }
 }
 

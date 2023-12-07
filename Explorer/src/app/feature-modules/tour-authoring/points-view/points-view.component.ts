@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { TourAuthoringService } from '../tour-authoring.service';
 import { Point } from '../model/points.model';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { Tour } from '../model/tour.model';
+import { OrderItem, OrderItemType } from '../../marketplace/model/order-item.model';
+import { AuthService } from 'src/app/infrastructure/auth/auth.service';
+import { User } from 'src/app/infrastructure/auth/model/user.model';
 
 @Component({
   selector: 'xp-points-view',
@@ -14,11 +17,17 @@ export class PointsViewComponent implements OnInit {
   selectedPoints: Point[] = [];
   tours: Tour[]=[];
   containsUnselectedPoints = true;
+  selectedTour: Tour;
 
-  constructor(private service: TourAuthoringService) {}
+  user: User;
+  constructor(private service: TourAuthoringService,private authService: AuthService) {}
+  
 
   ngOnInit(): void {
     this.getPoints();
+    this.authService.user$.subscribe(user => {
+      this.user = user;
+    })
   }
 
 
@@ -47,45 +56,57 @@ export class PointsViewComponent implements OnInit {
           this.tours = data;
           
     
-          
         });
       }
 
       checkForUnselectedPoints(tour: Tour): boolean {
-        const tourPoints = tour.points.map((point: Point) => point.name); // Promenite "name" ako je to jedinstveni identifikator
-        const selectedPoints = this.selectedPoints.map((point: Point) => point.name); // Takođe promenite ovde
-    
-        // Ukoliko ne možete koristiti isto polje za identifikaciju, možete pokušati kombinovati različita polja
-        // const tourPoints = tour.points.map((point: Point) => `${point.latitude}-${point.longitude}`);
-        // const selectedPoints = this.selectedPoints.map((point: Point) => `${point.latitude}-${point.longitude}`);
+        const tourPoints = tour.points.map((point: Point) => point.name); 
+        const selectedPoints = this.selectedPoints.map((point: Point) => point.name); 
     
         return tourPoints.some(pointName => !selectedPoints.includes(pointName));
     }
-      addMyTours(): void {
-     
+
+
+    onSelectTour(tour: Tour): void {
+      if (this.selectedTour === tour) {
+         
+      } else {
+        this.selectedTour = tour; 
       }
+    }
 
-      /*findTours(): void {
-        if (this.selectedPoints.length < 2) {
-          console.error('List must contain at least 2 points.');
-          return;
+    shopping(): void {
+      if (!this.selectedTour || !this.selectedTour.id || this.selectedTour.id === 0) {
+        throw new Error('Invalid TourId');
+      }
+    
+      const orderItem: OrderItem = {
+        idType: this.selectedTour.id,
+        name: this.selectedTour.name,
+        price: this.selectedTour.price,
+        image: this.selectedTour.points[0].picture,
+        type: OrderItemType.singleTour,
+        couponCode:""
+      };
+    
+      console.log(orderItem);
+     
+      this.service.addToCart(orderItem, this.user?.id).subscribe(
+        () => {
+          
+          alert('Successfully added to cart!');
+        },
+        (error) => {
+          
+          console.error(error);
+          alert('Error while adding to cart!');
         }
+      );
       
-        this.service.findToursContainingPoints(this.selectedPoints).subscribe({
-          next: (result: PagedResults<Tour>) => {
-            this.tours = result.results;
-            
-          },
-          error: (error) => {
-            console.error('An error occurred:', error);
-            
-          }
-        });
-      }*/
+    }
+    
+    
+    
+
+      
   }
-
-  
-  
-
-
-  
