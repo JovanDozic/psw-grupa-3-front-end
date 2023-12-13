@@ -8,12 +8,14 @@ import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { SocialEncounterFormComponent } from './social-encounter-form/social-encounter-form.component';
 
 
 
 @NgModule({
   declarations: [
-    HiddenEncounterFormComponent
+    HiddenEncounterFormComponent,
+    SocialEncounterFormComponent
   ],
   imports: [
     CommonModule, 

@@ -6,10 +6,12 @@
     </div>
     <div class="map-container">
     <xp-map  
-    (markerClicked)="handleMarkerClick($event)"
     [points]="points" 
     [socialEncounters]="socialEncounters" 
-    [hiddenEncounters]="hiddenEncounters" 
+    [hiddenEncounters]="hiddenEncounters"
+    [miscEncounters]="miscEncounters"
+    (markerClicked)="handleMarkerClick($event)"
+    (yellowMarkerClicked)="handleYellowMarkerClick($event)"
     (blackMarkerClicked)="handleBlackMarkerClick($event)"
     (latitude)="GetLatitude($event)" 
     (longitude)="GetLongitude($event)"></xp-map>
@@ -40,12 +42,16 @@
       <div   margin-bottom="10px" margin-top="10px">
         <button (click)="quitTour()" [routerLink]="['tour-exit']" class="stop-button">Quit</button>
     </div>
-    <div>
+    <div >
       <button class="button-social-encounter" *ngIf="clickedMarker"  data-bs-toggle="modal" data-bs-target="#staticBackdrop1" (click)="socialEncounterButton()" > Social Encounter</button>
     </div>
      
       <div margin-bottom="10px" margin-top="10px">
         <button *ngIf="clickedBlackMarker" (click)="hiddenEncounterButton()" mat-raised-button color="primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Hidden Encounter</button>
+      </div>
+
+      <div >
+        <button *ngIf="clickedYellowMarker" (click)="miscEncounterButton()" mat-raised-button color="primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">Misc Encounter</button>
       </div>
     </div>
     
@@ -118,6 +124,31 @@
       </div>
    </div>
   </div>
+
+  <div  #staticBackdrop class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">{{miscModal.name}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <p><strong>Description:</strong></p>
+            <p>{{ miscModal.description }}</p>
+          </div>
+            <p><strong>Longitude: </strong> {{miscModal.location.longitude}} <strong> Latitude:</strong> {{ encounterModal.location.latitude }} </p>
+            <p><strong>Experience:</strong> {{ miscModal.experience }}</p>
+        </div>
+        <div class="modal-footer">
+          <button *ngIf="canActivate" type="button" class="button-social-encounter" (click)="activateMiscEncounter()" >Activate</button>
+          <button *ngIf="canSolve" type="button" class="button-social-encounter" (click)="solveMiscEncounter()">Solve</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 </div>
 
 
