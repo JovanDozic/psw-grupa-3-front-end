@@ -3,20 +3,101 @@
     <div class="row">
         <h1 class="text-center">Create social encounter</h1>
     </div>
-    <div class="row">
-        <form>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+    <div class="row justify-content-center form-control-lg">
+        <div class="col-6 border p-4">
+            <form [formGroup]="socialEncounterForm">
+                <div class="mb-3">
+                  <label class="form-label">Name</label>
+                  <input type="text" formControlName="name" class="form-control" >
+                </div>
+                <div class="mb-3 ">
+                    <label class="form-label">Description</label>
+                    <textarea type="text" formControlName="description" class="form-control"></textarea>
+                </div>
+                <div class="mb-3 ">
+                    <label class="form-label">Experience</label>
+                    <input type="number" formControlName="experience" class="form-control">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Radius</label>
+                  <input type="number" formControlName="radius" class="form-control">
+                </div>
+                <div class="mb-3 ">
+                    <label class="form-label">Required participants</label>
+                    <input type="number" formControlName="participantsNumber" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <p class="d-inline-flex gap-1">
+                        <input class="btn-check" id="btn-check-4" checked  autocomplete="off" type="checkbox" for="btn-check-4" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-pressed="true" aria-controls="collapseExample">
+                        <label class="btn form-label" for="btn-check-4">Location</label>
+                        
+                      </p>
+                      <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            <div>
+                                <label class="form-label">Latitude:</label>
+                                <input type="number" class="form-control" formControlName="latitude" >
+                              </div>
+                              <div>
+                                <label class="form-label">Longitude:</label>
+                                <input type="number" class="form-control" formControlName="longitude">
+                              </div>
+                        </div>
+
+                      </div>
+                  </div>
+                <button (click)="createEncounter()" class="btn btn-success float-end">Create</button>
+              </form>
+
+        </div>
     </div>
-    
 
 </div>
+<!-- 19.839293446999974
+45.24139102716511 -->
+<!-- <h1>Create hidden encounter:</h1>
+<form [formGroup]="encounterForm">
+    <div>
+        <div class="form-item">
+            <label>Name:</label>
+            <input matInput formControlName="name" type="text">
+        </div>
+        <div class="form-item">
+            <label>Description:</label>
+            <textarea 
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="3"
+            formControlName="description"
+            cdkAutosizeMaxRows="6"></textarea>
+        </div>
+        <div class="form-item">
+            <label>Location:</label>
+            <div class="form-subitem">
+              <div>
+                <label>Latitude:</label>
+                <input matInput formControlName="latitude" type="number">
+              </div>
+              <div>
+                <label>Longitude:</label>
+                <input matInput formControlName="longitude" type="number">
+              </div>
+            </div>
+          </div>
+        <div class="form-item">
+            <label>Experience:</label>
+            <input matInput formControlName="experience" type="number">
+        </div>
+        <div class="form-item">
+            <label>Radius:</label>
+            <input matInput formControlName="radius" type="number">
+        </div>
 
+        <div>
+            <label>Required participants:</label>
+        </div>
+
+        <div>
+            <button (click)="addEncounter()">Create encounter</button>
+        </div>
+    </div>
+</form> -->

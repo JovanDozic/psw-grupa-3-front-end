@@ -22,6 +22,10 @@ export class EncounterService {
 
   //Social Encounter
 
+  createSocialEncounter(encounter: SocialEncounter): Observable<SocialEncounter> {
+    return this.http.post<SocialEncounter>(environment.apiHost + `social-encounters`, encounter);
+  }
+
   activateSocialEncounter(encounterId: number, location: ParticipantLocation): Observable<Encounter>{
       return this.http.put<Encounter>(environment.apiHost + 'encounters/activate/' + encounterId, location)
   }
