@@ -36,6 +36,7 @@ export class PositionSimulatorComponent implements OnInit {
   tour: Tour
   doneTasks: PointTask[]
   hiddenEncounters: any[] = []
+  socialEncounters: any[] = []
   selectedHiddenEncounter: HiddenEncounter = {
     "id": 0,
     "name": "",
@@ -89,14 +90,15 @@ export class PositionSimulatorComponent implements OnInit {
     public: false
   }
 
-  selectedSocialEncounter: SocialEncounter
   clickedMarker: boolean = false
   activatedEncounter: Encounter 
   canActivate: boolean = true
   canSolve: boolean = true
   solvedSocialEncounter: SocialEncounter
+  solvedSocialEncounters: SocialEncounter[] = []
+  activatedSocialEncounters: Encounter[] = []
 
-  encounterModal: Encounter ={
+  encounterModal: SocialEncounter ={
     "id": 0,
     "name": "",
     "description": "Encounter Description",
@@ -108,16 +110,11 @@ export class PositionSimulatorComponent implements OnInit {
     "status": 2,
     "type": 1,
     "radius": 100,
-    "participants": [
-
-    ],
-    "completers": [
-
-    ]
+    "participants": [],
+    "completers": [],
+    "requiredParticipants": 0,
+    "currentlyInRange": []
   };
-
-  encounters: Encounter[] = []
-
 
   @Output() points: Point[] = []
 
@@ -137,21 +134,13 @@ export class PositionSimulatorComponent implements OnInit {
     } else {
       sessionStorage.removeItem('isReloaded');
     }    
-    this.encounterService.getAllEncounters().subscribe(
-      (data) => {
-        this.encounters = data.results;
-        console.log(this.encounters)
-      },
-      (error) => {
-        console.log(error); 
-        alert(error.error.message);
-      }
-    )
-  
+    
+    this.getSocialEncounters(); 
     this.getHiddenEncounters();
     this.tour = history.state.tour;
     console.log('Received tour:', this.tour);
     this.points = this.tour.points
+
     this.service.startExecution(this.tour).subscribe({
       next: (result: TourExecution) => {
         this.tourExecution = result;
@@ -162,13 +151,9 @@ export class PositionSimulatorComponent implements OnInit {
     });
   }
  
-  handleMarkerClick(encounter: Encounter) {
+  handleMarkerClick(encounter: SocialEncounter) {
     console.log('Marker clicked:', encounter);
     this.encounterModal = encounter;
-    this.encounterService.getSocialEncounterById(this.encounterModal.id).subscribe({
-      next: (result: SocialEncounter) =>{
-        this.selectedSocialEncounter = result;
-      }})
     if(this.encounterModal.type === 1)
         this.clickedMarker = true;
   }
@@ -178,18 +163,20 @@ export class PositionSimulatorComponent implements OnInit {
     if(this.encounterModal.completers?.some(participant => participant.username === this.service.user.value.username)){
       this.canSolve = false
       this.canActivate = false     
-  }
+    }
 
-    if(!this.selectedSocialEncounter.currentlyInRange.some(participant => participant.username === this.service.user.value.username) &&
+    if(this.solvedSocialEncounters.some(encounter => encounter.id === this.encounterModal.id) ||
+      !this.encounterModal.currentlyInRange.some(participant => participant.username === this.service.user.value.username) &&
    this.encounterModal.completers?.some(participant => participant.username === this.service.user.value.username)
-   || (this.selectedSocialEncounter.currentlyInRange.some(participant => participant.username === this.service.user.value.username) &&
+   || (this.encounterModal.currentlyInRange.some(participant => participant.username === this.service.user.value.username) &&
    !this.encounterModal.completers?.some(participant => participant.username === this.service.user.value.username)))
         this.canSolve = false;
     else
         this.canSolve = true;
 
     if(!this.encounterModal.participants?.some(participant => participant.username === this.service.user.value.username)
-    && !this.encounterModal.completers?.some(participant => participant.username === this.service.user.value.username))
+    && !this.encounterModal.completers?.some(participant => participant.username === this.service.user.value.username) &&
+    !this.activatedSocialEncounters.some(encounter => encounter.id === this.encounterModal.id))
         this.canActivate = true;
     else
         this.canActivate = false;
@@ -297,10 +284,10 @@ export class PositionSimulatorComponent implements OnInit {
         this.encounterService.activateSocialEncounter(this.encounterModal.id, this.partLocation).subscribe({
           next: (result: Encounter) => {
                 this.activatedEncounter = result;
+                this.activatedSocialEncounters.push(result);
                 if(this.activatedEncounter.participants?.some(participant => participant.username === this.service.user.value.username)){
                     this.canActivate = false;
                     this.canSolve = true;
-                    this.ngOnInit();
                 }
                 console.log("aktivirani: ", result)
           }
@@ -318,6 +305,7 @@ export class PositionSimulatorComponent implements OnInit {
         this.encounterService.solveSocialEncounter(this.encounterModal.id, this.partLocation).subscribe({
           next: (result: SocialEncounter) => {
             this.solvedSocialEncounter = result;
+            this.solvedSocialEncounters.push(result);
             if (
               (!this.solvedSocialEncounter.participants || this.solvedSocialEncounter.participants.length === 0) ||
               this.solvedSocialEncounter.currentlyInRange.some(
@@ -325,7 +313,6 @@ export class PositionSimulatorComponent implements OnInit {
               )
             ) {
               this.canSolve = false;
-              this.ngOnInit();
             }
             console.log(result);
           }
@@ -392,6 +379,16 @@ export class PositionSimulatorComponent implements OnInit {
     this.encounterService.getHiddenEncounters().subscribe({
       next: (result: any[]) => {
         this.hiddenEncounters = result;
+      },
+      error: () => {
+      }
+    })
+  }
+
+  getSocialEncounters() {
+    this.encounterService.getAllSocialEncounters().subscribe({
+      next: (result: any[]) => {
+        this.socialEncounters = result;
       },
       error: () => {
       }

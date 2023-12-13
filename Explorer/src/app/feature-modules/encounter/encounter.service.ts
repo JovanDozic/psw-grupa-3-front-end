@@ -27,6 +27,10 @@ export class EncounterService {
     return this.http.put<SocialEncounter>(environment.apiHost + 'social-encounters/solve-social/' + encounterId, location)
   }
 
+  getAllSocialEncounters(): Observable<any> {
+    return this.http.get<any>(environment.apiHost + 'social-encounters/getAll');
+  }
+
   getSocialEncounterById(encounterId: number): Observable<SocialEncounter>{
     return this.http.get<SocialEncounter>(environment.apiHost + 'social-encounters/get/' + encounterId);
   }

@@ -6,6 +6,7 @@ import { environment } from 'src/env/environment';
 import { Point } from 'src/app/feature-modules/tour-authoring/model/points.model';
 import { Encounter } from 'src/app/feature-modules/encounter/model/encounter.model';
 import { HiddenEncounter } from 'src/app/feature-modules/encounter/model/hidden-encounter.model';
+import { SocialEncounter } from 'src/app/feature-modules/encounter/model/socialEncounter.model';
 
 @Component({
   selector: 'xp-map',
@@ -20,9 +21,9 @@ export class MapComponent implements AfterViewInit {
   endingAddress: string = '';
   @Output() longitude: EventEmitter<number> = new EventEmitter<number>();
   @Output() latitude: EventEmitter<number> = new EventEmitter<number>();
-  @Output() markerClicked: EventEmitter<Encounter> = new EventEmitter<Encounter>();
+  @Output() markerClicked: EventEmitter<SocialEncounter> = new EventEmitter<SocialEncounter>();
   @Input() points: Point[] = [];
-  @Input() encounters: Encounter[] = [];
+  @Input() socialEncounters: SocialEncounter[] = [];
   private markers : L.Marker[] = [];
   @Output() blackMarkerClicked: EventEmitter<HiddenEncounter> = new EventEmitter<HiddenEncounter>();
   @Input() hiddenEncounters: HiddenEncounter[] = [];
@@ -62,7 +63,7 @@ export class MapComponent implements AfterViewInit {
     this.registerOnClick();
   }
 
-  private handleGreenMarkerClick(encounter: Encounter) {
+  private handleGreenMarkerClick(encounter: SocialEncounter) {
     //console.log('Green marker clicked:', encounter);
     this.markerClicked.emit(encounter); // Emitting the encounter data when a green marker is clicked
   }
@@ -91,13 +92,12 @@ export class MapComponent implements AfterViewInit {
     }
 
 
-    if (changes['encounters']) {
-      console.log('New Encounters:', this.encounters);
+    if (changes['socialEncounters']) {
+      console.log('New Encounters:', this.socialEncounters);
       // Additional logic to handle the updated data
 
-      console.log(this.encounters)
-      this.encounters.forEach((encounter) => {
-        if(encounter.type == 1){
+      console.log(this.socialEncounters)
+      this.socialEncounters.forEach((encounter) => {
             const greenIcon = L.icon({
               iconUrl: 'https://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Marker-Outside-Chartreuse-icon.png',
               iconSize: [31, 41],
@@ -111,7 +111,6 @@ export class MapComponent implements AfterViewInit {
             });
 
             this.markers.push(marker);
-          }
           });
         }
     }
