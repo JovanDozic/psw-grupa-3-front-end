@@ -38,10 +38,6 @@ export class EncounterService {
     return this.http.get<any>(environment.apiHost + 'social-encounters/getAll');
   }
 
-  getSocialEncounterById(encounterId: number): Observable<SocialEncounter>{
-    return this.http.get<SocialEncounter>(environment.apiHost + 'social-encounters/get/' + encounterId);
-  }
-
   //Hidden Encounter
 
   addHiddenEncounter(encounter: HiddenEncounter): Observable<HiddenEncounter> {
@@ -62,6 +58,10 @@ export class EncounterService {
 
   //Misc Encounter
 
+  createMiscEncounter(encounter: MiscEncounter): Observable<MiscEncounter> {
+    return this.http.post<MiscEncounter>(environment.apiHost + `misc-encounters`, encounter);
+  }
+
   getAllMiscEncounters(): Observable<any> {
     return this.http.get<any>(environment.apiHost + 'misc-encounters/getAll');
   }
@@ -73,7 +73,6 @@ export class EncounterService {
   solveMiscEncounter(encounterId: number, location: ParticipantLocation): Observable<MiscEncounter>{
     return this.http.put<MiscEncounter>(`${environment.apiHost}misc-encounters/solve-misc/${encounterId}?username=${location.username}`, {})
   }
-  
   
 
 }

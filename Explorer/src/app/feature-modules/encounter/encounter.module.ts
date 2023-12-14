@@ -9,13 +9,15 @@ import { MatRadioModule } from '@angular/material/radio';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SocialEncounterFormComponent } from './social-encounter-form/social-encounter-form.component';
+import { MiscEncounterFormComponent } from './misc-encounter-form/misc-encounter-form.component';
 
 
 
 @NgModule({
   declarations: [
     HiddenEncounterFormComponent,
-    SocialEncounterFormComponent
+    SocialEncounterFormComponent,
+    MiscEncounterFormComponent
   ],
   imports: [
     CommonModule, 

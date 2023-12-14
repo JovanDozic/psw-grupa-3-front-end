@@ -45,6 +45,7 @@ import { TourCampaignsComponent } from 'src/app/feature-modules/tour-authoring/t
 import { TourCampaignFormComponent } from 'src/app/feature-modules/tour-authoring/tour-campaign-form/tour-campaign-form.component';
 import { HiddenEncounterFormComponent } from 'src/app/feature-modules/encounter/hidden-encounter-form/hidden-encounter-form.component';
 import { SocialEncounterFormComponent } from 'src/app/feature-modules/encounter/social-encounter-form/social-encounter-form.component';
+import { MiscEncounterFormComponent } from 'src/app/feature-modules/encounter/misc-encounter-form/misc-encounter-form.component';
 
 
 const routes: Routes = [
@@ -90,7 +91,8 @@ const routes: Routes = [
   {path: 'hidden-encounter-form', component: HiddenEncounterFormComponent},
   {path: 'tour-campaigns', component: TourCampaignsComponent},
   {path: 'tour-campaign-form', component: TourCampaignFormComponent},
-  {path: 'social-encounter-form', component: SocialEncounterFormComponent}
+  {path: 'social-encounter-form', component: SocialEncounterFormComponent},
+  {path: 'misc-encounter-form', component: MiscEncounterFormComponent}
 ];
 
 @NgModule({
