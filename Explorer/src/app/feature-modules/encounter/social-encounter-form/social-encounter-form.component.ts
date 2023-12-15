@@ -13,12 +13,10 @@ import { MapService } from 'src/app/shared/map/map.service';
   templateUrl: './social-encounter-form.component.html',
   styleUrls: ['./social-encounter-form.component.css']
 })
-export class SocialEncounterFormComponent implements OnInit {
+export class SocialEncounterFormComponent{
 
-  //user: User
   buttonVisibility: boolean = false
-  addressButtonDisabled: boolean = false
-  
+
   encounterLocation : Location = {
     longitude: 0,
     latitude: 0
@@ -29,7 +27,7 @@ export class SocialEncounterFormComponent implements OnInit {
     description: new FormControl('', [Validators.required]),
     experience: new FormControl(null, [Validators.required]),
     radius: new FormControl(null, [Validators.required]),
-    address: new FormControl(null, [Validators.required]),
+    address: new FormControl('', [Validators.required]),
     participantsNumber: new FormControl(null, [Validators.required]),
   });
   
@@ -37,30 +35,34 @@ export class SocialEncounterFormComponent implements OnInit {
 
   constructor(private service: EncounterService, private mapService: MapService, private authService: AuthService, private router: Router){}
 
-  ngOnInit(): void {
-    //this.user = this.authService.user$.getValue();
-  }
-
   searchAddress(){
-    this.mapService.search(this.socialEncounterForm.value.address!).subscribe({
-      next: (result: any) => {
-
-          this.encounterLocation.latitude = result[0].lat
-          this.encounterLocation.longitude = result[0].lon
-
-          if(this.encounterLocation.latitude === 0 && this.encounterLocation.longitude === 0)
-            this.addressButtonDisabled = true
-
-          console.log("Long:",result[0].lon)
-          console.log("Lat", result[0].lat)
-      },
-      error: () => { },
-    });
-    this.buttonVisibility = true
+    if(this.socialEncounterForm.value.address === "")
+    {
+      this.buttonVisibility = false
+    
+    }
+    else{
+      this.mapService.search(this.socialEncounterForm.value.address!).subscribe({
+        next: (result: any) => {
+  
+            this.encounterLocation.latitude = result[0].lat
+            this.encounterLocation.longitude = result[0].lon
+  
+            if(this.encounterLocation.latitude != 0 && this.encounterLocation.longitude != 0)
+              this.buttonVisibility = true
+            else
+              this.buttonVisibility = false
+  
+            console.log("Long:",result[0].lon)
+            console.log("Lat", result[0].lat)
+        },
+        error: () => { },
+      });
+    }
+  
   }
 
   createEncounter(): void{
-    //const userType = this.user.role; 
 
     const socialEncounter: SocialEncounter = {
       id: 0,

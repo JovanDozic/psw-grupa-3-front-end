@@ -278,6 +278,7 @@ export class PositionSimulatorComponent implements OnInit {
       this.encounterService.activateSocialEncounter(this.encounterModal.id, this.partLocation).subscribe({
         next: (result: Encounter) => {
               this.activatedEncounter = result;
+              this.encounterModal.participants = result.participants;
               this.activatedSocialEncounters.push(result);
               if(this.activatedEncounter.participants?.some(participant => participant.username === this.service.user.value.username)){
                   this.canActivate = false;
@@ -299,6 +300,7 @@ export class PositionSimulatorComponent implements OnInit {
       this.encounterService.solveSocialEncounter(this.encounterModal.id, this.partLocation).subscribe({
         next: (result: SocialEncounter) => {
           this.solvedSocialEncounter = result;
+          this.encounterModal.participants = result.participants;
           this.solvedSocialEncounters.push(result);
           if (
             (!this.solvedSocialEncounter.participants || this.solvedSocialEncounter.participants.length === 0) ||
@@ -367,6 +369,7 @@ export class PositionSimulatorComponent implements OnInit {
       this.encounterService.activateMiscEncounter(this.miscModal.id, this.partLocation).subscribe({
         next: (result: Encounter) => {
               this.activatedMisc = result;
+              this.miscModal.participants = result.participants;
               this.activatedMiscEncounters.push(result);
               if(this.activatedMisc.participants?.some(participant => participant.username === this.service.user.value.username)){
                   this.canActivate = false;
@@ -388,6 +391,7 @@ export class PositionSimulatorComponent implements OnInit {
       this.encounterService.solveMiscEncounter(this.miscModal.id, this.partLocation).subscribe({
         next: (result: MiscEncounter) => {
           this.solvedMisc = result;
+          this.miscModal.participants = result.participants;
           this.solvedMiscEncounters.push(result);
           if (
             (!this.solvedMisc.participants || this.solvedMisc.participants.length === 0)

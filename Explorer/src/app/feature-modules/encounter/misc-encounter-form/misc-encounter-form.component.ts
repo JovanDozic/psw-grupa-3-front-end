@@ -14,10 +14,7 @@ import { MapService } from 'src/app/shared/map/map.service';
 })
 export class MiscEncounterFormComponent {
 
-  //user: User
   buttonVisibility: boolean = false
-  addressButtonDisabled: boolean = false
-
   encounterLocation : Location = {
     longitude: 0,
     latitude: 0
@@ -28,38 +25,42 @@ export class MiscEncounterFormComponent {
     description: new FormControl('', [Validators.required]),
     experience: new FormControl(null, [Validators.required]),
     radius: new FormControl(null, [Validators.required]),
-    address: new FormControl(null, [Validators.required]),
+    address: new FormControl('', [Validators.required]),
   });
   
 
 
   constructor(private service: EncounterService, private mapService: MapService, private authService: AuthService, private router: Router){}
 
-  ngOnInit(): void {
-    //this.user = this.authService.user$.getValue();
-  }
-
   searchAddress(){
-    this.mapService.search(this.miscEncounterForm.value.address!).subscribe({
-      next: (result: any) => {
+    if(this.miscEncounterForm.value.address === "")
+    {
+      this.buttonVisibility = false
+    
+    }
+    else{
+      this.mapService.search(this.miscEncounterForm.value.address!).subscribe({
+        next: (result: any) => {
+  
+            this.encounterLocation.latitude = result[0].lat
+            this.encounterLocation.longitude = result[0].lon
+  
+            if(this.encounterLocation.latitude != 0 && this.encounterLocation.longitude != 0)
+              this.buttonVisibility = true
+            else
+              this.buttonVisibility = false
+  
+            console.log("Long:",result[0].lon)
+            console.log("Lat", result[0].lat)
+        },
+        error: () => { },
+      });
+    }
 
-          this.encounterLocation.latitude = result[0].lat
-          this.encounterLocation.longitude = result[0].lon
-
-          if(this.encounterLocation.latitude === 0 && this.encounterLocation.longitude === 0)
-            this.addressButtonDisabled = true
-          console.log("Long:",result[0].lon)
-          console.log("Lat", result[0].lat)
-      },
-      error: () => { },
-    });
-    this.buttonVisibility = true
   }
 
   createEncounter(): void{
-
-    //const userType = this.user.role; 
-
+    
     const miscEncounter: MiscEncounter = {
       id: 0,
       name: this.miscEncounterForm.value.name || "",
