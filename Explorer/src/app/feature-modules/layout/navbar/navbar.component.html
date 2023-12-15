@@ -77,15 +77,7 @@
                         </li>
 
                         <li *ngIf="user && (user.role === 'author' || user.role === 'administrator')">
-                            <a class="dropdown-item" [routerLink]="['hidden-encounter-form']">Create hidden encounter</a>
-                        </li>
-
-                        <li *ngIf="user && (user.role === 'author' || user.role === 'administrator')">
-                            <a class="dropdown-item" [routerLink]="['social-encounter-form']">Create social encounter</a>
-                        </li>
-
-                        <li *ngIf="user && (user.role === 'author' || user.role === 'administrator')">
-                            <a class="dropdown-item" [routerLink]="['misc-encounter-form']">Create misc encounter</a>
+                            <a class="dropdown-item" [routerLink]="['encounter-creation']">Create encounter</a>
                         </li>
 
                         <li *ngIf="user && user.role === 'author'">

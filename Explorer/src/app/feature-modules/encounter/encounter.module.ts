@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SocialEncounterFormComponent } from './social-encounter-form/social-encounter-form.component';
 import { MiscEncounterFormComponent } from './misc-encounter-form/misc-encounter-form.component';
+import { EncounterCreationComponent } from './encounter-creation/encounter-creation.component';
 
 
 
@@ -17,7 +18,8 @@ import { MiscEncounterFormComponent } from './misc-encounter-form/misc-encounter
   declarations: [
     HiddenEncounterFormComponent,
     SocialEncounterFormComponent,
-    MiscEncounterFormComponent
+    MiscEncounterFormComponent,
+    EncounterCreationComponent
   ],
   imports: [
     CommonModule, 
