@@ -5,46 +5,35 @@
         <th>Username</th>
         <th>Email</th>
         <th>Role</th>
-        <th>Adventure Coins</th>
-        <th>Actions</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
+      <tr *ngFor="let user of users; let i = index;" (click)="selectUser(user, i)">
         <td>{{user.username}}</td>
         <td>{{user.email}}</td>
-        <td>{{user.role}}</td>
-        <td>{{user.coins}}</td>
         <td>
-          <button (click)="selectUser(user)" class="btn btn-outline-secondary">Selektuj</button>
-          <button *ngIf="user.role == 'tourist'" class="btn btn-outline-secondary ms-2" data-bs-toggle="modal" data-bs-target="#addCoinsModal"
-            (click)="onAddCoinsClicked(user)">Add Coins</button>
+          <label *ngIf="user.role == 2">Tourist</label>
+          <label *ngIf="user.role == 0">Admin</label>
+          <label *ngIf="user.role == 1">Author</label>
         </td>
+        <td *ngIf="!user.isActive">Blocked</td>
+        <td *ngIf="user.isActive">Active</td>
       </tr>
     </tbody>
   </table>
   <div *ngIf="selectedUser">
-    <p>Selektovani korisnik: {{selectedUser.username}}</p>
-    <button (click)="blockSelectedUser()">Blokiraj odabrane</button>
-  </div>
-
-  <div class="modal fade" id="addCoinsModal">
-    <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title">Add coins to {{selectUserForCoinsAddition?.username}}</h1>
-          <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onModalClose()"></button>
-        </div>
-        <div class="modal-body">
-          <form [formGroup]="coinAdditionForm" (submit)="addCoins()">
-            <div class="form-group">
-              <label class="form-label">Amount:</label>
-              <input type="number" class="form-control" placeholder="Amount" formControlName="coinAmount" required>
-              <button type="submit" class="btn btn-primary mt-3">Add</button>
-            </div>   
-          </form>
-        </div>
-      </div>
+    <div>
+      <p>Actions:</p>
+      <button [disabled]="!selectedUser.isActive" (click)="blockUser()">Block user</button>
+    </div>
+    <div *ngIf="selectedUser.role === 2">
+      <p>Wallet: </p>
+      <label>Balance: </label><label>{{selectedUsersWallet?.coins}}</label><button (click)="addMoreCoins = true">+</button>
+    </div>
+    <div *ngIf="addMoreCoins">
+      <label>Coins to add: </label><input type="number" min="0" max="1000" #coins>
+      <button (click)="addCoins(coins.value)">Add coins</button>
     </div>
   </div>
 </div>

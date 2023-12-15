@@ -11,7 +11,7 @@ import { Overview } from './model/overview.model';
 
 import { AppRating } from './model/app-rating.model';
 import { TouristEquipment } from './model/tourist-equipment.model';
-import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { User, UserInfo } from 'src/app/infrastructure/auth/model/user.model';
 import { PublicRegistrationRequest } from './model/public-registration-request.model';
 import { UserNotification } from 'src/app/infrastructure/auth/model/user.model';
 import { Wallet } from '../marketplace/model/wallet.model';
@@ -42,7 +42,7 @@ export class AdministrationService {
     return this.http.put<Equipment>(environment.apiHost + 'administration/equipment/' + equipment.id, equipment);
   }
 
-  //User Profile
+  //Profile, Administration
 
   getUser(id: number): Observable<Person>{
     return this.http.get<Person>(environment.apiHost + 'userprofile/' + id);
@@ -56,13 +56,13 @@ export class AdministrationService {
     return this.http.get<PagedResults<Problem>>(environment.apiHost + 'administration/problems')
   }
 
-  getAllUsers(): Observable<PagedResults<Overview>> {
-    return this.http.get<PagedResults<Overview>>(environment.apiHost + 'administration/users');
+  getAllUsers(): Observable<UserInfo[]> {
+    return this.http.get<UserInfo[]>(environment.apiHost + 'administration/users/getAll');
   }
   
-  blockUser(username: string): Observable<any> {
-    const url = `${environment.apiHost}administration/users/block-users`;
-    return this.http.post(url, [username]);
+  blockUser(username: string): Observable<UserInfo> {
+    const url = `${environment.apiHost}administration/users/block-user?username=` + username;
+    return this.http.post<UserInfo>(url, {});
   }
   
   getUserFollowers(id: number): Observable<PagedResults<User>> {
@@ -80,6 +80,8 @@ export class AdministrationService {
   unfollowUser(userId: number, userToUnfollowId: number) {
     return this.http.patch<User>(environment.apiHost + 'userprofile/followers/' + userId + '/unfollow/' + userToUnfollowId, {});
   }
+
+  //Wallet
 
   getUserWallet(userId: number): Observable<Wallet> {
     return this.http.get<Wallet>(environment.apiHost + 'tourist/wallet/getByUserId/' + userId);
