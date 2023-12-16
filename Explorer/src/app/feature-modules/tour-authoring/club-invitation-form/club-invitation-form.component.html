@@ -1,32 +1,38 @@
-
-<form [formGroup]="clubInvitationForm" class="club-invitation-form">
-    <h2 class="form-title">Send club invitation</h2>
-    <div>
+<div class="container mt-4">
+    <div class="row d-flex align-items-start">
         
+        <div class="col-6">
+            <h1 class="text-center">Send club invitation</h1>
+           
+            <form [formGroup]="clubInvitationForm">
+                
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">For tourist:</span>
+                    <input type="number" min="1" class="form-control" placeholder="id" formControlName="touristId">
+                </div>
+               
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">From club:</span>
+                    <input type="number" min="1" class="form-control" placeholder="id" formControlName="clubId">
+                </div>
+            
+            </form>
+            <button class="btn btn-outline-primary" (click)="addClubInvitation()">Send</button>
+        </div>
+
        
-    <div class="form-item">
-        <label>For tourist:</label>
-        <mat-form-field>
-            <input matInput formControlName="touristId" type="number" min="1"  placeholder="id">
-        </mat-form-field>
+        <div class="col-6">
+            <h1 class="text-center">Invitations for me</h1>
+            
+            <div class="custom-alignment">
+                <xp-club-invitations #clubInvitationsRef></xp-club-invitations>
+            </div>
+            
+        </div>
     </div>
-    <div class="form-item">
-        <label>From club:</label>
-        <mat-form-field>
-            <input matInput formControlName="clubId" type="number" min="1"  placeholder="id">
-        </mat-form-field>
-    </div>
-    
-        <button  color="primary" type="submit" (click)="addClubInvitation()" mat-raised-button>Send</button>
-          <div>
-             <xp-club-invitations></xp-club-invitations>
-    
-          </div>
-       
-    </div>
-   
-</form>
- 
+</div>
+
+
 
 
 
