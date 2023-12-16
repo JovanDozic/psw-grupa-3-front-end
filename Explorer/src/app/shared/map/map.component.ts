@@ -6,6 +6,8 @@ import { environment } from 'src/env/environment';
 import { Point } from 'src/app/feature-modules/tour-authoring/model/points.model';
 import { Encounter } from 'src/app/feature-modules/encounter/model/encounter.model';
 import { HiddenEncounter } from 'src/app/feature-modules/encounter/model/hidden-encounter.model';
+import { SocialEncounter } from 'src/app/feature-modules/encounter/model/socialEncounter.model';
+import { MiscEncounter } from 'src/app/feature-modules/encounter/model/misc-encounter.model';
 
 @Component({
   selector: 'xp-map',
@@ -20,13 +22,18 @@ export class MapComponent implements AfterViewInit {
   endingAddress: string = '';
   @Output() longitude: EventEmitter<number> = new EventEmitter<number>();
   @Output() latitude: EventEmitter<number> = new EventEmitter<number>();
-  @Output() markerClicked: EventEmitter<Encounter> = new EventEmitter<Encounter>();
   @Input() points: Point[] = [];
-  @Input() encounters: Encounter[] = [];
-  private markers : L.Marker[] = [];
+
+  @Output() markerClicked: EventEmitter<SocialEncounter> = new EventEmitter<SocialEncounter>();
+  @Input() socialEncounters: SocialEncounter[] = [];
+  
+  @Output() yellowMarkerClicked: EventEmitter<MiscEncounter> = new EventEmitter<MiscEncounter>();
+  @Input() miscEncounters: MiscEncounter[] = [];
+
   @Output() blackMarkerClicked: EventEmitter<HiddenEncounter> = new EventEmitter<HiddenEncounter>();
   @Input() hiddenEncounters: HiddenEncounter[] = [];
 
+  private markers : L.Marker[] = [];
 
   constructor(private mapService: MapService) { }
 
@@ -62,9 +69,16 @@ export class MapComponent implements AfterViewInit {
     this.registerOnClick();
   }
 
-  private handleGreenMarkerClick(encounter: Encounter) {
-    //console.log('Green marker clicked:', encounter);
-    this.markerClicked.emit(encounter); // Emitting the encounter data when a green marker is clicked
+  private handleGreenMarkerClick(encounter: SocialEncounter) {
+    this.markerClicked.emit(encounter); 
+  }
+
+  handleBlackMarkerClick(hiddenEncounter: HiddenEncounter) {
+    this.blackMarkerClicked.emit(hiddenEncounter);
+  }
+
+  handleYellowMarkerClick(miscEncounter: MiscEncounter) {
+    this.yellowMarkerClicked.emit(miscEncounter);
   }
 
 
@@ -91,13 +105,12 @@ export class MapComponent implements AfterViewInit {
     }
 
 
-    if (changes['encounters']) {
-      console.log('New Encounters:', this.encounters);
+    if (changes['socialEncounters']) {
+      console.log('New Encounters:', this.socialEncounters);
       // Additional logic to handle the updated data
 
-      console.log(this.encounters)
-      this.encounters.forEach((encounter) => {
-        if(encounter.type == 1){
+      console.log(this.socialEncounters)
+      this.socialEncounters.forEach((encounter) => {
             const greenIcon = L.icon({
               iconUrl: 'https://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Marker-Outside-Chartreuse-icon.png',
               iconSize: [31, 41],
@@ -111,15 +124,33 @@ export class MapComponent implements AfterViewInit {
             });
 
             this.markers.push(marker);
-          }
+          });
+        }
+
+        if (changes['miscEncounters']) {
+          console.log('New miscEncounters:', this.hiddenEncounters);
+    
+          console.log(this.miscEncounters)
+          this.miscEncounters.forEach((misc) => {
+            const yellowIcon = L.icon({
+              iconUrl: 'https://cdn.icon-icons.com/icons2/1527/PNG/512/mapmarker_106655.png',
+              iconSize: [37, 51],
+              iconAnchor: [13, 41],
+            });
+    
+            const marker = new L.Marker([misc.location.latitude, misc.location.longitude], { icon: yellowIcon }).addTo(this.map);
+    
+            marker.on('click', () => {
+              this.handleYellowMarkerClick(misc);
+            });
+    
+            this.markers.push(marker);
           });
         }
     }
       
 
-  handleBlackMarkerClick(hiddenEncounter: HiddenEncounter) {
-    this.blackMarkerClicked.emit(hiddenEncounter);
-  }
+
 
 
   registerOnClick(): void {

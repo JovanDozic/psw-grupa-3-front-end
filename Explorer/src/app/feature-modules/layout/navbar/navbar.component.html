@@ -77,7 +77,7 @@
                         </li>
 
                         <li *ngIf="user && (user.role === 'author' || user.role === 'administrator')">
-                            <a class="dropdown-item" [routerLink]="['hidden-encounter-form']">Create hidden encounter</a>
+                            <a class="dropdown-item" [routerLink]="['encounter-creation']">Create encounter</a>
                         </li>
 
                         <li *ngIf="user && user.role === 'author'">
