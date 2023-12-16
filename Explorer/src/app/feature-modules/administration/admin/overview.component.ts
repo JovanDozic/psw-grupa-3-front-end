@@ -14,7 +14,6 @@ export class OverviewComponent implements OnInit {
   users: UserInfo[] = [];
   selectedUser: UserInfo;
   selectedUsersWallet: Wallet | null = null;
-  selectedIndex: number = -1;
   addMoreCoins: boolean;
 
   constructor(private service: AdministrationService) { }
@@ -37,9 +36,8 @@ export class OverviewComponent implements OnInit {
     })
   }
 
-  selectUser(user: UserInfo, index: number): void {
+  selectUser(user: UserInfo): void {
     this.selectedUser = user;
-    this.selectedIndex = index;
     if(this.selectedUser.role == 2){ //Only for tourist
       this.service.getUserWallet(this.selectedUser.id).subscribe({
         next: (result: any) => {
@@ -58,12 +56,12 @@ export class OverviewComponent implements OnInit {
     }
   }
 
-  blockUser(): void {
-    if(this.selectedUser == null) return;
-    this.service.blockUser(this.selectedUser.username).subscribe({
+  blockUser(username: string, index: number): void {
+    if(username == null || username == "") return;
+    this.service.blockUser(username).subscribe({
         next: (result: any) => {
           if(result != undefined){
-            this.users[this.selectedIndex] = result;
+            this.users[index] = result;
           }
         },
         error: (err) => {

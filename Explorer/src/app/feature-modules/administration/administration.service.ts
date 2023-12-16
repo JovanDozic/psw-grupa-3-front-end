@@ -6,9 +6,6 @@ import { Observable } from 'rxjs';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { Person } from './model/userprofile.model';
 import { Problem } from '../tour-authoring/model/problem.model';
-
-import { Overview } from './model/overview.model';
-
 import { AppRating } from './model/app-rating.model';
 import { TouristEquipment } from './model/tourist-equipment.model';
 import { User, UserInfo } from 'src/app/infrastructure/auth/model/user.model';

@@ -6,10 +6,11 @@
         <th>Email</th>
         <th>Role</th>
         <th>Status</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users; let i = index;" (click)="selectUser(user, i)">
+      <tr *ngFor="let user of users; let i = index;" (click)="selectUser(user)">
         <td>{{user.username}}</td>
         <td>{{user.email}}</td>
         <td>
@@ -19,18 +20,13 @@
         </td>
         <td *ngIf="!user.isActive">Blocked</td>
         <td *ngIf="user.isActive">Active</td>
+        <td><button [disabled]="!user.isActive" (click)="blockUser(user.username, i)">Block user</button></td>
       </tr>
     </tbody>
   </table>
-  <div *ngIf="selectedUser">
-    <div>
-      <p>Actions:</p>
-      <button [disabled]="!selectedUser.isActive" (click)="blockUser()">Block user</button>
-    </div>
-    <div *ngIf="selectedUser.role === 2">
+  <div *ngIf="selectedUser && selectedUser.role === 2">
       <p>Wallet: </p>
       <label>Balance: </label><label>{{selectedUsersWallet?.coins}}</label><button (click)="addMoreCoins = true">+</button>
-    </div>
     <div *ngIf="addMoreCoins">
       <label>Coins to add: </label><input type="number" min="0" max="1000" #coins>
       <button (click)="addCoins(coins.value)">Add coins</button>
