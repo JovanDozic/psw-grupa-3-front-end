@@ -18,6 +18,7 @@ export class PointsViewComponent implements OnInit {
   tours: Tour[]=[];
   containsUnselectedPoints = true;
   selectedTour: Tour;
+  isSelected: boolean = false;
 
   user: User;
   constructor(private service: TourAuthoringService,private authService: AuthService) {}
@@ -41,19 +42,25 @@ export class PointsViewComponent implements OnInit {
 
       onSelect(point: Point): void {
         const index = this.selectedPoints.indexOf(point);
+        
         if (index >= 0) {
           this.selectedPoints.splice(index, 1); 
         } else {
           this.selectedPoints.push(point); 
         }
       }
+     
+      
+      
 
       findTours(): void {
         if (this.selectedPoints.length < 2) {
              alert('List must contain at least 2 points.');
+             
           }
         this.service.findToursContainingPoints(this.selectedPoints).subscribe((data: Tour[]) => {
           this.tours = data;
+          
           
     
         });
@@ -67,13 +74,11 @@ export class PointsViewComponent implements OnInit {
     }
 
 
-    onSelectTour(tour: Tour): void {
-      if (this.selectedTour === tour) {
-         
-      } else {
-        this.selectedTour = tour; 
-      }
-    }
+   
+    selectTourAndShop(tour: Tour): void {
+      this.selectedTour=tour; 
+      this.shopping(); 
+  }
 
     shopping(): void {
       if (!this.selectedTour || !this.selectedTour.id || this.selectedTour.id === 0) {
@@ -105,6 +110,7 @@ export class PointsViewComponent implements OnInit {
       
     }
     
+   
     
     
 
