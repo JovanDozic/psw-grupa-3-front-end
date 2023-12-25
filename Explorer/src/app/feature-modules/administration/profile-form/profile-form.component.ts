@@ -19,7 +19,7 @@ export class ProfileFormComponent implements OnChanges {
   constructor(private service: AdministrationService) {
   }
   ngOnChanges(): void {
-    //this.profileForm.reset();
+    // this.profileForm.reset();
     this.profileForm.patchValue(this.profile);
   }
 
@@ -40,12 +40,10 @@ export class ProfileFormComponent implements OnChanges {
       surname: this.profileForm.value.surname || "",
       bio: this.profileForm.value.bio || "",
       quote: this.profileForm.value.quote || "",
-      email: this.profile.email,
       xp: this.profile.xp,
       level: this.profile.level
     };
     person.id = this.profile.id;
-    console.log(person);
     this.service.updateUser(person).subscribe({
       next: (_) => { this.profileUpdated.emit();}
     });

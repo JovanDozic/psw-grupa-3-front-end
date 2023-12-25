@@ -53,4 +53,9 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  editProfile(profile: Person): void{
+    this.selectedProfile = profile
+    console.log(this.selectedProfile)
+  }
+
 }

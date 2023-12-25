@@ -46,8 +46,7 @@ export class AdministrationService {
   }
 
   updateUser(profile: Person): Observable<Person> {
-    console.log(profile);
-    return this.http.put<Person>(environment.apiHost + 'userprofile/' + profile.id, profile);
+    return this.http.put<Person>(environment.apiHost + 'userprofile/updateUser/' + profile.id, profile);
   }
   getProblems(): Observable<PagedResults<Problem>> {
     return this.http.get<PagedResults<Problem>>(environment.apiHost + 'administration/problems')
