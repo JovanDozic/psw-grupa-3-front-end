@@ -14,12 +14,9 @@ export class ProfileFormComponent implements OnChanges {
   @Input() profile: Person;
   @Output() profileUpdated = new EventEmitter<null>();
   
-  picture: string = " ";
-
   constructor(private service: AdministrationService) {
   }
   ngOnChanges(): void {
-    //this.profileForm.reset();
     this.profileForm.patchValue(this.profile);
   }
 
@@ -35,17 +32,15 @@ export class ProfileFormComponent implements OnChanges {
     const person: Person = {
       id: this.profile.id || -1,
       userId: this.profile.userId || -1,
-      picture: this.picture,
+      picture: this.profile.picture,
       name: this.profileForm.value.name || "",
       surname: this.profileForm.value.surname || "",
       bio: this.profileForm.value.bio || "",
       quote: this.profileForm.value.quote || "",
-      email: this.profile.email,
       xp: this.profile.xp,
       level: this.profile.level
     };
     person.id = this.profile.id;
-    console.log(person);
     this.service.updateUser(person).subscribe({
       next: (_) => { this.profileUpdated.emit();}
     });
@@ -57,7 +52,7 @@ export class ProfileFormComponent implements OnChanges {
       const reader = new FileReader();
 
       reader.onload = (event: any) => {
-        this.picture = event.target.result;
+        this.profile.picture = event.target.result;
       }
 
       reader.readAsDataURL(file);
@@ -74,6 +69,6 @@ export class ProfileFormComponent implements OnChanges {
   }
 
   removeImage():void{
-    this.picture = " ";
+    this.profile.picture = " ";
   }
 }
