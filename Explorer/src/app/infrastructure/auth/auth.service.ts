@@ -11,6 +11,7 @@ import { User } from './model/user.model';
 import { Registration } from './model/registration.model';
 import { ShoppingCart } from 'src/app/feature-modules/marketplace/model/shopping-cart.model';
 import { Wallet } from 'src/app/feature-modules/marketplace/model/wallet.model';
+import { PasswordChange } from './model/password-change.model';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,10 @@ export class AuthService {
 
   sendPasswordResetLink(email: string): Observable<boolean>{
       return this.http.get<boolean>(environment.apiHost + `users/forgotPassword?email=` + email)
+  }
+
+  changePassword(change: PasswordChange): Observable<boolean>{
+    return this.http.post<boolean>(environment.apiHost + `users/changePassword`, change);
   }
 
   checkIfUserExists(): void {
