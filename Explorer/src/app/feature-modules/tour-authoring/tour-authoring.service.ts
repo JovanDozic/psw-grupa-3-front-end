@@ -239,5 +239,12 @@ export class TourAuthoringService {
     const queryParams  = new HttpParams().set('userId', userId);
     return this.http.post<ShoppingCart>(environment.apiHost + 'tourist/order/addToCart', orderItem, { params: queryParams });
   }
+  findToursReviewedByUsersIFollow(currentUserId: number, ratedTourId: number): Observable<Tour []> {
+    const queryParams = new HttpParams()
+        .set('currentUserId', currentUserId.toString())
+        .set('ratedTourId', ratedTourId.toString());
+
+    return this.http.put<Tour []>(environment.apiHost + 'author/tour/findToursByFollowers', null, { params: queryParams });
+  }
 }
 
