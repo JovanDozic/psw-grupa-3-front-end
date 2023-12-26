@@ -48,6 +48,7 @@ import { SocialEncounterFormComponent } from 'src/app/feature-modules/encounter/
 import { MiscEncounterFormComponent } from 'src/app/feature-modules/encounter/misc-encounter-form/misc-encounter-form.component';
 import { EncounterCreationComponent } from 'src/app/feature-modules/encounter/encounter-creation/encounter-creation.component';
 import { TourCommunityRecommendComponent } from 'src/app/feature-modules/tour-authoring/tour-community-recommend/tour-community-recommend.component';
+import { ForgotPasswordComponent } from '../auth/forgot-password/forgot-password.component';
 
 
 const routes: Routes = [
@@ -96,7 +97,8 @@ const routes: Routes = [
   {path: 'social-encounter-form', component: SocialEncounterFormComponent},
   {path: 'misc-encounter-form', component: MiscEncounterFormComponent},
   {path: 'encounter-creation', component: EncounterCreationComponent},
-  {path: 'tour-community-recommend', component: TourCommunityRecommendComponent}
+  {path: 'tour-community-recommend', component: TourCommunityRecommendComponent},
+  {path: 'forgot-password', component: ForgotPasswordComponent}
 ];
 
 @NgModule({
