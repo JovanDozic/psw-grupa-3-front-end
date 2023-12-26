@@ -4,6 +4,7 @@ import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { TourAuthoringService } from '../tour-authoring.service';
 import { Point } from '../model/points.model';
 import { TourReview } from '../model/tourReview.model';
+import { TransportType } from '../model/requiredTime.model';
 
 @Component({
   selector: 'xp-tour',
@@ -34,7 +35,7 @@ export class TourComponent implements OnInit {
     arhiveTime: '',
     points: [],
     requiredTime: {
-      transportType: 'Bike',
+      transportType: TransportType.Bicycle,
       minutes: 0
     },
     reviews:[]
