@@ -141,7 +141,7 @@ getShoppingCart() {
   }
 
   addToCart() {
-    if (this.shoppingCart.items.findIndex((x: OrderItem) => x.idType === this.tour.id && x.type === OrderItemType.singleTour) === -1) {
+    if (this.shoppingCart.items.findIndex((x: OrderItem) => x.idType === this.tour.id && x.type == "SingleTour") === -1) {
       const orderItem: OrderItem = {
         idType: this.tour.id,
         name: this.tour.name,

@@ -13,10 +13,10 @@ import { Wallet } from '../model/wallet.model';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent {
-  shoppingCart: ShoppingCart;
+  shoppingCart?: ShoppingCart;
   user: User;
   sum: number;
-  wallet: Wallet;
+  wallet?: Wallet;
 
   constructor(private service: MarketplaceService, private authService: AuthService) { }
 
@@ -38,6 +38,7 @@ export class ShoppingCartComponent {
   }
 
   purchaseFromCart() {
+    if(this.shoppingCart != undefined)
     this.service.purchaseFromCart(this.shoppingCart).subscribe({
       next: result => {
         let copiedCart = Object.assign({}, this.shoppingCart);
@@ -45,6 +46,7 @@ export class ShoppingCartComponent {
         this.service.updateCart(copiedCart).subscribe({
           next: result => {
             this.getShoppingCart();
+            this.getWallet();
           }
         })
       }
@@ -52,30 +54,13 @@ export class ShoppingCartComponent {
   }
 
   purchaseFromCartUsingAC() {
-    if(this.wallet.coins < this.sum/15){
+    if(this.wallet != undefined && this.wallet.coins < this.sum){
+      alert("You don't have enouth AC to purchase everything from the cart! Please remove some items and try again...")
       return
     } else {
 
-    this.wallet = {
-      id: this.wallet.id,
-      userId: this.wallet.userId,
-      coins: Math.floor(this.wallet.coins - this.sum/15)
-    }
-
     this.purchaseFromCart()
-    this.updateWallet()
     }
-  }
-
-  updateWallet(){
-    this.service.updateWallet(this.wallet).subscribe({
-      next: (result: Wallet) => {
-        this.wallet = result
-      },
-      error: error => {
-        console.error('Greška pri ažuriranju novčanika:', error);
-      }
-    })
   }
 
   onRemoveClicked(t: OrderItem): void {
@@ -97,6 +82,7 @@ export class ShoppingCartComponent {
 
   getSum(): void {
     this.sum = 0;
+    if(this.shoppingCart != undefined)
     for (let o of this.shoppingCart.items) {
       this.sum += o.price
     }
@@ -105,6 +91,8 @@ export class ShoppingCartComponent {
   getWallet() : void {
     this.service.getWalletByUserId(this.user.id).subscribe({
       next: (result: Wallet) => {
+        if(result.coins != 0)
+          result.coins = Math.round(result.coins * 100) / 100
         this.wallet = result;
       }
     })

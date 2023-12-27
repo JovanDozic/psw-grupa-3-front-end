@@ -247,5 +247,8 @@ export class TourAuthoringService {
 
     return this.http.put<Tour []>(environment.apiHost + 'author/tour/findToursByFollowers', null, { params: queryParams });
   }
+  getIdByName(name: string): Observable<number> {
+    return this.http.get<number>(environment.apiHost + 'author/tour/getIdByName/' + name);
+  }
 }
 
