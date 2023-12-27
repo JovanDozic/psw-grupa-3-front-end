@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { BlogService } from '../blog.service';
-import { BlogComment } from '../model/blog.model';
+import { BlogComment, BlogReport } from '../model/blog.model';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { Blog } from '../model/blog.model';
 import { BlogRating } from '../model/blog.model';
@@ -15,8 +15,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./detailed-blog.component.css']
 })
 export class DetailedBlogComponent {
-
-
 
   @Output() commentsUpdated = new EventEmitter<null>();
   @Input() comment: BlogComment;
@@ -34,16 +32,9 @@ export class DetailedBlogComponent {
   currentImageIndex: number = 0;
   currentPicture: string = '';
   selectedReportComment: BlogComment = {} as BlogComment;
-  reportReasons: string[] = [
-    "",
-    "Spam",
-    "Hate speech",
-    "False information",
-    "Bullying or harassment",
-    "Violence or dangerous organizations"
-  ];
+  selectedReportReason: number = 0;
 
-  constructor(private service: BlogService, private authService: AuthService, private route: ActivatedRoute, private fb: FormBuilder) {
+  constructor(private service: BlogService, private authService: AuthService, private route: ActivatedRoute, private fb: FormBuilder, private el: ElementRef) {
     this.commentForm = this.fb.group({
       comment: ['', Validators.required],
     });
@@ -244,9 +235,39 @@ export class DetailedBlogComponent {
     this.selectedReportComment = comment;
   }
 
-  reportComment() {
+  selectReportReason(index: number) {
+    this.selectedReportReason = index;
+  }
 
-    alert("Reportujes ovo: " + this.selectedReportComment.comment);
+
+  reportComment() {
+    if (this.selectedReportReason > 0) {
+
+      const report: BlogReport = {
+        blogId: this.selectedReportComment.blogId,
+        userId: this.loggedInUserId,
+        reportAuthorId: this.user?.id ?? 0,
+        timeCommentCreated: this.selectedReportComment.timeCreated,
+        timeReported: new Date(),
+        reportReason: this.selectedReportReason,
+        isReviewed: false,
+        comment: this.selectedReportComment.comment,
+      };
+
+      this.service.reportComment(this.blogId, report).subscribe(
+        () => {
+          console.log('Comment reported successfully!');
+          const closeButton = this.el.nativeElement.querySelector('#close-report-modal-button');
+          if (closeButton) {
+            closeButton.click();
+          }
+          this.ngOnInit();
+        },
+        error => {
+          console.error('Error:', error);
+        }
+      );
+    }
   }
 
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Blog, BlogRating } from './model/blog.model';
+import { Blog, BlogRating, BlogReport } from './model/blog.model';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { BlogComment } from './model/blog.model';
 import { environment } from 'src/env/environment';
@@ -53,4 +53,11 @@ export class BlogService {
   deleteBlogComment(blogId : number, _blogComment : BlogComment) : Observable<Blog> {
     return this.http.put<Blog>(environment.apiHost + `blog/deleteBlogComment/` + blogId, _blogComment);
   }
+
+
+  reportComment(blogId : number, report : BlogReport) : Observable<Blog> {
+    return this.http.post<Blog>(environment.apiHost + `blog/reportBlogComment/` + blogId, report);
+  }
+
+
 }
