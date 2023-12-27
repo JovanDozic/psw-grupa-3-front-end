@@ -16,77 +16,88 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailedBlogComponent {
 
+
+
   @Output() commentsUpdated = new EventEmitter<null>();
   @Input() comment: BlogComment;
 
   user: User | undefined;
-  loggedInUserId : number;
+  loggedInUserId: number;
   editingComments: { [comment: string]: boolean } = {};
 
   blog: Blog;
   blogId: number;
   commentForm: FormGroup;
   addingComment: boolean = false;
-  isClosed : boolean = false;
+  isClosed: boolean = false;
   blogImages: string[];
   currentImageIndex: number = 0;
   currentPicture: string = '';
+  selectedReportComment: BlogComment = {} as BlogComment;
+  reportReasons: string[] = [
+    "",
+    "Spam",
+    "Hate speech",
+    "False information",
+    "Bullying or harassment",
+    "Violence or dangerous organizations"
+  ];
 
-  constructor(private service: BlogService, private authService: AuthService, private route: ActivatedRoute, private fb: FormBuilder){
+  constructor(private service: BlogService, private authService: AuthService, private route: ActivatedRoute, private fb: FormBuilder) {
     this.commentForm = this.fb.group({
       comment: ['', Validators.required],
     });
   }
-  
+
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const blogIdParam = params.get('blogId');
-      
+
       if (blogIdParam !== null) {
         this.blogId = +blogIdParam; // + konvertuje string u broj
         this.service.getBlog(this.blogId).subscribe(blog => {
           this.blog = blog;
           this.loadPictures(blog);
-          if(this.blog.status == BlogStatus.CLOSED){
+          if (this.blog.status == BlogStatus.CLOSED) {
             this.isClosed = true;
           }
         });
-  
+
         this.authService.user$.subscribe(user => {
           this.user = user;
           this.loggedInUserId = this.user.id;
         });
 
-       
-        if(this.blog.blogComments != null){
+
+        if (this.blog.blogComments != null) {
           this.blog.blogComments.forEach(comment => {
             this.editingComments[comment.comment] = false;
           });
         }
-        
+
       } else {
         console.error('Nije pružen validan blogId.');
         this.service.getBlog(1).subscribe(blog => {
           this.blog = blog;
           this.blogId = 0;
         });
-  
+
       }
     });
   }
 
-  loadPictures(blog : Blog) {
-    if(blog != null) {
+  loadPictures(blog: Blog) {
+    if (blog != null) {
       this.blogImages = blog.images;
       this.currentPicture = this.blogImages[this.currentImageIndex];
-      
+
     }
   }
 
-  publishBlog(){
+  publishBlog() {
     this.service.publishBlog(this.blogId).subscribe({
       next: (result: any) => {
-          this.blog = result;
+        this.blog = result;
       }
     })
   }
@@ -119,7 +130,7 @@ export class DetailedBlogComponent {
     if (this.commentForm.valid) {
       const newComment: BlogComment = {
         userId: this.loggedInUserId,
-        blogId: this.blogId, 
+        blogId: this.blogId,
         comment: this.commentForm.value.comment,
         timeCreated: new Date(),
         timeUpdated: new Date(),
@@ -139,8 +150,8 @@ export class DetailedBlogComponent {
     return convertBlogStatusToString(status);
   }
 
-  enableEditMode(index : number) {
-    if(this.blog.blogComments != null){
+  enableEditMode(index: number) {
+    if (this.blog.blogComments != null) {
       this.commentForm.patchValue({
         comment: this.blog.blogComments[index].comment
       });
@@ -148,12 +159,12 @@ export class DetailedBlogComponent {
     }
   }
 
-  disableEditMode(index : number) {
+  disableEditMode(index: number) {
     this.editingComments[index] = false;
     this.commentForm.reset();
   }
 
-  deleteComment(comment : BlogComment) {
+  deleteComment(comment: BlogComment) {
     if (this.blogId && comment) {
       this.service.deleteBlogComment(this.blogId, comment).subscribe(
         () => {
@@ -169,8 +180,8 @@ export class DetailedBlogComponent {
     }
   }
 
-  updateComment(index : number) {
-    if(this.blog.blogComments != null) {
+  updateComment(index: number) {
+    if (this.blog.blogComments != null) {
       if (this.commentForm.valid) {
         const updatedComment = {
           ...this.blog.blogComments[index],
@@ -180,7 +191,7 @@ export class DetailedBlogComponent {
         this.service.updateBlogComment(this.blogId, updatedComment).subscribe(() => {
           this.editingComments[index] = false;
           this.commentForm.reset();
-          if(this.blog.blogComments!=null){
+          if (this.blog.blogComments != null) {
             this.blog.blogComments[index] = updatedComment;
           }
         });
@@ -190,9 +201,9 @@ export class DetailedBlogComponent {
 
   rate(mark: number) {
     const rating: BlogRating = { userId: 1, votingDate: new Date(), mark };
-    
+
     this.service.rateBlog(this.blogId, rating).subscribe(
-      
+
       (response) => {
         console.log('Blog je ocenjen uspešno:', response);
         this.service.getBlog(this.blogId).subscribe(blog => {
@@ -228,5 +239,14 @@ export class DetailedBlogComponent {
       thumbDownButton?.classList.add('thumb-down-active');
     }
   }
-  
+
+  selectCommentForReport(comment: BlogComment) {
+    this.selectedReportComment = comment;
+  }
+
+  reportComment() {
+
+    alert("Reportujes ovo: " + this.selectedReportComment.comment);
+  }
+
 }
