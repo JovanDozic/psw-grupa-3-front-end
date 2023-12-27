@@ -50,7 +50,7 @@ import { EncounterCreationComponent } from 'src/app/feature-modules/encounter/en
 import { TourCommunityRecommendComponent } from 'src/app/feature-modules/tour-authoring/tour-community-recommend/tour-community-recommend.component';
 import { ForgotPasswordComponent } from '../auth/forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from '../auth/change-password/change-password.component';
-import { BlogReportsComponent } from 'src/app/feature-modules/administration/blog-reports/blog-reports.component';
+import { BlogReportsComponent } from 'src/app/feature-modules/blog/blog-reports/blog-reports.component';
 
 
 const routes: Routes = [

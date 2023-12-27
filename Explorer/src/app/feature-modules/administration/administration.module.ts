@@ -13,7 +13,6 @@ import { AppRatingsComponent } from './app-ratings/app-ratings.component';
 import { EquipmentRecordComponent } from './equipment-record/equipment-record.component';
 import { FindPeopleComponent } from './find-people/find-people.component';
 import { PublicRegistrationRequestsComponent } from './public-registration-requests/public-registration-requests.component';
-import { BlogReportsComponent } from './blog-reports/blog-reports.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { BlogReportsComponent } from './blog-reports/blog-reports.component';
     EquipmentRecordComponent,
     FindPeopleComponent,
     PublicRegistrationRequestsComponent,
-    BlogReportsComponent,
   ],
   imports: [
     CommonModule,
@@ -46,7 +44,6 @@ import { BlogReportsComponent } from './blog-reports/blog-reports.component';
     EquipmentRecordComponent,
     AppRatingsComponent,
     AppRatingFormComponent,
-    BlogReportsComponent,
   ]
 })
 export class AdministrationModule { }
