@@ -44,7 +44,7 @@ export class ShowTourComponent {
 
       this.service.user$.subscribe(user => {
         this.user = user;
-        this.getShoppingCart();
+        if(this.user.role == 'tourist') this.getShoppingCart();      
       });
       this.loadTourData();
       
@@ -101,22 +101,18 @@ export class ShowTourComponent {
           console.error(error);
         }
       });
-      this.marketService.getToken(this.user.id, this.currentTourId).subscribe({
-        next: (result: boolean) => {
-          this.isPaid = result;
-          if (this.isPaid == false) {
-            this.forCart = true;
-          } else {
-            this.forCart = false;
+      if(this.user.role == 'tourist'){
+        this.marketService.getToken(this.user.id, this.currentTourId).subscribe({
+          next: (result: boolean) => {
+            this.isPaid = result;
+            console.log(result);
+          },
+          error: (error: any) => {
+            console.error(error);
           }
-          console.log(result);
-          console.log(this.user.id);
-          console.log(this.currentTourId);
-        },
-        error: (error: any) => {
-          console.error(error);
-        }
-      });
+        });
+      }
+      
     }
   }
 

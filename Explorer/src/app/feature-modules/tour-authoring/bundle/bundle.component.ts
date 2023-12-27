@@ -28,7 +28,7 @@ export class BundleComponent implements OnInit{
   ngOnInit(): void {
     this.userService.user$.subscribe(user => {
       this.user = user;
-      this.getShoppingCart();
+      if(this.user.role == 'tourist') this.getShoppingCart();
     });
 
     this.service.getAllBundles().subscribe({
