@@ -9,6 +9,7 @@ export interface Blog {
   netVotes: number;
   ratings?: BlogRating[] | null;
   blogComments?: BlogComment[] | null;
+  reports?: BlogReport[] | null;
 }
 
 
