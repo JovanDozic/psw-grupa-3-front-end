@@ -22,14 +22,9 @@ export class TourComponent implements OnInit {
     description: '',
     difficult: 0,
     tags: undefined,
-    status: '',
+    status: 0,
     price: 0,
     authorId: 0,
-    guide: {
-      name: '',
-      surname: '',
-      email: ''
-    },
     length: 0,
     publishTime: '',
     arhiveTime: '',
@@ -38,7 +33,9 @@ export class TourComponent implements OnInit {
       transportType: TransportType.Bicycle,
       minutes: 0
     },
-    reviews:[]
+    reviews: [],
+    problems: [],
+    myOwn: false
   };
   shouldRenderTourForm: boolean = false;
   shouldEdit: boolean = false;

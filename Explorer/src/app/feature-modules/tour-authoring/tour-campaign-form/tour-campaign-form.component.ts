@@ -97,7 +97,7 @@ export class TourCampaignFormComponent implements OnInit {
     const campaign: Campaign = {
       id: 0,
       title: this.campaignName,
-      tours: this.selectedTours.map(tour => ({ ...tour, problems: null, guides: null })),
+      tours: this.selectedTours.map(tour => ({ ...tour, guides: null })),
       touristId: this.user?.id!,
       difficult: this.totalDifficulty,
       length: this.totalLength,

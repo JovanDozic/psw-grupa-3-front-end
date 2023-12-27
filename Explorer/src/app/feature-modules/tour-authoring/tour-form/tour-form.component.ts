@@ -67,7 +67,12 @@ export class TourFormComponent implements OnChanges, OnInit {
   }
 
   save() {
+    this.tour.id=4;
     this.tour.length = 50
+    this.tour.publishTime = new Date().toISOString();
+    this.tour.arhiveTime =new Date().toISOString();
+    this.tour.status = 1;
+    this.tour.myOwn = false;
     this.service.addTour(this.tour).subscribe({
       next: () => { }
     });
