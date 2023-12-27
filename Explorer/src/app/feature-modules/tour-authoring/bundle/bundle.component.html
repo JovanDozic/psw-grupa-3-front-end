@@ -1,10 +1,10 @@
 <div id="tourReviews">
     <div class="tourReviewHeader">
-        <p>Bundles</p>
+        <h1>Bundles</h1>
     </div>
     <div class="col-12 d-flex align-items-center justify-content-between">
-        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createTourModal"
-            (click)="onAddClicked()">Create a bundle</button>
+        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createTourModal" *ngIf="user && user.role === 'author'"
+            (click)=" onAddClicked()">Create a bundle</button>
     </div>
 
     <div class="modal fade" id="createTourModal">
@@ -29,7 +29,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Price</th>
-                        <th></th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,10 +37,16 @@
                         <td>{{bundle.name}}</td>
                         <td>{{bundle.price}}</td>
                         <th>
-                            <button class="btn-primary" *ngIf="bundle.status ==  0" (click)="publish(bundle.id)">Publish</button>
-                            <button class="btn-primary" *ngIf="bundle.status == 1" (click)="archive(bundle.id)">Archive</button>
-                            <button class="btn-danger" *ngIf="bundle.status == 0" (click)="delete(bundle.id)">Delete</button>
-                            <button class="btn-primary" *ngIf="bundle.status == 1" (click)="addToCart(bundle)">Add to cart</button>
+                            <button class="btn btn-primary"
+                                *ngIf="user && user.role === 'author' && bundle.status ==  0"
+                                (click)="publish(bundle.id)">Publish</button>
+                            <button class="btn btn-primary" *ngIf="user && user.role === 'author' && bundle.status == 1"
+                                (click)="archive(bundle.id)">Archive</button>
+                            <button class="btn btn-danger" *ngIf="user && user.role === 'author' && bundle.status == 0"
+                                (click)="delete(bundle.id)">Delete</button>
+                            <button class="btn btn-primary"
+                                *ngIf="user && user.role === 'tourist' && bundle.status == 1"
+                                (click)="addToCart(bundle)">Add to cart</button>
                         </th>
                     </tr>
                     <tr>
