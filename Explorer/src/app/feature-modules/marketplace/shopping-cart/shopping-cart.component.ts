@@ -23,8 +23,10 @@ export class ShoppingCartComponent {
   ngOnInit(): void {
     this.authService.user$.subscribe(user => {
       this.user = user;
-      this.getShoppingCart();
-      this.getWallet();
+      if(this.user && this.user.role == 'tourist'){
+        this.getShoppingCart();
+        this.getWallet();
+      }
     })
   }
 
