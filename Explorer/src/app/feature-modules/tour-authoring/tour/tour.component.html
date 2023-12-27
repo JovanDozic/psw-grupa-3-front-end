@@ -44,8 +44,8 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-between mt-4">
                         <!-- <button class="btn btn-outline-primary start-0">View tour</button> -->
-                        <button class="btn btn-outline-warning" (click)="arhive(tour.id)" *ngIf="tour.status == '1'">Archive tour</button>
-                        <button class="btn btn-outline-warning" (click)="publish(tour.id)" *ngIf="tour.status == '0'">Publish tour</button>
+                        <button class="btn btn-outline-warning" (click)="arhive(tour.id)" *ngIf="tour.status == 1">Archive tour</button>
+                        <button class="btn btn-outline-warning" (click)="publish(tour.id)" *ngIf="tour.status == 0">Publish tour</button>
                         <!-- <button class="btn btn-outline-secondary end-0" data-bs-toggle="modal" data-bs-target="#createTourModal">Edit tour</button> -->
                         <button class="btn btn-outline-secondary end-0" data-bs-toggle="modal" data-bs-target="#createTourModal" (click)="onEditClicked(tour)">Edit tour</button>
                     </div>

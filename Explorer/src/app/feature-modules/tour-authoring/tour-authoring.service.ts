@@ -54,6 +54,7 @@ export class TourAuthoringService {
   }
 
   addTour(tour: Tour): Observable<Tour> {
+    console.log(tour);
     return this.http.post<Tour>(environment.apiHost + 'author/tour', tour);
   }
 
@@ -94,8 +95,8 @@ export class TourAuthoringService {
     return this.http.delete<ClubInvitation>(environment.apiHost + 'tourist/clubInvitation/' + id);
   }
 
-   addProblem(problem: Problem): Observable<Problem> {
-    return this.http.post<Problem>(environment.apiHost + 'tourist/problem', problem);
+  addProblem(tourId: number, problem: Problem): Observable<Problem> {
+    return this.http.post<Problem>(environment.apiHost + 'author/tour/addProblem/'+ tourId,problem);
   }
 
   createMembershipRequest(membershipRequest:MembershipRequest){
