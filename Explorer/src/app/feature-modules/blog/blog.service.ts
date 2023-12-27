@@ -59,5 +59,9 @@ export class BlogService {
     return this.http.post<Blog>(environment.apiHost + `blog/reportBlogComment/` + blogId, report);
   }
 
+  didUserReportComment(blogId: number, userId: number, comment: BlogComment) : Observable<boolean> {
+    return this.http.get<boolean>(environment.apiHost + `blog/didUserReportComment/` + blogId + `/` + userId + "/" + comment.timeCreated);
+  }
+
 
 }

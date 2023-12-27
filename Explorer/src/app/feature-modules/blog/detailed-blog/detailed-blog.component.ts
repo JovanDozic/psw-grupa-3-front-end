@@ -231,7 +231,15 @@ export class DetailedBlogComponent {
     }
   }
 
+  userAlreadyReported: boolean = false;
+
   selectCommentForReport(comment: BlogComment) {
+    this.service.didUserReportComment(this.blogId, this.loggedInUserId, comment).subscribe(
+      (response) => {
+        this.userAlreadyReported = response;
+        console.log('User already reported:', response);
+      }
+    );
     this.selectedReportComment = comment;
   }
 
