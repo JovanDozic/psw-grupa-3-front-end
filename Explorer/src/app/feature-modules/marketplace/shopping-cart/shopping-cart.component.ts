@@ -52,14 +52,15 @@ export class ShoppingCartComponent {
   }
 
   purchaseFromCartUsingAC() {
-    if(this.wallet.coins < this.sum/15){
+    if(this.wallet.coins < this.sum){
+      alert("You don't have enouth AC to purchase everything from the cart! Please remove some items and try again...")
       return
     } else {
 
     this.wallet = {
       id: this.wallet.id,
       userId: this.wallet.userId,
-      coins: Math.floor(this.wallet.coins - this.sum/15)
+      coins: Math.floor(this.wallet.coins - this.sum)
     }
 
     this.purchaseFromCart()
