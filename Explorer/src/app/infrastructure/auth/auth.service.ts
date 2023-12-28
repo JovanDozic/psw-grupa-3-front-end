@@ -17,7 +17,7 @@ import { PasswordChange } from './model/password-change.model';
   providedIn: 'root'
 })
 export class AuthService {
-  user$ = new BehaviorSubject<User>({username: "", id: 0, role: "" });
+  user$ = new BehaviorSubject<User>({username: "", id: 0, role: "", isBlogEnabled: false });
 
   constructor(private http: HttpClient,
     private tokenStorage: TokenStorage,

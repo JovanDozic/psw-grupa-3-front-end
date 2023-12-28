@@ -67,6 +67,7 @@ export interface BlogReport {
   reportReason: BlogReportReason;
   isReviewed: boolean;
   comment: string;
+  isAccepted?: boolean;
 }
 
 export enum BlogReportReason {

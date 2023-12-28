@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { BlogReport } from '../../blog/model/blog.model';
+import { BlogService } from '../blog.service';
 
 @Component({
   selector: 'xp-blog-reports',
@@ -10,6 +11,7 @@ import { BlogReport } from '../../blog/model/blog.model';
 export class BlogReportsComponent implements OnInit {
 
   unreviewedReports: BlogReport[] = [];
+  reviewedReports: BlogReport[] = [];
   selectedReport: BlogReport = {} as BlogReport;
   reportReasons: string[] = [
     "",
@@ -20,22 +22,22 @@ export class BlogReportsComponent implements OnInit {
     "Violence or dangerous organizations"
   ];
 
-  constructor(private AuthService: AuthService /* ! Dodati blog servis */) { }
+  constructor(private blogService: BlogService, private el: ElementRef) { }
 
   ngOnInit(): void {
-    for (let i = 0; i < 10; i++) {
-      const report: BlogReport = {
-        blogId: i,
-        userId: i + 100,
-        reportAuthorId: i + 200,
-        timeCommentCreated: new Date(),
-        timeReported: new Date(),
-        reportReason: Math.floor(Math.random() * (5 - 1 + 1)) + 1,
-        isReviewed: false,
-        comment: "Comment " + i + " for blog " + i,
-      };
-      this.unreviewedReports.push(report);
-    }
+    this.getReports();
+  }
+
+  getReports() {
+    console.log("Fetching reports...");
+    this.blogService.getUnreviewedReports().subscribe(reports => {
+      this.unreviewedReports = reports;
+      console.log(reports.length + " unreviewed reports fetched.")
+    });
+    this.blogService.getReviewedReports().subscribe(reports => {
+      this.reviewedReports = reports;
+      console.log(reports.length + " reviewed reports fetched.")
+    });
   }
 
   selectReport(report: BlogReport) {
@@ -43,11 +45,24 @@ export class BlogReportsComponent implements OnInit {
   }
 
   acceptReport() {
-
+    this.blogService.reviewReport(this.selectedReport.blogId, true, this.selectedReport).subscribe(() => {
+      this.getReports();
+      const closeButton = this.el.nativeElement.querySelector('#close-accept-report-modal-button');
+      if (closeButton) {
+        closeButton.click();
+      }
+    });
+    this.blogService.deleteReportedComment(this.selectedReport.blogId, this.selectedReport).subscribe(() => { });
   }
 
   denyReport() {
-    
+    this.blogService.reviewReport(this.selectedReport.blogId, false, this.selectedReport).subscribe(() => {
+      this.getReports();
+      const closeButton = this.el.nativeElement.querySelector('#close-deny-report-modal-button');
+      if (closeButton) {
+        closeButton.click();
+      }
+    });
   }
 
 }

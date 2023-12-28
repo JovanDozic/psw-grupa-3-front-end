@@ -8,6 +8,7 @@ import { BlogRating } from '../model/blog.model';
 import { BlogStatus, convertBlogStatusToString } from '../model/blog.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { AdministrationService } from '../../administration/administration.service';
 
 @Component({
   selector: 'xp-detailed-blog',
@@ -34,7 +35,7 @@ export class DetailedBlogComponent {
   selectedReportComment: BlogComment = {} as BlogComment;
   selectedReportReason: number = 0;
 
-  constructor(private service: BlogService, private authService: AuthService, private route: ActivatedRoute, private fb: FormBuilder, private el: ElementRef) {
+  constructor(private service: BlogService, private authService: AuthService, private route: ActivatedRoute, private fb: FormBuilder, private el: ElementRef, private administrationService: AdministrationService) {
     this.commentForm = this.fb.group({
       comment: ['', Validators.required],
     });
@@ -57,7 +58,13 @@ export class DetailedBlogComponent {
         this.authService.user$.subscribe(user => {
           this.user = user;
           this.loggedInUserId = this.user.id;
+          this.administrationService.canUserUseBlog(this.loggedInUserId).subscribe(
+            (response) => {
+              this.user!.isBlogEnabled = response;
+            }
+          );
         });
+
 
 
         if (this.blog.blogComments != null) {
@@ -253,13 +260,14 @@ export class DetailedBlogComponent {
 
       const report: BlogReport = {
         blogId: this.selectedReportComment.blogId,
-        userId: this.loggedInUserId,
+        userId: this.selectedReportComment.userId,
         reportAuthorId: this.user?.id ?? 0,
         timeCommentCreated: this.selectedReportComment.timeCreated,
         timeReported: new Date(),
         reportReason: this.selectedReportReason,
         isReviewed: false,
         comment: this.selectedReportComment.comment,
+        isAccepted: undefined,
       };
 
       this.service.reportComment(this.blogId, report).subscribe(

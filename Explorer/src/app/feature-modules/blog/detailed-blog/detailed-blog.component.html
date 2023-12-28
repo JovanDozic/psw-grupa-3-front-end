@@ -161,7 +161,7 @@
 
 
 
-    <div class="container blog-details-container">
+    <div class="container blog-details-container" *ngIf="user?.isBlogEnabled == undefined || user?.isBlogEnabled">
         <div *ngIf="!addingComment">
             <button class="btn btn-primary" (click)="addComment()">Add a Comment</button>
         </div>
@@ -178,5 +178,8 @@
                 </div>
             </form>
         </div>
+    </div>
+    <div class="container blog-details-container" *ngIf="user?.isBlogEnabled != undefined && user?.isBlogEnabled == false">
+        <p class="text-danger">You are not allowed to leave comments. Please contact the administrator.</p>
     </div>
 </div>

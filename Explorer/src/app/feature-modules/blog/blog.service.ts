@@ -63,5 +63,21 @@ export class BlogService {
     return this.http.get<boolean>(environment.apiHost + `blog/didUserReportComment/` + blogId + `/` + userId + "/" + comment.timeCreated);
   }
 
+  getReviewedReports(): Observable<BlogReport[]> {
+    return this.http.get<BlogReport[]>(environment.apiHost + `blog/getReviewedReports`);
+  }
+
+  getUnreviewedReports(): Observable<BlogReport[]> {
+    return this.http.get<BlogReport[]>(environment.apiHost + `blog/getUnreviewedReports`);
+  }
+
+  reviewReport(blogId: number, isAccepted: boolean, report: BlogReport) {
+    return this.http.put(environment.apiHost + `blog/reviewReport/` + blogId + `/` + isAccepted, report);
+  }
+
+  deleteReportedComment(blogId: number, report: BlogReport) {
+    return this.http.put(environment.apiHost + `blog/deleteReportedBlogComment/` + blogId, report);
+  }
+
 
 }
