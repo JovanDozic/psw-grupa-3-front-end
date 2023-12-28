@@ -54,7 +54,7 @@ export class CalendarComponent implements OnInit {
         // Mapiranje tura na format koji podržava FullCalendar
         const calendarEvents = tours.map(tour => ({
           title: tour.name,
-          start: this.datePipe.transform(tour.publishTime, 'yyyy-MM-ddTHH:mm:ss'),
+          start: this.datePipe.transform(tour.arhiveTime, 'yyyy-MM-ddTHH:mm:ss'),
           // Dodajte dodatne informacije o turi prema potrebi
           // Na primer: tourId: tour.id
         }));
