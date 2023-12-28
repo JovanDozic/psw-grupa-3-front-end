@@ -121,6 +121,9 @@
                             <button color="primary" (click)="showTourReviews(tour)">
                                 Show reviews
                             </button>
+                            <button color="primary" class="mx-2" [routerLink]="['../show-tour/' + tour.id]">
+                                Show tour
+                            </button>
                         </td>
                     </tr>
                     <tr>

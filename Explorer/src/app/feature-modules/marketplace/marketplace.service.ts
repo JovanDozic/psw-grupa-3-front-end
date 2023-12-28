@@ -9,6 +9,8 @@ import { SearchResultTour } from './model/search-result-tour.model';
 import { OrderItem } from './model/order-item.model';
 import { Coupon } from './model/coupons.model';
 import { Wallet } from './model/wallet.model';
+import { ShoppingSession } from './model/shopping-session.model';
+import { ShoppingEvent } from './model/shopping-event.model';
 
 
 @Injectable({
@@ -102,5 +104,15 @@ export class MarketplaceService {
     return this.http.delete<Coupon>(environment.apiHost + 'author/coupons/' + id);
   }
 
+  startSession(userId: number): Observable<ShoppingSession> {
+    return this.http.post<ShoppingSession>(environment.apiHost + 'tourist/shoppingSession/startSession/' + userId, null);
+  }
 
+  closeSession(userId: number): Observable<ShoppingSession> {
+    return this.http.get<ShoppingSession>(environment.apiHost + 'tourist/shoppingSession/closeSession/' + userId);
+  }
+
+  addEvent(event: ShoppingEvent, userId: number): Observable<ShoppingSession> {
+    return this.http.patch<ShoppingSession>(environment.apiHost + 'tourist/shoppingSession/addEvent/' + userId, event);
+  }
 }

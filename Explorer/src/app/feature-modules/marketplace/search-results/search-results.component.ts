@@ -19,13 +19,18 @@ export class SearchResultsComponent implements OnInit {
   user: User;
   shoppingCart: ShoppingCart;
 
-  constructor(private router: Router, private route: ActivatedRoute, private marketplaceService: MarketplaceService,
+  constructor(private route: ActivatedRoute, private marketplaceService: MarketplaceService,
     private authService: AuthService) { }
 
   ngOnInit(): void {
     this.getSearchResults();
     this.authService.user$.subscribe(user => {
       this.user = user;
+      const isReloaded = sessionStorage.getItem('isReloaded');
+      if (!isReloaded && this.user && this.user.role == 'tourist') {
+        this.startSession()
+      } 
+      
     })
   }
 
@@ -41,6 +46,14 @@ export class SearchResultsComponent implements OnInit {
       },
       error: (error) => {
         console.log(error);
+      }
+    })
+  }
+
+  startSession() {
+    this.marketplaceService.startSession(this.user.id).subscribe({
+      next: response => {
+        console.log(response);
       }
     })
   }
