@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { Tour } from '../model/tour.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'xp-tour-review-form',
@@ -19,8 +20,11 @@ export class TourReviewFormComponent implements OnInit{
   @Output() visibilityFlag = new EventEmitter<null>();
 
   user: User | undefined;
+  showNextButton: boolean = false;
 
-  constructor(private authService: AuthService, private service: TourAuthoringService) {}
+
+  constructor(private authService: AuthService, private service: TourAuthoringService, private router: Router) {}
+
 
   ngOnInit(): void {
     this.authService.user$.subscribe(user => {
@@ -72,6 +76,7 @@ export class TourReviewFormComponent implements OnInit{
     this.service.addTourReview(this.tour, review).subscribe({
       next: () => { 
         this.visibilityFlag.emit();
+        this.showNextButton = true;
       },
       error: (error) => {
         console.error(error);
@@ -112,4 +117,9 @@ export class TourReviewFormComponent implements OnInit{
     }
   }
 
+
+  goToNextPage(): void {
+    
+    this.router.navigate(['tour-community-recommend', this.tour.id]);
+  }
 }

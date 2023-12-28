@@ -19,5 +19,7 @@
         <input type="file" multiple (change)="onFileSelected($event)">
     </div>
         <button  color="primary" type="submit" (click)="addReview()" mat-raised-button>Done</button>
+        <button color="primary" mat-raised-button (click)="goToNextPage()" [disabled]="!showNextButton">See recommended tours</button>
+
     </div>
 </form>
