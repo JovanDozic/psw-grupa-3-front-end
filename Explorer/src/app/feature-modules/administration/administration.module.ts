@@ -13,6 +13,7 @@ import { AppRatingsComponent } from './app-ratings/app-ratings.component';
 import { EquipmentRecordComponent } from './equipment-record/equipment-record.component';
 import { FindPeopleComponent } from './find-people/find-people.component';
 import { PublicRegistrationRequestsComponent } from './public-registration-requests/public-registration-requests.component';
+import { MarketplaceModule } from '../marketplace/marketplace.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { PublicRegistrationRequestsComponent } from './public-registration-reque
   imports: [
     CommonModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MarketplaceModule,
   ],
   exports: [
     EquipmentComponent,

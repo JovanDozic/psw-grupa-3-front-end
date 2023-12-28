@@ -70,5 +70,7 @@ export class PreferenceFormComponent implements OnInit, OnChanges {
         this.preferenceUpdated.emit();
       }
     })
+    this.preferenceForm.reset();
+    this.ngOnInit()
   }
 }
