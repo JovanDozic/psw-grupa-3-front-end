@@ -5,6 +5,7 @@ import { Tour } from '../model/tour.model';
 import { OrderItem, OrderItemType } from '../../marketplace/model/order-item.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'xp-tour-community-recommend',
@@ -20,20 +21,22 @@ export class TourCommunityRecommendComponent implements OnInit {
 
   user: User;
   averageRatings: { [tourId: number]: number } = {};
-  constructor(private service: TourAuthoringService,private authService: AuthService) {}
+  constructor(private service: TourAuthoringService, private authService: AuthService, private route: ActivatedRoute) {}
   
 
   ngOnInit(): void {
-    
     this.authService.user$.subscribe(user => {
       this.user = user;
-      this.getRecommendedTours();
-      
-    })
+      this.route.params.subscribe(params => {
+        const tourId = +params['tourId']; // '+' pretvara string u broj
+        this.getRecommendedTours(tourId);
+      });
+    });
   }
   
-  getRecommendedTours(): void {
-    this.service.findToursReviewedByUsersIFollow(this.user.id, 2).subscribe((data: Tour[]) => {
+  
+  getRecommendedTours(tourId: number): void {
+    this.service.findToursReviewedByUsersIFollow(this.user.id, tourId).subscribe((data: Tour[]) => {
       this.tours = data;
       for (const tour of this.tours) {
         if (tour.id !== undefined) {
