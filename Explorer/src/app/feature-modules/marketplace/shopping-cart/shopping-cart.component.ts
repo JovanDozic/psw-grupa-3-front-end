@@ -6,6 +6,7 @@ import { Tour } from '../../tour-authoring/model/tour.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { Wallet } from '../model/wallet.model';
+import { EventType, ShoppingEvent } from '../model/shopping-event.model';
 
 @Component({
   selector: 'xp-shopping-cart',
@@ -49,6 +50,13 @@ export class ShoppingCartComponent {
           next: result => {
             this.getShoppingCart();
             this.getWallet();
+            //Zatvori shopping session
+            if(this.user && this.user.role == 'tourist')
+              this.service.closeSession(this.user.id).subscribe({
+                next: response => {
+                  console.log(response);
+                }
+              })
           }
         })
       }
@@ -75,6 +83,17 @@ export class ShoppingCartComponent {
         this.shoppingCart = result;
         this.getSum();
         alert('Successfully removed from cart!');
+        //Ubaci event
+        const newEvent : ShoppingEvent = {
+          eventType: t.type == 'Bundle' ? EventType.RemoveBundleFromCart : EventType.RemoveTourFromCart,
+          itemId: t.idType,
+        }
+        this.service.addEvent(newEvent, this.user.id).subscribe({
+          next: response => {
+            console.log(response);
+          }
+        })
+        
       },
       error: err => {
         console.log(err);

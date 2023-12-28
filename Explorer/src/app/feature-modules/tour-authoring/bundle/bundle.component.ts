@@ -7,6 +7,7 @@ import { MarketplaceService } from '../../marketplace/marketplace.service';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { ShoppingCart } from '../../marketplace/model/shopping-cart.model';
+import { EventType, ShoppingEvent } from '../../marketplace/model/shopping-event.model';
 
 @Component({
   selector: 'xp-bundle',
@@ -28,7 +29,14 @@ export class BundleComponent implements OnInit{
   ngOnInit(): void {
     this.userService.user$.subscribe(user => {
       this.user = user;
-      if(this.user.role == 'tourist') this.getShoppingCart();
+      if(this.user.role == 'tourist'){
+        this.getShoppingCart();
+        this.marketService.startSession(this.user.id).subscribe({
+          next: response => {
+            console.log(response);
+          }
+        })
+      } 
     });
 
     this.service.getAllBundles().subscribe({
@@ -122,6 +130,15 @@ export class BundleComponent implements OnInit{
         next: result => {
           alert('Added to cart!');
           this.getShoppingCart();
+          const newEvent : ShoppingEvent = {
+            eventType: EventType.AddBundleToCart,
+            itemId: bundle.id,
+          }
+          this.marketService.addEvent(newEvent, this.user.id).subscribe({
+            next: response => {
+              console.log(response);
+            }
+          })
         },
         error: (err) => {
           console.log(err);

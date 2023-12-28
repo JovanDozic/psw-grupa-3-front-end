@@ -8,6 +8,7 @@ import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { MarketplaceService } from '../../marketplace/marketplace.service';
 
 @Component({
   selector: 'xp-problem-form',
@@ -35,14 +36,17 @@ export class ProblemFormComponent implements OnChanges {
   @Input() problem: Problem;
   @Input() shouldEdit: boolean = false;
 
-  constructor(private authService: AuthService, private service: TourAuthoringService) { }
+  constructor(private authService: AuthService, private service: TourAuthoringService, private marketService: MarketplaceService) { }
 
 
   ngOnInit(): void {
     this.authService.user$.subscribe(user => {
       this.user = user;
+      if(this.user && this.user.role == 'tourist')
+        this.openSession();
     })
     this.getTours();
+    
   }
 
   ngOnChanges(): void {
@@ -222,6 +226,14 @@ export class ProblemFormComponent implements OnChanges {
 
   setRatingFilter(rating: number) {
     this.selectedRating = rating;
+  }
+
+  openSession(){
+    this.marketService.startSession(this.user!.id).subscribe({
+      next: response => {
+        console.log(response);
+      }
+    })
   }
 
 
