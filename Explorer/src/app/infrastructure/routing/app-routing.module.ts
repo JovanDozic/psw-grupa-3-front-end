@@ -99,7 +99,7 @@ const routes: Routes = [
   {path: 'social-encounter-form', component: SocialEncounterFormComponent},
   {path: 'misc-encounter-form', component: MiscEncounterFormComponent},
   {path: 'encounter-creation', component: EncounterCreationComponent},
-  {path: 'tour-community-recommend', component: TourCommunityRecommendComponent},
+  {path: 'tour-community-recommend/:tourId', component: TourCommunityRecommendComponent },
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'change-password', component: ChangePasswordComponent},
   {path: 'blog-reports', component: BlogReportsComponent}, //, canActivate: [AuthGuard]},
