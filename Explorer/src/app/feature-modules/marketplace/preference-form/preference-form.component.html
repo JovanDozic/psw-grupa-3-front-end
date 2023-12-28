@@ -1,23 +1,33 @@
-<form [formGroup]="preferenceForm">
-    <div>
-        <mat-form-field>
-            <mat-label>Difficulty(1=easy, 5=hard; 1-5)</mat-label>
-            <input matInput formControlName="difficulty" type="number"/>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Transport</mat-label>
-            <mat-select matInput formControlName="transport">
-                <mat-option value="Walking">Walking</mat-option>
-                <mat-option value="Bicycle">Bicycle</mat-option>
-                <mat-option value="Car">Car</mat-option>
-                <mat-option value="Boat">Boat</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Tags</mat-label>
-          <input matInput formControlName="tags" type="text">
-        </mat-form-field>
-    <button *ngIf="!shouldEdit" color="primary" type="submit" (click)="addPreference()" mat-raised-button>Done</button>
-    <button *ngIf="shouldEdit" color="primary" type="submit" (click)="editPreference()" mat-raised-button>Done</button>
+<div class="container mt-4">
+
+    <div class="row justify-content-center form-control-lg">
+
+        <div>
+            <form [formGroup]="preferenceForm">
+                <div>
+                    <div class="mb-3">
+                        <label class="form-label">Difficulty(1=easy, 5=hard; 1-5)</label>
+                        <input matInput formControlName="difficulty" type="number"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Transport</label>
+                        <select matInput formControlName="transport">
+                            <option value="Walking">Walking</option>
+                            <option value="Bicycle">Bicycle</option>
+                            <option value="Car">Car</option>
+                            <option value="Boat">Boat</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Tags</label>
+                      <input matInput formControlName="tags" type="text">
+                    </div>
+                <button *ngIf="!shouldEdit" class="btn btn-primary" type="submit" (click)="addPreference()" >Done</button>
+                <button *ngIf="shouldEdit" class="btn btn-primary" type="submit" (click)="editPreference()">Done</button>
+                </div>
+            </form>
+        </div>
     </div>
-</form>
+
+</div>
+

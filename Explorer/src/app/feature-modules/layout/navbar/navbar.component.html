@@ -96,7 +96,6 @@
 
                         <li *ngIf="user && user.role === 'tourist'">
                             <a class="dropdown-item" [routerLink]="['equipment-record']">Equipment record</a>
-                            <a class="dropdown-item" [routerLink]="['preference']">Preferences</a>
                             <a class="dropdown-item" [routerLink]="['club']">Club management</a>
                             <a class="dropdown-item" [routerLink]="['invitations']">Club invitations</a>
                             <a class="dropdown-item" [routerLink]="['problem-form']">All tours</a>
@@ -109,16 +108,20 @@
 
                         </li>
 
-                        <li *ngIf="user && user.role !== 'administrator' && user.username !== ''">
-                            <a class="dropdown-item" [routerLink]="['profile']">Profile</a>
-                        </li>
-
                     </ul>
                 </li>
             </ul>
 
             <ul class="navbar-nav ms-auto">
                 <!--Messages dropdown menu-->
+                <div class="container">
+                    <div class="dropdown">
+                    <li *ngIf="user && user.role !== 'administrator' && user.username !== ''">
+                        <button class="btn btn-secondary dropdown-toggle" color="btn-primary" [routerLink]="['profile']"><i class="bi bi-person"></i></button>
+                    </li>
+                    </div>
+                </div>
+
                 <div class="container">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" color="btn-primary" type="button" id="messageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -163,7 +166,6 @@
                       </ul>
                     </div>
                 </div>
-
                 <li class="nav-item" *ngIf="user && user.username === ''">
                     <a class="nav-link" [routerLink]="['login']">Login</a>
                 </li>
