@@ -38,6 +38,9 @@
                             <a class="dropdown-item" [routerLink]="['tour-campaign-form']">Create a campaign</a>
                             <a class="dropdown-item" [routerLink]="['all-bundles']">All bundles</a>
                         </li>
+                        <li *ngIf="user && user.role === 'author'">
+                            <a class="dropdown-item" [routerLink]="['tour-statistics']">Your tour statistics</a> 
+                        </li>
                     </ul>
                 </li>
 
