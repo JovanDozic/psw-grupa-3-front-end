@@ -9,6 +9,7 @@ import {BehaviorSubject} from "rxjs";
 import { TourExecution } from './model/tour-lifecycle.model';
 import { Tour } from '../tour-authoring/model/tour.model';
 import { TourPurchaseToken } from './model/tour-purchase-token.model';
+import {PagedResults} from "../../shared/model/paged-results.model";
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,10 @@ export class TourExecutionService {
 
   getTouristTokens(userId: number): Observable<TourPurchaseToken[]> {
     return this.http.get<TourPurchaseToken[]>(environment.apiHost + 'tourist/tourPurchaseToken/' + userId);
+  }
+
+
+  getExecutions(): Observable<PagedResults<TourExecution>> {
+    return this.http.get<PagedResults<TourExecution>>(environment.apiHost + 'tourist/tourExecution/getAll');
   }
 }

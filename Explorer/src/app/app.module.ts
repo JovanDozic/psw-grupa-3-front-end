@@ -24,6 +24,7 @@ import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule  } from 'ngx-g
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EncounterModule } from './feature-modules/encounter/encounter.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +52,7 @@ import { EncounterModule } from './feature-modules/encounter/encounter.module';
     TourExecutionModule,
     MatCheckboxModule,
     EncounterModule,
+    
   ],
   providers: [
     {
