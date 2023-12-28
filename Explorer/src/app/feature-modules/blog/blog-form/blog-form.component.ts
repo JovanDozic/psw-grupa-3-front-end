@@ -22,10 +22,11 @@ export class BlogFormComponent implements OnInit {
     additionalDescription: new FormControl('')
   });
   imageUrls: string[] = [];
-  imageUrl: string = '';
+  imageUrl: string = "";
   user: User;
 
-  
+  blogCreated = false; 
+
   constructor(private authService: AuthService, private service: BlogService) {}
 
   onDataReceived(emittedTour: any) {
@@ -49,6 +50,7 @@ export class BlogFormComponent implements OnInit {
   }
 
   addImage(): void{
+    if (this.imageUrl == undefined) return;
     this.imageUrls.push(this.imageUrl);
     console.log('Image added: ' + this.imageUrl);
     this.imageUrl = "";
@@ -76,7 +78,16 @@ export class BlogFormComponent implements OnInit {
     blog.creationDate.toISOString();
 
     this.service.addBlog(blog).subscribe({
-        next: () => {console.log("New blog created")}
+        next: () => {
+          console.log("New blog created")
+          
+          this.blogCreated = true;
+
+          this.blogForm.reset();
+          this.imageUrls = [];
+          this.imageUrl = '';
+      
+      }
     });
   }
 }
