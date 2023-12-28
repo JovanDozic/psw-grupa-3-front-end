@@ -37,7 +37,7 @@ export class TourCampaignFormComponent implements OnInit {
       this.availableTours = pagedResults.results;
       this.tourExeService.getTouristTokens(this.user?.id!).subscribe((tokens) => {
         this.availableTours = this.availableTours.filter((tour) => {
-          return tokens.find((token) => token.typeId === tour.id) !== undefined;
+          return tokens.find((token) => token.tourId === tour.id) !== undefined;
         });
         this.sortTours();
       });
@@ -97,7 +97,7 @@ export class TourCampaignFormComponent implements OnInit {
     const campaign: Campaign = {
       id: 0,
       title: this.campaignName,
-      tours: this.selectedTours.map(tour => ({ ...tour, problems: null, guides: null })),
+      tours: this.selectedTours.map(tour => ({ ...tour, guides: null })),
       touristId: this.user?.id!,
       difficult: this.totalDifficulty,
       length: this.totalLength,

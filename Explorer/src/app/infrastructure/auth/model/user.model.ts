@@ -4,6 +4,7 @@ export interface User {
     role: string;
     followers?: User[];
     notifications?: UserNotification[]; 
+    isBlogEnabled?: boolean;
 }
 
 export interface UserInfo{

@@ -10,12 +10,14 @@ import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { BlogReportsComponent } from './blog-reports/blog-reports.component';
 
 @NgModule({
   declarations: [
     BlogFormComponent,
     DetailedBlogComponent,
-    BlogsPageComponent
+    BlogsPageComponent,
+    BlogReportsComponent
   ],
   imports: [
     CommonModule, 

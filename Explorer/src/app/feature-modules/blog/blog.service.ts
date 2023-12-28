@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Blog, BlogRating } from './model/blog.model';
+import { Blog, BlogRating, BlogReport } from './model/blog.model';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { BlogComment } from './model/blog.model';
 import { environment } from 'src/env/environment';
@@ -53,4 +53,31 @@ export class BlogService {
   deleteBlogComment(blogId : number, _blogComment : BlogComment) : Observable<Blog> {
     return this.http.put<Blog>(environment.apiHost + `blog/deleteBlogComment/` + blogId, _blogComment);
   }
+
+
+  reportComment(blogId : number, report : BlogReport) : Observable<Blog> {
+    return this.http.post<Blog>(environment.apiHost + `blog/reportBlogComment/` + blogId, report);
+  }
+
+  didUserReportComment(blogId: number, userId: number, comment: BlogComment) : Observable<boolean> {
+    return this.http.get<boolean>(environment.apiHost + `blog/didUserReportComment/` + blogId + `/` + userId + "/" + comment.timeCreated);
+  }
+
+  getReviewedReports(): Observable<BlogReport[]> {
+    return this.http.get<BlogReport[]>(environment.apiHost + `blog/getReviewedReports`);
+  }
+
+  getUnreviewedReports(): Observable<BlogReport[]> {
+    return this.http.get<BlogReport[]>(environment.apiHost + `blog/getUnreviewedReports`);
+  }
+
+  reviewReport(blogId: number, isAccepted: boolean, report: BlogReport) {
+    return this.http.put(environment.apiHost + `blog/reviewReport/` + blogId + `/` + isAccepted, report);
+  }
+
+  deleteReportedComment(blogId: number, report: BlogReport) {
+    return this.http.put(environment.apiHost + `blog/deleteReportedBlogComment/` + blogId, report);
+  }
+
+
 }

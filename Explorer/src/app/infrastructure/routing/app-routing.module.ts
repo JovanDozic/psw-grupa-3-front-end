@@ -46,6 +46,10 @@ import { HiddenEncounterFormComponent } from 'src/app/feature-modules/encounter/
 import { SocialEncounterFormComponent } from 'src/app/feature-modules/encounter/social-encounter-form/social-encounter-form.component';
 import { MiscEncounterFormComponent } from 'src/app/feature-modules/encounter/misc-encounter-form/misc-encounter-form.component';
 import { EncounterCreationComponent } from 'src/app/feature-modules/encounter/encounter-creation/encounter-creation.component';
+import { TourCommunityRecommendComponent } from 'src/app/feature-modules/tour-authoring/tour-community-recommend/tour-community-recommend.component';
+import { ForgotPasswordComponent } from '../auth/forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from '../auth/change-password/change-password.component';
+import { BlogReportsComponent } from 'src/app/feature-modules/blog/blog-reports/blog-reports.component';
 
 
 const routes: Routes = [
@@ -92,7 +96,11 @@ const routes: Routes = [
   {path: 'tour-campaign-form', component: TourCampaignFormComponent},
   {path: 'social-encounter-form', component: SocialEncounterFormComponent},
   {path: 'misc-encounter-form', component: MiscEncounterFormComponent},
-  {path: 'encounter-creation', component: EncounterCreationComponent}
+  {path: 'encounter-creation', component: EncounterCreationComponent},
+  {path: 'tour-community-recommend', component: TourCommunityRecommendComponent},
+  {path: 'forgot-password', component: ForgotPasswordComponent},
+  {path: 'change-password', component: ChangePasswordComponent},
+  {path: 'blog-reports', component: BlogReportsComponent}, //, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

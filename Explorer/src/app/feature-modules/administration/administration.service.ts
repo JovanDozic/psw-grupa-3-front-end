@@ -77,6 +77,10 @@ export class AdministrationService {
     return this.http.patch<User>(environment.apiHost + 'userprofile/followers/' + userId + '/unfollow/' + userToUnfollowId, {});
   }
 
+  canUserUseBlog(userId: number): Observable<boolean> {
+    return this.http.get<boolean>(environment.apiHost + 'userprofile/canUserUseBlog/' + userId);
+  }
+
   //Wallet
 
   getUserWallet(userId: number): Observable<Wallet> {

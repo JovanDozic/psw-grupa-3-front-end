@@ -36,6 +36,7 @@
                         <li *ngIf="user && user.role === 'tourist'">
                             <a class="dropdown-item" [routerLink]="['tour-campaigns']">Your campaigns</a>
                             <a class="dropdown-item" [routerLink]="['tour-campaign-form']">Create a campaign</a>
+                            <a class="dropdown-item" [routerLink]="['all-bundles']">All bundles</a>
                         </li>
                     </ul>
                 </li>
@@ -70,6 +71,7 @@
                             <a class="dropdown-item" [routerLink]="['app-ratings']">All App Ratings</a>
                             <a class="dropdown-item" [routerLink]="['problems']">Show Tour Problems</a>
                             <a class="dropdown-item" [routerLink]="['public-registration-requests']">Manage registration requests</a>
+                            <a class="dropdown-item" [routerLink]="['blog-reports']">Manage reported comments</a>
                         </li>
 
                         <li *ngIf="user && (user.role === 'author' || user.role === 'tourist')">

@@ -1,4 +1,11 @@
 export interface RequiredTime {
-    transportType: string,
+    transportType: TransportType,
     minutes: number
+}
+
+export enum TransportType {
+    Walking,
+    Bicycle,
+    Car,
+    Boat
 }
