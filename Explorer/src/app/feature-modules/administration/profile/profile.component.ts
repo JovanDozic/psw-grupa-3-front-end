@@ -5,6 +5,8 @@ import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { Person } from '../model/userprofile.model';
 import { switchMap } from 'rxjs/operators';
 import { Wallet } from '../../marketplace/model/wallet.model';
+import { Preference } from '../../marketplace/model/preference.model';
+import { MarketplaceService } from '../../marketplace/marketplace.service';
 
 @Component({
   selector: 'xp-profile',
@@ -18,11 +20,25 @@ export class ProfileComponent implements OnInit {
   selectedProfile: Person;
   wallet: Wallet;
 
-  constructor(private authService: AuthService, private service: AdministrationService) {}
+  shouldEdit: boolean = false
+  preferences: Preference[] = [];
+  shouldRenderPreferenceForm: boolean = false;
+  shouldRenderAdd: boolean = false
+  selectedPreference: Preference;
+
+  constructor(private authService: AuthService,private marketService: MarketplaceService, private service: AdministrationService) {}
 
   ngOnInit(): void {
     this.getUser();
     this.getFollowers();
+    this.getPreferences();
+    // const isReloaded = sessionStorage.getItem('isReloaded');
+    // if (!isReloaded || this.preferences.length == 0) {
+    //   sessionStorage.setItem('isReloaded', 'true');
+    //   window.location.reload();
+    // } else {
+    //   sessionStorage.removeItem('isReloaded');
+    // }   
   }
 
   getUser(): void {
@@ -51,6 +67,49 @@ export class ProfileComponent implements OnInit {
         console.log(this.wallet);
       }
     })
+  }
+
+  editProfile(profile: Person): void{
+    this.selectedProfile = profile
+    console.log(this.selectedProfile)
+  }
+
+  getPreferences() {
+    this.marketService.getAllTouristPreferences(this.user.id).subscribe({
+      next: (result: Preference[]) => {
+        this.preferences = result;
+        console.log("Resultat je:", result)
+      }
+    })
+  }
+
+  deletePreference(id: number) {
+    this.marketService.deletePreference(id).subscribe({
+      next: (_) => {
+        this.getPreferences();
+        console.log("Successfully deleted!");
+      }
+    })
+  }
+
+  onEditClicked(pref: Preference) {
+    this.selectedPreference = pref
+    this.shouldRenderAdd = false
+    if(this.shouldRenderPreferenceForm == true)
+      this.shouldRenderPreferenceForm = false
+    else
+      this.shouldRenderPreferenceForm = true
+
+    this.shouldEdit = true
+  }
+
+  onAddClicked() {
+    this.shouldRenderPreferenceForm = false
+    if(this.shouldRenderAdd == true)
+      this.shouldRenderAdd = false
+    else
+      this.shouldRenderAdd = true
+    this.shouldEdit = false;
   }
 
 }

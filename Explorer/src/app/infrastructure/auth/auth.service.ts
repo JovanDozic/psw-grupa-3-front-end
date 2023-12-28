@@ -11,12 +11,13 @@ import { User } from './model/user.model';
 import { Registration } from './model/registration.model';
 import { ShoppingCart } from 'src/app/feature-modules/marketplace/model/shopping-cart.model';
 import { Wallet } from 'src/app/feature-modules/marketplace/model/wallet.model';
+import { PasswordChange } from './model/password-change.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  user$ = new BehaviorSubject<User>({username: "", id: 0, role: "" });
+  user$ = new BehaviorSubject<User>({username: "", id: 0, role: "", isBlogEnabled: false });
 
   constructor(private http: HttpClient,
     private tokenStorage: TokenStorage,
@@ -52,6 +53,14 @@ export class AuthService {
     );
   }
 
+  sendPasswordResetLink(email: string): Observable<boolean>{
+      return this.http.get<boolean>(environment.apiHost + `users/forgotPassword?email=` + email)
+  }
+
+  changePassword(change: PasswordChange): Observable<boolean>{
+    return this.http.post<boolean>(environment.apiHost + `users/changePassword`, change);
+  }
+
   checkIfUserExists(): void {
     const accessToken = this.tokenStorage.getAccessToken();
     if (accessToken == null) {
@@ -59,20 +68,6 @@ export class AuthService {
     }
     this.setUser();
   }
-
-  private setUser(): void {
-    const jwtHelperService = new JwtHelperService();
-    const accessToken = this.tokenStorage.getAccessToken() || "";
-    const user: User = {
-      id: +jwtHelperService.decodeToken(accessToken).id,
-      username: jwtHelperService.decodeToken(accessToken).username,
-      role: jwtHelperService.decodeToken(accessToken)[
-        'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
-      ],
-    };
-    this.user$.next(user);
-  }
-
   activateUser(id: number): Observable<boolean> {
     const credentials : Login =  {
       username: "",
@@ -87,5 +82,18 @@ export class AuthService {
 
   createWallet(wallet: Wallet):Observable<Wallet> {
     return this.http.post<Wallet>(environment.apiHost + 'tourist/wallet', wallet);
+  }
+
+  private setUser(): void {
+    const jwtHelperService = new JwtHelperService();
+    const accessToken = this.tokenStorage.getAccessToken() || "";
+    const user: User = {
+      id: +jwtHelperService.decodeToken(accessToken).id,
+      username: jwtHelperService.decodeToken(accessToken).username,
+      role: jwtHelperService.decodeToken(accessToken)[
+        'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+      ],
+    };
+    this.user$.next(user);
   }
 }

@@ -6,7 +6,6 @@ export interface Person {
     picture: string;
     bio: string;
     quote: string;
-    email: string;
     xp: number;
     level: number;
 }

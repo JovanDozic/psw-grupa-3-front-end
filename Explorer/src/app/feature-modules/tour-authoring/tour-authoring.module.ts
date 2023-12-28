@@ -27,6 +27,7 @@ import { TouristsProblemsComponent } from './tourists-problems/tourists-problems
 import { PointsViewComponent } from './points-view/points-view.component';
 import { TourCampaignsComponent } from './tour-campaigns/tour-campaigns.component';
 import { TourCampaignFormComponent } from './tour-campaign-form/tour-campaign-form.component';
+import { TourCommunityRecommendComponent } from './tour-community-recommend/tour-community-recommend.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { TourCampaignFormComponent } from './tour-campaign-form/tour-campaign-fo
     TouristsProblemsComponent,
     PointsViewComponent,
     TourCampaignsComponent,
-    TourCampaignFormComponent
+    TourCampaignFormComponent,
+    TourCommunityRecommendComponent
   ],
   imports: [
     CommonModule,

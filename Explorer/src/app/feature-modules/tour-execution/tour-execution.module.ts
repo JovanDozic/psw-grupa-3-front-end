@@ -12,11 +12,13 @@ import {LayoutModule} from "../layout/layout.module";
 import { TourAuthoringModule } from '../tour-authoring/tour-authoring.module';
 import { PurchasedToursComponent } from './purchased-tours/purchased-tours.component';
 import { BlogModule } from '../blog/blog.module';
+import { TourStatisticsComponent } from './tour-statistics/tour-statistics.component';
 
 @NgModule({
   declarations: [
     PositionSimulatorComponent,
     PurchasedToursComponent,
+    TourStatisticsComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +37,7 @@ import { BlogModule } from '../blog/blog.module';
   exports: [
     PositionSimulatorComponent,
     PurchasedToursComponent,
+    TourStatisticsComponent
   ]
 })
 export class TourExecutionModule { }

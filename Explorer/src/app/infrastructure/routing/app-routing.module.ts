@@ -10,7 +10,6 @@ import { ProblemFormComponent } from 'src/app/feature-modules/tour-authoring/pro
 import { ProblemsComponent } from 'src/app/feature-modules/administration/problems/problems.component';
 import { OverviewComponent } from 'src/app/feature-modules/administration/admin/overview.component';
 import { BlogFormComponent } from 'src/app/feature-modules/blog/blog-form/blog-form.component';
-import { PreferenceComponent } from 'src/app/feature-modules/marketplace/preference/preference.component';
 import { TourReviewFormComponent } from 'src/app/feature-modules/tour-authoring/tour-review-form/tour-review-form.component';
 import { TourComponent } from 'src/app/feature-modules/tour-authoring/tour/tour.component';
 import { AppRatingsComponent } from 'src/app/feature-modules/administration/app-ratings/app-ratings.component';
@@ -44,8 +43,15 @@ import { PointsViewComponent } from 'src/app/feature-modules/tour-authoring/poin
 import { TourCampaignsComponent } from 'src/app/feature-modules/tour-authoring/tour-campaigns/tour-campaigns.component';
 import { TourCampaignFormComponent } from 'src/app/feature-modules/tour-authoring/tour-campaign-form/tour-campaign-form.component';
 import { HiddenEncounterFormComponent } from 'src/app/feature-modules/encounter/hidden-encounter-form/hidden-encounter-form.component';
-
-
+import { SocialEncounterFormComponent } from 'src/app/feature-modules/encounter/social-encounter-form/social-encounter-form.component';
+import { MiscEncounterFormComponent } from 'src/app/feature-modules/encounter/misc-encounter-form/misc-encounter-form.component';
+import { EncounterCreationComponent } from 'src/app/feature-modules/encounter/encounter-creation/encounter-creation.component';
+import { TourCommunityRecommendComponent } from 'src/app/feature-modules/tour-authoring/tour-community-recommend/tour-community-recommend.component';
+import { ForgotPasswordComponent } from '../auth/forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from '../auth/change-password/change-password.component';
+import { BlogReportsComponent } from 'src/app/feature-modules/blog/blog-reports/blog-reports.component'; 
+import { CalendarComponent } from 'src/app/feature-modules/administration/calendar/calendar.component'; 
+import { TourStatisticsComponent } from 'src/app/feature-modules/tour-execution/tour-statistics/tour-statistics.component'; 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
@@ -57,7 +63,6 @@ const routes: Routes = [
   {path: 'problems', component: ProblemsComponent},
   {path: 'overview', component: OverviewComponent},
   {path: 'blog-creation', component: BlogFormComponent, canActivate: [AuthGuard]},
-  {path: 'preference', component: PreferenceComponent, canActivate: [AuthGuard]},
   {path: 'tour-review', component: TourReviewFormComponent},
   {path: 'tours', component: TourComponent, canActivate: [AuthGuard]},
   {path: 'app-ratings', component: AppRatingsComponent},
@@ -89,6 +94,15 @@ const routes: Routes = [
   {path: 'hidden-encounter-form', component: HiddenEncounterFormComponent},
   {path: 'tour-campaigns', component: TourCampaignsComponent},
   {path: 'tour-campaign-form', component: TourCampaignFormComponent},
+  {path: 'social-encounter-form', component: SocialEncounterFormComponent},
+  {path: 'misc-encounter-form', component: MiscEncounterFormComponent},
+  {path: 'encounter-creation', component: EncounterCreationComponent},
+  {path: 'tour-community-recommend/:tourId', component: TourCommunityRecommendComponent },
+  {path: 'forgot-password', component: ForgotPasswordComponent},
+  {path: 'change-password', component: ChangePasswordComponent},
+  {path: 'blog-reports', component: BlogReportsComponent}, //, canActivate: [AuthGuard]},
+  {path: 'app-calendar', component: CalendarComponent},
+  {path: 'tour-statistics', component: TourStatisticsComponent},
 ];
 
 @NgModule({

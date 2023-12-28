@@ -31,28 +31,20 @@ export class ClubInvitationsComponent implements OnInit {
   }
 
   deleteClubInvitation(id: number): void {
-    
     this.service.deleteClubInvitation(id).subscribe({
       next: () => {
         
-        const table = document.getElementById('myInvitations') as HTMLTableElement;
-
-        if (table) {
-            const rows = table.getElementsByTagName('tr'); 
-            for (let i = 1; i < rows.length; i++) {
-                  const row = rows[i];
-                  row.innerHTML = ''; 
-            }
-        }
-        this.getClubInvitations();
+        this.clubInvitations = this.clubInvitations.filter(invitation => invitation.id !== id);
       },
-    })
+      error: (error) => {
+        
+      }
+    });
   }
-
   getClubInvitations(): void {
     this.service.getClubInvitations().subscribe({
       next: (result: PagedResults<ClubInvitation>) => {
-       
+        this.clubInvitations = [];
         const temp = result.results;
         for(const clubInvitation of temp){
           if(clubInvitation.touristId === this.user?.id){
@@ -68,5 +60,7 @@ export class ClubInvitationsComponent implements OnInit {
     })
   }
  
-
+  refreshInvitations() {
+    this.getClubInvitations();
+  }
 }

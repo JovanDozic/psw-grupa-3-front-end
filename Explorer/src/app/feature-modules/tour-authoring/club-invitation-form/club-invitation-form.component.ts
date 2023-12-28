@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TourAuthoringService } from '../tour-authoring.service';
 import { ClubInvitation } from '../model/clubInvitation.model';
@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { Club } from '../model/club.model';
+import { ClubInvitationsComponent } from '../club-invitations/club-invitations.component';
 
 @Component({
   selector: 'xp-club-invitation-form',
@@ -15,6 +16,9 @@ import { Club } from '../model/club.model';
 export class ClubInvitationFormComponent implements OnInit {
   @Input() club: Club;
   @Output() visibilityFlag = new EventEmitter<null>();
+  @Output() invitationSent = new EventEmitter<void>();
+  @ViewChild('clubInvitationsRef') clubInvitationsComponent: ClubInvitationsComponent;
+
 
   user: User | undefined;
 
@@ -40,10 +44,8 @@ export class ClubInvitationFormComponent implements OnInit {
     this.service.addClubInvitation(invitation).subscribe(
       (data) => {
         alert('Invitation sended successfully');
-        this.clubInvitationForm.patchValue({
-          touristId: null,
-          clubId: null,
-        });
+        this.clubInvitationForm.reset();
+        this.clubInvitationsComponent.refreshInvitations();
       },
       (error) => {
         console.log(error);

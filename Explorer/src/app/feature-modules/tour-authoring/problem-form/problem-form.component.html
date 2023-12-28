@@ -121,6 +121,9 @@
                             <button color="primary" (click)="showTourReviews(tour)">
                                 Show reviews
                             </button>
+                            <button color="primary" class="mx-2" [routerLink]="['../show-tour/' + tour.id]">
+                                Show tour
+                            </button>
                         </td>
                     </tr>
                     <tr>
@@ -150,6 +153,9 @@
                         </mat-form-field>
                     </div>
                     <div>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary" (click)="addProblem()">Submit Problem</button>
                     </div>
                 </form>
             </div>

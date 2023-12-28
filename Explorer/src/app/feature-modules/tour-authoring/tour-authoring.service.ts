@@ -54,6 +54,7 @@ export class TourAuthoringService {
   }
 
   addTour(tour: Tour): Observable<Tour> {
+    console.log(tour);
     return this.http.post<Tour>(environment.apiHost + 'author/tour', tour);
   }
 
@@ -94,8 +95,8 @@ export class TourAuthoringService {
     return this.http.delete<ClubInvitation>(environment.apiHost + 'tourist/clubInvitation/' + id);
   }
 
-   addProblem(problem: Problem): Observable<Problem> {
-    return this.http.post<Problem>(environment.apiHost + 'tourist/problem', problem);
+  addProblem(tourId: number, problem: Problem): Observable<Problem> {
+    return this.http.post<Problem>(environment.apiHost + 'author/tour/addProblem/'+ tourId,problem);
   }
 
   createMembershipRequest(membershipRequest:MembershipRequest){
@@ -238,6 +239,16 @@ export class TourAuthoringService {
   addToCart(orderItem: OrderItem, userId: number): Observable<ShoppingCart>{
     const queryParams  = new HttpParams().set('userId', userId);
     return this.http.post<ShoppingCart>(environment.apiHost + 'tourist/order/addToCart', orderItem, { params: queryParams });
+  }
+  findToursReviewedByUsersIFollow(currentUserId: number, ratedTourId: number): Observable<Tour []> {
+    const queryParams = new HttpParams()
+        .set('currentUserId', currentUserId.toString())
+        .set('ratedTourId', ratedTourId.toString());
+
+    return this.http.put<Tour []>(environment.apiHost + 'author/tour/findToursByFollowers', null, { params: queryParams });
+  }
+  getIdByName(name: string): Observable<number> {
+    return this.http.get<number>(environment.apiHost + 'author/tour/getIdByName/' + name);
   }
 }
 

@@ -36,6 +36,10 @@
                         <li *ngIf="user && user.role === 'tourist'">
                             <a class="dropdown-item" [routerLink]="['tour-campaigns']">Your campaigns</a>
                             <a class="dropdown-item" [routerLink]="['tour-campaign-form']">Create a campaign</a>
+                            <a class="dropdown-item" [routerLink]="['all-bundles']">All bundles</a>
+                        </li>
+                        <li *ngIf="user && user.role === 'author'">
+                            <a class="dropdown-item" [routerLink]="['tour-statistics']">Your tour statistics</a> 
                         </li>
                     </ul>
                 </li>
@@ -70,6 +74,7 @@
                             <a class="dropdown-item" [routerLink]="['app-ratings']">All App Ratings</a>
                             <a class="dropdown-item" [routerLink]="['problems']">Show Tour Problems</a>
                             <a class="dropdown-item" [routerLink]="['public-registration-requests']">Manage registration requests</a>
+                            <a class="dropdown-item" [routerLink]="['blog-reports']">Manage reported comments</a>
                         </li>
 
                         <li *ngIf="user && (user.role === 'author' || user.role === 'tourist')">
@@ -77,7 +82,7 @@
                         </li>
 
                         <li *ngIf="user && (user.role === 'author' || user.role === 'administrator')">
-                            <a class="dropdown-item" [routerLink]="['hidden-encounter-form']">Create hidden encounter</a>
+                            <a class="dropdown-item" [routerLink]="['encounter-creation']">Create encounter</a>
                         </li>
 
                         <li *ngIf="user && user.role === 'author'">
@@ -89,12 +94,12 @@
                             <a class="dropdown-item" [routerLink]="['coupons']">Coupons</a>
                             <a class="dropdown-item" [routerLink]="['activate-sale']">Activate sale</a>
                             <a class="dropdown-item" [routerLink]="['all-bundles']">Manage bundles</a>
+                            <a class="dropdown-item" [routerLink]="['app-calendar']">Calendar</a>
 
                         </li>
 
                         <li *ngIf="user && user.role === 'tourist'">
                             <a class="dropdown-item" [routerLink]="['equipment-record']">Equipment record</a>
-                            <a class="dropdown-item" [routerLink]="['preference']">Preferences</a>
                             <a class="dropdown-item" [routerLink]="['club']">Club management</a>
                             <a class="dropdown-item" [routerLink]="['invitations']">Club invitations</a>
                             <a class="dropdown-item" [routerLink]="['problem-form']">All tours</a>
@@ -104,11 +109,8 @@
                             <a class="dropdown-item" [routerLink]="['purchased-tours']">Purchased tours</a>
                             <a class="dropdown-item" [routerLink]="['tourists-problems']">Responds to problems</a>
                             <a class="dropdown-item" [routerLink]="['tours-on-sale']">Tours on sale</a>
+                            
 
-                        </li>
-
-                        <li *ngIf="user && user.role !== 'administrator' && user.username !== ''">
-                            <a class="dropdown-item" [routerLink]="['profile']">Profile</a>
                         </li>
 
                     </ul>
@@ -117,6 +119,14 @@
 
             <ul class="navbar-nav ms-auto">
                 <!--Messages dropdown menu-->
+                <div class="container">
+                    <div class="dropdown">
+                    <li *ngIf="user && user.role !== 'administrator' && user.username !== ''">
+                        <button class="btn btn-secondary dropdown-toggle" color="btn-primary" [routerLink]="['profile']"><i class="bi bi-person"></i></button>
+                    </li>
+                    </div>
+                </div>
+
                 <div class="container">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" color="btn-primary" type="button" id="messageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -161,7 +171,6 @@
                       </ul>
                     </div>
                 </div>
-
                 <li class="nav-item" *ngIf="user && user.username === ''">
                     <a class="nav-link" [routerLink]="['login']">Login</a>
                 </li>

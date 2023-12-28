@@ -4,7 +4,6 @@ import { PreferenceFormComponent } from './preference-form/preference-form.compo
 import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
-import { PreferenceComponent } from './preference/preference.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -23,7 +22,6 @@ import { ActivateSaleComponent } from './activate-sale/activate-sale.component';
 @NgModule({
   declarations: [
     PreferenceFormComponent,
-    PreferenceComponent,
     ShoppingCartComponent,
     SearchResultsComponent,
     SearchFormComponent,
@@ -45,7 +43,6 @@ import { ActivateSaleComponent } from './activate-sale/activate-sale.component';
   ],
   exports: [
     PreferenceFormComponent,
-    PreferenceComponent,
     ShoppingCartComponent,
     SearchFormComponent,
     SearchResultsComponent,

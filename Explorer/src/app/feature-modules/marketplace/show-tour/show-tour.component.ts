@@ -8,7 +8,8 @@ import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { MarketplaceService } from '../marketplace.service';
 import { ShoppingCart } from '../model/shopping-cart.model';
-import { OrderItem, OrderItemType } from '../model/order-item.model';
+import { OrderItem } from '../model/order-item.model';
+import { EventType, ShoppingEvent } from '../model/shopping-event.model';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { OrderItem, OrderItemType } from '../model/order-item.model';
 })
 export class ShowTourComponent {
 
-  constructor(private marketService: MarketplaceService, private route: ActivatedRoute, private checkpointService: TourAuthoringService, private service: AuthService, private router: Router) {}
+  constructor(private marketService: MarketplaceService, private route: ActivatedRoute, private checkpointService: TourAuthoringService, private service: AuthService, private router: Router) { }
 
   tour: Tour
 
@@ -44,10 +45,10 @@ export class ShowTourComponent {
 
       this.service.user$.subscribe(user => {
         this.user = user;
-        this.getShoppingCart();
+        if (this.user.role == 'tourist') this.getShoppingCart();
       });
       this.loadTourData();
-      
+
     });
   }
 
@@ -69,7 +70,7 @@ export class ShowTourComponent {
     return images;
   }
 
-  
+
 
 
   previousImage() {
@@ -101,30 +102,26 @@ export class ShowTourComponent {
           console.error(error);
         }
       });
-      this.marketService.getToken(this.user.id, this.currentTourId).subscribe({
-        next: (result: boolean) => {
-          this.isPaid = result;
-          if (this.isPaid == false) {
-            this.forCart = true;
-          } else {
-            this.forCart = false;
+      if (this.user && this.user.role == 'tourist') {
+        this.marketService.getToken(this.user.id, this.currentTourId).subscribe({
+          next: (result: boolean) => {
+            this.isPaid = result;
+            console.log(result);
+          },
+          error: (error: any) => {
+            console.error(error);
           }
-          console.log(result);
-          console.log(this.user.id);
-          console.log(this.currentTourId);
-        },
-        error: (error: any) => {
-          console.error(error);
-        }
-      });
+        });
+      }
+
     }
   }
 
-  activateTour(){
+  activateTour() {
     this.router.navigate(['/tour-execution-lifecycle'], { state: { tour: this.tour } });
-}
+  }
 
-getShoppingCart() {
+  getShoppingCart() {
     this.marketService.getCartByUserId(this.user.id).subscribe({
       next: (result: ShoppingCart) => {
         this.shoppingCart = result;
@@ -141,12 +138,12 @@ getShoppingCart() {
   }
 
   addToCart() {
-    if (this.shoppingCart.items.findIndex((x: OrderItem) => x.idType === this.tour.id && x.type === OrderItemType.singleTour) === -1) {
+    if (this.shoppingCart.items.findIndex((x: OrderItem) => x.idType === this.tour.id && x.type == "SingleTour") === -1) {
       const orderItem: OrderItem = {
         idType: this.tour.id,
         name: this.tour.name,
         price: this.tour.price,
-        image: this.tour.points[0].picture,
+        image: this.tour.points[0].picture ?? 'No image',
         couponCode: this.couponCode,
         type: "SingleTour"
       };
@@ -156,6 +153,17 @@ getShoppingCart() {
         next: result => {
           alert('Added to cart!');
           this.getShoppingCart();
+
+          //Add event to shopping session
+          const newEvent : ShoppingEvent = {
+            eventType: EventType.AddTourToCart,
+            itemId: this.tour.id,
+          }
+          this.marketService.addEvent(newEvent, this.user.id).subscribe({
+            next: response => {
+              console.log(response);
+            }
+          })
         },
         error: (err) => {
           console.log(err);

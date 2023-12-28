@@ -20,7 +20,6 @@ export class FindPeopleComponent {
     this.user = this.authService.user$.value;
     this.service.getUserFollowers(this.user.id).subscribe((result: any) => {
       this.user.followers = result;
-      console.log("EVOOOOOO");
       console.log(result);
     });
     this.getUsers();
