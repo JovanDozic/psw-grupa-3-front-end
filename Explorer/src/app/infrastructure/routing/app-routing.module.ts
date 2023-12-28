@@ -49,9 +49,9 @@ import { EncounterCreationComponent } from 'src/app/feature-modules/encounter/en
 import { TourCommunityRecommendComponent } from 'src/app/feature-modules/tour-authoring/tour-community-recommend/tour-community-recommend.component';
 import { ForgotPasswordComponent } from '../auth/forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from '../auth/change-password/change-password.component';
-import { BlogReportsComponent } from 'src/app/feature-modules/blog/blog-reports/blog-reports.component';
-import { CalendarComponent } from 'src/app/feature-modules/administration/calendar/calendar.component';
-
+import { BlogReportsComponent } from 'src/app/feature-modules/blog/blog-reports/blog-reports.component'; 
+import { CalendarComponent } from 'src/app/feature-modules/administration/calendar/calendar.component'; 
+import { TourStatisticsComponent } from 'src/app/feature-modules/tour-execution/tour-statistics/tour-statistics.component'; 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
@@ -102,7 +102,7 @@ const routes: Routes = [
   {path: 'change-password', component: ChangePasswordComponent},
   {path: 'blog-reports', component: BlogReportsComponent}, //, canActivate: [AuthGuard]},
   {path: 'app-calendar', component: CalendarComponent},
-
+  {path: 'tour-statistics', component: TourStatisticsComponent},
 ];
 
 @NgModule({
