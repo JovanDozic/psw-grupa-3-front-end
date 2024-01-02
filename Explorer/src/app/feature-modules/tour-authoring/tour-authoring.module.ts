@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from "@angular/material/button";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TextFieldModule } from "@angular/cdk/text-field";
-import { TourReviewFormComponent } from './tour-review-form/tour-review-form.component';
 import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 import { MatRadioModule } from '@angular/material/radio';
 import { TourComponent } from './tour/tour.component';
@@ -31,7 +30,6 @@ import { TourCommunityRecommendComponent } from './tour-community-recommend/tour
 
 @NgModule({
   declarations: [
-    TourReviewFormComponent,
     TourComponent,
     TourFormComponent,
     ClubComponent,
@@ -67,7 +65,6 @@ import { TourCommunityRecommendComponent } from './tour-community-recommend/tour
   exports: [
     TourComponent,
     TourFormComponent,
-    TourReviewFormComponent,
     ClubComponent,
     ClubFormComponent,
     ClubInvitationFormComponent,

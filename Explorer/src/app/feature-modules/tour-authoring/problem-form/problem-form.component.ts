@@ -9,6 +9,7 @@ import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { MarketplaceService } from '../../marketplace/marketplace.service';
+import { TourReview } from '../model/tourReview.model';
 
 @Component({
   selector: 'xp-problem-form',
@@ -20,10 +21,18 @@ export class ProblemFormComponent implements OnChanges {
   tours: Tour[] = [];
   tours_original: Tour[] = [];
   selectedTour: Tour;
+  selectedTourName: string;
   shouldRenderProblemForm: boolean = false;
   shouldRenderTourReviewForm: boolean = false;
   shouldRenderTourReviewList: boolean = false;
   averageRatings: { [tourId: number]: number } = {};
+  reviewImages: string[] = [];
+  reviewForm = new FormGroup({
+    rating: new FormControl(null, [Validators.required]),
+    comment: new FormControl('', [Validators.required]),
+    tourDate: new FormControl(new Date(), [Validators.required]),
+    images: new FormControl('')
+  });
 
   sortDirection?: boolean = undefined
   selectedPrice?: number = undefined
@@ -126,12 +135,6 @@ export class ProblemFormComponent implements OnChanges {
     this.shouldRenderTourReviewForm = false;
   }
 
-  showTourReviews(tour: Tour): void {
-    this.selectedTour = tour;
-    this.shouldRenderTourReviewList = true;
-    this.shouldRenderProblemForm = false;
-    this.shouldRenderTourReviewForm = false;
-  }
   calculateAverageRating(tourId: number): void {
     this.service.getAverageRating(tourId).subscribe(
       (averageRating: number) => {
@@ -213,6 +216,56 @@ export class ProblemFormComponent implements OnChanges {
           return b.name.localeCompare(a.name);
         }
       });
+    }
+  }
+
+  addReview(): void { 
+    const review: TourReview = {
+      rating: this.reviewForm.get('rating')?.value || 1,
+      comment: this.reviewForm.get('comment')?.value || '',
+      tourDate: this.formatDate(this.reviewForm.value.tourDate), 
+      images: this.reviewImages || [],
+      creationDate: new Date(),
+      tourId: this.selectedTour.id || -1,
+      touristId: this.user?.id || -1,
+      touristUsername: this.user?.username || ''
+    };
+  
+    this.service.addTourReview(this.selectedTour, review).subscribe({
+      next: () => { 
+      },
+      error: (error) => {
+        console.error(error);
+        alert(error.error.detail || 'An unexpected error occurred.');
+      }
+    });
+  
+    console.log(review);
+  }
+
+  selectTour(tour: Tour){
+    this.selectedTour = tour;
+    this.selectedTourName = tour.name;
+  }
+
+  encodeImages(selectedFiles: FileList) {
+    for(let i = 0; i < selectedFiles.length; i++){
+      const file = selectedFiles[i];
+      const reader = new FileReader();
+
+      reader.onload = (event: any) => {
+        this.reviewImages.push(event.target.result);
+      }
+
+      reader.readAsDataURL(file);
+    }
+  }
+
+  onFileSelected(event: any) {
+    const selectedFiles: FileList = event.target.files;
+
+    if (selectedFiles.length > 0) {
+      this.encodeImages(selectedFiles);
     }
   }
 
