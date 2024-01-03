@@ -10,6 +10,9 @@ import { MarketplaceService } from '../marketplace.service';
 import { ShoppingCart } from '../model/shopping-cart.model';
 import { OrderItem } from '../model/order-item.model';
 import { EventType, ShoppingEvent } from '../model/shopping-event.model';
+import { TourReview } from '../../tour-authoring/model/tourReview.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -33,7 +36,15 @@ export class ShowTourComponent {
   currentTourId: number
   couponCode: string = '';
   currentImageIndex: number = 0;
+  averageRating: number = 0;
   currentPicture: string = '';
+  reviewImages: string[] = [];
+  reviewForm = new FormGroup({
+    rating: new FormControl(null, [Validators.required]),
+    comment: new FormControl('', [Validators.required]),
+    tourDate: new FormControl(new Date(), [Validators.required]),
+    images: new FormControl('')
+  });
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -72,7 +83,6 @@ export class ShowTourComponent {
 
 
 
-
   previousImage() {
     if (this.currentImageIndex > 0) {
       this.currentImageIndex--;
@@ -97,6 +107,11 @@ export class ShowTourComponent {
           this.images = this.getImagesFromPoints(this.tour.points)
           console.log(this.images)
           this.currentPicture = this.images[this.currentImageIndex];
+          this.checkpointService.getAverageRating(this.currentTourId).subscribe({
+            next:(result: number) => {
+              this.averageRating = result;
+            }
+          })
         },
         error: (error: any) => {
           console.error(error);
@@ -175,5 +190,59 @@ export class ShowTourComponent {
       alert('Tour is already in cart!');
     }
   }
+
+  formatDate(selectedDate: Date | null | undefined): Date {
+    const datePipe = new DatePipe('en-US');
+    const formattedDate = datePipe.transform(selectedDate, 'yyyy-MM-ddTHH:mm:ss.SSSZ');
+    return formattedDate ? new Date(formattedDate) : new Date();
+  }
+
+  addReview(): void { 
+    const review: TourReview = {
+      rating: this.reviewForm.get('rating')?.value || 1,
+      comment: this.reviewForm.get('comment')?.value || '',
+      tourDate: this.formatDate(this.reviewForm.value.tourDate), 
+      images: this.reviewImages || [],
+      creationDate: new Date(),
+      tourId: this.tour.id || -1,
+      touristId: this.user?.id || -1,
+      touristUsername: this.user?.username || ''
+    };
+  
+    this.checkpointService.addTourReview(this.tour, review).subscribe({
+      next: () => { 
+        this.tour.reviews.push(review);
+      },
+      error: (error) => {
+        console.error(error);
+        alert(error.error.detail || 'An unexpected error occurred.');
+      }
+    });
+  
+    console.log(review);
+  }
+
+
+  encodeImages(selectedFiles: FileList) {
+    for(let i = 0; i < selectedFiles.length; i++){
+      const file = selectedFiles[i];
+      const reader = new FileReader();
+
+      reader.onload = (event: any) => {
+        this.reviewImages.push(event.target.result);
+      }
+
+      reader.readAsDataURL(file);
+    }
+  }
+
+  onFileSelected(event: any) {
+    const selectedFiles: FileList = event.target.files;
+
+    if (selectedFiles.length > 0) {
+      this.encodeImages(selectedFiles);
+    }
+  }
+
 }
 

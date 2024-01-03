@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from "@angular/material/button";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TextFieldModule } from "@angular/cdk/text-field";
-import { TourReviewFormComponent } from './tour-review-form/tour-review-form.component';
 import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 import { MatRadioModule } from '@angular/material/radio';
 import { TourComponent } from './tour/tour.component';
@@ -28,10 +27,10 @@ import { PointsViewComponent } from './points-view/points-view.component';
 import { TourCampaignsComponent } from './tour-campaigns/tour-campaigns.component';
 import { TourCampaignFormComponent } from './tour-campaign-form/tour-campaign-form.component';
 import { TourCommunityRecommendComponent } from './tour-community-recommend/tour-community-recommend.component';
+import { TourReviewFormComponent } from './tour-review-form/tour-review-form.component';
 
 @NgModule({
   declarations: [
-    TourReviewFormComponent,
     TourComponent,
     TourFormComponent,
     ClubComponent,
@@ -51,7 +50,8 @@ import { TourCommunityRecommendComponent } from './tour-community-recommend/tour
     PointsViewComponent,
     TourCampaignsComponent,
     TourCampaignFormComponent,
-    TourCommunityRecommendComponent
+    TourCommunityRecommendComponent,
+    TourReviewFormComponent
   ],
   imports: [
     CommonModule,

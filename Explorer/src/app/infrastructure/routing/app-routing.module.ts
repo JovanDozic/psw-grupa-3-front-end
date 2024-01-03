@@ -10,7 +10,6 @@ import { ProblemFormComponent } from 'src/app/feature-modules/tour-authoring/pro
 import { ProblemsComponent } from 'src/app/feature-modules/administration/problems/problems.component';
 import { OverviewComponent } from 'src/app/feature-modules/administration/admin/overview.component';
 import { BlogFormComponent } from 'src/app/feature-modules/blog/blog-form/blog-form.component';
-import { TourReviewFormComponent } from 'src/app/feature-modules/tour-authoring/tour-review-form/tour-review-form.component';
 import { TourComponent } from 'src/app/feature-modules/tour-authoring/tour/tour.component';
 import { AppRatingsComponent } from 'src/app/feature-modules/administration/app-ratings/app-ratings.component';
 import { AppRatingFormComponent } from 'src/app/feature-modules/administration/app-rating-form/app-rating-form.component';
@@ -63,7 +62,6 @@ const routes: Routes = [
   {path: 'problems', component: ProblemsComponent},
   {path: 'overview', component: OverviewComponent},
   {path: 'blog-creation', component: BlogFormComponent, canActivate: [AuthGuard]},
-  {path: 'tour-review', component: TourReviewFormComponent},
   {path: 'tours', component: TourComponent, canActivate: [AuthGuard]},
   {path: 'app-ratings', component: AppRatingsComponent},
   {path: 'app-rating-form', component: AppRatingFormComponent},

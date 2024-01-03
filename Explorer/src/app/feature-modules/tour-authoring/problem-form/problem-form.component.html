@@ -115,12 +115,6 @@
                             <button color="primary" (click)="onProblemClicked(tour)" mat-icon-button>
                                 <mat-icon>error</mat-icon>
                             </button>
-                            <button color="primary" (click)="onRatingClicked(tour)" mat-icon-button>
-                                <mat-icon>stars</mat-icon>
-                            </button>
-                            <button color="primary" (click)="showTourReviews(tour)">
-                                Show reviews
-                            </button>
                             <button color="primary" class="mx-2" [routerLink]="['../show-tour/' + tour.id]">
                                 Show tour
                             </button>
@@ -161,11 +155,5 @@
             </div>
         </div>
     </div>
-    <div>
-        <xp-tour-review-form *ngIf="shouldRenderTourReviewForm" (visibilityFlag)="changeReviewVisibility()"
-            [tour]="selectedTour"></xp-tour-review-form>
-    </div>
-    <div>
-        <xp-tour-review *ngIf="shouldRenderTourReviewList" [tour]="selectedTour"></xp-tour-review>
-    </div>
+
 </div>

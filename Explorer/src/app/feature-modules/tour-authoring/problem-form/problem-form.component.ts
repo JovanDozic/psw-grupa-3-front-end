@@ -9,6 +9,7 @@ import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { MarketplaceService } from '../../marketplace/marketplace.service';
+import { TourReview } from '../model/tourReview.model';
 
 @Component({
   selector: 'xp-problem-form',
@@ -20,9 +21,8 @@ export class ProblemFormComponent implements OnChanges {
   tours: Tour[] = [];
   tours_original: Tour[] = [];
   selectedTour: Tour;
+  selectedTourName: string;
   shouldRenderProblemForm: boolean = false;
-  shouldRenderTourReviewForm: boolean = false;
-  shouldRenderTourReviewList: boolean = false;
   averageRatings: { [tourId: number]: number } = {};
 
   sortDirection?: boolean = undefined
@@ -107,8 +107,6 @@ export class ProblemFormComponent implements OnChanges {
   onProblemClicked(tour: Tour): void {
     this.selectedTour = tour;
     this.shouldRenderProblemForm = true;
-    this.shouldRenderTourReviewForm = false;
-    this.shouldRenderTourReviewList = false;
   }
 
   changeProblemVisibility(): void {
@@ -117,21 +115,10 @@ export class ProblemFormComponent implements OnChanges {
 
   onRatingClicked(tour: Tour): void {
     this.selectedTour = tour;
-    this.shouldRenderTourReviewForm = true;
     this.shouldRenderProblemForm = false;
-    this.shouldRenderTourReviewList = false;
   }
 
-  changeReviewVisibility(): void {
-    this.shouldRenderTourReviewForm = false;
-  }
 
-  showTourReviews(tour: Tour): void {
-    this.selectedTour = tour;
-    this.shouldRenderTourReviewList = true;
-    this.shouldRenderProblemForm = false;
-    this.shouldRenderTourReviewForm = false;
-  }
   calculateAverageRating(tourId: number): void {
     this.service.getAverageRating(tourId).subscribe(
       (averageRating: number) => {
@@ -215,6 +202,12 @@ export class ProblemFormComponent implements OnChanges {
       });
     }
   }
+
+  selectTour(tour: Tour){
+    this.selectedTour = tour;
+    this.selectedTourName = tour.name;
+  }
+
 
   setPriceFilter(price: number) {
     this.selectedPrice = price;
