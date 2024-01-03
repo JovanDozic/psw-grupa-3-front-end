@@ -27,6 +27,7 @@ import { PointsViewComponent } from './points-view/points-view.component';
 import { TourCampaignsComponent } from './tour-campaigns/tour-campaigns.component';
 import { TourCampaignFormComponent } from './tour-campaign-form/tour-campaign-form.component';
 import { TourCommunityRecommendComponent } from './tour-community-recommend/tour-community-recommend.component';
+import { TourReviewFormComponent } from './tour-review-form/tour-review-form.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { TourCommunityRecommendComponent } from './tour-community-recommend/tour
     PointsViewComponent,
     TourCampaignsComponent,
     TourCampaignFormComponent,
-    TourCommunityRecommendComponent
+    TourCommunityRecommendComponent,
+    TourReviewFormComponent
   ],
   imports: [
     CommonModule,
@@ -65,6 +67,7 @@ import { TourCommunityRecommendComponent } from './tour-community-recommend/tour
   exports: [
     TourComponent,
     TourFormComponent,
+    TourReviewFormComponent,
     ClubComponent,
     ClubFormComponent,
     ClubInvitationFormComponent,
