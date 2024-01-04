@@ -4,6 +4,7 @@ import { Problem } from '../../tour-authoring/model/problem.model';
 import { PagedResults } from 'src/app/shared/model/paged-results.model';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 
 @Component({
   selector: 'xp-authors-problems',
@@ -11,17 +12,18 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./authors-problems.component.css']
 })
 export class AuthorsProblemsComponent {
-  constructor(private service: TourAuthoringService) { }
+  constructor(private service: TourAuthoringService, private authService: AuthService) { }
 
   problems: any[] = [];
   shouldRenderRespondForm = false;
-  selectedProblem: any;
-
-  
-  user: User | undefined;
+  selectedProblem: any; 
+  user: User;
   
   ngOnInit(): void {
-    this.service.getAllProblems().subscribe({
+    this.authService.user$.subscribe(user => {
+      this.user = user; 
+    })
+    this.service.getAllProblems(this.user).subscribe({
       next: (result: any) => {  
           this.problems = result;
           console.log('Data loaded successfully:', this.problems);

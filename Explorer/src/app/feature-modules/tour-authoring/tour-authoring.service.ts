@@ -18,6 +18,7 @@ import { Bundle } from './model/bundle.model';
 import { Campaign } from './model/campaign.model';
 import { OrderItem } from '../marketplace/model/order-item.model';
 import { ShoppingCart } from '../marketplace/model/shopping-cart.model';
+import { User } from 'src/app/infrastructure/auth/model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -161,8 +162,8 @@ export class TourAuthoringService {
     return this.http.get<any>(environment.apiHost + 'author/tour/publishTour/' + id);
   }
   
-  getAllProblems(): Observable<PagedResults<Problem>> {
-    return this.http.get<PagedResults<Problem>>(environment.apiHost + 'author/problems/getAll')
+  getAllProblems(user: User): Observable<PagedResults<Problem>> {
+    return this.http.get<PagedResults<Problem>>(environment.apiHost + 'author/problems/getAll/'+ user.id)
      .pipe(
        tap(data => console.log('API Response:', data)),
      );
@@ -189,8 +190,8 @@ export class TourAuthoringService {
         tap(data => console.log('Response to problem:', data)),
       );
   }
-  getAllTouristsProblems(): Observable<PagedResults<Problem>> {
-    return this.http.get<PagedResults<Problem>>(environment.apiHost + 'tourist/problem/getAll');
+  getAllTouristsProblems(user: User): Observable<PagedResults<Problem>> {
+    return this.http.get<PagedResults<Problem>>(environment.apiHost + 'tourist/problem/getAll/'+ user.id);
   }
   getToursOnSale(): Observable<PagedResults<Tour>> {
     console.log('Entering getToursOnSale in service');

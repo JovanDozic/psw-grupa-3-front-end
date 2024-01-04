@@ -1,9 +1,9 @@
 .map-frame {
-    border: 2px solid black;
-    border-radius: 2rem;
+    border-radius: 0px;
   }
 
 #map {
     height: 20rem;
-    border-radius: 2rem;
+    width: 90%;
+    border-radius: 0px;
   }
