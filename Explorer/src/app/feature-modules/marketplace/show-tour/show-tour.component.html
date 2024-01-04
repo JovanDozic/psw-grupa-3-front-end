@@ -36,7 +36,53 @@
         </div>
       </mat-grid-tile>
     </mat-grid-list>
-  
+    <div class="additional-info-container" *ngIf="problems && problems.length > 0">
+      <div class="header-div-problem">
+        Problems:
+        <button mat-icon-button class="add-button" *ngIf="user && user.role == 'tourist'" (click)="onProblemClicked()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div class="problem-row" *ngFor="let p of problems; let i = index">
+        <div class="problem-container" [ngClass]="{'even-row': i % 2 === 0, 'odd-row': i % 2 !== 0}">
+          <div class="shadow-box">
+            <div class="label-container">
+              <div class="label">Kategorija:</div>
+              <span class="category">{{ p.category }}</span>
+              <div class="label">Opis:</div>
+              <span class="description">{{ p.description }}</span> 
+          </div>
+        </div>
+      </div>  
+    </div>
+    
+    <div *ngIf="shouldRenderProblemForm" class="form-container">
+      <div class="problem-header">
+          <p>Report a Problem</p>
+      </div>
+      <form [formGroup]="problemForm">
+          <div>
+              <mat-form-field>
+                  <mat-label>Category</mat-label>
+                  <input matInput formControlName="category" type="text" />
+              </mat-form-field>
+          </div>
+          <div>
+              <mat-checkbox formControlName="priority">High Priority</mat-checkbox>
+          </div>
+          <div>
+              <mat-form-field>
+                  <mat-label>Description</mat-label>
+                  <input matInput formControlName="description" type="text" />
+              </mat-form-field>
+          </div>
+          <div>
+          </div>
+          <div>
+              <button type="button" class="submit-problem-button" (click)="addProblem()">Submit</button>
+          </div>
+      </form>
+    </div>
       <div class="button-div mt-2"> 
   
         <input *ngIf="user && user.role == 'tourist' && !isPaid" type="text" placeholder="Enter coupon code" (input)="onCouponCodeChange($event)">

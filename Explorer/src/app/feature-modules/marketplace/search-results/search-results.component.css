@@ -82,6 +82,8 @@
 
 .image {
     display: block;
+    width: 400px;
+    height: 250px;
 }
 
 ngb-rating {

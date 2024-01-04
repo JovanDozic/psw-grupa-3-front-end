@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { TourAuthoringService } from '../tour-authoring.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 
 @Component({
   selector: 'xp-tourists-problems',
@@ -9,14 +10,17 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./tourists-problems.component.css']
 })
 export class TouristsProblemsComponent {
-  constructor(private service: TourAuthoringService) { }
+  constructor(private service: TourAuthoringService, private authService: AuthService) { }
   problems: any[] = [];
   shouldRenderUnsolvedForm = false;
   selectedProblem: any;
-  user: User | undefined;
+  user: User;
   
   ngOnInit(): void {
-    this.service.getAllTouristsProblems().subscribe({
+    this.authService.user$.subscribe(user => {
+      this.user = user; 
+    })
+    this.service.getAllTouristsProblems(this.user).subscribe({
       next: (result: any) => {  
           this.problems = result;
           console.log('Data loaded successfully:', this.problems);
@@ -73,7 +77,7 @@ export class TouristsProblemsComponent {
   }
   private updateData(): void {
     // Fetch the updated data from the service or update the existing data
-    this.service.getAllTouristsProblems().subscribe({
+    this.service.getAllTouristsProblems(this.user).subscribe({
       next: (result: any) => {
         this.problems = result;
         console.log('Data updated successfully:', this.problems);

@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Tour } from '../../tour-authoring/model/tour.model';
 import { Point } from '../../tour-authoring/model/points.model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { ShoppingCart } from '../model/shopping-cart.model';
 import { OrderItem } from '../model/order-item.model';
 import { EventType, ShoppingEvent } from '../model/shopping-event.model';
 import { TourReview } from '../../tour-authoring/model/tourReview.model';
+import { Problem } from '../../tour-authoring/model/problem.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
@@ -45,6 +46,8 @@ export class ShowTourComponent {
     tourDate: new FormControl(new Date(), [Validators.required]),
     images: new FormControl('')
   });
+  problems: Problem[];
+  shouldRenderProblemForm: boolean = false;
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -63,7 +66,17 @@ export class ShowTourComponent {
     });
   }
 
+  ngOnChanges(): void {
+    this.problemForm.reset();
+    if (this.shouldEdit) {
+      this.problemForm.patchValue(this.problem);
+    }
+  }
+  
+  @Output() problemUpdated = new EventEmitter<null>();
   @Output() points: Point[] = []
+  @Input() problem: Problem;
+  @Input() shouldEdit: boolean = false;
 
   onCouponCodeChange(event: any) {
     this.couponCode = event.target.value;
@@ -81,7 +94,36 @@ export class ShowTourComponent {
     return images;
   }
 
+  problemForm = new FormGroup({
+    category: new FormControl('', [Validators.required]),
+    priority: new FormControl(false),
+    description: new FormControl('', [Validators.required]),
+    time: new FormControl(new Date(Date.now()), [Validators.required]),
+  });
 
+  addProblem(): void {
+    const problem: Problem = {
+      category: this.problemForm.value.category || "",
+      priority: this.problemForm.value.priority || false,
+      description: this.problemForm.value.description || "",
+      time: this.formatDate(this.problemForm.value.time),
+      tourId: this.currentTourId || 1,
+      touristId: this.user?.id || -1,
+      authorsSolution: '',
+      isSolved: false,
+      unsolvedProblemComment: '',
+      deadline: this.formatDate(this.problemForm.value.time)
+    };
+    this.checkpointService.addProblem(this.currentTourId,problem).subscribe({
+      next: () => { this.problemUpdated.emit() }
+    });
+  }
+  
+  formatDate(selectedDate: Date | null | undefined): Date {
+    const datePipe = new DatePipe('en-US');
+    const formattedDate = datePipe.transform(selectedDate, 'yyyy-MM-ddTHH:mm:ss.SSSZ');
+    return formattedDate ? new Date(formattedDate) : new Date();
+  }
 
   previousImage() {
     if (this.currentImageIndex > 0) {
@@ -128,7 +170,16 @@ export class ShowTourComponent {
           }
         });
       }
-
+      
+      this.checkpointService.getProblemsForTour(this.currentTourId).subscribe({
+        next: (result) => {
+          this.problems = result;
+          console.log('problems:',result);
+        },
+        error: (error: any) => {
+          console.error(error);
+        }
+      });
     }
   }
 
@@ -190,12 +241,7 @@ export class ShowTourComponent {
       alert('Tour is already in cart!');
     }
   }
-
-  formatDate(selectedDate: Date | null | undefined): Date {
-    const datePipe = new DatePipe('en-US');
-    const formattedDate = datePipe.transform(selectedDate, 'yyyy-MM-ddTHH:mm:ss.SSSZ');
-    return formattedDate ? new Date(formattedDate) : new Date();
-  }
+  
 
   addReview(): void { 
     const review: TourReview = {
@@ -243,6 +289,11 @@ export class ShowTourComponent {
       this.encodeImages(selectedFiles);
     }
   }
-
+  onProblemClicked(): void {
+    this.shouldRenderProblemForm = true;
+  }
+  changeProblemVisibility(): void {
+    this.shouldRenderProblemForm = false;
+  }
 }
 

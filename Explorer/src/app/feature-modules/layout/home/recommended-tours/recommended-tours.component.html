@@ -1,91 +1,23 @@
 <div class="shelfContainer">
-    <div class="container">
-        <div class="headerContainer">
-            <div>
-                <h2 class="title">Recommended Tours</h2>
-            </div>
+    <div class="header-container">
+        <div class="header-container">
+            <h1 class="header">Recommended tours</h1>
         </div>
-        <div class="tourContainer">
-            <div class="box">
-                <div>
-                    <img class="main-tour-image"
-                        src="https://media.tacdn.com/media/attractions-splice-spp-674x446/08/ba/a5/2c.jpg" alt="TURA">
-                    <span class="title-box">Rome, Italy</span>
-
-                </div>
-
-                <div class="ratings">
-                    <div class="star-placeholder">
-                        <ngb-rating [max]="5" [(rate)]="starRating" [readonly]="true"></ngb-rating>
-                    </div>
-
-                    <span>30.530</span>
-                </div>
-                <p>from <span class="price">$37.12</span></p>
-
-            </div>
-
-            <div class="box">
-                <div>
-                    <img class="main-tour-image"
-                        src="https://www.trolleytours.com/wp-content/uploads/2016/07/trolley-tours-of-key-west.jpg"
+        <div class="search-results-grid">
+            <div class="search-result" *ngFor="let tour of tours">
+                <div class="box" [routerLink]="['../show-tour/' + tour.id]">
+                    <img class="image" [src]="tour.points[0].picture"
                         alt="TURA">
-                    <span class="title-box">Cuba, Havana</span>
-
-                </div>
-
-                <div class="ratings">
-                    <div class="star-placeholder">
-                        <ngb-rating [max]="5" [(rate)]="starRating" [readonly]="true"></ngb-rating>
+                    <span class="title-box">{{tour.name}}</span>
+                    <span class="description-box">{{tour.description}}</span>
+                    <div class="ratings">
+                        <div class="star-placeholder">
+                            <ngb-rating [max]="5" [(rate)]="starRating" [readonly]="true"></ngb-rating>
+                        </div>
+                        <span>13,257</span>
                     </div>
-
-                    <span>10.130</span>
                 </div>
-                <p>from <span class="price">$77.55</span></p>
-
             </div>
-
-            <div class="box">
-                <div>
-                    <img class="main-tour-image"
-                        src="https://media.tacdn.com/media/attractions-splice-spp-674x446/07/25/13/74.jpg" alt="TURA">
-                    <span class="title-box">New York, USA</span>
-
-                </div>
-
-                <div class="ratings">
-                    <div class="star-placeholder">
-                        <ngb-rating [max]="5" [(rate)]="starRatingNewYork" [readonly]="true"></ngb-rating>
-                    </div>
-
-                    <span>57.750</span>
-                </div>
-                <p>from <span class="price">$69.57</span></p>
-
-            </div>
-
-            <div class="box">
-                <div>
-                    <img class="main-tour-image"
-                        src="https://media.tacdn.com/media/attractions-splice-spp-674x446/0a/4a/b3/a0.jpg" alt="TURA">
-                    <span class="title-box">Grand Canyon, USA</span>
-
-                </div>
-
-                <div class="ratings">
-                    <div class="star-placeholder">
-                        <ngb-rating [max]="5" [(rate)]="starRating" [readonly]="true"></ngb-rating>
-                    </div>
-
-                    <span>20.470</span>
-                </div>
-                <p>from <span class="price">$27.44</span></p>
-
-            </div>
-
-
-
         </div>
-
     </div>
 </div>

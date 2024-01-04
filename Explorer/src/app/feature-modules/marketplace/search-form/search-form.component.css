@@ -7,7 +7,7 @@
 
 .search-container{
     width: 70%;
-    margin-top: 3rem;
+    margin-top: 2rem;
 }
 
 .search-form-container{
@@ -30,13 +30,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #292F36;
+    background-color: #646668;
     border-radius: 1rem;
     width: 25rem;
     height: 3rem;
     z-index: 999;
     position: absolute;
-    margin-top: 16rem;
+    margin-top: 21rem;
 }
 
 .longitude-input{
