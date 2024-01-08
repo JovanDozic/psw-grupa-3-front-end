@@ -7,3 +7,13 @@
     color: red; 
     
 }
+
+.button-separator {
+    margin: 0 10px; 
+    white-space: nowrap;
+}
+
+
+.btn-outline-primary {
+    margin-right: 10px; 
+}

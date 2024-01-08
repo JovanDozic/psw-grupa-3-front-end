@@ -95,7 +95,7 @@
         [style.background-color]="'#00BBFF'" [style.color]="'#F7FFF7'" (click)="activateTour()">Activate
         </button></div>
 
-        <button *ngIf="tour && tour.reviews.length == 0 && user && user.role == 'tourist'" class="mt-5 mb-3 d-flex justify-content-between align-items-end ms-auto btn btn-outline-secondary text-dark"
+        <button *ngIf="tour && !tour.myOwn && tour.reviews.length == 0 && user && user.role == 'tourist'" class="mt-5 mb-3 d-flex justify-content-between align-items-end ms-auto btn btn-outline-secondary text-dark"
               data-bs-toggle="modal"
              data-bs-target="#tourReviewModal">Add a review</button>
     
@@ -116,7 +116,7 @@
           </div>
           <div class="mb-3 d-inline-block d-flex justify-content-between align-items-end">
             <button class="ms-auto btn btn-outline-secondary text-dark"
-            *ngIf="user && user.role == 'tourist'" data-bs-toggle="modal"
+            *ngIf="user && !tour.myOwn && user.role == 'tourist'" data-bs-toggle="modal"
             data-bs-target="#tourReviewModal">Add a review</button>
           </div>
           <div class="row row-cols-1 row-cols-md-2 g-4">
