@@ -51,6 +51,7 @@ import { ChangePasswordComponent } from '../auth/change-password/change-password
 import { BlogReportsComponent } from 'src/app/feature-modules/blog/blog-reports/blog-reports.component'; 
 import { CalendarComponent } from 'src/app/feature-modules/administration/calendar/calendar.component'; 
 import { TourStatisticsComponent } from 'src/app/feature-modules/tour-execution/tour-statistics/tour-statistics.component'; 
+import { TourOwnViewComponent } from 'src/app/feature-modules/tour-authoring/tour-own-view/tour-own-view.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
@@ -101,6 +102,7 @@ const routes: Routes = [
   {path: 'blog-reports', component: BlogReportsComponent}, //, canActivate: [AuthGuard]},
   {path: 'app-calendar', component: CalendarComponent},
   {path: 'tour-statistics', component: TourStatisticsComponent},
+  {path: 'tour-own-view', component: TourOwnViewComponent},
 ];
 
 @NgModule({

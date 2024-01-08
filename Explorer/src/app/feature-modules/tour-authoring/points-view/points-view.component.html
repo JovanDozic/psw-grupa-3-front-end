@@ -30,16 +30,73 @@
                     </div>
                 </div>
                    
-                           
-                <div class="text-center my-4">
-                <button class="btn btn-outline-primary" (click)="findTours()">Find Tours</button>
+            <div class="text-center my-4">              
+                <button class="btn btn-outline-primary mr-2" (click)="findTours()">Find Tours</button>
+                <span class="button-separator">or you can</span>
+                
+                <button class="btn btn-outline-primary mr-2" data-bs-toggle="modal" data-bs-target="#createTourModal"
+                >Create own tour</button>
+        
+            </div>
+            <div class="modal fade" id="createTourModal">
+                <div class="modal-dialog modal-dialog-scrollable modal-fullscreen">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title">Create Your Own Tour</h1>
+                            <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                
+                                <div class="form-group">
+                                    <label for="tourName">Name</label>
+                                    <input type="text" class="form-control" id="tourName" [(ngModel)]="tour.name" name="tourName" placeholder="Enter tour name" required>
+                                </div>
+                                
+                               
+                                <div class="form-group">
+                                    <label for="tourDescription">Description</label>
+                                    <textarea class="form-control" id="tourDescription" rows="3" [(ngModel)]="tour.description" name="tourDescription" placeholder="Describe the tour" required></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tourRequiredTime" >Required time</label>
+                                    <input type="number" class="form-control" id="tourRequiredTime" [(ngModel)]="tour.requiredTime.minutes" name="tourRequiredTime" placeholder="Enter required time in minutes" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputLengthTour">Transport type:</label>
+                                    <select class="form-select" [(ngModel)]="tour.requiredTime.transportType">
+                                        
+                                        <option value="TransportType.Walking">Walking</option>
+                                        <option value="TransportType.Bicycle">Bicycle</option>
+                                        <option value="TransportType.Car">Car</option>
+                                        <option value="TransportType.Boat">Boat</option>
+                                      </select>
+                                </div>
+            
+                                <div class="form-group">
+                                    <label for="tourDifficulty">Difficulty</label>
+                                    <input type="number" class="form-control" id="tourDifficulty" [(ngModel)]="tour.difficult" name="tourDifficulty"  placeholder="Enter tour difficulty" min="1" required>
+                                </div>
+                                
+                               
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" (click)="save()" >Save Tour</button>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            
+
         </div>
     </div>
     <div class="row mt-4">
         <div class="col-md-4 mb-5" *ngFor="let tour of tours">
             <div class="card">
-                <!-- TODO: Add image to tour? -->
+              
                 <img [src]="tour.points[0].picture" alt="Tour Image" class="card-img-top" style="max-width: 500px; max-height: 300px;">
 
 
@@ -63,7 +120,11 @@
         </div>
 
        
-                
+       
+    
+        
+
+
         </div>
     </div>
 </div>

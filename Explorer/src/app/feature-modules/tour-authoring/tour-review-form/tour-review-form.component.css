@@ -1,43 +1,12 @@
-div {
-    width: 400px;
-    display:flex;
-    gap: 20px;
-    flex-direction: column;
-}
-
-.mat-icon {
-    vertical-align: middle;
-}
-
-.form-title {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.review-form {
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    text-align: center; 
-    align-items: center; 
-}
-
-.form-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    margin: auto;
-}
-.form-item label {
-    text-align: left;
-    font-weight: 500;
-  }
-
   .tour-name {
     text-align: center;
     font-weight: 400;
     font-size: 18px;
   }
+  .form-title{
+    text-align: center;
+   
+  }
+  .custom-btn-width {
+    width: 285px; 
+}

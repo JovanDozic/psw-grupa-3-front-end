@@ -1,26 +1,42 @@
-<p>tour-review-form works!</p>
-<form [formGroup]="reviewForm" class="review-form">
-    <h2 class="form-title">Tour Review Form</h2>
-    <p class="tour-name">{{tour.name}}</p>
-    <div>
-        <mat-radio-group formControlName="rating">
-            <mat-radio-button *ngFor="let i of[1, 2, 3, 4, 5]" [value]="i">{{i}}</mat-radio-button>
-        </mat-radio-group>
-        <mat-form-field>
-            <input matInput formControlName="comment" placeholder="Comment" type="text">
-        </mat-form-field>
-    <div class="form-item">
-        <label>The date you visited the tour:</label>
-        <mat-form-field>
-            <input matInput formControlName="tourDate" type="date"  placeholder="Date of Tour">
-        </mat-form-field>
-    </div>
-    <div class="form-item">
-        <label>Upload images:</label>
-        <input type="file" multiple (change)="onFileSelected($event)">
-    </div>
-        <button  color="primary" type="submit" (click)="addReview()" mat-raised-button>Done</button>
-        <button color="primary" mat-raised-button (click)="goToNextPage()" [disabled]="!showNextButton">See recommended tours</button>
+<div class="container mt-4">
+    <form [formGroup]="reviewForm" class="review-form">
+        <h2 class="form-title">Tour Review Form</h2>
+        <p class="tour-name">{{tour.name}}</p>
 
-    </div>
-</form>
+        
+        <div class="mb-4">
+            <label class="form-label">Rating:</label>
+            <div>
+                <div *ngFor="let i of [1, 2, 3, 4, 5]" class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="rating" [value]="i" id="rating-{{i}}">
+                    <label class="form-check-label" for="rating-{{i}}">{{i}}</label>
+                </div>
+            </div>
+        </div>
+       
+        <div class="mb-3">
+            <label class="form-label">Comment:</label>
+            <input class="form-control" type="text" formControlName="comment" placeholder="Comment">
+        </div>
+
+       
+        <div class="mb-3">
+            <label class="form-label">The date you visited the tour:</label>
+            <input class="form-control" type="date" formControlName="tourDate" placeholder="Date of Tour">
+        </div>
+
+        
+        <div class="mb-3">
+            <label class="form-label">Upload images:</label>
+            <input type="file" class="form-control" multiple (change)="onFileSelected($event)">
+        </div>
+
+        
+        <div class="mb-1" >
+            <button class="btn btn-primary custom-btn-width" type="submit" (click)="addReview()">Done</button>
+        </div>
+        <div class="mb-1">
+            <button class="btn btn-primary custom-btn-width" (click)="goToNextPage()" [disabled]="!showNextButton">See recommended tours</button>
+        </div>
+    </form>
+</div>

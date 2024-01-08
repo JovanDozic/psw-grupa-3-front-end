@@ -25,6 +25,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EncounterModule } from './feature-modules/encounter/encounter.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

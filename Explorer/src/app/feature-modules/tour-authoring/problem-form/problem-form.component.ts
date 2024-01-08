@@ -90,8 +90,10 @@ export class ProblemFormComponent implements OnChanges {
   getTours(): void {
     this.service.getTours().subscribe({
       next: (result: PagedResults<Tour>) => {
-        this.tours = result.results;
-        this.tours_original = result.results;
+        
+        this.tours = result.results.filter(tour => tour.myOwn === false);
+        this.tours_original = this.tours;
+
         for (const tour of this.tours) {
           if (tour.id !== undefined) {
             this.calculateAverageRating(tour.id);

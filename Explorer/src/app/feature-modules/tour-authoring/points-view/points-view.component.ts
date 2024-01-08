@@ -6,6 +6,7 @@ import { Tour } from '../model/tour.model';
 import { OrderItem, OrderItemType } from '../../marketplace/model/order-item.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { TransportType } from '../model/requiredTime.model';
 
 @Component({
   selector: 'xp-points-view',
@@ -19,6 +20,27 @@ export class PointsViewComponent implements OnInit {
   containsUnselectedPoints = true;
   selectedTour: Tour;
   isSelected: boolean = false;
+  tour: Tour = {
+    id:0,
+    name: '',
+    description: '',
+    difficult: 0,
+    tags: undefined,
+    status: 0,
+    price: 0,
+    authorId: 0,
+    length: 0,
+    publishTime: '',
+    arhiveTime: '',
+    points: [],
+    requiredTime: {
+      transportType: TransportType.Bicycle,
+      minutes: 0
+    },
+    reviews: [],
+    problems: [],
+    myOwn: false
+  };
 
   user: User;
   constructor(private service: TourAuthoringService,private authService: AuthService) {}
@@ -29,6 +51,7 @@ export class PointsViewComponent implements OnInit {
     this.authService.user$.subscribe(user => {
       this.user = user;
     })
+    
   }
 
 
@@ -63,6 +86,21 @@ export class PointsViewComponent implements OnInit {
           
           
     
+        });
+      }
+
+      save() {
+        
+        this.tour.id=50;
+        this.tour.length = 2
+        this.tour.publishTime = new Date().toISOString();
+        this.tour.arhiveTime =new Date().toISOString();
+        this.tour.status = 1;
+        this.tour.myOwn = true;
+        this.tour.points=this.selectedPoints;
+        this.tour.authorId=this.user.id;
+        this.service.addTour(this.tour).subscribe({
+          next: () => { }
         });
       }
 
