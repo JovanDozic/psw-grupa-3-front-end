@@ -33,6 +33,7 @@ export interface BlogComment {
   comment: string;
   timeCreated: Date;
   timeUpdated: Date;
+  username: string;
 }
 
 export interface BlogRating {
@@ -61,6 +62,7 @@ export function convertBlogStatusToString(status: BlogStatus): string {
 export interface BlogReport {
   blogId: number;
   userId: number;
+  username: string;
   reportAuthorId: number;
   timeCommentCreated: Date;
   timeReported: Date;

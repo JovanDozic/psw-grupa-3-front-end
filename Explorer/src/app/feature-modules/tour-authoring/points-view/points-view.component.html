@@ -95,7 +95,7 @@
     </div>
     <div class="row mt-4">
         <div class="col-md-4 mb-5" *ngFor="let tour of tours">
-            <div class="card">
+            <div class="card"  [routerLink]="['../show-tour/' + tour.id]">
               
                 <img [src]="tour.points[0].picture" alt="Tour Image" class="card-img-top" style="max-width: 500px; max-height: 300px;">
 
@@ -111,7 +111,7 @@
                             <li [ngClass]="{'contains-points': checkForUnselectedPoints(tour)}" class="list-group-item">
                                 {{ checkForUnselectedPoints(tour) ? "Contains additional points" : "Doesn't contain additional points" }} </li>
                         </ul>
-                        <button class="btn btn-outline-primary" (click)="selectTourAndShop(tour)">Shopping</button>
+                        <button class="btn btn-outline-primary" (click)="selectTourAndShop(tour)">Add to cart</button>
         
                     </div>
                     

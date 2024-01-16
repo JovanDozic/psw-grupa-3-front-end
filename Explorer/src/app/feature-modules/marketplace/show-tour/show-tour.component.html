@@ -36,7 +36,7 @@
         </div>
       </mat-grid-tile>
     </mat-grid-list>
-    <div class="additional-info-container" *ngIf="problems && problems.length > 0">
+    <!-- <div class="additional-info-container" *ngIf="problems && problems.length > 0">
       <div class="header-div-problem">
         Problems:
         <button mat-icon-button class="add-button" *ngIf="user && user.role == 'tourist'" (click)="onProblemClicked()">
@@ -54,7 +54,7 @@
           </div>
         </div>
       </div>  
-    </div>
+    </div> -->
     
     <div *ngIf="shouldRenderProblemForm" class="form-container">
       <div class="problem-header">
@@ -101,8 +101,8 @@
     
     
         <div *ngIf="tour && tour.reviews && tour.reviews.length > 0" class="reviews-container my-5">
-          <h2 class="header-div text-muted">Reviews</h2>.
-          <div class="mx-auto text-end d-inline-block d-flex justify-content-between align-items-end mb-2">
+          <h2 class="header-div text-muted">Reviews</h2>
+          <!-- <div class="mx-auto text-end d-inline-block d-flex justify-content-between align-items-end mb-2">
             <div class="average-rating border border-2 rounded p-3" style="width: 110px">
               <h3 class="me-3" style="font-size: 26px;">{{ averageRating | number:'1.1-1' }}</h3>
               <div class="star-rating">
@@ -113,7 +113,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="mb-3 d-inline-block d-flex justify-content-between align-items-end">
             <button class="ms-auto btn btn-outline-secondary text-dark"
             *ngIf="user && !tour.myOwn && user.role == 'tourist'" data-bs-toggle="modal"

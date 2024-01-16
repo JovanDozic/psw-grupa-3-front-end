@@ -12,7 +12,7 @@
             <div class="card my-2" *ngFor="let report of unreviewedReports">
                 <div class="card-body d-flex align-items-center justify-content-between">
                     <div>
-                        <h2 class="card-title">{{report.userId}}</h2>
+                        <h2 class="card-title">{{report.username}}</h2>
                         <p class="card-text fst-italic">{{report.comment}}</p>
                         <p class="card-text mt-4">Reported as <span
                                 class="text-primary"><b>{{this.reportReasons[report.reportReason]}}</b></span>.</p>
@@ -41,7 +41,7 @@
                     <p>
                         Are you sure that this comment is <span class="text-danger"><b>{{this.reportReasons[this.selectedReport.reportReason]}}</b></span>?
                         <br>
-                        If you confirm, user <b>{{this.selectedReport.userId}}</b> will be banned from using blog features, and will be notified.
+                        If you confirm, user <b>{{this.selectedReport.username}}</b> will be banned from using blog features, and will be notified.
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -81,7 +81,7 @@
             <div class="card my-2" *ngFor="let report of reviewedReports">
                 <div class="card-body d-flex align-items-center justify-content-between">
                     <div>
-                        <h2 class="card-title">{{report.userId}}</h2>
+                        <h2 class="card-title">{{report.username}}</h2>
                         <p class="card-text fst-italic">{{report.comment}}</p>
                         <p class="card-text mt-4">Reported as <span class="text-primary"><b>{{this.reportReasons[report.reportReason]}}</b></span>.</p>
                         <p class="card-text mt-3">

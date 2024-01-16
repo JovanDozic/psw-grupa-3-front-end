@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { BlogService } from '../blog.service';
 import { BlogComment, BlogReport } from '../model/blog.model';
-import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { User, UserInfo } from 'src/app/infrastructure/auth/model/user.model';
 import { Blog } from '../model/blog.model';
 import { BlogRating } from '../model/blog.model';
 import { BlogStatus, convertBlogStatusToString } from '../model/blog.model';
@@ -34,6 +34,7 @@ export class DetailedBlogComponent {
   currentPicture: string = '';
   selectedReportComment: BlogComment = {} as BlogComment;
   selectedReportReason: number = 0;
+  users: UserInfo[] = [];
 
   constructor(private service: BlogService, private authService: AuthService, private route: ActivatedRoute, private fb: FormBuilder, private el: ElementRef, private administrationService: AdministrationService) {
     this.commentForm = this.fb.group({
@@ -82,6 +83,24 @@ export class DetailedBlogComponent {
 
       }
     });
+
+    
+
+    this.administrationService.getAllUsers().subscribe(
+      (response) => {
+        this.users = response;
+        if (this.blog.blogComments != null) {
+          this.blog.blogComments.forEach(comment => {
+            const user = this.users.find(u => u.id === comment.userId);
+            if (user) {
+              comment.username = user.username;
+            }
+          });
+        }
+
+      }
+    );
+
   }
 
   loadPictures(blog: Blog) {
@@ -132,6 +151,7 @@ export class DetailedBlogComponent {
         comment: this.commentForm.value.comment,
         timeCreated: new Date(),
         timeUpdated: new Date(),
+        username: this.user?.username ?? 'turistaMarko'
       };
 
       this.service.leaveBlogComment(this.blogId, newComment).subscribe(() => {
@@ -261,6 +281,7 @@ export class DetailedBlogComponent {
       const report: BlogReport = {
         blogId: this.selectedReportComment.blogId,
         userId: this.selectedReportComment.userId,
+        username: this.selectedReportComment.username,
         reportAuthorId: this.user?.id ?? 0,
         timeCommentCreated: this.selectedReportComment.timeCreated,
         timeReported: new Date(),

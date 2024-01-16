@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { BlogReport } from '../../blog/model/blog.model';
 import { BlogService } from '../blog.service';
+import { AdministrationService } from '../../administration/administration.service';
+import { UserInfo } from 'src/app/infrastructure/auth/model/user.model';
 
 @Component({
   selector: 'xp-blog-reports',
@@ -21,11 +23,35 @@ export class BlogReportsComponent implements OnInit {
     "Bullying or harassment",
     "Violence or dangerous organizations"
   ];
+  users: UserInfo[] = [];
 
-  constructor(private blogService: BlogService, private el: ElementRef) { }
+  constructor(private blogService: BlogService, private el: ElementRef, private administrationService: AdministrationService) { }
 
   ngOnInit(): void {
     this.getReports();
+
+    this.administrationService.getAllUsers().subscribe(users => {
+      this.users = users;
+      if (this.unreviewedReports != null) {
+        this.unreviewedReports.forEach(report => {
+          const user = this.users.find(u => u.id === report.userId);
+          if (user) {
+            report.username = user.username;
+          }
+        });
+      }
+      if (this.reviewedReports != null) {
+        this.reviewedReports.forEach(report => {
+          const user = this.users.find(u => u.id === report.userId);
+          if (user) {
+            report.username = user.username;
+          }
+        });
+      }
+    });
+
+
+
   }
 
   getReports() {

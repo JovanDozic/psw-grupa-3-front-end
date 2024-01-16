@@ -258,12 +258,15 @@ export class ShowTourComponent {
     this.checkpointService.addTourReview(this.tour, review).subscribe({
       next: () => { 
         this.tour.reviews.push(review);
+        
       },
       error: (error) => {
         console.error(error);
         alert(error.error.detail || 'An unexpected error occurred.');
       }
     });
+    this.ngOnInit();
+
   
     console.log(review);
   }
